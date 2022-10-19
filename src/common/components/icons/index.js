@@ -6,3 +6,8 @@ export * from './DashboardIcon';
 export * from './DataIcon';
 export * from './PlusIcon';
 export * from './SearchIcon';
+export * from './UserControlIcon';
+export * from './EyeIcon';
+export * from './PenIcon';
+export * from './TrashIcon';
+export * from './PenAltIcon';

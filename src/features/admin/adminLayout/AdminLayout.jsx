@@ -1,18 +1,22 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { BurgerIcon, CaretIcon, DashboardIcon, DataIcon, SearchIcon, AppLogoText } from '../../common/components/icons';
-import { NavItem } from '../../common/components';
-import userAvatar from '../../assets/user.png';
+import { BurgerIcon, DashboardIcon, DataIcon, SearchIcon, AppLogoText, UserControlIcon } from '../../../common/components/icons';
+import { NavItem, NavLabel } from '../../../common/components';
+import userAvatar from '../../../assets/user.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggle } from './adminLayoutSlice';
 
 export const AdminLayout = () => {
+    const { navOpen } = useSelector(state => state.adminLayout);
+    const dispatch = useDispatch();
     return (
-        <div>
-            <div className="flex bg-green-500 w-screen relative z-10 shadow-lg _shadow-[0px_3px_10px_rgba(0_44_32_0.17)]">
+        <div className="max-w-full">
+            <div className="sticky top-0 flex bg-green-500 w-screen z-10 shadow-lg _shadow-[0px_3px_10px_rgba(0_44_32_0.17)]">
                 <div className="py-[15px] px-[48px] lg:w-[274px]">
                     <AppLogoText width={ `auto` } height={ `46px` } />
                 </div>
-                <div className="py-[15px] px-[48px] flex-1 flex items-center font-rubik">
-                    <BurgerIcon className="cursor-pointer" />
+                <div className="py-[15px] px-[48px] flex-1 flex items-center ">
+                    <BurgerIcon onClick={ () => dispatch(toggle()) } className="cursor-pointer" />
                     <div className="relative">
                         <input type="text" className="ml-[56px] py-3 rounded-lg bg-green-600 text-white placeholder-green-300 px-4" placeholder="Search" />
                         <div className="absolute right-0 top-0 h-full pr-4 flex items-center">
@@ -39,28 +43,26 @@ export const AdminLayout = () => {
                 </div>
             </div>
             <div className="flex relative z-0">
-                <div className="lg:w-[274px] bg-green-500 h-screen py-[48px] px-[32px]">
-                    <div className="text-green-200 font-rubik font-semibold mb-[24px]">Home</div>
-                    <div className="text-green-200 font-lato font-semibold mb-[24px]">
-                        <div className="flex items-center mb-[8px] cursor-pointer">
-                            <DashboardIcon className="mr-3" />
-                            <div className="hidden lg:block">Dashboard</div>
-                            <CaretIcon className="ml-auto" />
-                        </div>
-                        <div className="hidden h-0 overflow-hidden pl-[34px] text-green-200 font-lato font-semibold">
-                            <div className="mb-[8px] text-green-50 cursor-pointer">Main Dashboard</div>
-                            <div className="mb-[8px] cursor-pointer">Cost Dashboard</div>
-                        </div>
-                    </div>
-                    <div className="text-green-200 font-rubik font-semibold mb-[24px]">Menu</div>
+                <div className={ `${!navOpen ? `min-w-[274px] max-w-[274px]` : `min-w-0 max-w-0 pl-0 overflow-hidden`} absolute left-0 md:relative transition-[max-width_min-width] flex flex-col gap-4 bg-green-500 min-h-screen py-[48px] pl-[32px]` }>
+                    <NavLabel className="my-0 mb-0">Home</NavLabel>
+                    <NavItem label={ `Dashboard` } icon={ <DashboardIcon className="mr-3 -mb-1" /> }>
+                        <NavItem label={ `Main Dashboard` } />
+                        <NavItem label={ `Cost Dashboard` } />
+                    </NavItem>
+                    <NavLabel>Menu</NavLabel>
                     <NavItem label={ `Data` } icon={ <DataIcon className="mr-3 -mb-1" /> }>
                         <NavItem label={ `Master Data` }>
                             <NavItem to={ `employees` } label={ `Employee Data` } className="-ml-2" />
                             <NavItem label={ `Tank` } className="-ml-2" />
                         </NavItem>
                     </NavItem>
+                    <NavItem label={ `User Control` } icon={ <UserControlIcon className="mr-3 -mb-1" /> }>
+                        <NavItem to={ `accounts` } label={ `Account` } />
+                        <NavItem to={ `` } label={ `Account Management` } />
+                        <NavItem to={ `` } label={ `Access` } />
+                    </NavItem>
                 </div>
-                <div className="py-[37px] px-[48px] w-full">
+                <div className="py-[37px] px-[48px] flex-1 overflow-auto">
                     <Outlet />
                 </div>
             </div>

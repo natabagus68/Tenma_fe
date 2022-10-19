@@ -9,14 +9,14 @@ export const NavItem = ({ children, label, icon = null, className = null, to = n
         setOpen(open => !open);
     };
     return (
-        <div className={ `${open || active ? `text-green-50` : `text-green-200`} hover:text-green-50 font-lato font-semibold ${className}` }>
-            <NavLink to={ to } onClick={ toggle } className={ `${({ isActive }) => isActive ? 'text-green-50' : ''} flex items-center mb-[8px] cursor-pointer` }>
+        <div className={ `${open || active ? `text-green-50` : `text-green-200`} hover:text-green-50 font-body font-semibold ${className}` }>
+            <NavLink to={ to } onClick={ toggle } className={ `${({ ispActive }) => isActive ? 'text-green-50' : ''} flex items-center cursor-pointer` }>
                 { icon }
-                <div className="hidden lg:block">{ label }</div>
-                { children && <CaretIcon className={ `ml-auto ${open && 'rotate-90'} transition` } /> }
+                { <div className={ `whitespace-nowrap` }>{ label }</div> }
+                { children && <CaretIcon className={ `ml-auto transition mr-10 ${open && 'rotate-90'}` } /> }
             </NavLink>
-            { children && <div className={ `${(open || active) ? `block max-h-screen` : `hidden h-0`} transition-max-height overflow-hidden pl-[34px] text-green-200 font-lato font-semibold mb-[24px]` }>
-                { typeof children == 'array' ? children.map(item => item) : children }
+            { children && <div className={ `${(open || active) ? `max-h-screen` : `max-h-0`} -mb-1 pt-2 flex flex-col gap-2 relative transition-[max-height] overflow-hidden pl-[34px] text-green-200 font-body font-semibold` }>
+                { children }
             </div> }
         </div>
     );

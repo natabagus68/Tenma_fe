@@ -1,16 +1,28 @@
+import authMe from './../fake/authMe.json';
+import employees from './../fake/employees.json';
+import divisions from './../fake/divisions.json';
+import positions from './../fake/positions.json';
+
 const axios = ({ url, method, data, params }) => {
     return new Promise((res, rej) => {
         switch (url) {
             case 'me': return res({
+                data: authMe
+            });
+            case 'employees': return res({
+                data: employees
+            });
+            case 'employees/1': return res({
                 data: {
-                    message: 'success',
-                    data: {
-                        id: 1,
-                        company_code: 'CMP',
-                        email: 'admin@admin.com',
-                    },
-                    token: 'asdasda87s65d65sa5fd87s98dasdfsdfasd'
+                    ...employees,
+                    data: employees.data.find(item => item.id == 1)
                 }
+            });
+            case 'divisions': return res({
+                data: divisions
+            });
+            case 'positions': return res({
+                data: positions
             });
         }
     });

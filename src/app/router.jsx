@@ -1,15 +1,11 @@
-import {
-    createBrowserRouter,
-    Navigate,
-    Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet, } from "react-router-dom";
 import { Error404 } from "../common/components";
 import { config } from "../common/utils";
 import { Login } from "../features/auth/Login";
 import { MainDashboard } from "../features/admin/dashboard/MainDashboard";
-import { AdminLayout } from "../features/admin/AdminLayout";
-import { Employee } from "../features/employee/Employee";
-import { DataEmployee } from "../features/employee/DataEmployee";
+import { AdminLayout } from "../features/admin/adminLayout";
+import { Employee, DataEmployee, Division, Position, ShowEmployee } from "../features/admin/employee";
+
 const Root = () => {
     return (
         <>
@@ -53,13 +49,17 @@ export default createBrowserRouter([
                     },
                     {
                         path: 'divisions',
-                        element: <></>,
+                        element: <Division />,
                     },
                     {
                         path: 'positions',
-                        element: <></>,
+                        element: <Position />,
                     },
                 ]
+            },
+            {
+                path: 'employees/data/:employeeId',
+                element: <ShowEmployee />,
             },
         ]
     }

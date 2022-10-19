@@ -8,9 +8,11 @@ module.exports = {
         extend: {
             colors: {
                 gray: {
+                    '50': '#EBECEC',
                     '100': '#C0C3C5',
                     '200': '#A2A5A9',
                     '500': '#B1B5BA',
+                    'foundation-500': '#343C44',
                     '700': '#5C5E61',
                 },
                 green: {
@@ -25,10 +27,13 @@ module.exports = {
                     '500': '#DE1B1B',
                 },
                 sky: {
-                    'base' : '#CDCFD0',
+                    'base': '#CDCFD0',
                     'light': '#E3E5E6',
                     'lightest': '#F7F9FA',
                 },
+                teal: {
+                    '50': '#E8F5F3'
+                }
             },
             fontSize: {
                 '4xl': '34px',
@@ -38,13 +43,9 @@ module.exports = {
                 '600': '600',
             },
             fontFamily: {
-                'marcellus': 'Marcellus',
-                'rubik': 'Rubik',
-                'lato': 'Lato'
+                'display': 'Marcellus',
+                'body': 'Lato'
             },
-            transitionProperty: {
-                'max-height': 'max-height'
-            }
         },
     },
     plugins: [],
