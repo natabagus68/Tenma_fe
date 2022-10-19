@@ -8,6 +8,20 @@ This is React.js admin template
 * TailwindCss
 * Headless UI
 
+## How to start
+1. Clone this repo
+2. Install Yarn if doesnt exist
+```
+npm i -g yarn
+```
+3. Run this command inside root folder for install node depedencies
+```
+yarn
+```
+4. Run this command after installing depedencies to start development
+```
+yarn dev
+```
 ## Folder Structure
 ```
 root
