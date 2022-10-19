@@ -18,6 +18,7 @@
             "position_id": 1,
             "division": "Maint. DT",
             "division_id": 1,
+            "shift": "Shift 1(Day)",
             "shift_id": 1,
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80"
         },
@@ -31,6 +32,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         },
         {
@@ -43,6 +45,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         },
         {
@@ -55,6 +58,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         },
         {
@@ -67,6 +71,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         },
         {
@@ -79,6 +84,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         },
         {
@@ -91,6 +97,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         },
         {
@@ -103,6 +110,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         },
         {
@@ -115,6 +123,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         },
         {
@@ -127,6 +136,7 @@
             "division" : "Maint. DT",
             "photo": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1666092063~exp=1666092663~hmac=a16ea81abbbdc8b1860f1d51139b58db1d7415323016c3849e490a3a3eac1a80",
             "photo_id": 1,
+            "shifd":"Shift 1(Day)",
             "shift_id": 1
         }
     ]

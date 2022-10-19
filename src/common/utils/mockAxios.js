@@ -5,26 +5,28 @@ import positions from './../fake/positions.json';
 
 const axios = ({ url, method, data, params }) => {
     return new Promise((res, rej) => {
-        switch (url) {
-            case 'me': return res({
-                data: authMe
-            });
-            case 'employees': return res({
-                data: employees
-            });
-            case 'employees/1': return res({
-                data: {
-                    ...employees,
-                    data: employees.data.find(item => item.id == 1)
-                }
-            });
-            case 'divisions': return res({
-                data: divisions
-            });
-            case 'positions': return res({
-                data: positions
-            });
-        }
+        setTimeout(() => {
+            switch (url) {
+                case 'me': return res({
+                    data: authMe
+                });
+                case 'employees': return res({
+                    data: employees
+                });
+                case 'employees/1': return res({
+                    data: {
+                        ...employees,
+                        data: employees.data.find(item => item.id == 1)
+                    }
+                });
+                case 'divisions': return res({
+                    data: divisions
+                });
+                case 'positions': return res({
+                    data: positions
+                });
+            }
+        }, 500);
     });
 };
 

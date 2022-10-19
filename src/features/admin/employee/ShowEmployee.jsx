@@ -5,10 +5,10 @@ import { useGetEmployeeByIdQuery } from './employeesApiSlice';
 
 export const ShowEmployee = () => {
     const { employeeId } = useParams();
-    const { data: employee, isError, isLoading, isSuccess } = useGetEmployeeByIdQuery(employeeId);
+    const { data: { data: employee } = { data: {} }, isError, isLoading, isSuccess } = useGetEmployeeByIdQuery(employeeId);
     return (
         <div>
-            <div className="flex gap-3 text-gray-500 font-body mb-6">
+            <div className="flex gap-3 text-gray-foundation-500 font-body mb-6">
                 <a>Menu</a>/
                 <a>Data</a>/
                 <a>Master Data</a>/
@@ -28,33 +28,36 @@ export const ShowEmployee = () => {
                         <div className="text-green-500 text-lg font-semibold mb-[37px]">Biodata User</div>
                         <div className="flex flex-col">
                             <div className="px-3 py-1 odd:bg-gray-50 flex">
-                                <div className="flex-[50%] text-gray-500 font-semibold">Name</div>
-                                <div className="flex-[50%] text-gray-400">Afif Chandra</div>
+                                <div className="flex-[50%] text-gray-foundation-500 font-semibold">Name</div>
+                                <div className="flex-[50%] text-gray-400">{ !isLoading && employee.name }</div>
                             </div>
                             <div className="px-3 py-1 odd:bg-gray-50 flex">
-                                <div className="flex-[50%] text-gray-500 font-semibold">Name</div>
-                                <div className="flex-[50%] text-gray-400">Afif Chandra</div>
+                                <div className="flex-[50%] text-gray-foundation-500 font-semibold">NPK</div>
+                                <div className="flex-[50%] text-gray-400">{ !isLoading && employee.npk }</div>
                             </div>
                             <div className="px-3 py-1 odd:bg-gray-50 flex">
-                                <div className="flex-[50%] text-gray-500 font-semibold">Name</div>
-                                <div className="flex-[50%] text-gray-400">Afif Chandra</div>
+                                <div className="flex-[50%] text-gray-foundation-500 font-semibold">Email</div>
+                                <div className="flex-[50%] text-gray-400">{ !isLoading && employee.email }</div>
                             </div>
                             <div className="px-3 py-1 odd:bg-gray-50 flex">
-                                <div className="flex-[50%] text-gray-500 font-semibold">Name</div>
-                                <div className="flex-[50%] text-gray-400">Afif Chandra</div>
+                                <div className="flex-[50%] text-gray-foundation-500 font-semibold">Position</div>
+                                <div className="flex-[50%] text-gray-400">{ !isLoading && employee.position }</div>
                             </div>
                             <div className="px-3 py-1 odd:bg-gray-50 flex">
-                                <div className="flex-[50%] text-gray-500 font-semibold">Name</div>
-                                <div className="flex-[50%] text-gray-400">Afif Chandra</div>
+                                <div className="flex-[50%] text-gray-foundation-500 font-semibold">Division</div>
+                                <div className="flex-[50%] text-gray-400">{ !isLoading && employee.division }</div>
                             </div>
                             <div className="px-3 py-1 odd:bg-gray-50 flex">
-                                <div className="flex-[50%] text-gray-500 font-semibold">Name</div>
-                                <div className="flex-[50%] text-gray-400">Afif Chandra</div>
+                                <div className="flex-[50%] text-gray-foundation-500 font-semibold">Shift</div>
+                                <div className="flex-[50%] text-gray-400">{ !isLoading && employee.shift }</div>
                             </div>
                         </div>
                     </div>
                     <div className="flex-[50%] rounded-xl bg-white px-6 py-6">
                         <div className="text-green-500 text-lg font-semibold">Photo Profile</div>
+                        <div className="w-[226px] h-[226px] rounded-full overflow-hidden">
+                            { !isLoading && <img src={ employee.photo } alt="" /> }
+                        </div>
                     </div>
                 </div>
             </div>

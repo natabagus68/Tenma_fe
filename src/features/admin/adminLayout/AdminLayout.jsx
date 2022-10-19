@@ -5,6 +5,7 @@ import { NavItem, NavLabel } from '../../../common/components';
 import userAvatar from '../../../assets/user.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from './adminLayoutSlice';
+import { Select } from '../../../common/components/input';
 
 export const AdminLayout = () => {
     const { navOpen } = useSelector(state => state.adminLayout);
@@ -25,15 +26,9 @@ export const AdminLayout = () => {
                     </div>
                     <div className="flex ml-auto gap-10 items-center">
                         <div className="hidden lg:flex gap-6">
-                            <select defaultValue="" name="" id="" className="appearance-none rounded-lg bg-white py-3 px-4 min-w-[171px] text-center text-gray-200">
-                                <option value="" disabled>All Area</option>
-                            </select>
-                            <select defaultValue="" name="" id="" className="appearance-none rounded-lg bg-white py-3 px-4 min-w-[171px] text-center text-gray-200">
-                                <option value="" disabled>Select Station</option>
-                            </select>
-                            <select defaultValue="" name="" id="" className="appearance-none rounded-lg bg-white py-3 px-4 min-w-[171px] text-center text-gray-200">
-                                <option value="" disabled>Select Location</option>
-                            </select>
+                            <Select placeholder={ `All Area` } />
+                            <Select placeholder={ `Select Station` } />
+                            <Select placeholder={ `Select Location` } />
                         </div>
                         <div className="flex gap-3">
                             <img className="w-[29px] h-[29px]" src={ userAvatar } alt="" />
@@ -43,7 +38,7 @@ export const AdminLayout = () => {
                 </div>
             </div>
             <div className="flex relative z-0">
-                <div className={ `${!navOpen ? `min-w-[274px] max-w-[274px]` : `min-w-0 max-w-0 pl-0 overflow-hidden`} absolute left-0 md:relative transition-[max-width_min-width] flex flex-col gap-4 bg-green-500 min-h-screen py-[48px] pl-[32px]` }>
+                <div className={ `${!navOpen ? `min-w-[274px] max-w-[274px] pl-[32px]` : `min-w-0 max-w-0 pl-0 overflow-hidden`} absolute left-0 md:relative transition-[max-width_min-width_padding] flex flex-col gap-4 bg-green-500 min-h-screen py-[48px] ` }>
                     <NavLabel className="my-0 mb-0">Home</NavLabel>
                     <NavItem label={ `Dashboard` } icon={ <DashboardIcon className="mr-3 -mb-1" /> }>
                         <NavItem label={ `Main Dashboard` } />
