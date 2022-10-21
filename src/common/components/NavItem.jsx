@@ -6,7 +6,7 @@ export const NavItem = ({ children, label, icon = null, className = null, to = n
     const [open, setOpen] = useState(false);
     const [active, setActive] = useState(false);
     const toggle = e => {
-        setOpen(open => !open);
+        if(children) setOpen(open => !open);
     };
     return (
         <div className={ `${open || active ? `text-green-50` : `text-green-200`} hover:text-green-50 font-body font-semibold ${className}` }>

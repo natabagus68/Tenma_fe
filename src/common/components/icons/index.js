@@ -11,3 +11,4 @@ export * from './EyeIcon';
 export * from './PenIcon';
 export * from './TrashIcon';
 export * from './PenAltIcon';
+export * from './KeyIcon';

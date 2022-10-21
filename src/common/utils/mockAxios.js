@@ -1,7 +1,4 @@
 import authMe from './../fake/authMe.json';
-import employees from './../fake/employees.json';
-import divisions from './../fake/divisions.json';
-import positions from './../fake/positions.json';
 
 const axios = ({ url, method, data, params }) => {
     return new Promise((res, rej) => {
@@ -10,21 +7,12 @@ const axios = ({ url, method, data, params }) => {
                 case 'me': return res({
                     data: authMe
                 });
-                case 'employees': return res({
-                    data: employees
+                case 'login': return res({
+                    data: authMe
                 });
-                case 'employees/1': return res({
-                    data: {
-                        ...employees,
-                        data: employees.data.find(item => item.id == 1)
-                    }
-                });
-                case 'divisions': return res({
-                    data: divisions
-                });
-                case 'positions': return res({
-                    data: positions
-                });
+                case 'logout' : return res({
+                    data : {}
+                })
             }
         }, 500);
     });
