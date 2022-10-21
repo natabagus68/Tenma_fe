@@ -10,9 +10,9 @@ const axios = ({ url, method, data, params }) => {
                 case 'login': return res({
                     data: authMe
                 });
-                case 'logout' : return res({
-                    data : {}
-                })
+                case 'logout': return res({
+                    data: {}
+                });
             }
         }, 500);
     });
@@ -20,7 +20,12 @@ const axios = ({ url, method, data, params }) => {
 
 export const mockAxiosBaseQuery = ({ baseUrl } = { baseUrl: '' }) =>
     async (_url, { url, method, data, params }) => {
-        if (_url) url = _url;
+        if (_url && typeof _url == 'object') {
+            url = _url.url;
+        } else if (typeof _url == 'string') {
+            url = _url;
+        }
+
         try {
             const result = await axios({ url: baseUrl + url, method, data, params });
             return { data: result.data };

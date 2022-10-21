@@ -57,7 +57,7 @@ export const AdminLayout = () => {
             </div>
             <div className="relative z-0">
                 <SideBar />
-                <div className={ `${navOpen || navOpen == null && `md:ml-[274px]`} transition-[margin] mt-[78px] py-[37px] px-[48px] flex-1 overflow-auto` }>
+                <div className={ `${navOpen == true || navOpen == null && `md:ml-[274px]`} transition-[margin] mt-[78px] py-[37px] px-[48px] flex-1 overflow-auto` }>
                     <Outlet />
                 </div>
             </div>

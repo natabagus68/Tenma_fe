@@ -2,7 +2,7 @@ import React from 'react';
 import { AppNameText, KeyIcon } from '../../common/components/icons';
 import { Input } from '../../common/components/input/Input';
 import appLogo from './../../assets/app-logo.png';
-import { useGetAuthenticatedUserQuery, useAuthenticateMutation } from './authApiSlice';
+import { useGetAuthenticatedUserQuery, useLoginMutation } from './authApiSlice';
 
 export const Login = () => {
     const {
@@ -12,7 +12,8 @@ export const Login = () => {
         isError,
         error
     } = useGetAuthenticatedUserQuery();
-    const [authenticate, { authenticateIsLoading }] = useAuthenticateMutation();
+
+    const [authenticate, { authenticateIsLoading }] = useLoginMutation();
     return (
         <>
             <div className="hidden md:flex md:flex-[50%] bg-green-500 flex-col justify-center items-center p-10">
@@ -22,7 +23,11 @@ export const Login = () => {
             <div className="flex-[50%] flex justify-center items-center md:p-10">
                 <form onSubmit={ e => {
                     e.preventDefault();
-                    authenticate(new FormData(e.target));
+                    authenticate({
+                        email: 'asd@asd.asd',
+                        company_code: 'asd',
+                        password: '123123'
+                    });
                 } }>
                     <div className="bg-white shadow-[0px_0px_13px_rgba(4_67_50_0.15)] rounded-xl border-[1px] border-gray-100 py-[92px] px-10 md:px-[74px] md:w-[479px]">
                         <div className=" font-bold text-green-500 text-4xl">Welcome back.</div>
@@ -49,7 +54,7 @@ export const Login = () => {
                             </div>
                             <Input type="password" className="pl-10 w-full" placeholder="input password" />
                         </div>
-                        <button className="font-body font-bold bg-green-500 rounded text-white w-full py-2 px 5" disabled={ authenticateIsLoading }>Login</button>
+                        <button type="submit" className="font-body font-bold bg-green-500 rounded text-white w-full py-2 px 5">Login</button>
                     </div>
                 </form>
             </div>

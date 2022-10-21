@@ -5,6 +5,7 @@ export const Dashboard = () => {
     const ctx = useRef();
     const chart = useRef();
     const [blue, setBlue] = useState(12);
+
     useEffect(() => {
         const initChart = () => {
             chart.current = new Chart(ctx.current, {
@@ -46,7 +47,6 @@ export const Dashboard = () => {
             });
         };
         if (!chart.current) {
-            console.log(chart.current);
             initChart();
         } else {
             try {
@@ -58,6 +58,7 @@ export const Dashboard = () => {
             }
         }
     }, [blue]);
+
     return (
         <>
             <div>Dashboard</div>
