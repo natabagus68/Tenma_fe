@@ -34,7 +34,7 @@ export default createBrowserRouter([
         children: [
             {
                 path: 'dashboard',
-                element: <UnderConstruction />
+                element: <Dashboard />
             }
         ]
     }
