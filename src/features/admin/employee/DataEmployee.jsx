@@ -6,7 +6,13 @@ import { Table } from '../../../common/components/table/Table';
 import { useGetEmployeesQuery } from './employeesApiSlice';
 
 export const DataEmployee = () => {
-    const employees = useGetEmployeesQuery();
+    const {
+        data: employees = {},
+        isLoading,
+        isSuccess,
+        isError,
+        error
+      } = useGetEmployeesQuery();
     return (
         <>
             <div className="flex gap-2 font-body text-gray-700 items-center mb-[27px]">
@@ -15,6 +21,9 @@ export const DataEmployee = () => {
                     <Input placeholder="search..." />
                 </div>
             </div>
+            {isLoading && 'Loading...'}
+            {isSuccess && 'isSuccess...'}
+            {isError && 'isError...'}
             <Table>
                 <Table.Thead>
                     <Table.Tr>
@@ -27,7 +36,7 @@ export const DataEmployee = () => {
                     </Table.Tr>
                 </Table.Thead>
                 <tbody>
-                    { employees?.data?.data?.map(item => (
+                    { employees.data?.map(item => (
                         <Table.Tr>
                             <Table.Td className="whitespace-nowrap">{ item.name }</Table.Td>
                             <Table.Td className="whitespace-nowrap">{ item.npk }</Table.Td>

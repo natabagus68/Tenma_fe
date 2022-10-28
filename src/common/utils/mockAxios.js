@@ -41,7 +41,6 @@ export const mockAxiosBaseQuery = ({ baseUrl } = { baseUrl: '' }) =>
             return {
                 error: {
                     status: err.response?.status,
-                    data: err.response?.data || err.message,
                 },
             };
         }
