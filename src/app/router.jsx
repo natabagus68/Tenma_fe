@@ -5,15 +5,8 @@ import { Login } from "../features/auth/Login";
 import { AdminLayout } from "../features/admin/adminLayout";
 import { GuestLayouts } from "../features/guest/GuestLayouts";
 import { Dashboard } from "../features/admin/dashboard";
-import { UnderConstruction } from "../common/components/error/UnderConstruction";
 
-const Root = () => {
-    return (
-        <>
-            <Outlet />
-        </>
-    );
-};
+const Root = () => { return <Outlet />; };
 
 export default createBrowserRouter([
     {
