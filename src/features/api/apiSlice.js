@@ -10,7 +10,7 @@ export const apiSlice = createApi({
                 ...(localStorage.getItem('authHeader') ? { Authorization: localStorage.getItem('authHeader') } : undefined)
             }
         }),
-    tagTypes: ['Auth'],
+    tagTypes: ['Auth', 'Employee'],
     endpoints: builder => ({
 
     })
