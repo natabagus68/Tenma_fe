@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    navOpen: false,
+    navOpen: null,
 };
 
 export const adminLayoutSlice = createSlice({
@@ -9,7 +9,7 @@ export const adminLayoutSlice = createSlice({
     initialState,
     reducers: {
         toggle: (state) => {
-            state.navOpen = !state.navOpen;
+            state.navOpen = !!!state.navOpen;
         }
     }
 });

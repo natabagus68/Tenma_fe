@@ -3,7 +3,16 @@ import { apiSlice } from "../../api/apiSlice";
 export const employeesApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getEmployees: builder.query({
-            query: () => 'employees'
+            query: () => 'employees',
+            providesTags: ['Employee'],
+        }),
+        storeEmployees: builder.mutation({
+            query: (form) => ({
+                url: 'employees',
+                method: 'POST',
+                body: form
+            }),
+            invalidatesTags: ['Employee'],
         }),
         getEmployeeById: builder.query({
             query: (employeeId) => `employees/${employeeId}`

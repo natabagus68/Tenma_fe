@@ -1,18 +1,25 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import { BurgerIcon, DashboardIcon, DataIcon, SearchIcon, AppLogoText, UserControlIcon } from '../../../common/components/icons';
-import { NavItem, NavLabel } from '../../../common/components';
+import { Navigate, Outlet } from 'react-router-dom';
+import { BurgerIcon, SearchIcon, AppLogoText } from '../../../common/components/icons';
+import { Loader } from '../../../common/components';
 import userAvatar from '../../../assets/user.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from './adminLayoutSlice';
 import { Select } from '../../../common/components/input';
+import { Menu } from '@headlessui/react';
+import { SideBar } from './SideBar';
+import { useGetAuthenticatedUserQuery, useLogoutMutation } from '../../auth/authApiSlice';
 
 export const AdminLayout = () => {
+    const { data: auth, isLoading, isError } = useGetAuthenticatedUserQuery();
     const { navOpen } = useSelector(state => state.adminLayout);
     const dispatch = useDispatch();
+    const [logout, { logoutIsLoading }] = useLogoutMutation();
+    if (isLoading || logoutIsLoading) return <Loader />;
+    if (isError || !auth?.data) return <Navigate to={ `login` } />;
     return (
-        <div className="max-w-full">
-            <div className="sticky top-0 flex bg-green-500 w-screen z-10 shadow-lg _shadow-[0px_3px_10px_rgba(0_44_32_0.17)]">
+        <div className="w-full">
+            <div className="fixed top-0 flex bg-green-500 z-10 shadow-lg w-full">
                 <div className="py-[15px] px-[48px] lg:w-[274px]">
                     <AppLogoText width={ `auto` } height={ `46px` } />
                 </div>
@@ -30,34 +37,27 @@ export const AdminLayout = () => {
                             <Select placeholder={ `Select Station` } />
                             <Select placeholder={ `Select Location` } />
                         </div>
-                        <div className="flex gap-3">
-                            <img className="w-[29px] h-[29px]" src={ userAvatar } alt="" />
-                            <span className="text-white">sevtian usa</span>
-                        </div>
+                        <Menu as="div" className="relative">
+                            <Menu.Button>
+                                <div className="flex gap-3 cursor-pointer">
+                                    <img className="w-[29px] h-[29px]" src={ userAvatar } alt="" />
+                                    <span className="text-white">{ auth.data.name }</span>
+                                </div>
+                            </Menu.Button>
+                            <Menu.Items className="absolute">
+                                <Menu.Item>
+                                    { ({ active }) => (
+                                        <button onClick={ () => logout() } className="px-3 py-1 rounded bg-gray-500 text-green-500">Logout</button>
+                                    ) }
+                                </Menu.Item>
+                            </Menu.Items>
+                        </Menu>
                     </div>
                 </div>
             </div>
-            <div className="flex relative z-0">
-                <div className={ `${!navOpen ? `min-w-[274px] max-w-[274px] pl-[32px]` : `min-w-0 max-w-0 pl-0 overflow-hidden`} absolute left-0 md:relative transition-[max-width_min-width_padding] flex flex-col gap-4 bg-green-500 min-h-screen py-[48px] ` }>
-                    <NavLabel className="my-0 mb-0">Home</NavLabel>
-                    <NavItem label={ `Dashboard` } icon={ <DashboardIcon className="mr-3 -mb-1" /> }>
-                        <NavItem label={ `Main Dashboard` } />
-                        <NavItem label={ `Cost Dashboard` } />
-                    </NavItem>
-                    <NavLabel>Menu</NavLabel>
-                    <NavItem label={ `Data` } icon={ <DataIcon className="mr-3 -mb-1" /> }>
-                        <NavItem label={ `Master Data` }>
-                            <NavItem to={ `employees` } label={ `Employee Data` } className="-ml-2" />
-                            <NavItem label={ `Tank` } className="-ml-2" />
-                        </NavItem>
-                    </NavItem>
-                    <NavItem label={ `User Control` } icon={ <UserControlIcon className="mr-3 -mb-1" /> }>
-                        <NavItem to={ `accounts` } label={ `Account` } />
-                        <NavItem to={ `` } label={ `Account Management` } />
-                        <NavItem to={ `` } label={ `Access` } />
-                    </NavItem>
-                </div>
-                <div className="py-[37px] px-[48px] flex-1 overflow-auto">
+            <div className="relative z-0">
+                <SideBar />
+                <div className={ `${(navOpen == null || navOpen == true) && `md:ml-[274px]`} transition-[margin] mt-[78px] py-[37px] px-[48px] flex-1 overflow-auto` }>
                     <Outlet />
                 </div>
             </div>

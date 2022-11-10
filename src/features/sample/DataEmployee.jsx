@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { EyeIcon, PenIcon, TrashIcon } from '../../../common/components/icons';
-import { Input } from '../../../common/components/input/Input';
-import { Table } from '../../../common/components/table/Table';
+import { EyeIcon, PenIcon, TrashIcon } from '../../common/components/icons';
+import { Input } from '../../common/components/input/Input';
+import { Table } from '../../common/components/table/Table';
 import { useGetEmployeesQuery } from './employeesApiSlice';
 
 export const DataEmployee = () => {
