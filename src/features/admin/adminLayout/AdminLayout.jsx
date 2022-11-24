@@ -2,17 +2,18 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { BurgerIcon, SearchIcon, AppLogoText } from '../../../common/components/icons';
 import { Loader } from '../../../common/components';
-import userAvatar from '../../../assets/user.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from './adminLayoutSlice';
 import { Select } from '../../../common/components/input';
 import { Menu } from '@headlessui/react';
 import { SideBar } from './SideBar';
-import { useGetAuthenticatedUserQuery, useLogoutMutation } from '../../auth/authApiSlice';
+import { useGetAuthenticatedUserQuery, useLogoutMutation } from '../../../app/services/authService';
+import { LogoutDialog } from './LogoutDialog';
+import { AvatarDropdown } from './AvatarDropdown';
 
 export const AdminLayout = () => {
     const { data: auth, isLoading, isError } = useGetAuthenticatedUserQuery();
-    const { navOpen } = useSelector(state => state.adminLayout);
+    const { navOpen, needCompany, needCompanyArea, needShift } = useSelector(state => state.adminLayout);
     const dispatch = useDispatch();
     const [logout, { logoutIsLoading }] = useLogoutMutation();
     if (isLoading || logoutIsLoading) return <Loader />;
@@ -33,31 +34,17 @@ export const AdminLayout = () => {
                     </div>
                     <div className="flex ml-auto gap-10 items-center">
                         <div className="hidden lg:flex gap-6">
-                            <Select placeholder={ `All Area` } />
-                            <Select placeholder={ `Select Station` } />
-                            <Select placeholder={ `Select Location` } />
+                            { needCompany && <Select placeholder={ `All Area` } /> }
+                            { needCompanyArea && <Select placeholder={ `Select Station` } /> }
+                            { needShift && <Select placeholder={ `Select Location` } /> }
                         </div>
-                        <Menu as="div" className="relative">
-                            <Menu.Button>
-                                <div className="flex gap-3 cursor-pointer">
-                                    <img className="w-[29px] h-[29px]" src={ userAvatar } alt="" />
-                                    <span className="text-white">{ auth.data.name }</span>
-                                </div>
-                            </Menu.Button>
-                            <Menu.Items className="absolute">
-                                <Menu.Item>
-                                    { ({ active }) => (
-                                        <button onClick={ () => logout() } className="px-3 py-1 rounded bg-gray-500 text-green-500">Logout</button>
-                                    ) }
-                                </Menu.Item>
-                            </Menu.Items>
-                        </Menu>
+                        <AvatarDropdown />
                     </div>
                 </div>
             </div>
             <div className="relative z-0">
                 <SideBar />
-                <div className={ `${(navOpen == null || navOpen == true) && `md:ml-[274px]`} transition-[margin] mt-[78px] py-[37px] px-[48px] flex-1 overflow-auto` }>
+                <div className={ `${(navOpen == null || navOpen == true) && `md:ml-[274px]`} transition-[margin] mt-[78px] py-6 md:py-[37px] px-2 md:px-[48px] flex-1 overflow-auto` }>
                     <Outlet />
                 </div>
             </div>
