@@ -3,6 +3,7 @@ module.exports = {
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
+        "./node_modules/react-tailwindcss-select/dist/index.esm.js"
     ],
     theme: {
         extend: {
@@ -27,7 +28,7 @@ module.exports = {
                 red: {
                     '50': '#FCEAEA',
                     '500': '#DE1B1B',
-                    'foundation-500' : '#F04438',
+                    'foundation-500': '#F04438',
                 },
                 sky: {
                     'base': '#CDCFD0',
@@ -38,7 +39,7 @@ module.exports = {
                 teal: {
                     '50': '#E8F5F3'
                 },
-                success : '#74B816'
+                success: '#74B816'
             },
             fontSize: {
                 '4xl': '34px',
@@ -50,7 +51,7 @@ module.exports = {
             fontFamily: {
                 'display': 'Marcellus',
                 'body': 'Lato',
-                'nunito-sans' : 'Nunito Sans'
+                'nunito-sans': 'Nunito Sans'
             },
         },
     },

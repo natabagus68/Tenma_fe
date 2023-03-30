@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, Outlet, } from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
 import { Error404 } from "../common/components";
 import { config } from "../common/utils";
 import { Login } from "../features/auth/Login";
@@ -13,12 +13,32 @@ import { AreaAccessDetail } from "../features/admin/AreaAccess/AreaAccessDetail"
 import { AreaAccessItem } from "../features/admin/AreaAccess/AreaAccessItem";
 import { AreaAccessCreate } from "../features/admin/AreaAccess/AreaAccessCreate";
 
-const Root = () => { return <Outlet />; };
+import MeasurementStd from "../features/admin/MasterData/MeasurementStd/MeasurementStd";
+import Part from "../features/admin/MasterData/Part/Part";
+import { element } from "prop-types";
+import PartDetail from "../features/admin/MasterData/Part/Detail";
+import AddDataPart from "../features/admin/MasterData/Part/AddData";
+import Customer from "../features/admin/MasterData/Customer/Customer";
+import AddDataCustomer from "../features/admin/MasterData/Customer/AddDataCustomer";
+import Machine from "../features/admin/MasterData/Machine/Machine";
+import AddDataMachine from "../features/admin/MasterData/Machine/AddDataMachine";
+import Tools from "../features/admin/MasterData/Tools/Tools";
+import AddDataTool from "../features/admin/MasterData/Tools/AddDataTool";
+import Material from "../features/admin/MasterData/Material/Material";
+import AddDataMaterial from "../features/admin/MasterData/Material/AddDataMaterial";
+import Color from "../features/admin/MasterData/Color/Color";
+import AddDataColor from "../features/admin/MasterData/Color/AddDataColor";
+import DailyProgessCheck from "../features/admin/DailyProgressCheck/DailyProgessCheck";
+import AddDataDailyProcessCheck from "../features/admin/DailyProgressCheck/AddDataDailyProcessCheck";
+import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
+const Root = () => {
+    return <Outlet />;
+};
 
 export default createBrowserRouter([
     {
         path: config.pathPrefix,
-        element: <Navigate to={ `${config.pathPrefix}login` } />,
+        element: <Navigate to={`${config.pathPrefix}login`} />,
     },
     {
         path: config.pathPrefix,
@@ -26,10 +46,10 @@ export default createBrowserRouter([
         errorElement: <Error404 />,
         children: [
             {
-                path: 'login',
-                element: <Login />
+                path: "login",
+                element: <Login />,
             },
-        ]
+        ],
     },
     {
         path: config.pathPrefix,
@@ -37,41 +57,141 @@ export default createBrowserRouter([
         errorElemepnt: <Error404 />,
         children: [
             {
-                path: 'dashboard',
-                element: <Dashboard />
+                path: "dashboard",
+                element: <Dashboard />,
             },
             {
-                path: 'payment-data',
-                element: <PaymentData />
+                path: "progress-check",
+                element: <PaymentData />,
             },
             {
-                path: 'payment-data/:id',
-                element: <PaymentDataDetail />
+                path: "report",
+                element: <PaymentDataDetail />,
             },
             {
-                path: 'payment-data/:id/history',
-                element: <PaymentHistory />
+                path: "master-data",
+                element: <Root />,
+                children: [
+                    {
+                        path: "measurement-std",
+                        element: <MeasurementStd />,
+                    },
+                    {
+                        path: "part",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Part />,
+                            },
+                            {
+                                path: "detail",
+                                element: <PartDetail />,
+                            },
+                            {
+                                path: "add-data",
+                                element: <AddDataPart />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "customer",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Customer />,
+                            },
+                            {
+                                path: "add-data",
+                                element: <AddDataCustomer />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "machine",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Machine />,
+                            },
+                            {
+                                path: "add-data",
+                                element: <AddDataMachine />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "tools",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Tools />,
+                            },
+                            {
+                                path: "add-data",
+                                element: <AddDataTool />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "material",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Material />,
+                            },
+                            {
+                                path: "add-data",
+                                element: <AddDataMaterial />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "color",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Color />,
+                            },
+                            {
+                                path: "add-data",
+                                element: <AddDataColor />,
+                            },
+                        ],
+                    },
+                ],
             },
             {
-                path: 'area-access',
-                element: <AreaAccess />
+                path: "daily-progress-check",
+                element: <Root />,
+                children: [
+                    {
+                        path: "",
+                        element: <DailyProgessCheck />,
+                    },
+                    {
+                        path: "add-data",
+                        element: <AddDataDailyProcessCheck />,
+                    },
+                    {
+                        path: "edit-data",
+                        element: <EditDataDailyProcessCheck />,
+                    },
+                ],
             },
             {
-                path: 'area-access/create',
-                element: <AreaAccessCreate />
+                path: "user",
+                element: <AreaAccess />,
             },
-            {
-                path: 'area-access/:id',
-                element: <AreaAccessDetail />
-            },
-            {
-                path: 'area-access/:id/area',
-                element: <AreaAccessItem />
-            },
-        ]
+        ],
     },
     {
-        path: '*',
+        path: "*",
         element: <Error404 />,
     },
 ]);

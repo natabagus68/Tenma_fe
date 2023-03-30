@@ -8,10 +8,11 @@ export const apiSlice = createApi({
         : fetchBaseQuery({
             baseUrl: config.apibaseUrl,
             headers: {
-                Authorization: localStorage.getItem('token')
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+
             }
         }),
-    tagTypes: ["Auth", "Payment"],
+    tagTypes: ["Auth", "Payment", "Part"],
     endpoints: (builder) => ({}),
 });
 
