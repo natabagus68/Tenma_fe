@@ -31,6 +31,8 @@ import AddDataColor from "../features/admin/MasterData/Color/AddDataColor";
 import DailyProgessCheck from "../features/admin/DailyProgressCheck/DailyProgessCheck";
 import AddDataDailyProcessCheck from "../features/admin/DailyProgressCheck/AddDataDailyProcessCheck";
 import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
+import DetailDailyProcessCheck from "../features/admin/DailyProgressCheck/DetailDailyProcessCheck";
+import AddSegmentData from "../features/admin/DailyProgressCheck/AddSegmentData";
 const Root = () => {
     return <Outlet />;
 };
@@ -181,6 +183,20 @@ export default createBrowserRouter([
                     {
                         path: "edit-data",
                         element: <EditDataDailyProcessCheck />,
+                    },
+                    {
+                        path: "detail",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <DetailDailyProcessCheck />,
+                            },
+                            {
+                                path: "add-segment-data",
+                                element: <AddSegmentData />,
+                            },
+                        ],
                     },
                 ],
             },

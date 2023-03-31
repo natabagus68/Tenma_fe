@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "../../../common/components";
 import {
@@ -14,6 +14,7 @@ import DimantionIcon from "./icon/DimantionIcon";
 
 const DailyProgessCheck = () => {
     const navigate = useNavigate();
+    // dami
     return (
         <>
             <div>
@@ -153,7 +154,13 @@ const DailyProgessCheck = () => {
                                     <JudgemnetIcon value={"OK"} />
                                 </td>
                                 <td className="py-6  pl-3 text-gray-600  items-center flex gap-3 justify-center">
-                                    <button className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2">
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            navigate("detail");
+                                        }}
+                                        className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
+                                    >
                                         <EyeIcon />
                                         Detail
                                     </button>
