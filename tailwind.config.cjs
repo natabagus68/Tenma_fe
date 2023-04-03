@@ -32,6 +32,7 @@ module.exports = {
                 },
                 sky: {
                     'base': '#CDCFD0',
+                    'standart': '#1BBDD4',
                     'light': '#E3E5E6',
                     'lightest': '#F7F9FA',
                     'dark': '#979C9E',

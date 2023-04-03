@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "../../../../common/components";
+import ModalNominal from "./components/addCavasity/ModalNominal";
+import SpecialAcept from "./components/addCavasity/SpecialAcept";
 
 const AddDataMeasurement = () => {
-    const [drop, setDrop] = useState(false);
+    const navigate = useNavigate();
     return (
         <>
             <div>
@@ -34,57 +37,22 @@ const AddDataMeasurement = () => {
                 </div>
             </div>
 
-            <div className="relative  mt-5 w-[14%] m-auto">
+            {/* tabel */}
+            <SpecialAcept />
+
+            <div className="w-full py-5 px-5 flex gap-3 border-2 boder-gray-50 rounded-xl mt-11">
+                <button className="py-2 px-20 text-xl rounded-md  text-center text-white bg-sky-standart ">
+                    Save
+                </button>
                 <button
                     onClick={(e) => {
                         e.preventDefault();
-                        setDrop(!drop);
+                        navigate("../");
                     }}
-                    className="flex gap-2 w-full text-center item-center justify-center text-white bg-gray-700 py-3 px-8 rounded-md m-auto "
+                    className="py-2 px-20 text-xl rounded-md  text-center text-gray-400 bg-white border-2 border-gray-100 "
                 >
-                    + &nbsp; Add Segment
-                    {drop ? (
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-5 h-5 m-auto"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M4.5 15.75l7.5-7.5 7.5 7.5"
-                            />
-                        </svg>
-                    ) : (
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-5 h-5 m-auto"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                            />
-                        </svg>
-                    )}
+                    Cancel
                 </button>
-                {drop ? (
-                    <div className="w-full rounded-md  border-gray-100 shadow-xl mt-3 animation duration-500">
-                        <ul className="px-3">
-                            <li className="py-3 border-b border-gray-50">
-                                Special Accept
-                            </li>
-                            <li className="py-3">PAC</li>
-                        </ul>
-                    </div>
-                ) : null}
             </div>
         </>
     );
