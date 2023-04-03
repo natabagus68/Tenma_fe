@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "../../../common/components";
 import { Td } from "../../../common/components/table/Td";
 import { Tr } from "../../../common/components/table/Tr";
-import CavasityTable from "./components/CavasityTable";
-import DateTable from "./components/DateTable";
-import JudgementIcon from "./icon/JudgemnetIcon";
-const DetailDailyProcessCheck = () => {
-    const [cavasity, setCavasity] = useState(true);
+import JudgemnetIcon from "../DailyProgressCheck/icon/JudgemnetIcon";
+
+const Detail = () => {
     const [toggle, setToggle] = useState(true);
     const toggleClass = " transform translate-x-5";
-    const navigate = useNavigate();
-
     return (
-        <>
+        <div>
             <div>
-                <Breadcrumbs items={["Daily Progress Check", "Detail 3D"]} />
+                <Breadcrumbs
+                    items={["Report", "Part Details", "Report Detail"]}
+                />
             </div>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
@@ -44,48 +41,6 @@ const DetailDailyProcessCheck = () => {
 
                         <div className="flex gap-4">
                             <button
-                                className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("add-segment-data");
-                                }}
-                            >
-                                + Add Segment Data
-                            </button>
-                            <button
-                                className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("add-history-data");
-                                }}
-                            >
-                                + Add History Data
-                            </button>
-
-                            <button
-                                className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("add-data");
-                                }}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                                    />
-                                </svg>
-                                Download Report
-                            </button>
-                            <button
                                 className="py-[12px] px-[20px] border border-gray-100 align-middle rounded-md flex gap-2"
                                 onClick={(e) => {
                                     e.preventDefault();
@@ -107,6 +62,30 @@ const DetailDailyProcessCheck = () => {
                                     />
                                 </svg>
                                 Back
+                            </button>
+
+                            <button
+                                className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md flex"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    navigate("add-data");
+                                }}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                                    />
+                                </svg>
+                                Download Report
                             </button>
                         </div>
                     </div>
@@ -258,7 +237,7 @@ const DetailDailyProcessCheck = () => {
                                         Judgement
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        <JudgementIcon value={"Waiting"} />
+                                        <JudgemnetIcon value={"Ok"} />
                                         {/* {state?.product_weight} gram */}
                                     </Td>
                                 </Tr>
@@ -279,15 +258,8 @@ const DetailDailyProcessCheck = () => {
                     </div>
                 </div>
             </div>
-
-            {cavasity ? (
-                <>
-                    <CavasityTable data={[]} />
-                    <DateTable />
-                </>
-            ) : null}
-        </>
+        </div>
     );
 };
 
-export default DetailDailyProcessCheck;
+export default Detail;

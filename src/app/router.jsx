@@ -33,6 +33,12 @@ import AddDataDailyProcessCheck from "../features/admin/DailyProgressCheck/AddDa
 import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
 import DetailDailyProcessCheck from "../features/admin/DailyProgressCheck/DetailDailyProcessCheck";
 import AddSegmentData from "../features/admin/DailyProgressCheck/AddSegmentData";
+import AddHistory from "../features/admin/DailyProgressCheck/AddHistory";
+import Report from "../features/admin/Report/Report";
+import ReportDetail from "../features/admin/Report/ReportDetail";
+import Detail from "../features/admin/Report/Detail";
+import MeasurementDetail from "../features/admin/MasterData/MeasurementStd/MeasurementDetail";
+import AddDataMeasurement from "../features/admin/MasterData/MeasurementStd/AddDataMeasurement";
 const Root = () => {
     return <Outlet />;
 };
@@ -62,21 +68,28 @@ export default createBrowserRouter([
                 path: "dashboard",
                 element: <Dashboard />,
             },
-            {
-                path: "progress-check",
-                element: <PaymentData />,
-            },
-            {
-                path: "report",
-                element: <PaymentDataDetail />,
-            },
+
             {
                 path: "master-data",
                 element: <Root />,
                 children: [
                     {
                         path: "measurement-std",
-                        element: <MeasurementStd />,
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <MeasurementStd />,
+                            },
+                            {
+                                path: "detail",
+                                element: <MeasurementDetail />,
+                            },
+                            {
+                                path: "add-data",
+                                element: <AddDataMeasurement />,
+                            },
+                        ],
                     },
                     {
                         path: "part",
@@ -195,6 +208,35 @@ export default createBrowserRouter([
                             {
                                 path: "add-segment-data",
                                 element: <AddSegmentData />,
+                            },
+                            {
+                                path: "add-history-data",
+                                element: <AddHistory />,
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                path: "report",
+                element: <Root />,
+                children: [
+                    {
+                        path: "",
+                        element: <Report />,
+                    },
+                    {
+                        path: "part-details",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <ReportDetail />,
+                            },
+
+                            {
+                                path: "report-detail",
+                                element: <Detail />,
                             },
                         ],
                     },
