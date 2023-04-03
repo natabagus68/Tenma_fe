@@ -1,18 +1,16 @@
-import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../../common/components";
-import { PenAltIcon } from "../../../../common/components/icons";
-import { Table } from "../../../../common/components/table/Table";
-import { Td } from "../../../../common/components/table/Td";
-import { Tr } from "../../../../common/components/table/Tr";
+import React from "react";
+import { Breadcrumbs } from "../../../../../common/components";
+import { PenAltIcon } from "../../../../../common/components/icons";
+import { Td } from "../../../../../common/components/table/Td";
+import { Tr } from "../../../../../common/components/table/Tr";
+import { usePartDetail } from "./part-detail-view-model";
+import { PartApiRepository } from "@data/api/part-api-repository";
 const PartDetail = () => {
-    const navigate = useNavigate();
-    const { state } = useLocation();
-    console.log(state);
+    const partDetail = usePartDetail(new PartApiRepository());
     return (
         <>
             <div>
-                <Breadcrumbs items={["Part", "Detail"]} />
+                <Breadcrumbs items={ ["Part", "Detail"] } />
             </div>
             <div>
                 <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-52 ">
@@ -23,17 +21,14 @@ const PartDetail = () => {
                         <div className="flex items-center gap-3">
                             <button
                                 className="py-[12px] px-[20px] border text-gray-600 text-center items-center rounded-md flex gap-2"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("../");
-                                }}
+                                onClick={ (e) => partDetail.onBack() }
                             >
                                 <div className="rotate-180">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
-                                        strokeWidth={1.5}
+                                        strokeWidth={ 1.5 }
                                         stroke="currentColor"
                                         className="w-4 h-4"
                                     >
@@ -46,7 +41,7 @@ const PartDetail = () => {
                                 </div>
                                 Back
                             </button>
-                            <button className="py-[12px] px-[20px] bg-[#F79009] text-white text-center items-center rounded-md flex gap-2 ">
+                            <button onClick={ e => partDetail.onEdit() } className="py-[12px] px-[20px] bg-[#F79009] text-white text-center items-center rounded-md flex gap-2 ">
                                 <PenAltIcon />
                                 Edit
                             </button>
@@ -54,7 +49,7 @@ const PartDetail = () => {
                     </div>
 
                     <div className="border-t-2 border-gray-100 py-8 px-8 flex ">
-                        {/* table 1 */}
+                        {/* table 1 */ }
                         <div className="w-1/2 flex justify-center">
                             <table className="border-none w-[90%]">
                                 <tbody>
@@ -63,7 +58,7 @@ const PartDetail = () => {
                                             Cust, Item CD
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            {state?.cust_item_cd}
+                                            { partDetail.part.customer }, { partDetail.part.custItemId }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -71,7 +66,7 @@ const PartDetail = () => {
                                             Part Code
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            {state?.part_cd}
+                                            { partDetail.part.partCode }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -79,7 +74,7 @@ const PartDetail = () => {
                                             Part Name
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            {state?.part_name}
+                                            { partDetail.part.partName }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -87,7 +82,7 @@ const PartDetail = () => {
                                             Item Group CD
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            {state?.item_group_cd}
+                                            { partDetail.part.itemGroupCode }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -95,7 +90,7 @@ const PartDetail = () => {
                                             Item Group Name
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            {state?.item_group_name}
+                                            { partDetail.part.itemGroupName }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -103,7 +98,7 @@ const PartDetail = () => {
                                             Old Part Number
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            {state?.old_part_number}
+                                            { partDetail.part.oldPartNumber }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -111,7 +106,7 @@ const PartDetail = () => {
                                             Customer Model
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            {state?.customer_model?.name}
+                                            { partDetail.part.customerModel }
                                         </Td>
                                     </Tr>
                                 </tbody>
@@ -123,7 +118,7 @@ const PartDetail = () => {
                             </table>
                         </div>
 
-                        {/* table 2 */}
+                        {/* table 2 */ }
                         <div className="w-1/2 flex justify-center">
                             <table className="border-none w-[90%]">
                                 <tbody>
@@ -132,7 +127,7 @@ const PartDetail = () => {
                                             Customer
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            {state?.customer?.name}
+                                            { partDetail.part.customer }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -140,7 +135,7 @@ const PartDetail = () => {
                                             Material
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            {state?.material?.id_material}
+                                            { partDetail.part.material }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -148,7 +143,7 @@ const PartDetail = () => {
                                             Material Color
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            {state?.material?.color?.name}
+                                            { partDetail.part.materialColor }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -156,7 +151,7 @@ const PartDetail = () => {
                                             Customer Model Group
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            {state?.customer_model_group.name}
+                                            { partDetail.part.customerModelGroup }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -164,7 +159,7 @@ const PartDetail = () => {
                                             Unit CD
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            {state?.unit_cd}
+                                            { partDetail.part.unitCd }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -172,7 +167,7 @@ const PartDetail = () => {
                                             Material Details
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            {state?.material?.detail}
+                                            { partDetail.part.materialDetails }
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -180,15 +175,10 @@ const PartDetail = () => {
                                             Product Weight
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            {state?.product_weight} gram
+                                            { partDetail.part.productWeight } gram
                                         </Td>
                                     </Tr>
                                 </tbody>
-                                {/* {[state].map((state) => {
-                                    return (
-                                       
-                                    );
-                                })} */}
                             </table>
                         </div>
                     </div>

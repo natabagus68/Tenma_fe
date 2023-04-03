@@ -16,7 +16,7 @@ import { AreaAccessCreate } from "../features/admin/AreaAccess/AreaAccessCreate"
 import MeasurementStd from "../features/admin/MasterData/MeasurementStd/MeasurementStd";
 import Part from "../features/admin/MasterData/Part/Part";
 import { element } from "prop-types";
-import PartDetail from "../features/admin/MasterData/Part/Detail";
+import PartDetail from "../features/admin/MasterData/Part/part-detail/part-detail-view";
 import AddDataPart from "../features/admin/MasterData/Part/AddData";
 import Customer from "../features/admin/MasterData/Customer/Customer";
 import AddDataCustomer from "../features/admin/MasterData/Customer/AddDataCustomer";
@@ -85,8 +85,12 @@ export default createBrowserRouter([
                                 element: <Part />,
                             },
                             {
-                                path: "detail",
+                                path: "detail/:partId",
                                 element: <PartDetail />,
+                            },
+                            {
+                                path: ":partId/edit",
+                                element: <AddDataPart />,
                             },
                             {
                                 path: "add-data",

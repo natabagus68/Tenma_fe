@@ -53,7 +53,7 @@ const AddDataTool = () => {
                                 className="px-12 py-3 rounded-lg border  text-black items-center flex justify-center hover:bg-gray-300"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    navigate("../");
+                                    navigate(-1);
                                 }}
                             >
                                 Cancel
