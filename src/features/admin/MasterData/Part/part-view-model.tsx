@@ -22,13 +22,13 @@ export function usePart(partRepository: PartRepository) {
         partRef.current.unmarshall()
     );
     const onAddData = () => {
-        console.log("add Data");
+        navigate(`${config.pathPrefix}master-data/part/create`)
     };
     const onDetail = (part: IPart) => {
-        navigate(`${config.pathPrefix}master-data/part/detail/${part.id}`);
+        navigate(`${config.pathPrefix}master-data/part/${part.id}/detail`);
     };
     const onEdit = (part: IPart) => {
-        navigate(`${config.pathPrefix}mater-data/part/${part.id}/edit`);
+        navigate(`${config.pathPrefix}master-data/part/${part.id}/edit`);
     };
     const onDelete = (part: IPart) => {
         partRef.current.data = partRef.current.data.map((item) =>

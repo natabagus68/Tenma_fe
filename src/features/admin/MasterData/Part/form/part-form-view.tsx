@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../../common/components";
+import { Breadcrumbs } from "../../../../../common/components";
 import { useFormik } from "formik";
-import { useAddPartDataMutation } from "../../../../app/services/partService";
+import { useAddPartDataMutation } from "../../../../../app/services/partService";
 import Select from "react-tailwindcss-select";
-import { useGetCustomerModelQuery } from "../../../../app/services/customerModelService";
-import { useGetCustomerQuery } from "../../../../app/services/customerService";
-import { useGetCustomerModelGroupQuery } from "../../../../app/services/customerModelGroupService";
-import { useGetMaterialQuery } from "../../../../app/services/materialService";
-const AddDataPart = () => {
+import { useGetCustomerModelQuery } from "../../../../../app/services/customerModelService";
+import { useGetCustomerQuery } from "../../../../../app/services/customerService";
+import { useGetCustomerModelGroupQuery } from "../../../../../app/services/customerModelGroupService";
+import { useGetMaterialQuery } from "../../../../../app/services/materialService";
+const PartFormView = () => {
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
@@ -239,4 +239,4 @@ const AddDataPart = () => {
     );
 };
 
-export default AddDataPart;
+export default PartFormView;

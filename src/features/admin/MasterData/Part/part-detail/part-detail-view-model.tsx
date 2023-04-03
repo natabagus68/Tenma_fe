@@ -1,3 +1,4 @@
+import { config } from "@common/utils";
 import { IPart, Part } from "@domain/models/part";
 import { PartRepository } from "@domain/repositories/part-repository";
 import { useEffect, useRef, useState } from "react";
@@ -12,7 +13,7 @@ export function usePartDetail(partRepository: PartRepository) {
         navigate(-1);
     };
     const onEdit = () => {
-        navigate(`../${partId}/edit`);
+        navigate(`${config.pathPrefix}master-data/part/${part.id}/edit`);
     };
     useEffect(() => {
         partRepository.show(partId).then((result) => {

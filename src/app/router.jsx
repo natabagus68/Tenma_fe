@@ -14,10 +14,10 @@ import { AreaAccessItem } from "../features/admin/AreaAccess/AreaAccessItem";
 import { AreaAccessCreate } from "../features/admin/AreaAccess/AreaAccessCreate";
 
 import MeasurementStd from "../features/admin/MasterData/MeasurementStd/MeasurementStd";
-import Part from "../features/admin/MasterData/Part/Part";
+import Part from "../features/admin/MasterData/Part/part/part-view";
 import { element } from "prop-types";
 import PartDetail from "../features/admin/MasterData/Part/part-detail/part-detail-view";
-import AddDataPart from "../features/admin/MasterData/Part/AddData";
+import PartFormView from "../features/admin/MasterData/Part/form/part-form-view";
 import Customer from "../features/admin/MasterData/Customer/Customer";
 import AddDataCustomer from "../features/admin/MasterData/Customer/AddDataCustomer";
 import Machine from "../features/admin/MasterData/Machine/Machine";
@@ -85,16 +85,16 @@ export default createBrowserRouter([
                                 element: <Part />,
                             },
                             {
-                                path: "detail/:partId",
+                                path: ":partId/detail",
                                 element: <PartDetail />,
                             },
                             {
                                 path: ":partId/edit",
-                                element: <AddDataPart />,
+                                element: <PartFormView />,
                             },
                             {
-                                path: "add-data",
-                                element: <AddDataPart />,
+                                path: "create",
+                                element: <PartFormView />,
                             },
                         ],
                     },
