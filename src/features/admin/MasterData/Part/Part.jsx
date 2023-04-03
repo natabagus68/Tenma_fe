@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Breadcrumbs, Loader } from "../../../../common/components";
 import {
     EyeIcon,
@@ -13,20 +13,23 @@ import ModalDelete from "../../../../common/components/Modal/ModalDelete";
 const Part = () => {
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
-    const { data: parts, isLoading } = useGetPartQuery();
-
-    if (!isLoading) {
-        console.log(parts);
-    }
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [getPartParam, setGetPartParam] = useState({
+        page: searchParams.get('page') || 1
+    });
+    const { data: parts, isLoading } = useGetPartQuery(getPartParam);
+    useEffect(() => {
+        setSearchParams(getPartParam);
+    }, [getPartParam]);
     return (
         <>
             <>
                 <ModalDelete
-                    showModal={showModal}
-                    setShowModal={setShowModal}
+                    showModal={ showModal }
+                    setShowModal={ setShowModal }
                 />
                 <div>
-                    <Breadcrumbs items={["Part"]} />
+                    <Breadcrumbs items={ ["Part"] } />
                 </div>
                 <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 ">
                     <div className="w-full py-5 px-12 flex justify-between items-center">
@@ -35,10 +38,10 @@ const Part = () => {
                         </h1>
                         <button
                             className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md"
-                            onClick={(e) => {
+                            onClick={ (e) => {
                                 e.preventDefault();
                                 navigate("add-data");
-                            }}
+                            } }
                         >
                             + Add Data
                         </button>
@@ -65,33 +68,33 @@ const Part = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {parts?.data?.map((item, i) => {
+                                { parts?.data?.map((item, i) => {
                                     return (
                                         <tr
                                             className="border-b-2 border-gray-100"
-                                            key={i}
+                                            key={ i }
                                         >
                                             <td className="py-6 text-center pl-3 text-gray-600 ">
-                                                {item.cust_item_cd}
+                                                { item.cust_item_cd }
                                             </td>
                                             <td className="py-6 text-center pl-3 text-gray-600 ">
-                                                {item.part_cd}
+                                                { item.part_cd }
                                             </td>
                                             <td className="py-6 text-center pl-3 text-gray-600 ">
-                                                {item.part_name}
+                                                { item.part_name }
                                             </td>
                                             <td className="py-6 text-center pl-3 text-gray-600 ">
-                                                {item.old_part_number}
+                                                { item.old_part_number }
                                             </td>
                                             <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
                                                 <button
                                                     className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
-                                                    onClick={(e) => {
+                                                    onClick={ (e) => {
                                                         e.preventDefault();
                                                         navigate("detail", {
                                                             state: item,
                                                         });
-                                                    }}
+                                                    } }
                                                 >
                                                     <EyeIcon />
                                                     Detail
@@ -101,12 +104,12 @@ const Part = () => {
                                                     Edit
                                                 </button>
                                                 <button
-                                                    onClick={(e) => {
+                                                    onClick={ (e) => {
                                                         e.preventDefault();
                                                         setShowModal(
                                                             !showModal
                                                         );
-                                                    }}
+                                                    } }
                                                     className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-md text-white flex gap-2"
                                                 >
                                                     <TrashIcon />
@@ -115,18 +118,20 @@ const Part = () => {
                                             </td>
                                         </tr>
                                     );
-                                })}
+                                }) }
                             </tbody>
                         </table>
                         <div className="flex items-center justify-end mt-4 px-5">
-                            {parts ? (
+                            { parts ? (
                                 <Pagination
-                                    row={parts?.totalRows}
-                                    limit={parts?.limit}
+                                    row={ parts?.totalRows }
+                                    limit={ parts?.limit }
+                                    page={ getPartParam.page }
+                                    onClick={ (page = 1) => setSearchParams(prevState => ({ ...prevState, page })) }
                                 />
                             ) : (
                                 ""
-                            )}
+                            ) }
                         </div>
                     </div>
                 </div>

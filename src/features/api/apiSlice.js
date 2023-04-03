@@ -9,10 +9,9 @@ export const apiSlice = createApi({
             baseUrl: config.apibaseUrl,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
-
             }
         }),
-    tagTypes: ["Auth", "Payment", "Part"],
+    tagTypes: ["Auth", "Payment", "Part", "Customer Model", "Customer", "Customer Model Group", "Material"],
     endpoints: (builder) => ({}),
 });
 
