@@ -39,6 +39,11 @@ import ReportDetail from "../features/admin/Report/ReportDetail";
 import Detail from "../features/admin/Report/Detail";
 import MeasurementDetail from "../features/admin/MasterData/MeasurementStd/MeasurementDetail";
 import AddDataMeasurement from "../features/admin/MasterData/MeasurementStd/AddDataMeasurement";
+
+import Account from "../features/admin/User/Account/Account";
+import DetailAccount from "../features/admin/User/Account/DetailAccount";
+import AddAccount from "../features/admin/User/Account/AddAccount";
+import EditAccount from "../features/admin/User/Account/EditAccount";
 const Root = () => {
     return <Outlet />;
 };
@@ -244,7 +249,31 @@ export default createBrowserRouter([
             },
             {
                 path: "user",
-                element: <AreaAccess />,
+                element: <Root />,
+                children: [
+                    {
+                        path: "Account",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Account />,
+                            },
+                            {
+                                path: "detail",
+                                element: <DetailAccount />,
+                            },
+                            {
+                                path: "add-data",
+                                element: <AddAccount />,
+                            },
+                            {
+                                path: "edit-data",
+                                element: <EditAccount />,
+                            },
+                        ],
+                    },
+                ],
             },
         ],
     },

@@ -62,9 +62,8 @@ export const SideBar = () => {
                     label={`User`}
                     icon={<UserControlIcon className="mr-3 -mb-1" />}
                 >
-                    <NavItem to={`accounts`} label={`Account`} />
-                    <NavItem to={``} label={`Account Management`} />
-                    <NavItem to={``} label={`Access`} />
+                    <NavItem to={`user/account`} label={`Account`} />
+                    <NavItem to={`user/access`} label={`Access`} />
                 </NavItem>
             </div>
         </>
