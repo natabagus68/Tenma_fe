@@ -119,7 +119,7 @@ const EditDataDailyProcessCheck = () => {
                             <button
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    navigate("../");
+                                    navigate(-1);
                                 }}
                                 className="py-2 px-14 rounded-md text-gray-700 border border-gray-100"
                             >

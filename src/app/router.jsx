@@ -14,20 +14,20 @@ import { AreaAccessItem } from "../features/admin/AreaAccess/AreaAccessItem";
 import { AreaAccessCreate } from "../features/admin/AreaAccess/AreaAccessCreate";
 
 import MeasurementStd from "../features/admin/MasterData/MeasurementStd/MeasurementStd";
-import Part from "../features/admin/MasterData/Part/Part";
+import Part from "../features/admin/MasterData/Part/part/part-view";
 import { element } from "prop-types";
-import PartDetail from "../features/admin/MasterData/Part/Detail";
-import AddDataPart from "../features/admin/MasterData/Part/AddData";
+import PartDetail from "../features/admin/MasterData/Part/part-detail/part-detail-view";
+import PartFormView from "../features/admin/MasterData/Part/form/part-form-view";
 import Customer from "../features/admin/MasterData/Customer/Customer";
 import AddDataCustomer from "../features/admin/MasterData/Customer/AddDataCustomer";
 import Machine from "../features/admin/MasterData/Machine/Machine";
 import AddDataMachine from "../features/admin/MasterData/Machine/AddDataMachine";
 import Tools from "../features/admin/MasterData/Tools/Tools";
 import AddDataTool from "../features/admin/MasterData/Tools/AddDataTool";
-import Material from "../features/admin/MasterData/Material/Material";
+import MaterialView from "../features/admin/MasterData/Material/material/material-view";
 import AddDataMaterial from "../features/admin/MasterData/Material/AddDataMaterial";
-import Color from "../features/admin/MasterData/Color/Color";
-import AddDataColor from "../features/admin/MasterData/Color/AddDataColor";
+import Color from "../features/admin/MasterData/Color/color/color-view";
+import ColorFormView from "../features/admin/MasterData/Color/color-form/color-form-view";
 import DailyProgessCheck from "../features/admin/DailyProgressCheck/DailyProgessCheck";
 import AddDataDailyProcessCheck from "../features/admin/DailyProgressCheck/AddDataDailyProcessCheck";
 import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
@@ -114,12 +114,16 @@ export default createBrowserRouter([
                                 element: <Part />,
                             },
                             {
-                                path: "detail",
+                                path: ":partId/detail",
                                 element: <PartDetail />,
                             },
                             {
-                                path: "add-data",
-                                element: <AddDataPart />,
+                                path: ":partId/edit",
+                                element: <PartFormView />,
+                            },
+                            {
+                                path: "create",
+                                element: <PartFormView />,
                             },
                         ],
                     },
@@ -193,7 +197,7 @@ export default createBrowserRouter([
                         children: [
                             {
                                 path: "",
-                                element: <Material />,
+                                element: <MaterialView />,
                             },
                             {
                                 path: "add-data",
@@ -210,8 +214,12 @@ export default createBrowserRouter([
                                 element: <Color />,
                             },
                             {
-                                path: "add-data",
-                                element: <AddDataColor />,
+                                path: "create",
+                                element: <ColorFormView />,
+                            },
+                            {
+                                path: ":id/edit",
+                                element: <ColorFormView />,
                             },
                         ],
                     },

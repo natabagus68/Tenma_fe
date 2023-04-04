@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ArrowIcon } from "../icons";
 
-const Pagination = ({ row, limit }) => {
+const Pagination = ({ row, limit, page, onClick = null }) => {
     const [count, setCount] = useState([]);
     useEffect(() => {
         const counting = Math.ceil(row / limit);
@@ -13,13 +12,13 @@ const Pagination = ({ row, limit }) => {
     }, []);
     return (
         <div className="flex justify-between gap-3">
-            <button className="flex gap-4 text-gray-400 items-center px-3 py-2 rounded-md border hover:bg-gray-600 hover:text-white">
+            <button onClick={ e => onClick(page > 1 ? page - 1 : page) } disabled={ page < 2 } type="button" role="button" className="flex gap-4 text-gray-400 items-center px-3 py-2 rounded-md border hover:bg-gray-600 hover:text-white">
                 <div className="rotate-180">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        strokeWidth={1.5}
+                        strokeWidth={ 1.5 }
                         stroke="currentColor"
                         className="w-4 h-4"
                     >
@@ -33,25 +32,28 @@ const Pagination = ({ row, limit }) => {
                 Previous
             </button>
 
-            {/* part pagination */}
+            {/* part pagination */ }
 
-            {count.map((item, i) => (
+            { count.map((item, i) => (
                 <button
-                    key={i}
+                    key={ i }
+                    type="button"
+                    role="button"
+                    onClick={ e => onClick(i + 1) }
                     className="flex gap-1 text-gray-400 items-center px-4 py-2 rounded-md border hover:bg-gray-600 hover:text-white"
                 >
-                    {i + 1}
+                    { i + 1 }
                 </button>
-            ))}
+            )) }
 
-            <button className="flex  gap-1 text-gray-400 items-center px-3 py-2 rounded-md border hover:bg-gray-600 hover:text-white">
-                next
+            <button onClick={ e => onClick(page < count.length ? page + 1 : page) } disabled={ page == count.length } type="button" role="button" className="flex  gap-1 text-gray-400 items-center px-3 py-2 rounded-md border hover:bg-gray-600 hover:text-white">
+                Next
                 <div>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        strokeWidth={1.5}
+                        strokeWidth={ 1.5 }
                         stroke="currentColor"
                         className="w-4 h-4"
                     >

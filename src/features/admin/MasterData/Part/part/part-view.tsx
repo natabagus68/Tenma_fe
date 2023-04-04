@@ -1,29 +1,24 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Breadcrumbs, Loader } from "../../../../common/components";
+import React from "react";
+import { Breadcrumbs } from "../../../../../common/components";
 import {
     EyeIcon,
     PenAltIcon,
     TrashIcon,
-} from "../../../../common/components/icons";
-import Pagination from "../../../../common/components/pagination/Pagination";
-import { useGetPartQuery } from "../../../../app/services/partService";
-import ModalDelete from "../../../../common/components/Modal/ModalDelete";
+} from "../../../../../common/components/icons";
+import Pagination from "../../../../../common/components/pagination/Pagination";
+import ModalDelete from "../../../../../common/components/Modal/ModalDelete";
+import { usePart } from "../part-view-model";
+import { PartApiRepository } from "@data/api/part-api-repository";
 
 const Part = () => {
-    const [showModal, setShowModal] = useState(false);
-    const navigate = useNavigate();
-    const { data: parts, isLoading } = useGetPartQuery();
-
-    if (!isLoading) {
-        console.log(parts);
-    }
+    const part = usePart(new PartApiRepository());
     return (
         <>
             <>
                 <ModalDelete
-                    showModal={showModal}
-                    setShowModal={setShowModal}
+                    showModal={part.deleteConfirmShow}
+                    setShowModal={part.setDeleteConfirmShow}
+                    onConfirm={part.onConfirmDelete}
                 />
                 <div>
                     <Breadcrumbs items={["Part"]} />
@@ -35,10 +30,9 @@ const Part = () => {
                         </h1>
                         <button
                             className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                navigate("add-data");
-                            }}
+                            type="button"
+                            role="button"
+                            onClick={(e) => part.onAddData()}
                         >
                             + Add Data
                         </button>
@@ -65,48 +59,47 @@ const Part = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {parts?.data?.map((item, i) => {
+                                {part.part.data.map((item, i) => {
                                     return (
                                         <tr
                                             className="border-b-2 border-gray-100"
                                             key={i}
                                         >
                                             <td className="py-6 text-center pl-3 text-gray-600 ">
-                                                {item.cust_item_cd}
+                                                {item.custItemId}
                                             </td>
                                             <td className="py-6 text-center pl-3 text-gray-600 ">
-                                                {item.part_cd}
+                                                {item.partCode}
                                             </td>
                                             <td className="py-6 text-center pl-3 text-gray-600 ">
-                                                {item.part_name}
+                                                {item.partName}
                                             </td>
                                             <td className="py-6 text-center pl-3 text-gray-600 ">
-                                                {item.old_part_number}
+                                                {item.oldPartNumber}
                                             </td>
                                             <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
                                                 <button
                                                     className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        navigate("detail", {
-                                                            state: item,
-                                                        });
-                                                    }}
+                                                    onClick={(e) =>
+                                                        part.onDetail(item)
+                                                    }
                                                 >
                                                     <EyeIcon />
                                                     Detail
                                                 </button>
-                                                <button className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-md text-white flex gap-2">
+                                                <button
+                                                    onClick={(e) =>
+                                                        part.onEdit(item)
+                                                    }
+                                                    className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-md text-white flex gap-2"
+                                                >
                                                     <PenAltIcon />
                                                     Edit
                                                 </button>
                                                 <button
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        setShowModal(
-                                                            !showModal
-                                                        );
-                                                    }}
+                                                    onClick={(e) =>
+                                                        part.onDelete(item)
+                                                    }
                                                     className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-md text-white flex gap-2"
                                                 >
                                                     <TrashIcon />
@@ -119,10 +112,14 @@ const Part = () => {
                             </tbody>
                         </table>
                         <div className="flex items-center justify-end mt-4 px-5">
-                            {parts ? (
+                            {part.part.data.length > 0 ? (
                                 <Pagination
-                                    row={parts?.totalRows}
-                                    limit={parts?.limit}
+                                    row={part.part.lastPage * part.part.limit}
+                                    limit={part.part.limit}
+                                    page={part.part.page}
+                                    onClick={(page = 1) =>
+                                        part.onPageChange(page)
+                                    }
                                 />
                             ) : (
                                 ""
