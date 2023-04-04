@@ -24,10 +24,10 @@ import Machine from "../features/admin/MasterData/Machine/Machine";
 import AddDataMachine from "../features/admin/MasterData/Machine/AddDataMachine";
 import Tools from "../features/admin/MasterData/Tools/Tools";
 import AddDataTool from "../features/admin/MasterData/Tools/AddDataTool";
-import Material from "../features/admin/MasterData/Material/Material";
+import MaterialView from "../features/admin/MasterData/Material/material/material-view";
 import AddDataMaterial from "../features/admin/MasterData/Material/AddDataMaterial";
-import Color from "../features/admin/MasterData/Color/Color";
-import AddDataColor from "../features/admin/MasterData/Color/AddDataColor";
+import Color from "../features/admin/MasterData/Color/color/color-view";
+import ColorFormView from "../features/admin/MasterData/Color/color-form/color-form-view";
 import DailyProgessCheck from "../features/admin/DailyProgressCheck/DailyProgessCheck";
 import AddDataDailyProcessCheck from "../features/admin/DailyProgressCheck/AddDataDailyProcessCheck";
 import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
@@ -146,7 +146,7 @@ export default createBrowserRouter([
                         children: [
                             {
                                 path: "",
-                                element: <Material />,
+                                element: <MaterialView />,
                             },
                             {
                                 path: "add-data",
@@ -163,8 +163,12 @@ export default createBrowserRouter([
                                 element: <Color />,
                             },
                             {
-                                path: "add-data",
-                                element: <AddDataColor />,
+                                path: "create",
+                                element: <ColorFormView />,
+                            },
+                            {
+                                path: ":id/edit",
+                                element: <ColorFormView />,
                             },
                         ],
                     },

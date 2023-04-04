@@ -29,9 +29,9 @@ export class PartApiRepository implements PartRepository {
                     unitCd: item.unit_cd,
                     materialDetails: item.material?.detail,
                     productWeight: item.productWeight || 0,
-                    customerModelId: item.customer_model?.id || '',
-                    customerId: item.customer?.id || '',
-                    customerModelGroupId: item.customer_model_group?.id || '',
+                    customerModelId: item.customer_model?.id || "",
+                    customerId: item.customer?.id || "",
+                    customerModelGroupId: item.customer_model_group?.id || "",
                 })
             ),
             lastPage: data.totalPage,
@@ -92,7 +92,20 @@ export class PartApiRepository implements PartRepository {
         });
     }
     async update(part: Part): Promise<Part> {
-        const { data: { data } = {} } = await api.put(`part/${part.id}`);
+        const { data: { data } = {} } = await api.put(`part/${part.id}`, {
+            cust_item_cd: part.custItemId,
+            part_cd: part.partCode,
+            part_name: part.partName,
+            item_group_cd: part.itemGroupCode,  
+            item_group_name: part.itemGroupName,
+            old_part_number: part.oldPartNumber,
+            customer_model_name: part.customerModel,
+            customer_name: part.customer,
+            customer_model_group_name: part.customerModelGroup,
+            material_id: part.material,
+            unit_cd: part.unitCd,
+            product_weight: part.productWeight,
+        });
         return Part.create({
             id: data.id,
             custItemId: data.custItemId,

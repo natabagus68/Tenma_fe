@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ModalDelete({ showModal, setShowModal, onConfirm = () => { } }) {
+export default function ModalDelete({ showModal, setShowModal, onConfirm = null }) {
     return (
         <>
             { showModal ? (

@@ -1,76 +1,28 @@
-import React, { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { Breadcrumbs } from "../../../../../common/components";
-import { useFormik } from "formik";
-import { useAddPartDataMutation } from "../../../../../app/services/partService";
-import Select from "react-tailwindcss-select";
-import { useGetCustomerModelQuery } from "../../../../../app/services/customerModelService";
-import { useGetCustomerQuery } from "../../../../../app/services/customerService";
-import { useGetCustomerModelGroupQuery } from "../../../../../app/services/customerModelGroupService";
-import { useGetMaterialQuery } from "../../../../../app/services/materialService";
+import { usePartForm } from "./part-form-view-model";
+import { PartApiRepository } from "@data/api/part-api-repository";
+import { CustomerModelApiRepository } from "@data/api/customer-model-api-repository";
+import { CustomerApiRepository } from "@data/api/customer-api-repository";
+import { CustomerModelGroupApiRepository } from "@data/api/customer-model-group-api-repository";
+import { MaterialApiRepository } from "@data/api/material-api-repository";
 const PartFormView = () => {
-    const navigate = useNavigate();
-    const formik = useFormik({
-        initialValues: {
-            cust_item_cd: '',
-            part_code: '',
-            item_group_cd: '',
-            item_group_name: '',
-            old_part_number: '',
-            customer_model_id: '',
-            customer_id: '',
-            customer_model_group_id: '',
-            material_id: '',
-            material_color: '',
-            unit_cd: '',
-            product_weight: '',
-        },
-        onSubmit: (values) => {
-            addPart({
-                cust_item_cd: values.custItemCD,
-                part_code: values.partCode,
-                item_group_cd: values.itemGroupCD,
-                item_group_name: values.itemGroupName,
-                old_part_number: values.oldPartNumber,
-                customer_model_id: values.customerModel,
-                customer_id: values.customer,
-                customer_model_group_id: values.customerModelGroup,
-                material_id: values.IdMatrial_MaterialName,
-                material_color: values.materialColor,
-                unit_cd: values.unitCD,
-                product_weight: values.productWeight,
-            });
-        },
-    });
-    const customerModel = useGetCustomerModelQuery({ page: 1, limit: 9999 });
-    const customerModels = useMemo(() => (customerModel.data?.data || [])?.map(item => ({
-        label: item.name,
-        value: item.id
-    })), [customerModel.data]);
-    const customer = useGetCustomerQuery({ page: 1, limit: 9999 });
-    const customers = useMemo(() => (customer.data?.data || [])?.map(item => ({
-        label: item.name,
-        value: item.id
-    })), [customer.data]);
-    const customerModelGroup = useGetCustomerModelGroupQuery({ page: 1, limit: 9999 });
-    const customerModelGroups = useMemo(() => (customerModelGroup.data?.data || [])?.map(item => ({
-        label: item.name,
-        value: item.id
-    })), [customerModelGroup.data]);
-    const material = useGetMaterialQuery({ page: 1, limit: 9999 });
-    const materials = useMemo(() => (material.data?.data || [])?.map(item => ({
-        label: `${item.id_tool} - ${item.name}`,
-        value: item.id
-    })), [material.data]);
+    const partForm = usePartForm(
+        new PartApiRepository(),
+        new CustomerModelApiRepository(),
+        new CustomerApiRepository(),
+        new CustomerModelGroupApiRepository(),
+        new MaterialApiRepository()
+    );
     return (
         <>
             <div>
-                <Breadcrumbs items={ ["Part", "Add Data"] } />
+                <Breadcrumbs items={["Part", "Add Data"]} />
             </div>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-52 ">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Add data.
+                        {partForm.partId ? "Edit data." : "Add data."}
                     </h1>
                 </div>
 
@@ -82,9 +34,13 @@ const PartFormView = () => {
                             </label>
                             <input
                                 type="text"
-                                name="cust_item_cd"
-                                value={ formik.values.cust_item_cd }
-                                onChange={ formik.handleChange }
+                                value={partForm.part?.custItemId}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "custItemId",
+                                        e.target.value
+                                    )
+                                }
                                 className="w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                                 placeholder="Input customer item cd"
                             />
@@ -95,9 +51,13 @@ const PartFormView = () => {
                             </label>
                             <input
                                 type="text"
-                                name="part_cd"
-                                value={ formik.values.part_cd }
-                                onChange={ formik.handleChange }
+                                value={partForm.part?.partCode}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "partCode",
+                                        e.target.value
+                                    )
+                                }
                                 className="w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                                 placeholder="Input part code"
                             />
@@ -109,8 +69,13 @@ const PartFormView = () => {
                             <input
                                 type="text"
                                 name="itemGroupCD"
-                                value={ formik.values.item_group_cd }
-                                onChange={ formik.handleChange }
+                                value={partForm.part?.itemGroupCode}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "itemGroupCode",
+                                        e.target.value
+                                    )
+                                }
                                 className="w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                                 placeholder="Input part name"
                             />
@@ -122,8 +87,13 @@ const PartFormView = () => {
                             <input
                                 type="text"
                                 name="item_group_cd"
-                                value={ formik.values.item_group_cd }
-                                onChange={ formik.handleChange }
+                                value={partForm.part?.itemGroupName}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "itemGroupName",
+                                        e.target.value
+                                    )
+                                }
                                 className="w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                                 placeholder="Input item group name"
                             />
@@ -135,8 +105,13 @@ const PartFormView = () => {
                             <input
                                 type="text"
                                 name="old_part_number"
-                                value={ formik.values.old_part_number }
-                                onChange={ formik.handleChange }
+                                value={partForm.part?.oldPartNumber}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "oldPartNumber",
+                                        e.target.value
+                                    )
+                                }
                                 className="w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                                 placeholder="Input old part number"
                             />
@@ -145,36 +120,116 @@ const PartFormView = () => {
                             <label className="font-sans text-gray-700">
                                 Customer Model
                             </label>
-                            <select className={ `${formik.values.customer_model_id == '' ? 'text-gray-200' : 'text-gray-700'} w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white` } name="customer_model_id" value={ formik.values.customer_model_id } onChange={ formik.handleChange }>
-                                <option value="" disabled>Select customer model</option>
-                                { customerModels.map(item => (<option value={ item.value } key={ item.value }>{ item.label }</option>)) }
+                            <select
+                                className={`${
+                                    partForm.part?.customerModelId == ""
+                                        ? "text-gray-200"
+                                        : "text-gray-700"
+                                } w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white`}
+                                name="customer_model_id"
+                                value={partForm.part?.customerModelId || ''}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "customerModelId",
+                                        e.target.value
+                                    )
+                                }
+                            >
+                                <option value="" disabled>
+                                    Select customer model
+                                </option>
+                                {partForm.customerModels.map((item) => (
+                                    <option value={item.id} key={item.id}>
+                                        {item.name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="flex flex-col gap-2 text-left my-2">
                             <label className="font-sans text-gray-700">
                                 Customer
                             </label>
-                            <select className={ `${formik.values.customer_id == '' ? 'text-gray-200' : 'text-gray-700'} w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white` } name="customer_id" value={ formik.values.customer_id } onChange={ formik.handleChange }>
-                                <option value="" disabled>Select customer</option>
-                                { customers.map(item => (<option value={ item.value } key={ item.value }>{ item.label }</option>)) }
+                            <select
+                                className={`${
+                                    partForm.part?.customerId == ""
+                                        ? "text-gray-200"
+                                        : "text-gray-700"
+                                } w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white`}
+                                name="customer_id"
+                                value={partForm.part?.customerId || ''}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "customerId",
+                                        e.target.value
+                                    )
+                                }
+                            >
+                                <option value="" disabled>
+                                    Select customer
+                                </option>
+                                {partForm.customers.map((item) => (
+                                    <option value={item.id} key={item.id}>
+                                        {item.name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="flex flex-col gap-2 text-left my-2">
                             <label className="font-sans text-gray-700">
                                 Customer Model Group
                             </label>
-                            <select className={ `${formik.values.customer_model_group_id == '' ? 'text-gray-200' : 'text-gray-700'} w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white` } name="customer_model_group_id" value={ formik.values.customer_model_group_id } onChange={ formik.handleChange }>
-                                <option value="" disabled>Select customer model group</option>
-                                { customerModelGroups.map(item => (<option value={ item.value } key={ item.value }>{ item.label }</option>)) }
+                            <select
+                                className={`${
+                                    partForm.part?.customerModelGroupId == ""
+                                        ? "text-gray-200"
+                                        : "text-gray-700"
+                                } w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white`}
+                                name="customer_model_group_id"
+                                value={partForm.part?.customerModelGroupId || ''}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "customerModelGroupId",
+                                        e.target.value
+                                    )
+                                }
+                            >
+                                <option value="" disabled>
+                                    Select customer model group
+                                </option>
+                                {partForm.customerModelGroups.map((item) => (
+                                    <option value={item.id} key={item.id}>
+                                        {item.name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="flex flex-col gap-2 text-left my-2">
                             <label className="font-sans text-gray-700">
                                 ID Material - Material Name
                             </label>
-                            <select className={ `${formik.values.material_id == '' ? 'text-gray-200' : 'text-gray-700'} w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white` } name="material_id" value={ formik.values.material_id } onChange={ formik.handleChange }>
-                                <option value="" disabled>Select material</option>
-                                { materials.map(item => (<option value={ item.value } key={ item.value }>{ item.label }</option>)) }
+                            <select
+                                className={`${
+                                    partForm.part?.material == ""
+                                        ? "text-gray-200"
+                                        : "text-gray-700"
+                                } w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white`}
+                                name="material_id"
+                                value={partForm.part?.material || ''}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "material",
+                                        e.target.value
+                                    )
+                                }
+                            >
+                                <option value="" disabled>
+                                    Select material
+                                </option>
+                                {partForm.materials.map((item) => (
+                                    <option value={item.id} key={item.id}>
+                                        {item.name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
 
@@ -183,14 +238,16 @@ const PartFormView = () => {
                                 Material Details
                             </label>
                             <div className="w-full bg-[#D0D3D9] rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono">
-                                -
+                                {partForm.part?.materialDetails || "-"}
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 text-left my-2">
                             <label className="font-sans text-gray-700">
                                 Material Color
                             </label>
-                            <div className="w-full bg-[#D0D3D9] rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono">-</div>
+                            <div className="w-full bg-[#D0D3D9] rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono">
+                                {partForm.part?.materialColor || "-"}
+                            </div>
                         </div>
                         <div className="flex flex-col gap-2 text-left my-2">
                             <label className="font-sans text-gray-700">
@@ -199,8 +256,13 @@ const PartFormView = () => {
                             <input
                                 type="text"
                                 name="unit_cd"
-                                value={ formik.values.unit_cd }
-                                onChange={ formik.handleChange }
+                                value={partForm.part?.unitCd}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "unitCd",
+                                        e.target.value
+                                    )
+                                }
                                 className="w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                                 placeholder="Input unit cd (e.g. “pcs”)"
                             />
@@ -212,29 +274,38 @@ const PartFormView = () => {
                             <input
                                 type="text"
                                 name="product_weight"
-                                value={ formik.values.product_weight }
-                                onChange={ formik.handleChange }
+                                value={partForm.part?.productWeight}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "productWeight",
+                                        e.target.value
+                                    )
+                                }
                                 className="w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                                 placeholder="Input product weight"
                             />
                         </div>
                         <div className="flex gap-2 text-left mt-10">
-                            <button className="px-12 py-3 rounded-lg bg-gray-600 text-white items-center flex justify-center hover:bg-gray-800">
+                            <button
+                                onClick={e => partForm.onSubmit()}
+                                type="button"
+                                role="button"
+                                className="px-12 py-3 rounded-lg bg-gray-600 text-white items-center flex justify-center hover:bg-gray-800"
+                            >
                                 save
                             </button>
                             <button
+                                type="button"
+                                role="button"
                                 className="px-12 py-3 rounded-lg border  text-black items-center flex justify-center hover:bg-gray-300"
-                                onClick={ (e) => {
-                                    e.preventDefault();
-                                    navigate(-1);
-                                } }
+                                onClick={ (e) => partForm.onCancel() }
                             >
                                 cancel
                             </button>
                         </div>
                     </form>
                 </div>
-            </div >
+            </div>
         </>
     );
 };

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ArrowIcon } from "../icons";
 
 const Pagination = ({ row, limit, page, onClick = null }) => {
     const [count, setCount] = useState([]);

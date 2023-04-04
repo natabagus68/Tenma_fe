@@ -22,7 +22,7 @@ export function usePart(partRepository: PartRepository) {
         partRef.current.unmarshall()
     );
     const onAddData = () => {
-        navigate(`${config.pathPrefix}master-data/part/create`)
+        navigate(`${config.pathPrefix}master-data/part/create`);
     };
     const onDetail = (part: IPart) => {
         navigate(`${config.pathPrefix}master-data/part/${part.id}/detail`);
@@ -42,9 +42,19 @@ export function usePart(partRepository: PartRepository) {
     };
     const onConfirmDelete = () => {
         setDeleteConfirmShow(false);
-        partRepository.destroy(
-            partRef.current.data.find((item) => item.checked)
-        );
+        partRepository
+            .destroy(partRef.current.data.find((item) => item.checked))
+            .then(() => {
+                loadPart();
+            });
+    };
+    const loadPart = () => {
+        partRepository
+            .get({ limit: part.limit, page: part.page, q: part.q })
+            .then((result) => {
+                partRef.current = result;
+                setPart(partRef.current.unmarshall());
+            });
     };
     useEffect(() => {
         setSearchParams({
@@ -54,12 +64,7 @@ export function usePart(partRepository: PartRepository) {
         });
     }, [part]);
     useEffect(() => {
-        partRepository
-            .get({ limit: part.limit, page: part.page, q: part.q })
-            .then((result) => {
-                partRef.current = result;
-                setPart(partRef.current.unmarshall());
-            });
+        loadPart();
     }, []);
     return {
         part,
