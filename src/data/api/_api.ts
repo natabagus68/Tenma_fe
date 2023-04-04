@@ -6,9 +6,8 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const auth = localStorage.getItem("auth");
-  const jsonAuth = auth ? JSON.parse(auth) : null;
-  config.headers["Authorization"] = `jwt ${jsonAuth}`;
+  const auth = localStorage.getItem("token");
+  config.headers["Authorization"] = `jwt ${auth}`;
   return config;
 });
 
