@@ -1,21 +1,14 @@
 import React from "react";
-import { Breadcrumbs } from "../../../../common/components";
-import {
-    EyeIcon,
-    PenAltIcon,
-    TrashIcon,
-} from "../../../../common/components/icons";
-import { Link, useNavigate } from "react-router-dom";
-import Pagination from "../../../../common/components/pagination/Pagination";
-const Customer = () => {
-    const navigate = useNavigate();
+import { PenAltIcon, TrashIcon } from "../../../../../common/components/icons";
+
+const CustomerModelGroup = () => {
     return (
         <>
             <table className="w-full">
                 <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                     <tr>
                         <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
-                            Customer Name
+                            Customer Model Group Name
                         </th>
 
                         <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
@@ -46,4 +39,4 @@ const Customer = () => {
     );
 };
 
-export default Customer;
+export default CustomerModelGroup;

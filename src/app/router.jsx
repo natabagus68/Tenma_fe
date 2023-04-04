@@ -48,6 +48,11 @@ import Access from "../features/admin/User/Access/Access";
 import Menu from "../features/admin/User/Access/Menu";
 import AddNewRole from "../features/admin/User/Access/AddNewRole";
 import EditRole from "../features/admin/User/Access/EditRole";
+import LayoutCustomer from "../features/admin/MasterData/Customer/LayoutCustomer";
+import CustomerModel from "../features/admin/MasterData/Customer/CustomerModel/CustomerModel";
+import CustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/CustomerModelGroup";
+import AddDataCustomerModel from "../features/admin/MasterData/Customer/CustomerModel/AddDataCustomerModel";
+import AddDataCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/AddDataCustomerModelGroup";
 const Root = () => {
     return <Outlet />;
 };
@@ -123,12 +128,34 @@ export default createBrowserRouter([
                         element: <Root />,
                         children: [
                             {
-                                path: "",
-                                element: <Customer />,
+                                path: "add-data-c1",
+                                element: <AddDataCustomer />,
                             },
                             {
-                                path: "add-data",
-                                element: <AddDataCustomer />,
+                                path: "add-data-c2",
+                                element: <AddDataCustomerModel />,
+                            },
+                            {
+                                path: "add-data-c3",
+                                element: <AddDataCustomerModelGroup />,
+                            },
+                            {
+                                path: "",
+                                element: <LayoutCustomer />,
+                                children: [
+                                    {
+                                        path: "",
+                                        element: <Customer />,
+                                    },
+                                    {
+                                        path: "customer-model",
+                                        element: <CustomerModel />,
+                                    },
+                                    {
+                                        path: "customer-model-group",
+                                        element: <CustomerModelGroup />,
+                                    },
+                                ],
                             },
                         ],
                     },
