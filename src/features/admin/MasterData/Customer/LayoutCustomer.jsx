@@ -8,7 +8,11 @@ const LayoutCustomer = () => {
     const url = window.location.href;
     function getLastSegmentOfUrl(url) {
         const segments = url.split("/");
-        return segments[segments.length - 1];
+        if (segments[segments.length - 1] !== "") {
+            return segments[segments.length - 1];
+        } else {
+            return segments[segments.length - 2];
+        }
     }
     return (
         <>
