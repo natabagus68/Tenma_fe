@@ -44,6 +44,10 @@ import Account from "../features/admin/User/Account/Account";
 import DetailAccount from "../features/admin/User/Account/DetailAccount";
 import AddAccount from "../features/admin/User/Account/AddAccount";
 import EditAccount from "../features/admin/User/Account/EditAccount";
+import Access from "../features/admin/User/Access/Access";
+import Menu from "../features/admin/User/Access/Menu";
+import AddNewRole from "../features/admin/User/Access/AddNewRole";
+import EditRole from "../features/admin/User/Access/EditRole";
 const Root = () => {
     return <Outlet />;
 };
@@ -270,6 +274,28 @@ export default createBrowserRouter([
                             {
                                 path: "edit-data",
                                 element: <EditAccount />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "access",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Access />,
+                            },
+                            {
+                                path: "menu",
+                                element: <Menu />,
+                            },
+                            {
+                                path: "add-new-role",
+                                element: <AddNewRole />,
+                            },
+                            {
+                                path: "edit-new-role/:id",
+                                element: <EditRole />,
                             },
                         ],
                     },
