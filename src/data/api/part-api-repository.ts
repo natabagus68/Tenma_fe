@@ -66,10 +66,20 @@ export class PartApiRepository implements PartRepository {
         });
     }
     async store(part: Part): Promise<Part> {
-        const { data: { data } = {} } = await api.post(
-            `part`,
-            part.unmarshall()
-        );
+        const { data: { data } = {} } = await api.post(`part`, {
+            cust_item_cd: part.custItemId,
+            part_cd: part.partCode,
+            part_name: part.partName,
+            item_group_cd: part.itemGroupCode,
+            item_group_name: part.itemGroupName,
+            old_part_number: part.oldPartNumber,
+            customer_model_name: part.customerModel,
+            customer_name: part.customer,
+            customer_model_group_name: part.customerModelGroup,
+            material_id: part.material,
+            unit_cd: part.unitCd,
+            product_weight: part.productWeight,
+        });
         return Part.create({
             id: data.id,
             custItemId: data.custItemId,
@@ -96,7 +106,7 @@ export class PartApiRepository implements PartRepository {
             cust_item_cd: part.custItemId,
             part_cd: part.partCode,
             part_name: part.partName,
-            item_group_cd: part.itemGroupCode,  
+            item_group_cd: part.itemGroupCode,
             item_group_name: part.itemGroupName,
             old_part_number: part.oldPartNumber,
             customer_model_name: part.customerModel,

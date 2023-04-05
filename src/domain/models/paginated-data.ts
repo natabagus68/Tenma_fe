@@ -22,6 +22,18 @@ export class PaginatedData<T> {
     static create<T>(props: IPaginatedData<T>) {
         return new PaginatedData<T>(props);
     }
+    next(): PaginatedData<T> {
+        if (this.lastPage < this.page) {
+            this.page++;
+        }
+        return this;
+    }
+    prev(): PaginatedData<T> {
+        if (this.page > 1) {
+            this.page--;
+        }
+        return this;
+    }
     unmarshall() {
         return {
             q: this.q,
@@ -30,5 +42,8 @@ export class PaginatedData<T> {
             lastPage: this.lastPage,
             data: this.data,
         };
+    }
+    duplicate(): PaginatedData<T> {
+        return PaginatedData.create<T>(this.unmarshall());
     }
 }

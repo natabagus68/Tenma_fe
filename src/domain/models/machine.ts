@@ -27,6 +27,9 @@ export class Machine extends Entity<IMachine> {
         this._props.checked = false
         return this
     }
+    duplicate():Machine{
+        return Machine.create(this.unmarshall())
+    }
     get idMachine(): string {
         return this._props.idMachine;
     }

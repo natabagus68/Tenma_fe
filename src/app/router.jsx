@@ -20,8 +20,8 @@ import PartDetail from "../features/admin/MasterData/Part/part-detail/part-detai
 import PartFormView from "../features/admin/MasterData/Part/form/part-form-view";
 import Customer from "../features/admin/MasterData/Customer/Customer";
 import AddDataCustomer from "../features/admin/MasterData/Customer/AddDataCustomer";
-import Machine from "../features/admin/MasterData/Machine/Machine";
-import AddDataMachine from "../features/admin/MasterData/Machine/AddDataMachine";
+import Machine from "../features/admin/MasterData/Machine/machine/machine-view";
+import MachineFormView from "../features/admin/MasterData/Machine/machine-form/machine-form-view";
 import ToolView from "../features/admin/MasterData/Tools/tool/tool-view";
 import ToolFormView from "../features/admin/MasterData/Tools/tools-form/tool-form-view";
 import MaterialView from "../features/admin/MasterData/Material/material/material-view";
@@ -172,8 +172,12 @@ export default createBrowserRouter([
                                 element: <Machine />,
                             },
                             {
-                                path: "add-data",
-                                element: <AddDataMachine />,
+                                path: "create",
+                                element: <MachineFormView />,
+                            },
+                            {
+                                path: ":id/edit",
+                                element: <MachineFormView />,
                             },
                         ],
                     },
