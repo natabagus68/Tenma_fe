@@ -30,7 +30,9 @@ export default function useMaterial() {
             const material = PaginatedData.create<Material>(
                 prevMaterial.unmarshall()
             );
-            material.data.find((item) => item.id == id).check();
+            material.data.forEach((item) =>
+                item.id == id ? item.check() : item.uncheck()
+            );
             return material;
         });
     };

@@ -19,7 +19,7 @@ import { element } from "prop-types";
 import PartDetail from "../features/admin/MasterData/Part/part-detail/part-detail-view";
 import PartFormView from "../features/admin/MasterData/Part/form/part-form-view";
 import Customer from "../features/admin/MasterData/Customer/Customer";
-import AddDataCustomer from "../features/admin/MasterData/Customer/AddDataCustomer";
+import CustomerFormView from "../features/admin/MasterData/Customer/customer-form-view";
 import Machine from "../features/admin/MasterData/Machine/Machine";
 import AddDataMachine from "../features/admin/MasterData/Machine/AddDataMachine";
 import ToolView from "../features/admin/MasterData/Tools/tool/tool-view";
@@ -52,7 +52,7 @@ import LayoutCustomer from "../features/admin/MasterData/Customer/LayoutCustomer
 import CustomerModel from "../features/admin/MasterData/Customer/CustomerModel/CustomerModel";
 import CustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/CustomerModelGroup";
 import AddDataCustomerModel from "../features/admin/MasterData/Customer/CustomerModel/AddDataCustomerModel";
-import AddDataCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/AddDataCustomerModelGroup";
+import InputFormCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/InputFormCustomerModelGroup";
 const Root = () => {
     return <Outlet />;
 };
@@ -133,15 +133,24 @@ export default createBrowserRouter([
                         children: [
                             {
                                 path: "add-data-c1",
-                                element: <AddDataCustomer />,
+                                element: <CustomerFormView />,
+                            },
+                            {
+                                path: ":id/edit-customer",
+                                element: <CustomerFormView />,
                             },
                             {
                                 path: "add-data-c2",
                                 element: <AddDataCustomerModel />,
                             },
+
                             {
                                 path: "add-data-c3",
-                                element: <AddDataCustomerModelGroup />,
+                                element: <InputFormCustomerModelGroup />,
+                            },
+                            {
+                                path: ":id/edit-customer-model-group",
+                                element: <InputFormCustomerModelGroup />,
                             },
                             {
                                 path: "",

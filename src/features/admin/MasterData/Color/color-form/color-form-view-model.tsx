@@ -45,5 +45,6 @@ export function useColorForm() {
         onColorChange,
         onSave,
         onCancel,
+        id,
     };
 }
