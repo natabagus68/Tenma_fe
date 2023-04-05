@@ -1,24 +1,25 @@
-import { Breadcrumbs } from "@common/components";
-import { PenAltIcon, TrashIcon } from "@common/components/icons";
-import Pagination from "@common/components/pagination/Pagination";
-import useMaterial from "./material-view-model";
+import React from "react";
+import { Breadcrumbs } from "../../../../../common/components";
+import { PenAltIcon, TrashIcon } from "../../../../../common/components/icons";
+import Pagination from "../../../../../common/components/pagination/Pagination";
+import useTool from "./tool-view-model";
 import ModalDelete from "@common/components/Modal/ModalDelete";
 
-const MaterialView = () => {
-    const material = useMaterial();
+const ToolView = () => {
+    const tool = useTool();
     return (
         <>
             <div>
-                <Breadcrumbs items={["Material"]} />
+                <Breadcrumbs items={["Tools"]} />
             </div>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 ">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Material.
+                        Tools.
                     </h1>
                     <button
                         className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md"
-                        onClick={(e) => material.onAdd()}
+                        onClick={() => tool.onAdd()}
                     >
                         + Add Data
                     </button>
@@ -28,16 +29,16 @@ const MaterialView = () => {
                         <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                             <tr>
                                 <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
-                                    ID Material
+                                    ID Tools
                                 </th>
                                 <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
-                                    Material
+                                    Tool Code
                                 </th>
                                 <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
-                                    Material Details
+                                    Name
                                 </th>
                                 <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
-                                    Material Color
+                                    Address
                                 </th>
                                 <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
                                     Action
@@ -45,36 +46,35 @@ const MaterialView = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {material.material.data.map((item) => (
+                            {tool.tool.data.map((item) => (
                                 <tr
                                     key={item.id}
                                     className="border-b-2 border-gray-100"
                                 >
                                     <td className="py-6 text-center pl-3 text-gray-600 ">
-                                        {item.idMaterial}
+                                        {item.idTool}
                                     </td>
+                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                        {item.toolCode}
+                                    </td>
+
                                     <td className="py-6 text-center pl-3 text-gray-600 ">
                                         {item.name}
                                     </td>
                                     <td className="py-6 text-center pl-3 text-gray-600 ">
-                                        {item.materialDetail}
-                                    </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
-                                        {item.color?.materialColor}
+                                        {item.address}
                                     </td>
                                     <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
                                         <button
-                                            onClick={(e) =>
-                                                material.onEdit(item.id)
-                                            }
+                                            onClick={() => tool.onEdit(item.id)}
                                             className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-md text-white flex gap-2"
                                         >
                                             <PenAltIcon />
                                             Edit
                                         </button>
                                         <button
-                                            onClick={(e) =>
-                                                material.onDelete(item.id)
+                                            onClick={() =>
+                                                tool.onDelete(item.id)
                                             }
                                             className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-md text-white flex gap-2"
                                         >
@@ -87,17 +87,17 @@ const MaterialView = () => {
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={1} limit={10} page={1} />
+                        <Pagination row={1} limit={10} page={undefined} />
                     </div>
                 </div>
             </div>
             <ModalDelete
-                showModal={material.deleteConfirmShow}
-                setShowModal={material.setDeleteConfirmShow}
-                onConfirm={material.onConfirmDelete}
+                showModal={tool.deleteConfirmShow}
+                setShowModal={tool.setDeleteConfirmShow}
+                onConfirm={tool.onConfirmDelete}
             />
         </>
     );
 };
 
-export default MaterialView;
+export default ToolView;

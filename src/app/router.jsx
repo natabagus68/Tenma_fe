@@ -22,10 +22,10 @@ import Customer from "../features/admin/MasterData/Customer/Customer";
 import AddDataCustomer from "../features/admin/MasterData/Customer/AddDataCustomer";
 import Machine from "../features/admin/MasterData/Machine/Machine";
 import AddDataMachine from "../features/admin/MasterData/Machine/AddDataMachine";
-import Tools from "../features/admin/MasterData/Tools/Tools";
-import AddDataTool from "../features/admin/MasterData/Tools/AddDataTool";
+import ToolView from "../features/admin/MasterData/Tools/tool/tool-view";
+import ToolFormView from "../features/admin/MasterData/Tools/tools-form/tool-form-view";
 import MaterialView from "../features/admin/MasterData/Material/material/material-view";
-import AddDataMaterial from "../features/admin/MasterData/Material/AddDataMaterial";
+import MaterialFormView from "../features/admin/MasterData/Material/material-form/material-form-view.tsx";
 import Color from "../features/admin/MasterData/Color/color/color-view";
 import ColorFormView from "../features/admin/MasterData/Color/color-form/color-form-view";
 import DailyProgessCheck from "../features/admin/DailyProgressCheck/DailyProgessCheck";
@@ -178,16 +178,20 @@ export default createBrowserRouter([
                         ],
                     },
                     {
-                        path: "tools",
+                        path: "tool",
                         element: <Root />,
                         children: [
                             {
                                 path: "",
-                                element: <Tools />,
+                                element: <ToolView />,
                             },
                             {
-                                path: "add-data",
-                                element: <AddDataTool />,
+                                path: "create",
+                                element: <ToolFormView />,
+                            },
+                            {
+                                path: ":id/edit",
+                                element: <ToolFormView />,
                             },
                         ],
                     },
@@ -200,8 +204,12 @@ export default createBrowserRouter([
                                 element: <MaterialView />,
                             },
                             {
-                                path: "add-data",
-                                element: <AddDataMaterial />,
+                                path: "create",
+                                element: <MaterialFormView />,
+                            },
+                            {
+                                path: ":id/edit",
+                                element: <MaterialFormView />,
                             },
                         ],
                     },

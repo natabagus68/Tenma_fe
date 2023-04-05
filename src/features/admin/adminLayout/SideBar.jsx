@@ -54,7 +54,7 @@ export const SideBar = () => {
                     <NavItem to={"master-data/part"} label={"Part"} />
                     <NavItem to={"master-data/customer"} label={"Customer"} />
                     <NavItem to={"master-data/machine"} label={"Machine"} />
-                    <NavItem to={"master-data/tools"} label={"Tools"} />
+                    <NavItem to={"master-data/tool"} label={"Tools"} />
                     <NavItem to={"master-data/material"} label={"Material"} />
                     <NavItem to={"master-data/color"} label={"Color"} />
                 </NavItem>

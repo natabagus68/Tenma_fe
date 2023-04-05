@@ -12,6 +12,15 @@ export class MaterialApiRepository implements MaterialRepository {
                 Material.create({
                     id: item.id,
                     name: item.name,
+                    idMaterial: item.id_material,
+                    materialDetail: item.detail,
+                    colorId: item.color?.id || "",
+                    color: item.color && {
+                        id: item.color?.id,
+                        idColor: item.color?.id_color,
+                        materialColor: item.color?.name,
+                        checked: false,
+                    },
                 })
             ),
             page: data.page,
@@ -26,28 +35,43 @@ export class MaterialApiRepository implements MaterialRepository {
         return Material.create({
             id: data.id,
             name: data.name,
+            idMaterial: data.id_material,
+            materialDetail: data.detail,
+            colorId: data.color_id,
         });
     }
     async store(param: Material): Promise<Material> {
         const {
             data: { data = {} },
         } = await api.post(`material`, {
+            id_material: param.idMaterial,
             name: param.name,
+            detail: param.materialDetail,
+            color_id: param.colorId,
         });
         return Material.create({
             id: data.id,
             name: data.name,
+            idMaterial: data.id_material,
+            materialDetail: data.detail,
+            colorId: data.color_id,
         });
     }
     async update(param: Material): Promise<Material> {
         const {
             data: { data = {} },
         } = await api.put(`material/${param.id}`, {
+            id_material: param.idMaterial,
             name: param.name,
+            detail: param.materialDetail,
+            color_id: param.colorId,
         });
         return Material.create({
             id: data.id,
             name: data.name,
+            idMaterial: data.id_material,
+            materialDetail: data.detail,
+            colorId: data.color_id,
         });
     }
     async destroy(id: string): Promise<boolean> {
