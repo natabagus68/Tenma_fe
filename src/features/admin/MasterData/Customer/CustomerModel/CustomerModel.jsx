@@ -2,6 +2,7 @@ import React from "react";
 import { PenAltIcon, TrashIcon } from "../../../../../common/components/icons";
 import useCustomerModel from "./customer-model-view-model";
 import ModalDelete from "@common/components/Modal/ModalDelete";
+import Pagination from "@common/components/pagination/Pagination";
 const CustomerModel = () => {
     const customerModel = useCustomerModel();
     return (
