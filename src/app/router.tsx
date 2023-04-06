@@ -60,7 +60,7 @@ const Root = () => {
 export default createBrowserRouter([
     {
         path: config.pathPrefix,
-        element: <Navigate to={ `${config.pathPrefix}login` } />,
+        element: <Navigate to={`${config.pathPrefix}login`} />,
     },
     {
         path: config.pathPrefix,
@@ -76,7 +76,7 @@ export default createBrowserRouter([
     {
         path: config.pathPrefix,
         element: <AdminLayout />,
-        errorElemepnt: <Error404 />,
+        // errorElemepnt: <Error404 />,
         children: [
             {
                 path: "dashboard",
