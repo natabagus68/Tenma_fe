@@ -19,9 +19,9 @@ import { element } from "prop-types";
 import PartDetail from "../features/admin/MasterData/Part/part-detail/part-detail-view";
 import PartFormView from "../features/admin/MasterData/Part/form/part-form-view";
 import Customer from "../features/admin/MasterData/Customer/Customer";
-import AddDataCustomer from "../features/admin/MasterData/Customer/AddDataCustomer";
 import Machine from "../features/admin/MasterData/Machine/machine/machine-view";
 import MachineFormView from "../features/admin/MasterData/Machine/machine-form/machine-form-view";
+import CustomerFormView from "../features/admin/MasterData/Customer/customer-form-view";
 import ToolView from "../features/admin/MasterData/Tools/tool/tool-view";
 import ToolFormView from "../features/admin/MasterData/Tools/tools-form/tool-form-view";
 import MaterialView from "../features/admin/MasterData/Material/material/material-view";
@@ -51,8 +51,8 @@ import EditRole from "../features/admin/User/Access/EditRole";
 import LayoutCustomer from "../features/admin/MasterData/Customer/LayoutCustomer";
 import CustomerModel from "../features/admin/MasterData/Customer/CustomerModel/CustomerModel";
 import CustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/CustomerModelGroup";
-import AddDataCustomerModel from "../features/admin/MasterData/Customer/CustomerModel/AddDataCustomerModel";
-import AddDataCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/AddDataCustomerModelGroup";
+import InputFormCustomerModel from "../features/admin/MasterData/Customer/CustomerModel/InputFormCustomerModel";
+import InputFormCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/InputFormCustomerModelGroup";
 const Root = () => {
     return <Outlet />;
 };
@@ -60,7 +60,7 @@ const Root = () => {
 export default createBrowserRouter([
     {
         path: config.pathPrefix,
-        element: <Navigate to={`${config.pathPrefix}login`} />,
+        element: <Navigate to={ `${config.pathPrefix}login` } />,
     },
     {
         path: config.pathPrefix,
@@ -133,15 +133,28 @@ export default createBrowserRouter([
                         children: [
                             {
                                 path: "add-data-c1",
-                                element: <AddDataCustomer />,
+                                element: <CustomerFormView />,
+                            },
+                            {
+                                path: ":id/edit-customer",
+                                element: <CustomerFormView />,
                             },
                             {
                                 path: "add-data-c2",
-                                element: <AddDataCustomerModel />,
+                                element: <InputFormCustomerModel />,
                             },
                             {
+                                path: ":id/edit-data-customer-model",
+                                element: <InputFormCustomerModel />,
+                            },
+
+                            {
                                 path: "add-data-c3",
-                                element: <AddDataCustomerModelGroup />,
+                                element: <InputFormCustomerModelGroup />,
+                            },
+                            {
+                                path: ":id/edit-customer-model-group",
+                                element: <InputFormCustomerModelGroup />,
                             },
                             {
                                 path: "",

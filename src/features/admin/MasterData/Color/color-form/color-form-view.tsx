@@ -7,7 +7,9 @@ const ColorFormView = () => {
     return (
         <>
             <div>
-                <Breadcrumbs items={["Color", "Add Data"]} />
+                <Breadcrumbs
+                    items={["Color", colorForm.id ? "Edit" : "Add Data"]}
+                />
             </div>
             <div className="m-auto w-full border-2 border-gray-100  rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
@@ -40,7 +42,10 @@ const ColorFormView = () => {
                             />
                         </div>
                         <div className="flex gap-4 mt-6">
-                            <button type="submit" className="px-12 py-3 rounded-lg bg-gray-600 text-white items-center flex justify-center hover:bg-gray-800">
+                            <button
+                                type="submit"
+                                className="px-12 py-3 rounded-lg bg-gray-600 text-white items-center flex justify-center hover:bg-gray-800"
+                            >
                                 Save
                             </button>
                             <button

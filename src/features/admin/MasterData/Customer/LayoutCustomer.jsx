@@ -85,9 +85,6 @@ const LayoutCustomer = () => {
                 <div>
                     <Outlet />
                 </div>
-                <div className="flex items-center justify-end mt-4 px-5">
-                    <Pagination row={1} limit={10} />
-                </div>
             </div>
         </>
     );
