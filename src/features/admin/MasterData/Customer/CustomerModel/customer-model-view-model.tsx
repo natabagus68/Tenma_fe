@@ -4,10 +4,11 @@ import { CustomerApiRepository } from "@data/api/customer-api-repository";
 import { PaginatedData } from "@domain/models/paginated-data";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { CustomerModelApiRepository } from "@data/api/customer-model-api-repository";
 export default function useCustomerModel() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
-    const customerModelRepository = new CustomerApiRepository();
+    const customerModelRepository = new CustomerModelApiRepository();
     const [customerModel, setCustomerModel] = useState<
         PaginatedData<CustomerModel>
     >(
