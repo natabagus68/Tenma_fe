@@ -24,9 +24,11 @@ export default function useCustomerMOdelGroup() {
             const cmg = PaginatedData.create<CustomerModelGroup>(
                 prev.unmarshall()
             );
-            cmg.data.map((item) => {
+            cmg.data.forEach((item) => {
                 if (item.id === id) {
-                    item.checked = true;
+                    item.check();
+                } else {
+                    item.uncheck();
                 }
                 return item;
             });

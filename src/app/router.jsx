@@ -51,7 +51,7 @@ import EditRole from "../features/admin/User/Access/EditRole";
 import LayoutCustomer from "../features/admin/MasterData/Customer/LayoutCustomer";
 import CustomerModel from "../features/admin/MasterData/Customer/CustomerModel/CustomerModel";
 import CustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/CustomerModelGroup";
-import AddDataCustomerModel from "../features/admin/MasterData/Customer/CustomerModel/AddDataCustomerModel";
+import InputFormCustomerModel from "../features/admin/MasterData/Customer/CustomerModel/InputFormCustomerModel";
 import InputFormCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/InputFormCustomerModelGroup";
 const Root = () => {
     return <Outlet />;
@@ -141,7 +141,11 @@ export default createBrowserRouter([
                             },
                             {
                                 path: "add-data-c2",
-                                element: <AddDataCustomerModel />,
+                                element: <InputFormCustomerModel />,
+                            },
+                            {
+                                path: ":id/edit-data-customer-model",
+                                element: <InputFormCustomerModel />,
                             },
 
                             {
