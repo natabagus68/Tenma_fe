@@ -1,7 +1,8 @@
 import React from "react";
+import { useInputMeasurementStd } from "../../input-form-measurement-std/input-form-measurement-std-model";
 
-const ModalNominal = ({ showModal, setShowModal }) => {
-    if (showModal) {
+const ModalNominal = ({ model = useInputMeasurementStd() }) => {
+    if (model.nominalModalShow) {
         return (
             <>
                 <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
@@ -25,9 +26,40 @@ const ModalNominal = ({ showModal, setShowModal }) => {
                                                     Nominal type
                                                 </label>
                                                 <select
-                                                    name="nominal_type"
+                                                    name="nominal"
+                                                    value={
+                                                        model.tempSegment
+                                                            .nominal
+                                                    }
+                                                    onChange={
+                                                        model.onNominalChange
+                                                    }
                                                     className="w-full py-1 px-6 border border-gray-100 outline-none rounded-md"
-                                                ></select>
+                                                >
+                                                    <option value={""} disabled>
+                                                        Choose Nominal Type
+                                                    </option>
+                                                    {[
+                                                        "Absolute (Good)",
+                                                        "ORR LESS",
+                                                        "ORR OVER",
+                                                        "Decimal",
+                                                        "Decimal with limit",
+                                                        "Free text",
+                                                        "Free tex with limit",
+                                                        "Free text with ORR LESS",
+                                                        "Free text with ORR OVER",
+                                                    ].map((item, i) => {
+                                                        return (
+                                                            <option
+                                                                value={item}
+                                                                key={i}
+                                                            >
+                                                                {item}
+                                                            </option>
+                                                        );
+                                                    })}
+                                                </select>
                                             </div>
                                             <div className="flex gap-5 justify-end">
                                                 <label className="text-md">
@@ -35,7 +67,14 @@ const ModalNominal = ({ showModal, setShowModal }) => {
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    name="nominal_value"
+                                                    name="nominalValue"
+                                                    value={
+                                                        model.tempSegment
+                                                            .nominalValue
+                                                    }
+                                                    onChange={
+                                                        model.onNominalChange
+                                                    }
                                                     className="w-full text-gray-600 py-1 px-6 border border-gray-100 outline-none rounded-md"
                                                 />
                                             </div>
@@ -48,14 +87,14 @@ const ModalNominal = ({ showModal, setShowModal }) => {
                                 <button
                                     className="bg-sky-standart w-full text-white active:bg-red-600  uppercase text-sm px-12 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
-                                    onClick={() => setShowModal(false)}
+                                    onClick={model.onSaveNominalChange}
                                 >
                                     Save Data
                                 </button>
                                 <button
                                     className="text-gray-600 w-full  background-transparent  uppercase px-12 py-3 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 border border-gray-100 rounded-md"
                                     type="button"
-                                    onClick={() => setShowModal(false)}
+                                    onClick={model.onCancelNominalChange}
                                 >
                                     Cancel
                                 </button>
