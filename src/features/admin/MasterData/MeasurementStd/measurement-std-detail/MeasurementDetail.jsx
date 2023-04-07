@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../../common/components";
-import { Td } from "../../../../common/components/table/Td";
-import { Tr } from "../../../../common/components/table/Tr";
-import Cavasity2Measurement from "./components/Cavasity2Measurement";
-import CavasitySMeasurent from "./components/CavasitySMeasurent";
+import { Breadcrumbs } from "../../../../../common/components";
+import { Td } from "../../../../../common/components/table/Td";
+import { Tr } from "../../../../../common/components/table/Tr";
+import Cavasity2Measurement from "../components/Cavasity2Measurement";
+import CavasitySMeasurent from "../components/CavasitySMeasurent";
 
 const MeasurementDetail = () => {
     const navigate = useNavigate();

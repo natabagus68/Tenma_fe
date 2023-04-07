@@ -1,6 +1,5 @@
 import { config } from "@common/utils";
 import { CustomerModel } from "@domain/models/customer-model";
-import { CustomerApiRepository } from "@data/api/customer-api-repository";
 import { PaginatedData } from "@domain/models/paginated-data";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
