@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../common/components";
-import { Td } from "../../../common/components/table/Td";
-import { Tr } from "../../../common/components/table/Tr";
-import CavasityTable from "./components/CavasityTable";
-import DateTable from "./components/DateTable";
-import JudgementIcon from "./icon/JudgemnetIcon";
-const DetailDailyProcessCheck = () => {
-    const [cavasity, setCavasity] = useState(true);
-    const [toggle, setToggle] = useState(true);
-    const toggleClass = " transform translate-x-5";
-    const navigate = useNavigate();
-
+import { Breadcrumbs } from "../../../../common/components";
+import { Td } from "../../../../common/components/table/Td";
+import { Tr } from "../../../../common/components/table/Tr";
+import CavasityTable from "../components/CavasityTable";
+import DateTable from "../components/DateTable";
+import JudgementIcon from "../icon/JudgemnetIcon";
+import { useDailyProgressCheckDetail } from "./daily-progress-check-detail-model";
+import moment from "moment";
+const DailyProgressCheckDetailView = () => {
+    // const [cavasity, setCavasity] = useState(true);
+    // const [toggle, setToggle] = useState(true);
+    // const toggleClass = " ";
+    // const navigate = useNavigate();
+    const dailyProgressCheckDetail = useDailyProgressCheckDetail();
     return (
         <>
             <div>
@@ -24,50 +26,42 @@ const DetailDailyProcessCheck = () => {
                     </h1>
                     <div className="flex justify-end items-center gap-3">
                         <div className="flex gap-2">
-                            2D
+                            {dailyProgressCheckDetail.toogle == "2d"
+                                ? "2D"
+                                : "3D"}
                             <div
                                 className="md:w-14 md:h-7 w-12 h-6 flex items-center bg-gray-400 rounded-full p-1 cursor-pointer"
-                                onClick={() => {
-                                    setToggle(!toggle);
-                                }}
+                                onClick={dailyProgressCheckDetail.onToogle}
                             >
                                 {/* Switch */}
                                 <div
-                                    className={
-                                        "bg-black md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out" +
-                                        (toggle ? null : toggleClass)
-                                    }
+                                    className={`bg-black md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out ${
+                                        dailyProgressCheckDetail.toogle ==
+                                            "2d" && `transform translate-x-5`
+                                    }`}
+                                    // className={`bg-black md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out`}
                                 ></div>
                             </div>
-                            3D
+                            {dailyProgressCheckDetail.toogle == '3d' ? '3D' : '2D'}
                         </div>
 
                         <div className="flex gap-4">
                             <button
                                 className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("add-segment-data");
-                                }}
+                                onClick={dailyProgressCheckDetail.onAddSegment}
                             >
                                 + Add Segment Data
                             </button>
                             <button
                                 className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("add-history-data");
-                                }}
+                                onClick={dailyProgressCheckDetail.onAddHistory}
                             >
                                 + Add History Data
                             </button>
 
                             <button
                                 className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("add-data");
-                                }}
+                                onClick={dailyProgressCheckDetail.onDownloadReport}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -87,10 +81,7 @@ const DetailDailyProcessCheck = () => {
                             </button>
                             <button
                                 className="py-[12px] px-[20px] border border-gray-100 align-middle rounded-md flex gap-2"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("../");
-                                }}
+                                onClick={dailyProgressCheckDetail.onBack}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -122,8 +113,8 @@ const DetailDailyProcessCheck = () => {
                                         Part Name
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        Housing Upper SC ENN8.5 (Adjani)
-                                        {/* {state?.cust_item_cd} */}
+                                        {/* {dailyProgressCheckDetail.dailyProgressCheck.part/} */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.part?.partName}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -131,8 +122,9 @@ const DetailDailyProcessCheck = () => {
                                         Part Code (Item CD){" "}
                                     </Td>
                                     <Td className="border-none font-bold">
-                                        1101000001
+                                        {/* 1101000001 */}
                                         {/* {state?.part_cd} */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.part?.partCode}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -140,8 +132,9 @@ const DetailDailyProcessCheck = () => {
                                         Model
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        Adjani
+                                        {/* Adjani */}
                                         {/* {state?.part_name} */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.part?.customerModel}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -149,8 +142,9 @@ const DetailDailyProcessCheck = () => {
                                         Machine No.
                                     </Td>
                                     <Td className="border-none font-bold">
-                                        E1-F3-C6-9E-E3-AE
+                                        {/* E1-F3-C6-9E-E3-AE */}
                                         {/* {state?.item_group_cd} */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.machine?.noMachine}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -158,8 +152,9 @@ const DetailDailyProcessCheck = () => {
                                         Inspection Date
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        07/02/2023
+                                        {/* 07/02/2023 */}
                                         {/* {state?.item_group_name} */}
+                                        {moment(dailyProgressCheckDetail.dailyProgressCheck.inspectionDate).format('DD/MM/YYYY')}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -167,8 +162,9 @@ const DetailDailyProcessCheck = () => {
                                         Part Weight QIS
                                     </Td>
                                     <Td className="border-none font-bold">
-                                        Part Weight QIS
+                                        {/* Part Weight QIS */}
                                         {/* {state?.old_part_number} */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.weightPart}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -176,8 +172,9 @@ const DetailDailyProcessCheck = () => {
                                         Lot Production
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        23207A
+                                        {/* 23207A */}
                                         {/* {state?.customer_model?.name} */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.lotProduction}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -186,15 +183,11 @@ const DetailDailyProcessCheck = () => {
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
                                         Dwiky Aprinald
+                                        {/* {dailyProgressCheckDetail.dailyProgressCheck.che} */}
                                         {/* {state?.customer_model?.name} */}
                                     </Td>
                                 </Tr>
                             </tbody>
-                            {/* {[state?].map((state?) => {
-                                    return (
-                                       
-                                    );
-                                })} */}
                         </table>
                     </div>
 
@@ -207,13 +200,15 @@ const DetailDailyProcessCheck = () => {
                                         Shift
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        Shift 2{/* {state?.customer?.name} */}
+                                        {/* Shift 2{state?.customer?.name} */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.shift}
                                     </Td>
                                 </Tr>
                                 <Tr>
                                     <Td className=" border-none">PIC</Td>
                                     <Td className="border-none font-bold">
-                                        Bramantra
+                                        {/* Bramantra */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.pic?.name}
                                         {/* {state?.material?.id_material} */}
                                     </Td>
                                 </Tr>
@@ -222,7 +217,8 @@ const DetailDailyProcessCheck = () => {
                                         Label No.
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        01
+                                        {/* 01 */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.labelNo}
                                         {/* {state?.material?.color?.name} */}
                                     </Td>
                                 </Tr>
@@ -231,7 +227,8 @@ const DetailDailyProcessCheck = () => {
                                         Accept sample (time)
                                     </Td>
                                     <Td className="border-none font-bold">
-                                        14:00
+                                        {/* 14:00 */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.acceptSampleTime}
                                         {/* {state?.customer_model_group.name} */}
                                     </Td>
                                 </Tr>
@@ -240,7 +237,8 @@ const DetailDailyProcessCheck = () => {
                                         Measure sample (time)
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        18:10
+                                        {/* 18:10 */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.measureSampleTime}
                                         {/* {state?.unit_cd} */}
                                     </Td>
                                 </Tr>
@@ -249,7 +247,8 @@ const DetailDailyProcessCheck = () => {
                                         Weight Part
                                     </Td>
                                     <Td className="border-none font-bold">
-                                        299.8 gram
+                                        {/* 299.8 gram */}
+                                        {dailyProgressCheckDetail.dailyProgressCheck.weightPart || `~`} gram
                                         {/* {state?.material?.detail} */}
                                     </Td>
                                 </Tr>
@@ -258,36 +257,32 @@ const DetailDailyProcessCheck = () => {
                                         Judgement
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        <JudgementIcon value={"Waiting"} />
+                                        <JudgementIcon value={dailyProgressCheckDetail.toogle == '2d' ? dailyProgressCheckDetail.dailyProgressCheck.judgement2d : dailyProgressCheckDetail.dailyProgressCheck.judgement3d} />
                                         {/* {state?.product_weight} gram */}
                                     </Td>
                                 </Tr>
                                 <Tr>
                                     <Td className=" border-none">Update at</Td>
                                     <Td className="border-none font-bold">
-                                        17:48
+                                        {/* 17:48 */}
+                                        {moment(dailyProgressCheckDetail.dailyProgressCheck.updatedAt).format('HH:mm')}
                                         {/* {state?.material?.detail} */}
                                     </Td>
                                 </Tr>
                             </tbody>
-                            {/* {[state].map((state) => {
-                                    return (
-                                       
-                                    );
-                                })} */}
                         </table>
                     </div>
                 </div>
             </div>
 
-            {cavasity ? (
-                <>
-                    <CavasityTable data={[]} />
-                    <DateTable />
-                </>
-            ) : null}
+            {/* {cavasity ? (
+                <> */}
+            <CavasityTable data={[]} />
+            <DateTable data={[]} />
+            {/* </>
+            ) : null} */}
         </>
     );
 };
 
-export default DetailDailyProcessCheck;
+export default DailyProgressCheckDetailView;

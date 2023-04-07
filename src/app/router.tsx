@@ -28,10 +28,10 @@ import MaterialView from "../features/admin/MasterData/Material/material/materia
 import MaterialFormView from "../features/admin/MasterData/Material/material-form/material-form-view.tsx";
 import Color from "../features/admin/MasterData/Color/color/color-view";
 import ColorFormView from "../features/admin/MasterData/Color/color-form/color-form-view";
-import DailyProgessCheck from "../features/admin/DailyProgressCheck/DailyProgessCheck";
-import AddDataDailyProcessCheck from "../features/admin/DailyProgressCheck/AddDataDailyProcessCheck";
+import DailyProgessCheckView from "../features/admin/DailyProgressCheck/daily-progress-check/daily-progress-check-view";
+import DailyProgressCheckCreateView from "../features/admin/DailyProgressCheck/daily-progress-check-create/daily-progress-check-create-view";
 import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
-import DetailDailyProcessCheck from "../features/admin/DailyProgressCheck/DetailDailyProcessCheck";
+import DailyProgressCheckDetailView from "../features/admin/DailyProgressCheck/daily-progress-check-detail/daily-progress-check-detail-view";
 import AddSegmentData from "../features/admin/DailyProgressCheck/AddSegmentData";
 import AddHistory from "../features/admin/DailyProgressCheck/AddHistory";
 import Report from "../features/admin/Report/Report";
@@ -256,23 +256,23 @@ export default createBrowserRouter([
                 children: [
                     {
                         path: "",
-                        element: <DailyProgessCheck />,
+                        element: <DailyProgessCheckView />,
                     },
                     {
-                        path: "add-data",
-                        element: <AddDataDailyProcessCheck />,
+                        path: "create",
+                        element: <DailyProgressCheckCreateView />,
                     },
                     {
-                        path: "edit-data",
+                        path: ":id/edit",
                         element: <EditDataDailyProcessCheck />,
                     },
                     {
-                        path: "detail",
+                        path: ":id/detail",
                         element: <Root />,
                         children: [
                             {
                                 path: "",
-                                element: <DetailDailyProcessCheck />,
+                                element: <DailyProgressCheckDetailView />,
                             },
                             {
                                 path: "add-segment-data",
