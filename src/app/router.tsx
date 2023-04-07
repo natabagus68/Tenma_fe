@@ -13,7 +13,7 @@ import { AreaAccessDetail } from "../features/admin/AreaAccess/AreaAccessDetail"
 import { AreaAccessItem } from "../features/admin/AreaAccess/AreaAccessItem";
 import { AreaAccessCreate } from "../features/admin/AreaAccess/AreaAccessCreate";
 
-import MeasurementStd from "../features/admin/MasterData/MeasurementStd/MeasurementStd";
+import MeasurementStd from "../features/admin/MasterData/MeasurementStd/measurement-std/MeasurementStd";
 import Part from "../features/admin/MasterData/Part/part/part-view";
 import { element } from "prop-types";
 import PartDetail from "../features/admin/MasterData/Part/part-detail/part-detail-view";
@@ -37,8 +37,8 @@ import AddHistory from "../features/admin/DailyProgressCheck/AddHistory";
 import Report from "../features/admin/Report/Report";
 import ReportDetail from "../features/admin/Report/ReportDetail";
 import Detail from "../features/admin/Report/Detail";
-import MeasurementDetail from "../features/admin/MasterData/MeasurementStd/MeasurementDetail";
-import AddDataMeasurement from "../features/admin/MasterData/MeasurementStd/AddDataMeasurement";
+import MeasurementDetail from "../features/admin/MasterData/MeasurementStd/measurement-std-detail/MeasurementDetail";
+import InputFormMeasurementView from "../features/admin/MasterData/MeasurementStd/input-form-measurement-std/input-form-measurement-view";
 
 import Account from "../features/admin/User/Account/Account";
 import DetailAccount from "../features/admin/User/Account/DetailAccount";
@@ -96,12 +96,16 @@ export default createBrowserRouter([
                                 element: <MeasurementStd />,
                             },
                             {
-                                path: "detail",
+                                path: ":id/detail",
                                 element: <MeasurementDetail />,
                             },
                             {
                                 path: "add-data",
-                                element: <AddDataMeasurement />,
+                                element: <InputFormMeasurementView />,
+                            },
+                            {
+                                path: ":id/edit-data",
+                                element: <InputFormMeasurementView />,
                             },
                         ],
                     },
