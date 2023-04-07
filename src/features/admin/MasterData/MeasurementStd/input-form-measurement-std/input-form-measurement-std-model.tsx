@@ -1,3 +1,4 @@
+import { MeasurementStdApiRepository } from "@data/api/measurement-std-api-repository";
 import { PartApiRepository } from "@data/api/part-api-repository";
 import { ToolApiRepository } from "@data/api/tool-api-repository";
 import { MeasurementStd } from "@domain/models/measurement-std";
@@ -7,10 +8,14 @@ import { Tool } from "@domain/models/tool";
 import { PartRepository } from "@domain/repositories/part-repository";
 import { ToolRepository } from "@domain/repositories/tool-repository";
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function useInputMeasurementStd() {
     const partRepo: PartRepository = new PartApiRepository();
     const toolRepo: ToolRepository = new ToolApiRepository();
+    const measurementRepository = new MeasurementStdApiRepository();
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [parts, setParts] = useState<Part[]>([]);
     const [tools, setTools] = useState<Tool[]>([]);
     const [measurementStd, setMeasurementStd] = useState<MeasurementStd>(
@@ -83,7 +88,16 @@ export function useInputMeasurementStd() {
     const onToolChange = (
         e: React.ChangeEvent<HTMLSelectElement>,
         i: number
-    ) => {};
+    ) => {
+        setMeasurementStd((prevState) => {
+            const newObject = prevState.duplicate();
+            newObject.changeTool(
+                tools.find((item) => item.id == e.target.value),
+                i
+            );
+            return newObject;
+        });
+    };
     const onRemoveSegment = (
         e: React.MouseEvent<HTMLButtonElement>,
         i: number
@@ -94,8 +108,17 @@ export function useInputMeasurementStd() {
             return newState;
         });
     };
-    const onSave = () => {};
-    const onCancel = () => {};
+    const onSave = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        id
+            ? measurementRepository.update(measurementStd)
+            : measurementRepository.store(measurementStd);
+
+        navigate("../");
+    };
+    const onCancel = () => {
+        navigate('../')
+    };
     const onShowNominalModal = (
         e: React.MouseEvent<HTMLButtonElement>,
         segment: Segment
@@ -132,6 +155,13 @@ export function useInputMeasurementStd() {
         setNominalModalShow(false);
     };
     useEffect(() => {
+        if (id) {
+            measurementRepository.show(id).then((result) => {
+                setMeasurementStd(result);
+            });
+        }
+    }, []);
+    useEffect(() => {
         partRepo
             .get({ page: 1, limit: 9999999 })
             .then((result) => setParts(result.data));
@@ -139,7 +169,9 @@ export function useInputMeasurementStd() {
             .get({ page: 1, limit: 9999999 })
             .then((result) => setTools(result.data));
     }, []);
+
     return {
+        id,
         parts,
         tools,
         measurementStd,

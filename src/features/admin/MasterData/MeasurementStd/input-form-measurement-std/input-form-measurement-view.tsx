@@ -6,15 +6,18 @@ import SpecialAcept from "../components/addCavasity/SpecialAcept";
 import { useInputMeasurementStd } from "./input-form-measurement-std-model";
 const InputFormMeasurementView = () => {
     const model = useInputMeasurementStd();
+
     return (
         <>
             <div>
-                <Breadcrumbs items={["Measurement Std", "Add Data"]} />
+                <Breadcrumbs
+                    items={["Measurement Std", model.id ? "Edit" : "Add"]}
+                />
             </div>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Measurement Std.
+                        {model.id ? "Edit" : "Add"} Measurement Std.
                     </h1>
                 </div>
                 <div className="border-t-2 border-gray-100 py-14 px-8">
@@ -53,14 +56,14 @@ const InputFormMeasurementView = () => {
             <SpecialAcept model={model} />
 
             <div className="w-full py-5 px-5 flex gap-3 border-2 boder-gray-50 rounded-xl mt-11">
-                <button className="py-2 px-20 text-xl rounded-md  text-center text-white bg-sky-standart ">
+                <button
+                    onClick={(e) => model.onSave(e)}
+                    className="py-2 px-20 text-xl rounded-md  text-center text-white bg-sky-standart "
+                >
                     Save
                 </button>
                 <button
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     navigate("../");
-                    // }}
+                    onClick={model.onCancel}
                     className="py-2 px-20 text-xl rounded-md  text-center text-gray-400 bg-white border-2 border-gray-100 "
                 >
                     Cancel

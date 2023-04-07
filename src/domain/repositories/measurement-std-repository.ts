@@ -1,4 +1,4 @@
-import { MeasurementStd } from "@domain/models/measurementStd";
+import { MeasurementStd } from "@domain/models/measurement-std";
 import { PaginatedData } from "@domain/models/paginated-data";
 import { TableParam } from "types";
 
