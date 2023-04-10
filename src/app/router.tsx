@@ -33,7 +33,7 @@ import DailyProgressCheckCreateView from "../features/admin/DailyProgressCheck/d
 import DailyProgressCheckEditView from "../features/admin/DailyProgressCheck/daily-progress-check-edit/daily-progress-check-edit-view.tsx";
 import DailyProgressCheckDetailView from "../features/admin/DailyProgressCheck/daily-progress-check-detail/daily-progress-check-detail-view";
 import CreateSegmentView from "../features/admin/DailyProgressCheck/create-segment/create-segment-view";
-import AddSegmentData from "../features/admin/DailyProgressCheck/daily-progress-add-history/AddHistory";
+import AddSegmentData from "../features/admin/DailyProgressCheck/daily-progress-add-history/history-form/history-form-view";
 import AddSegmentTwoD from "@features/admin/DailyProgressCheck/add-segment-2d-daily-progress-check/add-segment-two-d";
 import AddHistory from "../features/admin/DailyProgressCheck/add-segment-3d-daily-progress-check/AddSegmentData";
 import Report from "../features/admin/Report/Report";
@@ -55,6 +55,7 @@ import CustomerModel from "../features/admin/MasterData/Customer/CustomerModel/C
 import CustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/CustomerModelGroup";
 import InputFormCustomerModel from "../features/admin/MasterData/Customer/CustomerModel/InputFormCustomerModel";
 import InputFormCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/InputFormCustomerModelGroup";
+import HistoryFormView from "../features/admin/DailyProgressCheck/daily-progress-add-history/history-form/history-form-view";
 const Root = () => {
     return <Outlet />;
 };
@@ -281,8 +282,12 @@ export default createBrowserRouter([
                         element: <DailyProgressCheckDetailView />,
                     },
                     {
-                        path: ":id/create-history",
-                        element: <AddHistory />,
+                        path: ":id/history/create",
+                        element: <HistoryFormView />,
+                    },
+                    {
+                        path: ":id/history/:historyId/edit",
+                        element: <HistoryFormView />,
                     },
                     {
                         path: ":id/add-segment-data-2d",

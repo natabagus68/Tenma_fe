@@ -25,5 +25,4 @@ export interface DailyProgressCheckRepository {
     update(data: DailyProgressCheck): Promise<DailyProgressCheck>;
     destroy(id: DailyProgressCheck["id"]): Promise<boolean>;
     get3dSegments(id:DailyProgressCheck['id']):Promise<Segment[]>
-    getHistories(id:DailyProgressCheck['id']):Promise<History[]>
 }

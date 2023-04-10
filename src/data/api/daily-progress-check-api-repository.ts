@@ -248,10 +248,10 @@ export class DailyProgressCheckApiRepository
                             saUpper: pacSegment.special_accept_upper,
                             saLower: pacSegment.special_accept_lower,
                             checked: false,
-                            result: "~",
-                            judgement: "~",
-                            saResult: "~",
-                            saJudgement: "~",
+                            result: pacSegment.cavity_results.actual_result,
+                            judgement: pacSegment.cavity_results.actual_result_judgement,
+                            saResult: pacSegment.cavity_results.sa_result,
+                            saJudgement: pacSegment.cavity_results.sa_result_judgement,
                             tool: {
                                 id: pacSegment.tool?.id,
                                 idTool: pacSegment.tool?.id_tool,
@@ -265,15 +265,5 @@ export class DailyProgressCheckApiRepository
                 checked: false,
             })
         );
-    }
-    async getHistories(id: string): Promise<History[]> {
-        const {data} = await api.get(`progress-check/${id}/history`)
-        return data.data.map(item => History.create({
-            id:item.id,
-            date: item.date,
-            problemDetail: item.problem,
-            char: item.char,
-            remark: item.remark,
-        }))
     }
 }
