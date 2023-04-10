@@ -23,6 +23,21 @@ export class History extends Entity<IHistory> {
             checked: this.checked,
         };
     }
+    duplicate(): History {
+        return History.create(this.unmarshall());
+    }
+    replace(props: IHistory): History {
+        this._props = props;
+        return this;
+    }
+    check(): History {
+        this._props.checked = true;
+        return this;
+    }
+    uncheck(): History {
+        this._props.checked = false;
+        return this;
+    }
     get date(): Date {
         return this._props.date;
     }

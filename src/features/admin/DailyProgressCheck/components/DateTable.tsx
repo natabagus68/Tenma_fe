@@ -1,7 +1,9 @@
 import React from "react";
 import { useDailyProgressCheckDetail } from "../daily-progress-check-detail/daily-progress-check-detail-model";
+import ModalDelete from "@common/components/Modal/ModalDelete";
+import moment from "moment";
 
-const DateTable = ({ model = useDailyProgressCheckDetail() }) => {
+const HistoryFormView = ({ model = useDailyProgressCheckDetail() }) => {
     return (
         <>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 mt-10">
@@ -25,10 +27,12 @@ const DateTable = ({ model = useDailyProgressCheckDetail() }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                { model.histories.map(item => (
+                                {model.histories.map((item) => (
                                     <tr key={item.id}>
                                         <td className="text-center border-b-2 border-gray-100 py-6">
-                                            {item.date}
+                                            {moment(item.date).format(
+                                                "DD/MM/YYYY"
+                                            )}
                                         </td>
                                         <td className="text-center border-b-2 border-gray-100 py-6">
                                             {item.problemDetail}
@@ -40,37 +44,46 @@ const DateTable = ({ model = useDailyProgressCheckDetail() }) => {
                                             {item.remark}
                                         </td>
                                         <td className="text-center border-b-2 border-gray-100 py-6">
-                                            <div className="flex gap-4 items-center justify-end">
+                                            <div className="flex gap-4 items-center">
                                                 <button
                                                     className="py-[12px] px-[20px] bg-[#F79009]  text-white align-middle rounded-md"
-                                                // onClick={ (e) => {
-                                                //     e.preventDefault();
-                                                //     navigate("add-data");
-                                                // } }
+                                                    onClick={(e) =>
+                                                        model.onEditHistory(
+                                                            e,
+                                                            item
+                                                        )
+                                                    }
                                                 >
                                                     + Edit
                                                 </button>
 
                                                 <button
                                                     className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md"
-                                                // onClick={ (e) => {
-                                                //     e.preventDefault();
-                                                //     navigate("add-data");
-                                                // } }
+                                                    onClick={(e) =>
+                                                        model.onDeleteHistory(
+                                                            e,
+                                                            item
+                                                        )
+                                                    }
                                                 >
                                                     + Delete
                                                 </button>
                                             </div>
                                         </td>
                                     </tr>
-                                )) }
+                                ))}
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            <ModalDelete
+                showModal={model.confirmDeleteHistoryShow}
+                setShowModal={model.setConfirmDeleteHistoryShow}
+                onConfirm={model.onConfirmDeleteHistory}
+            />
         </>
     );
 };
 
-export default DateTable;
+export default HistoryFormView;

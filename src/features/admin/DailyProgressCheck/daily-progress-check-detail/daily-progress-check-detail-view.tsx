@@ -6,7 +6,7 @@ import SegmentTable from "../components/segment-table";
 import JudgementIcon from "../icon/JudgemnetIcon";
 import { useDailyProgressCheckDetail } from "./daily-progress-check-detail-model";
 import moment from "moment";
-import DateTable from "../components/DateTable";
+import HistoryFormView from "../components/DateTable";
 const DailyProgressCheckDetailView = () => {
     const dailyProgressCheckDetail = useDailyProgressCheckDetail();
     return (
@@ -314,9 +314,9 @@ const DailyProgressCheckDetailView = () => {
                     {dailyProgressCheckDetail.segments.map((item) => (
                         <SegmentTable key={item.id} segment={item} />
                     ))}
-                    <DateTable model={dailyProgressCheckDetail} />
                 </>
             )}
+            <HistoryFormView model={dailyProgressCheckDetail} />
         </>
     );
 };
