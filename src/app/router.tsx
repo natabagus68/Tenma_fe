@@ -30,9 +30,9 @@ import Color from "../features/admin/MasterData/Color/color/color-view";
 import ColorFormView from "../features/admin/MasterData/Color/color-form/color-form-view";
 import DailyProgessCheckView from "../features/admin/DailyProgressCheck/daily-progress-check/daily-progress-check-view";
 import DailyProgressCheckCreateView from "../features/admin/DailyProgressCheck/daily-progress-check-create/daily-progress-check-create-view";
-import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
+import DailyProgressCheckEditView from "../features/admin/DailyProgressCheck/daily-progress-check-edit/daily-progress-check-edit-view.tsx";
 import DailyProgressCheckDetailView from "../features/admin/DailyProgressCheck/daily-progress-check-detail/daily-progress-check-detail-view";
-import AddSegmentData from "../features/admin/DailyProgressCheck/AddSegmentData";
+import CreateSegmentView from "../features/admin/DailyProgressCheck/create-segment/create-segment-view";
 import AddHistory from "../features/admin/DailyProgressCheck/AddHistory";
 import Report from "../features/admin/Report/Report";
 import ReportDetail from "../features/admin/Report/ReportDetail";
@@ -268,25 +268,19 @@ export default createBrowserRouter([
                     },
                     {
                         path: ":id/edit",
-                        element: <EditDataDailyProcessCheck />,
+                        element: <DailyProgressCheckEditView />,
+                    },
+                    {
+                        path: ":id/create-segment",
+                        element: <CreateSegmentView />,
                     },
                     {
                         path: ":id/detail",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <DailyProgressCheckDetailView />,
-                            },
-                            {
-                                path: "add-segment-data",
-                                element: <AddSegmentData />,
-                            },
-                            {
-                                path: "add-history-data",
-                                element: <AddHistory />,
-                            },
-                        ],
+                        element: <DailyProgressCheckDetailView />,
+                    },
+                    {
+                        path: ":id/create-history",
+                        element: <AddHistory />,
                     },
                 ],
             },

@@ -5,11 +5,11 @@ export interface UpdateDailyProgressCheckReq {
     pic:                 string;
     part_cd:             string;
     id_machine:          string;
-    inspection_date:     Date;
+    inspection_date:     Date | '';
     part_weight_qis:     string;
     lot_production:      string;
     label_no:            string;
-    accept_sample_time:  string;
-    measure_sample_time: string;
+    accept_sample_time:  Date;
+    measure_sample_time: Date;
     actual_part_weight:  string;
 }

@@ -22,8 +22,8 @@ export interface IDailyProgressCheck {
     inspectionDate: Date;
     lotProduction: string;
     labelNo: string;
-    acceptSampleTime: string;
-    measureSampleTime: string;
+    acceptSampleTime: Date;
+    measureSampleTime: Date;
     weightPart: number;
     checked: boolean;
     part?: IPart;
@@ -69,6 +69,9 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
     uncheck(): DailyProgressCheck {
         this._props.checked = false;
         return this;
+    }
+    duplicate():DailyProgressCheck{
+        return DailyProgressCheck.create(this.unmarshall())
     }
     get picId(): string {
         return this._props.picId;
@@ -118,10 +121,10 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
     get labelNo(): string {
         return this._props.labelNo;
     }
-    get acceptSampleTime(): string {
+    get acceptSampleTime(): Date {
         return this._props.acceptSampleTime;
     }
-    get measureSampleTime(): string {
+    get measureSampleTime(): Date {
         return this._props.measureSampleTime;
     }
     get weightPart(): number {

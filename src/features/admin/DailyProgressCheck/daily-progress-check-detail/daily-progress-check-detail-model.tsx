@@ -1,11 +1,15 @@
+import { config } from "@common/utils";
 import { DailyProgressCheckApiRepository } from "@data/api/daily-progress-check-api-repository";
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
+import { History } from "@domain/models/history";
+import { Segment } from "@domain/models/segment";
 import { DailyProgressCheckRepository } from "@domain/repositories/daily-progress-check-repository";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function useDailyProgressCheckDetail() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const dailyProgressCheckRepo: DailyProgressCheckRepository =
         new DailyProgressCheckApiRepository();
     const [dailyProgressCheck, setDailyProgressCheck] =
@@ -26,26 +30,47 @@ export function useDailyProgressCheckDetail() {
                 inspectionDate: undefined,
                 lotProduction: "",
                 labelNo: "",
-                acceptSampleTime: "",
-                measureSampleTime: "",
+                acceptSampleTime: new Date(),
+                measureSampleTime: new Date(),
                 weightPart: 0,
                 checked: false,
             })
         );
+    const [segments, setSegments] = useState<Segment[]>([]);
+    const [histories, setHistories] = useState<History[]>([]);
     const fetchDetail = () => {
-        dailyProgressCheckRepo.detail(id);
+        dailyProgressCheckRepo
+            .detail(id)
+            .then((res) => setDailyProgressCheck(res));
+    };
+    const fetchSegment = () => {
+        dailyProgressCheckRepo
+            .get3dSegments(id)
+            .then((res) => setSegments(res));
     };
     const [toogle, setToogle] = useState<"2d" | "3d">("2d");
-    const onToogle = () => {};
-    const onAddSegment = () => {};
+    const onToogle = () => {
+        setToogle((toogle) => (toogle === "2d" ? "3d" : "2d"));
+    };
+    const onAddSegment = () => {
+        if (toogle === "3d") {
+            navigate(
+                `${config.pathPrefix}daily-progress-check/${id}/create-segment`
+            );
+        }
+    };
     const onAddHistory = () => {};
     const onDownloadReport = () => {};
-    const onBack = () => {};
+    const onBack = () => {
+        navigate(-1);
+    };
     useEffect(() => {
         fetchDetail();
+        fetchSegment();
     }, [id]);
     return {
         dailyProgressCheck,
+        segments,
         toogle,
         onToogle,
         onAddHistory,
