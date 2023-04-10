@@ -1,7 +1,7 @@
 import { Entity } from "./_entity";
 import { ITool, Tool } from "./tool";
 
-export interface IPacSegment {
+export interface IMeasurement {
     id?: string;
     character: string;
     nominal: string;
@@ -18,8 +18,8 @@ export interface IPacSegment {
     checked: boolean;
 }
 
-export class PacSegment extends Entity<IPacSegment> {
-    static PacSegment(arg0: {
+export class Measurement extends Entity<IMeasurement> {
+    static Measurement(arg0: {
         character: string;
         nominal: string;
         nominalValue: string;
@@ -35,10 +35,10 @@ export class PacSegment extends Entity<IPacSegment> {
     }): import("./measurement-std").MeasurementStd {
         throw new Error("Method not implemented.");
     }
-    static create(props: IPacSegment): PacSegment {
-        return new PacSegment(props);
+    static create(props: IMeasurement): Measurement {
+        return new Measurement(props);
     }
-    unmarshall(): IPacSegment {
+    unmarshall(): IMeasurement {
         return {
             id: this.id,
             character: this.character,
@@ -56,10 +56,10 @@ export class PacSegment extends Entity<IPacSegment> {
             checked: this.checked,
         };
     }
-    duplicate(): PacSegment {
-        return PacSegment.create(this.unmarshall());
+    duplicate(): Measurement {
+        return Measurement.create(this.unmarshall());
     }
-    update(props: IPacSegment): PacSegment {
+    update(props: IMeasurement): Measurement {
         this._props = props;
         return this;
     }

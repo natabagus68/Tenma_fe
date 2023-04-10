@@ -1,11 +1,11 @@
-import { IPacSegment } from "./pac-segment";
+import { IMeasurement } from "./pac-segment";
 import { Entity } from "./_entity";
 
 export interface ISegment {
     id?: string;
     name: string;
     type: string;
-    pacSegments: IPacSegment[];
+    pacSegments: IMeasurement[];
     checked:boolean;
 }
 export class Segment extends Entity<ISegment> {
@@ -42,7 +42,7 @@ export class Segment extends Entity<ISegment> {
     get type(): string {
         return this._props.type;
     }
-    get pacSegments(): IPacSegment[] {
+    get pacSegments(): IMeasurement[] {
         return this._props.pacSegments;
     }
     get checked(): boolean {

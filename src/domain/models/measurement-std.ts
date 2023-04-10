@@ -1,12 +1,12 @@
 import { Entity } from "./_entity";
 import { IPart, Part } from "./part";
-import { IPacSegment, PacSegment } from "./pac-segment";
+import { IMeasurement, Measurement } from "./pac-segment";
 import { ITool } from "./tool";
 
 export interface IMeasurementStd {
     id?: string;
     part: IPart;
-    segments: IPacSegment[];
+    segments: IMeasurement[];
     checked: boolean;
 }
 
@@ -24,7 +24,7 @@ export class MeasurementStd extends Entity<IMeasurementStd> {
     }
     createSegment(): MeasurementStd {
         this._props.segments.push(
-            PacSegment.create({
+            Measurement.create({
                 character: "",
                 nominal: "",
                 nominalValue: "",
@@ -49,18 +49,18 @@ export class MeasurementStd extends Entity<IMeasurementStd> {
         this._props.segments.splice(i, 1);
         return this;
     }
-    updateSegment(i: number, segment: IPacSegment): MeasurementStd {
+    updateSegment(i: number, segment: IMeasurement): MeasurementStd {
         this._props.segments[i] = segment;
         return this;
     }
-    updateAllSegment(segments: IPacSegment[]): MeasurementStd {
+    updateAllSegment(segments: IMeasurement[]): MeasurementStd {
         this._props.segments = segments;
         return this;
     }
     duplicate(): MeasurementStd {
         return MeasurementStd.create(this.unmarshall());
     }
-    chooseSegment(segment: PacSegment) {
+    chooseSegment(segment: Measurement) {
         this._props.segments = this._props.segments.map((item) =>
             item.id == segment.id
                 ? { ...item, checked: true }
@@ -68,7 +68,7 @@ export class MeasurementStd extends Entity<IMeasurementStd> {
         );
         return this;
     }
-    replaceSegment(segment: IPacSegment) {
+    replaceSegment(segment: IMeasurement) {
         this._props.segments = this._props.segments.map((item) =>
             item.id == segment.id ? segment : item
         );
@@ -83,19 +83,19 @@ export class MeasurementStd extends Entity<IMeasurementStd> {
     get part(): Part {
         return this._props.part ? Part.create(this._props.part) : undefined;
     }
-    get segments(): PacSegment[] {
-        return this._props.segments.map((item) => PacSegment.create(item));
+    get segments(): Measurement[] {
+        return this._props.segments.map((item) => Measurement.create(item));
     }
     get checked(): boolean {
         return this._props.checked;
     }
-    get checkedSegment(): PacSegment {
+    get checkedSegment(): Measurement {
         return this.segments.find((item) => item.checked);
     }
     set part(part: Part) {
         this._props.part = part.unmarshall();
     }
-    set segments(segments: PacSegment[]) {
+    set segments(segments: Measurement[]) {
         this._props.segments = segments.map((item) => item.unmarshall());
     }
 }

@@ -1,11 +1,11 @@
 import { Entity } from "./_entity";
 import { MeasurementStd } from "./measurement-std";
-import { PacSegment } from "./pac-segment";
+import { IMeasurement, PacSegment } from "./pac-segment";
 
 export interface ISegment2D {
     id?: string;
     name: string;
-    segmentTable?: MeasurementStd[];
+    measurements?: IMeasurement[];
 }
 
 export class Segment2D extends Entity<ISegment2D> {
@@ -17,7 +17,7 @@ export class Segment2D extends Entity<ISegment2D> {
         return {
             id: this.id,
             name: this.name,
-            segmentTable: this.segmentTable,
+            measurements: this.measurements,
         };
     }
     get id(): string {
@@ -26,7 +26,7 @@ export class Segment2D extends Entity<ISegment2D> {
     get name(): string {
         return this._props.name;
     }
-    get segmentTable(): MeasurementStd[] | undefined {
-        return this._props.segmentTable;
+    get measurements(): IMeasurement[] | undefined {
+        return this._props.measurements;
     }
 }

@@ -62,6 +62,9 @@ const DailyProgessCheckView = () => {
                                 className="w-[100px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
                             >
                                 <option value="">Semua</option>
+                                {dailyProgressCheck.pic.map(item => (
+                                    <option value={item.name} key={item.id}>{item.name}</option>
+                                ))}
                             </select>
                         </div>
                         <div className="flex gap-3 items-center">

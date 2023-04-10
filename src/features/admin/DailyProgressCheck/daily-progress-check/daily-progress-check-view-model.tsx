@@ -1,6 +1,7 @@
 import { DailyProgressCheckApiRepository } from "@data/api/daily-progress-check-api-repository";
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { PaginatedData } from "@domain/models/paginated-data";
+import { Pic } from "@domain/models/pic";
 import {
     DailyProgressCheckRepository,
     IDPCGetParam,
@@ -32,6 +33,7 @@ export function useDailyProgressCheck() {
             search: searchParams.get("search") || "",
         });
     const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
+    const [pic, setPic] = useState<Pic[]>([]);
     const fetchDailyProgressCheck = () => {
         dailyProgressCheckRepository
             .get(dailyProgressCheckGetPayload)
@@ -82,6 +84,7 @@ export function useDailyProgressCheck() {
     };
     useEffect(() => {
         fetchDailyProgressCheck();
+        dailyProgressCheckRepository.getPic().then((res) => setPic(res));
     }, []);
     useEffect(() => {
         setSearchParams({
@@ -99,6 +102,7 @@ export function useDailyProgressCheck() {
         dailyProgressCheckGetPayload,
         deleteConfirmShow,
         setDeleteConfirmShow,
+        pic,
         onDailyProgressCheckGetPayloadChange,
         onAdd,
         onDelete,

@@ -5,7 +5,8 @@ import { MeasurementStd } from "@domain/models/measurement-std";
 import { MeasurementStdRepository } from "@domain/repositories/measurement-std-repository";
 import { Segment } from "@domain/models/segment";
 import { Part } from "@domain/models/part";
-import { PacSegment } from "@domain/models/pac-segment";
+import { Measurement } from "@domain/models/pac-segment";
+import { Segment2D } from "@domain/models/segment-2d";
 export class MeasurementStdApiRepository implements MeasurementStdRepository {
     async get(params: TableParam): Promise<PaginatedData<MeasurementStd>> {
         const { data } = await api.get(`std-measurement`, {
@@ -39,7 +40,7 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                         customerModelGroupId: item.part.customer_model_group_id,
                     }),
                     segments: item.special_accept_segments.map((el) => {
-                        return PacSegment.create({
+                        return Measurement.create({
                             id: el.id,
                             character: el.character,
                             nominal: el.nominal_type,
@@ -87,7 +88,7 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                 customerModelGroupId: data.data.part.customer_model_group_id,
             }),
             segments: data.data.special_accept_segments.map((el) => {
-                return PacSegment.create({
+                return Measurement.create({
                     id: el.id,
                     character: el.character,
                     nominal: el.nominal,
@@ -146,7 +147,7 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                 customerModelGroupId: data.data.part.customer_model_group_id,
             }),
             segments: data.data.special_accept_segments.map((el) => {
-                return PacSegment.create({
+                return Measurement.create({
                     id: el.id,
                     character: el.character,
                     nominal: el.nominal,
@@ -205,7 +206,7 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                 customerModelGroupId: data.data.part.customer_model_group_id,
             }),
             segments: data.data.special_accept_segments.map((el) => {
-                return PacSegment.create({
+                return Measurement.create({
                     id: el.id,
                     character: el.character,
                     nominal: el.nominal,
@@ -227,5 +228,36 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
     async destroy(id: string): Promise<boolean> {
         await api.delete(`std-measurement${id}`);
         return true;
+    }
+    async getByProcessId(id: string): Promise<MeasurementStd> {
+        const { data } = await api.get(`progress-check/${id}/2d/std-measure`);
+        return MeasurementStd.create({
+            part: undefined,
+            segments: (data.data?.special_accept_segments || []).map((item) =>
+                Measurement.create({
+                    id: item.id,
+                    character: item.character,
+                    nominal: item.nominal_type,
+                    nominalValue: item.nominal_value,
+                    upper: item.standard_upper,
+                    lower: item.standard_lower,
+                    saUpper: item.special_accept_upper,
+                    saLower: item.special_accept_lower,
+                    result: '',
+                    judgement: '',
+                    saResult: '',
+                    saJudgement: '',
+                    tool : {
+                        idTool : item.tool?.id_tool,
+                        toolCode : item.tool?.code,
+                        name : item.tool?.name,
+                        address : item.tool?.address,
+                        checked : !!item.tool?.checked,
+                    },
+                    checked: false,
+                })
+            ),
+            checked: false,
+        });
     }
 }

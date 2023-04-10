@@ -15,8 +15,9 @@ import { UpdateDailyProgressCheckReq } from "./types/update-daily-progress-check
 import { UpdateDailyProgressCheckRes } from "./types/update-daily-progress-check-res";
 import moment from "moment";
 import { History } from "@domain/models/history";
-import { PacSegment } from "@domain/models/pac-segment";
+import { Measurement } from "@domain/models/pac-segment";
 import { Segment } from "@domain/models/segment";
+import { Pic } from "@domain/models/pic";
 
 export class DailyProgressCheckApiRepository
     implements DailyProgressCheckRepository
@@ -238,7 +239,7 @@ export class DailyProgressCheckApiRepository
                 type: item.cavity_type,
                 pacSegments: item.std_measurement?.special_accept_segments.map(
                     (pacSegment) =>
-                        PacSegment.create({
+                        Measurement.create({
                             id: pacSegment.id,
                             character: pacSegment.character,
                             nominal: pacSegment.nominal_type,
@@ -249,9 +250,12 @@ export class DailyProgressCheckApiRepository
                             saLower: pacSegment.special_accept_lower,
                             checked: false,
                             result: pacSegment.cavity_results.actual_result,
-                            judgement: pacSegment.cavity_results.actual_result_judgement,
+                            judgement:
+                                pacSegment.cavity_results
+                                    .actual_result_judgement,
                             saResult: pacSegment.cavity_results.sa_result,
-                            saJudgement: pacSegment.cavity_results.sa_result_judgement,
+                            saJudgement:
+                                pacSegment.cavity_results.sa_result_judgement,
                             tool: {
                                 id: pacSegment.tool?.id,
                                 idTool: pacSegment.tool?.id_tool,
@@ -262,6 +266,15 @@ export class DailyProgressCheckApiRepository
                             },
                         })
                 ),
+                checked: false,
+            })
+        );
+    }
+    async getPic(): Promise<Pic[]> {
+        const { data } = await api.get(`progress-check/pic`);
+        return data.data.map((item) =>
+            Pic.create({
+                name: item.pic,
                 checked: false,
             })
         );

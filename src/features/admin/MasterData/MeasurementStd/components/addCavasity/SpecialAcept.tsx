@@ -86,7 +86,7 @@ const SpecialAcept = ({ model = useInputMeasurementStd() }) => {
                                                     className="px-8 py-2 bg-sky-standart text-center rounded-md text-white     "
                                                 >
                                                     {item.nominal ||
-                                                        "Choose Fucking Nominal"}
+                                                        "Choose Nominal"}
                                                 </button>
                                             </td>
                                             <td className="py-4 border text-center">

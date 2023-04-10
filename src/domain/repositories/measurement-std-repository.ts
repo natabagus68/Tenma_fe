@@ -8,4 +8,5 @@ export interface MeasurementStdRepository {
     store(params: MeasurementStd): Promise<MeasurementStd>;
     update(params: MeasurementStd): Promise<MeasurementStd>;
     destroy(id: MeasurementStd["id"]): Promise<boolean>;
+    getByProcessId(id: string): Promise<MeasurementStd>;
 }
