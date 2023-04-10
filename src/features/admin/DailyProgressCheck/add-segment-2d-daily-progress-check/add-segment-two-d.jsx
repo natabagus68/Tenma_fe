@@ -1,9 +1,7 @@
 import { Breadcrumbs } from "@common/components";
 import React from "react";
-import useAddSegmentTwoD from "./add-segment-2d-progess-check-view-model";
 
 const AddSegmentTwoD = () => {
-    const model = useAddSegmentTwoD();
     return (
         <>
             <div>
@@ -26,7 +24,7 @@ const AddSegmentTwoD = () => {
                 </div>
 
                 <div>
-                    <table className="w-full">
+                    <table className="w-full mt-5">
                         <thead>
                             <tr>
                                 <th
@@ -84,25 +82,25 @@ const AddSegmentTwoD = () => {
                         <tbody>
                             <tr>
                                 <td className="border bg-white text-center py-5">
-                                    Default
+                                    e.character
                                 </td>
                                 <td className="border bg-white text-center py-5">
-                                    Default
+                                    e.nominal
                                 </td>
                                 <td className="border bg-white text-center py-5">
-                                    Default
+                                    e.upper
                                 </td>
                                 <td className="border bg-white text-center py-5">
-                                    Default
+                                    e.lower
                                 </td>
                                 <td className="border bg-white text-center py-5">
-                                    Default
+                                    e.saUpper
                                 </td>
                                 <td className="border bg-white text-center py-5">
-                                    Default
+                                    e.saLower
                                 </td>
                                 <td className="border bg-white text-center py-5">
-                                    Default
+                                    e.tool.name
                                 </td>
                                 <td className="border bg-white ">
                                     <div className="py-5 h-full text-start w-[50%] border-r border-gray-100 pl-2">
@@ -129,7 +127,10 @@ const AddSegmentTwoD = () => {
             </div>
 
             <div className="w-full text-center mt-5">
-                <button className="m-auto px-14 py-3 text-white rounded-md bg-gray-700 hover:scale-90 duration-300">
+                <button
+                    // onClick={(e) => model.addSegment(e)}
+                    className="m-auto px-14 py-3 text-white rounded-md bg-gray-700 hover:scale-90 duration-300"
+                >
                     + Add Segments
                 </button>
             </div>

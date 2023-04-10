@@ -5,12 +5,12 @@ import { MeasurementStd } from "@domain/models/measurement-std";
 import { MeasurementStdRepository } from "@domain/repositories/measurement-std-repository";
 import { Segment } from "@domain/models/segment";
 import { Part } from "@domain/models/part";
+import { PacSegment } from "@domain/models/pac-segment";
 export class MeasurementStdApiRepository implements MeasurementStdRepository {
     async get(params: TableParam): Promise<PaginatedData<MeasurementStd>> {
         const { data } = await api.get(`std-measurement`, {
             params: params,
         });
-        console.log(data, "api");
         return PaginatedData.create({
             page: params.page,
             limit: params.limit,
@@ -39,17 +39,21 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                         customerModelGroupId: item.part.customer_model_group_id,
                     }),
                     segments: item.special_accept_segments.map((el) => {
-                        return Segment.create({
+                        return PacSegment.create({
                             id: el.id,
                             character: el.character,
-                            nominal: el.nominal,
-                            nominalValue: el.nominalValue,
-                            upper: el.upper,
-                            lower: el.lower,
-                            saUpper: el.saUpper,
-                            saLower: el.saLower,
+                            nominal: el.nominal_type,
+                            nominalValue: el.nominal_value,
+                            upper: el.standard_upper,
+                            lower: el.standard_lower,
+                            saUpper: el.special_accept_upper,
+                            saLower: el.special_accept_lower,
+                            result: el.actual_result,
+                            judgement: el.judgement,
+                            saResult: el.sa_result,
+                            saJudgement: el.sa_judgement,
                             tool: el.tool,
-                            checked: el.checked,
+                            checked: false,
                         });
                     }),
                     checked: false,
@@ -82,18 +86,21 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                 customerId: data.data.part.customer_id,
                 customerModelGroupId: data.data.part.customer_model_group_id,
             }),
-            segments: data.data.special_accept_segments.map((item) => {
-                return Segment.create({
-                    id: item.id,
-                    character: item.character,
-                    nominal: item.nominal,
-                    nominalValue: item.nominal_value,
-                    upper: item.upper,
-                    lower: item.lower,
-                    saUpper: item.standard_upper,
-                    saLower: item.standard__ower,
-                    tool: item.tool,
-                    checked: item.checked,
+            segments: data.data.special_accept_segments.map((el) => {
+                return PacSegment.create({
+                    id: el.id,
+                    character: el.character,
+                    nominal: el.nominal,
+                    nominalValue: el.nominal_value,
+                    upper: el.standard_upper,
+                    lower: el.standard_lower,
+                    saUpper: el.special_accept_upper,
+                    saLower: el.special_accept_lower,
+                    result: el.actual_result,
+                    judgement: el.judgement,
+                    saResult: el.sa_result,
+                    saJudgement: el.sa_judgement,
+                    checked: false,
                 });
             }),
             checked: false,
@@ -139,17 +146,20 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                 customerModelGroupId: data.data.part.customer_model_group_id,
             }),
             segments: data.data.special_accept_segments.map((el) => {
-                return Segment.create({
+                return PacSegment.create({
                     id: el.id,
                     character: el.character,
                     nominal: el.nominal,
-                    nominalValue: el.nominalValue,
-                    upper: el.upper,
-                    lower: el.lower,
-                    saUpper: el.saUpper,
-                    saLower: el.saLower,
-                    tool: el.tool,
-                    checked: el.checked,
+                    nominalValue: el.nominal_value,
+                    upper: el.standard_upper,
+                    lower: el.standard_lower,
+                    saUpper: el.special_accept_upper,
+                    saLower: el.special_accept_lower,
+                    result: el.actual_result,
+                    judgement: el.judgement,
+                    saResult: el.sa_result,
+                    saJudgement: el.sa_judgement,
+                    checked: false,
                 });
             }),
             checked: false,
@@ -195,17 +205,20 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                 customerModelGroupId: data.data.part.customer_model_group_id,
             }),
             segments: data.data.special_accept_segments.map((el) => {
-                return Segment.create({
+                return PacSegment.create({
                     id: el.id,
                     character: el.character,
                     nominal: el.nominal,
-                    nominalValue: el.nominalValue,
-                    upper: el.upper,
-                    lower: el.lower,
-                    saUpper: el.saUpper,
-                    saLower: el.saLower,
-                    tool: el.tool,
-                    checked: el.checked,
+                    nominalValue: el.nominal_value,
+                    upper: el.standard_upper,
+                    lower: el.standard_lower,
+                    saUpper: el.special_accept_upper,
+                    saLower: el.special_accept_lower,
+                    result: el.actual_result,
+                    judgement: el.judgement,
+                    saResult: el.sa_result,
+                    saJudgement: el.sa_judgement,
+                    checked: false,
                 });
             }),
             checked: false,
