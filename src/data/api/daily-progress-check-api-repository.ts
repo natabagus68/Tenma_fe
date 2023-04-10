@@ -187,10 +187,10 @@ export class DailyProgressCheckApiRepository
             UpdateDailyProgressCheckReq
         >(`progress-check/${payload.id}`, {
             shift: payload.shift,
-            pic: payload.pic?.name || '',
+            pic: payload.pic?.name || "",
             part_cd: payload.part.id,
             id_machine: payload.machine.id,
-            inspection_date: payload.inspectionDate || '',
+            inspection_date: payload.inspectionDate || "",
             part_weight_qis: `${payload.weightPart}`,
             lot_production: payload.lotProduction,
             label_no: payload.labelNo,
@@ -230,27 +230,50 @@ export class DailyProgressCheckApiRepository
         return true;
     }
     async get3dSegments(id: string): Promise<Segment[]> {
-        const {data} = await api.get(`progress-check/${id}/3d`)
-        return data.data.map(item => Segment.create({
-            id: item.id,
-            name: item.name,
-            type: item.cavity_type,
-            pacSegments: item.std_measurement?.special_accept_segments.map(pacSegment => PacSegment.create({
-                id: pacSegment.id,
-                character: pacSegment.character,
-                nominal: pacSegment.nominal_type,
-                nominalValue: pacSegment.nominal_value,
-                upper: pacSegment.standard_upper,
-                lower: pacSegment.standard_lower,
-                saUpper: pacSegment.special_accept_upper,
-                saLower: pacSegment.special_accept_lower,
-                checked: false
-            })),
-            checked: false
-        }))
+        const { data } = await api.get(`progress-check/${id}/3d`);
+        return data.data.map((item) =>
+            Segment.create({
+                id: item.id,
+                name: item.name,
+                type: item.cavity_type,
+                pacSegments: item.std_measurement?.special_accept_segments.map(
+                    (pacSegment) =>
+                        PacSegment.create({
+                            id: pacSegment.id,
+                            character: pacSegment.character,
+                            nominal: pacSegment.nominal_type,
+                            nominalValue: pacSegment.nominal_value,
+                            upper: pacSegment.standard_upper,
+                            lower: pacSegment.standard_lower,
+                            saUpper: pacSegment.special_accept_upper,
+                            saLower: pacSegment.special_accept_lower,
+                            checked: false,
+                            result: "~",
+                            judgement: "~",
+                            saResult: "~",
+                            saJudgement: "~",
+                            tool: {
+                                id: pacSegment.tool?.id,
+                                idTool: pacSegment.tool?.id_tool,
+                                toolCode: pacSegment.tool?.code,
+                                name: pacSegment.tool?.name,
+                                address: pacSegment.tool?.address,
+                                checked: false,
+                            },
+                        })
+                ),
+                checked: false,
+            })
+        );
     }
     async getHistories(id: string): Promise<History[]> {
-        
-        throw new Error("Method not implemented.");
+        const {data} = await api.get(`progress-check/${id}/history`)
+        return data.data.map(item => History.create({
+            id:item.id,
+            date: item.date,
+            problemDetail: item.problem,
+            char: item.char,
+            remark: item.remark,
+        }))
     }
 }

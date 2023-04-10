@@ -1,4 +1,4 @@
-import { MeasurementStd } from "@domain/models/measurementStd";
+import { MeasurementStd } from "@domain/models/measurement-std";
 import { MeasurementStdApiRepository } from "@data/api/measurement-std-api-repository";
 import { PaginatedData } from "@domain/models/paginated-data";
 import { config } from "@common/utils";
@@ -32,19 +32,19 @@ export default function useMeasurement() {
         );
     };
     const toAddData = () => {
-        navigate(`${config.pathPrefix}master-data/measurement-std/add-data`);
+        navigate(`add-data`);
     };
 
-    const onDelete = (id: string) => {
-        setMeasurementStd((prev) => {
-            const measurement = PaginatedData.create(prev.unmarshall());
-            measurement.data.forEach((item) => {
-                item.id == id ? item.check() : item.uncheck();
-            });
-            return measurement;
-        });
-        setShowModal(true);
-    };
+    // const onDelete = (id: string) => {
+    //     setMeasurementStd((prev) => {
+    //         const measurement = PaginatedData.create(prev.unmarshall());
+    //         measurement.data.forEach((item) => {
+    //             item.id == id ? item.check() : item.uncheck();
+    //         });
+    //         return measurement;
+    //     });
+    //     setShowModal(true);
+    // };
 
     const onConfirm = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -74,7 +74,6 @@ export default function useMeasurement() {
         toDetail,
         toEdit,
         toAddData,
-        onDelete,
         onConfirm,
         onCancel,
     };

@@ -5,9 +5,10 @@ import { Td } from "../../../../../common/components/table/Td";
 import { Tr } from "../../../../../common/components/table/Tr";
 import Cavasity2Measurement from "../components/Cavasity2Measurement";
 import CavasitySMeasurent from "../components/CavasitySMeasurent";
+import useMeasurementDetail from "./measurement-detail-view-model";
 
 const MeasurementDetail = () => {
-    const navigate = useNavigate();
+    const model = useMeasurementDetail();
     return (
         <>
             <div>
@@ -20,10 +21,7 @@ const MeasurementDetail = () => {
                     </h1>
                     <div className="flex gap-3 justify-end pr-5">
                         <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                navigate("../");
-                            }}
+                            onClick={model.back}
                             className="py-[12px] px-[20px] bg-white border border-gray-500 text-gray-100 align-middle rounded-md flex gap-2 items-center"
                         >
                             <svg
@@ -69,7 +67,7 @@ const MeasurementDetail = () => {
                                     Part Name
                                 </Td>
                                 <Td className="py-4 text-center font-bold bg-gray-300 border-none">
-                                    Housing Upper SC ENN8.5 (Adjani)
+                                    {model.measurement.part.partName}
                                 </Td>
                             </Tr>
                             <Tr>
@@ -77,7 +75,7 @@ const MeasurementDetail = () => {
                                     Part Code (Item CD)
                                 </Td>
                                 <Td className="py-4 text-center font-bold border-none">
-                                    1101000001
+                                    {model.measurement.part.partCode}
                                 </Td>
                             </Tr>
                             <Tr>
@@ -85,7 +83,7 @@ const MeasurementDetail = () => {
                                     Model
                                 </Td>
                                 <Td className="py-4 text-center font-bold bg-gray-300 border-none">
-                                    Adjani
+                                    {model.measurement.part.customerModel.name}
                                 </Td>
                             </Tr>
                         </tbody>
@@ -93,8 +91,8 @@ const MeasurementDetail = () => {
                 </div>
             </div>
 
-            <CavasitySMeasurent />
-            <Cavasity2Measurement />
+            <CavasitySMeasurent model={model.measurement} />
+            {/* <Cavasity2Measurement /> */}
         </>
     );
 };

@@ -11,7 +11,10 @@ export interface IPacSegment {
     saUpper: number;
     saLower: number;
     tool?: ITool;
-    // actRes
+    result: string;
+    judgement: string;
+    saResult: string;
+    saJudgement: string;
     checked: boolean;
 }
 
@@ -30,6 +33,10 @@ export class PacSegment extends Entity<IPacSegment> {
             saUpper: this.saUpper,
             saLower: this.saLower,
             tool: this.tool?.unmarshall(),
+            result: this.result,
+            judgement: this.judgement,
+            saResult: this.saResult,
+            saJudgement: this.saJudgement,
             checked: this.checked,
         };
     }
@@ -63,6 +70,18 @@ export class PacSegment extends Entity<IPacSegment> {
     }
     get tool(): Tool | undefined {
         return this._props.tool ? Tool.create(this._props.tool) : undefined;
+    }
+    get result(): string {
+        return this._props.result;
+    }
+    get judgement(): string {
+        return this._props.judgement;
+    }
+    get saResult(): string {
+        return this._props.saResult;
+    }
+    get saJudgement(): string {
+        return this._props.saJudgement;
     }
     get checked(): boolean {
         return !!this._props.checked;

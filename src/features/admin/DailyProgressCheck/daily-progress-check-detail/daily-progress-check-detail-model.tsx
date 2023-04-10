@@ -48,6 +48,11 @@ export function useDailyProgressCheckDetail() {
             .get3dSegments(id)
             .then((res) => setSegments(res));
     };
+    const fetchHistory = () => {
+        dailyProgressCheckRepo
+            .getHistories(id)
+            .then((res) => setHistories(res));
+    };
     const [toogle, setToogle] = useState<"2d" | "3d">("2d");
     const onToogle = () => {
         setToogle((toogle) => (toogle === "2d" ? "3d" : "2d"));
@@ -67,10 +72,12 @@ export function useDailyProgressCheckDetail() {
     useEffect(() => {
         fetchDetail();
         fetchSegment();
+        fetchHistory();
     }, [id]);
     return {
         dailyProgressCheck,
         segments,
+        histories,
         toogle,
         onToogle,
         onAddHistory,

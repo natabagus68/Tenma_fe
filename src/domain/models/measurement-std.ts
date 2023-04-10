@@ -37,6 +37,10 @@ export class MeasurementStd extends Entity<IMeasurementStd> {
         );
         return this;
     }
+    changeTool(tool: ITool, i: number): MeasurementStd {
+        this._props.segments[i].tool = tool;
+        return this;
+    }
     removeSegment(i: number): MeasurementStd {
         this._props.segments.splice(i, 1);
         return this;
@@ -66,6 +70,12 @@ export class MeasurementStd extends Entity<IMeasurementStd> {
         );
         return this;
     }
+    // getDetail(measurement: any) {
+    //     this._props.part = measurement.part;
+    //     this._props.segments = measurement.special_accept_segments.map((item) =>
+    //         Segment.create(item.unmarshall())
+    //     );
+    // }
     get part(): Part {
         return this._props.part ? Part.create(this._props.part) : undefined;
     }

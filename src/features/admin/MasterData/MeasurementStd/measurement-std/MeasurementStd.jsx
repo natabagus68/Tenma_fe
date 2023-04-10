@@ -28,7 +28,7 @@ const MeasurementStd = () => {
                     </h1>
                     <button
                         className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md"
-                        onClick={measurementStd.toAddData()}
+                        onClick={measurementStd.toAddData}
                     >
                         + Add Data
                     </button>
@@ -59,19 +59,21 @@ const MeasurementStd = () => {
                                         key={ind}
                                     >
                                         <td className="py-6 text-center pl-3 text-gray-600 ">
-                                            {item.part.part_cd}
+                                            {item.part.partCode}
                                         </td>
                                         <td className="py-6 text-center pl-3 text-gray-600 ">
-                                            {item.part.part_name}
+                                            {item.part.partName}
                                         </td>
                                         <td className="py-6 text-center pl-3 text-gray-600 ">
-                                            {item.part.customer_model.name}
+                                            {item.part.customerModel.name}
                                         </td>
                                         <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
                                             <button
                                                 className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
                                                 onClick={(e) =>
-                                                    measurementStd.toDetail()
+                                                    measurementStd.toDetail(
+                                                        item.id
+                                                    )
                                                 }
                                             >
                                                 <EyeIcon />

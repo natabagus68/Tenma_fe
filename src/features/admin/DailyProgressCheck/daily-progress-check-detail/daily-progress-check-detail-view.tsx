@@ -2,7 +2,7 @@ import React from "react";
 import { Breadcrumbs } from "../../../../common/components";
 import { Td } from "../../../../common/components/table/Td";
 import { Tr } from "../../../../common/components/table/Tr";
-import CavasityTable from "../components/CavasityTable";
+import SegmentTable from "../components/segment-table";
 import JudgementIcon from "../icon/JudgemnetIcon";
 import { useDailyProgressCheckDetail } from "./daily-progress-check-detail-model";
 import moment from "moment";
@@ -12,7 +12,16 @@ const DailyProgressCheckDetailView = () => {
     return (
         <>
             <div>
-                <Breadcrumbs items={["Daily Progress Check", `Detail ${dailyProgressCheckDetail.toogle == '2d' ? '2D' : '3D'}`]} />
+                <Breadcrumbs
+                    items={[
+                        "Daily Progress Check",
+                        `Detail ${
+                            dailyProgressCheckDetail.toogle == "2d"
+                                ? "2D"
+                                : "3D"
+                        }`,
+                    ]}
+                />
             </div>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
@@ -29,7 +38,8 @@ const DailyProgressCheckDetailView = () => {
                                 <div
                                     className={`bg-white md:w-6 md:h-6 h-5 w-5 ml-[2px] rounded-full shadow-md transform duration-300 ease-in-out ${
                                         dailyProgressCheckDetail.toogle ==
-                                            "3d" && `transform translate-x-[27px]`
+                                            "3d" &&
+                                        `transform translate-x-[27px]`
                                     }`}
                                 ></div>
                             </div>
@@ -236,11 +246,11 @@ const DailyProgressCheckDetailView = () => {
                                         Accept sample (time)
                                     </Td>
                                     <Td className="border-none font-bold">
-                                        {
-                                            moment(dailyProgressCheckDetail
+                                        {moment(
+                                            dailyProgressCheckDetail
                                                 .dailyProgressCheck
-                                                .acceptSampleTime).format('HH:mm') || ''
-                                        }
+                                                .acceptSampleTime
+                                        ).format("HH:mm") || ""}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -248,11 +258,11 @@ const DailyProgressCheckDetailView = () => {
                                         Measure sample (time)
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        {
-                                            moment(dailyProgressCheckDetail
+                                        {moment(
+                                            dailyProgressCheckDetail
                                                 .dailyProgressCheck
-                                                .measureSampleTime).format('HH:mm') || ''
-                                        }
+                                                .measureSampleTime
+                                        ).format("HH:mm") || ""}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -299,10 +309,14 @@ const DailyProgressCheckDetailView = () => {
                     </div>
                 </div>
             </div>
-            {dailyProgressCheckDetail.segments.map(item => (
-                <CavasityTable key={item.id} segment={item} />
-            ))}
-            <DateTable  model={dailyProgressCheckDetail} />
+            {dailyProgressCheckDetail.toogle === "3d" && (
+                <>
+                    {dailyProgressCheckDetail.segments.map((item) => (
+                        <SegmentTable key={item.id} segment={item} />
+                    ))}
+                    <DateTable model={dailyProgressCheckDetail} />
+                </>
+            )}
         </>
     );
 };
