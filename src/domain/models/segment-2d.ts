@@ -1,6 +1,6 @@
 import { Entity } from "./_entity";
 import { MeasurementStd } from "./measurement-std";
-import { IMeasurement, PacSegment } from "./pac-segment";
+import { IMeasurement, PacSegment } from "./measurement";
 
 export interface ISegment2D {
     id?: string;

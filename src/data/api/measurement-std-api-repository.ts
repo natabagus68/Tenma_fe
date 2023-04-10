@@ -5,7 +5,7 @@ import { MeasurementStd } from "@domain/models/measurement-std";
 import { MeasurementStdRepository } from "@domain/repositories/measurement-std-repository";
 import { Segment } from "@domain/models/segment";
 import { Part } from "@domain/models/part";
-import { Measurement } from "@domain/models/pac-segment";
+import { Measurement } from "@domain/models/measurement";
 import { Segment2D } from "@domain/models/segment-2d";
 export class MeasurementStdApiRepository implements MeasurementStdRepository {
     async get(params: TableParam): Promise<PaginatedData<MeasurementStd>> {

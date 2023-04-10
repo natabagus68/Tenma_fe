@@ -1,4 +1,4 @@
-import { IMeasurement } from "./pac-segment";
+import { IMeasurement } from "./measurement";
 import { Entity } from "./_entity";
 
 export interface ISegment {

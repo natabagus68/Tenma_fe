@@ -3,7 +3,7 @@ import { PartApiRepository } from "@data/api/part-api-repository";
 import { ToolApiRepository } from "@data/api/tool-api-repository";
 import { MeasurementStd } from "@domain/models/measurement-std";
 import { IPart, Part } from "@domain/models/part";
-import { Measurement } from "@domain/models/pac-segment";
+import { Measurement } from "@domain/models/measurement";
 import { Tool } from "@domain/models/tool";
 import { PartRepository } from "@domain/repositories/part-repository";
 import { ToolRepository } from "@domain/repositories/tool-repository";

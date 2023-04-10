@@ -15,7 +15,7 @@ import { UpdateDailyProgressCheckReq } from "./types/update-daily-progress-check
 import { UpdateDailyProgressCheckRes } from "./types/update-daily-progress-check-res";
 import moment from "moment";
 import { History } from "@domain/models/history";
-import { Measurement } from "@domain/models/pac-segment";
+import { Measurement } from "@domain/models/measurement";
 import { Segment } from "@domain/models/segment";
 import { Pic } from "@domain/models/pic";
 

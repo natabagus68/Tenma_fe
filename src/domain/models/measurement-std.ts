@@ -1,6 +1,6 @@
 import { Entity } from "./_entity";
 import { IPart, Part } from "./part";
-import { IMeasurement, Measurement } from "./pac-segment";
+import { IMeasurement, Measurement } from "./measurement";
 import { ITool } from "./tool";
 
 export interface IMeasurementStd {
