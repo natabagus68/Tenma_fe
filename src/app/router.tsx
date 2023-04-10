@@ -30,8 +30,9 @@ import Color from "../features/admin/MasterData/Color/color/color-view";
 import ColorFormView from "../features/admin/MasterData/Color/color-form/color-form-view";
 import DailyProgessCheckView from "../features/admin/DailyProgressCheck/daily-progress-check/daily-progress-check-view";
 import DailyProgressCheckCreateView from "../features/admin/DailyProgressCheck/daily-progress-check-create/daily-progress-check-create-view";
-import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
+import DailyProgressCheckEditView from "../features/admin/DailyProgressCheck/daily-progress-check-edit/daily-progress-check-edit-view.tsx";
 import DailyProgressCheckDetailView from "../features/admin/DailyProgressCheck/daily-progress-check-detail/daily-progress-check-detail-view";
+import CreateSegmentView from "../features/admin/DailyProgressCheck/create-segment/create-segment-view";
 import AddSegmentData from "../features/admin/DailyProgressCheck/daily-progress-add-history/AddHistory";
 import AddSegmentTwoD from "@features/admin/DailyProgressCheck/add-segment-2d-daily-progress-check/add-segment-two-d";
 import AddHistory from "../features/admin/DailyProgressCheck/add-segment-3d-daily-progress-check/AddSegmentData";
@@ -269,10 +270,19 @@ export default createBrowserRouter([
                     },
                     {
                         path: ":id/edit",
-                        element: <EditDataDailyProcessCheck />,
+                        element: <DailyProgressCheckEditView />,
+                    },
+                    {
+                        path: ":id/create-segment",
+                        element: <CreateSegmentView />,
                     },
                     {
                         path: ":id/detail",
+                        element: <DailyProgressCheckDetailView />,
+                    },
+                    {
+                        path: ":id/create-history",
+                        element: <AddHistory />,
                         element: <Root />,
                         children: [
                             {

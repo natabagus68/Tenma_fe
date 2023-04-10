@@ -1,19 +1,13 @@
+import { IPacSegment } from "./pac-segment";
 import { Entity } from "./_entity";
-import { ITool, Tool } from "./tool";
 
 export interface ISegment {
     id?: string;
-    character: string;
-    nominal: string;
-    nominalValue: string;
-    upper: number;
-    lower: number;
-    saUpper: number;
-    saLower: number;
-    tool?: ITool;
-    checked: boolean;
+    name: string;
+    type: string;
+    pacSegments: IPacSegment[];
+    checked:boolean;
 }
-
 export class Segment extends Entity<ISegment> {
     static create(props: ISegment): Segment {
         return new Segment(props);
@@ -21,47 +15,35 @@ export class Segment extends Entity<ISegment> {
     unmarshall(): ISegment {
         return {
             id: this.id,
-            character: this.character,
-            nominal: this.nominal,
-            nominalValue: this.nominalValue,
-            upper: this.upper,
-            lower: this.lower,
-            saUpper: this.saUpper,
-            saLower: this.saLower,
-            tool: this.tool?.unmarshall(),
+            name: this.name,
+            type: this.type,
+            pacSegments: this.pacSegments,
             checked: this.checked,
         };
     }
     duplicate(): Segment {
         return Segment.create(this.unmarshall());
     }
-    update(props: ISegment): Segment {
-        this._props = props;
-        return this;
+    replace(props:ISegment):Segment{
+        this._props = props
+        return this
     }
-    get character(): string {
-        return this._props.character;
+    check():Segment{
+        this._props.checked = true
+        return this
     }
-    get nominal(): string {
-        return this._props.nominal;
+    uncheck():Segment{
+        this._props.checked = false
+        return this
     }
-    get nominalValue(): string {
-        return this._props.nominalValue;
+    get name(): string {
+        return this._props.name;
     }
-    get upper(): number {
-        return this._props.upper;
+    get type(): string {
+        return this._props.type;
     }
-    get lower(): number {
-        return this._props.lower;
-    }
-    get saUpper(): number {
-        return this._props.saUpper;
-    }
-    get saLower(): number {
-        return this._props.saLower;
-    }
-    get tool(): Tool | undefined {
-        return this._props.tool ? Tool.create(this._props.tool) : undefined;
+    get pacSegments(): IPacSegment[] {
+        return this._props.pacSegments;
     }
     get checked(): boolean {
         return !!this._props.checked;

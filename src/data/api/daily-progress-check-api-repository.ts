@@ -13,7 +13,10 @@ import { StoreDailyProgressCheckReq } from "./types/store-daily-progress-check-r
 import { StoreDailyProgressCheckRes } from "./types/store-daily-progress-check-res";
 import { UpdateDailyProgressCheckReq } from "./types/update-daily-progress-check-req";
 import { UpdateDailyProgressCheckRes } from "./types/update-daily-progress-check-res";
-import { MeasurementStd } from "@domain/models/measurement-std";
+import moment from "moment";
+import { History } from "@domain/models/history";
+import { PacSegment } from "@domain/models/pac-segment";
+import { Segment } from "@domain/models/segment";
 
 export class DailyProgressCheckApiRepository
     implements DailyProgressCheckRepository
@@ -87,24 +90,50 @@ export class DailyProgressCheckApiRepository
             judgement: data.data.judgement,
             judgement2d: data.data.judgement_2d,
             judgement3d: data.data.judgement_3d,
-            updatedAt: data.data.inspection_date,
-            partCode: data.data.part.part_cd,
+            updatedAt: moment(data.data.inspection_date).toDate(),
+            partCode: data.data.part?.part_cd,
             model: "Unknown",
             shift: data.data.shift,
-            has3d: data.data.judgement_3d.length > 0,
-            has2d: data.data.judgement_2d.length > 0,
-            partId: data.data.part.id,
+            has3d: data.data.judgement_3d?.length > 0,
+            has2d: data.data.judgement_2d?.length > 0,
+            partId: data.data.part?.id,
             machineId: data.data.machine.id,
             inspectionDate: data.data.inspection_date,
             lotProduction: data.data.lot_production,
             labelNo: `${data.data.label_no}`,
-            acceptSampleTime: data.data.accept_sample_time.toISOString(),
-            measureSampleTime: data.data.measure_sample_time.toISOString(),
+            acceptSampleTime: data.data.accept_sample_time,
+            measureSampleTime: data.data.measure_sample_time,
             weightPart: Number(data.data.part_weight_qis),
             checked: false,
             pic: {
                 checked: false,
                 name: data.data.pic,
+            },
+            part: {
+                id: data.data.part?.id,
+                custItemId: data.data.part?.cust_item_cd,
+                partCode: data.data.part?.part_cd,
+                partName: data.data.part?.part_name,
+                oldPartNumber: data.data.part?.old_part_number,
+                itemGroupCode: data.data.part?.item_group_cd,
+                itemGroupName: data.data.part?.item_group_name,
+                customerModel: data.data.part?.customer_model?.name,
+                customer: data.data.part?.customer?.name,
+                material: data.data.part?.material?.id_material,
+                materialColor: data.data.part?.material?.color?.name,
+                customerModelGroup: data.data.part?.customer_model_group?.name,
+                unitCd: data.data.part?.unit_cd,
+                materialDetails: data.data.part?.material?.detail,
+                productWeight: data.data.part?.product_weight,
+                customerModelId: data.data.part?.customer_model?.id,
+                customerId: data.data.part?.customer?.id,
+                customerModelGroupId: data.data.part?.customer_model_group?.id,
+            },
+            machine: {
+                id: data.data.machine.id,
+                idMachine: data.data.machine.id_machine,
+                noMachine: data.data.machine.no,
+                checked: false,
             },
         });
     }
@@ -131,15 +160,15 @@ export class DailyProgressCheckApiRepository
             partCode: data.data.part_id,
             model: "Unknown",
             shift: data.data.shift,
-            has3d: data.data.judgement_3d.length > 0,
-            has2d: data.data.judgement_2d.length > 0,
+            has3d: data.data.judgement_3d?.length > 0,
+            has2d: data.data.judgement_2d?.length > 0,
             partId: data.data.part_id,
             machineId: data.data.machine_id,
             inspectionDate: data.data.inspection_date,
             lotProduction: data.data.lot_production,
             labelNo: `${data.data.label_no}`,
-            acceptSampleTime: data.data.accept_sample_time?.toISOString(),
-            measureSampleTime: data.data.measure_sample_time?.toISOString(),
+            acceptSampleTime: data.data.accept_sample_time,
+            measureSampleTime: data.data.measure_sample_time,
             weightPart: Number(data.data.part_weight_qis),
             checked: false,
             pic: {
@@ -158,10 +187,10 @@ export class DailyProgressCheckApiRepository
             UpdateDailyProgressCheckReq
         >(`progress-check/${payload.id}`, {
             shift: payload.shift,
-            pic: payload.pic.name,
-            part_cd: payload.partCode,
-            id_machine: payload.machineId,
-            inspection_date: payload.inspectionDate,
+            pic: payload.pic?.name || "",
+            part_cd: payload.part.id,
+            id_machine: payload.machine.id,
+            inspection_date: payload.inspectionDate || "",
             part_weight_qis: `${payload.weightPart}`,
             lot_production: payload.lotProduction,
             label_no: payload.labelNo,
@@ -179,8 +208,8 @@ export class DailyProgressCheckApiRepository
             partCode: data.data.part_id,
             model: "Unknown",
             shift: data.data.shift,
-            has3d: data.data.judgement_3d.length > 0,
-            has2d: data.data.judgement_2d.length > 0,
+            has3d: data.data.judgement_3d?.length > 0,
+            has2d: data.data.judgement_2d?.length > 0,
             pic: {
                 checked: false,
                 name: data.data.pic,
@@ -190,8 +219,8 @@ export class DailyProgressCheckApiRepository
             inspectionDate: data.data.inspection_date,
             lotProduction: data.data.lot_production,
             labelNo: data.data.label_no.toString(),
-            acceptSampleTime: data.data.accept_sample_time.toISOString(),
-            measureSampleTime: data.data.measure_sample_time.toISOString(),
+            acceptSampleTime: data.data.accept_sample_time,
+            measureSampleTime: data.data.measure_sample_time,
             weightPart: Number(data.data.actual_part_weight),
             checked: false,
         });
@@ -200,41 +229,51 @@ export class DailyProgressCheckApiRepository
         await api.delete(`progress-check/${id}`);
         return true;
     }
-
-    async getCavity(id: string, toogle: string) {
-        const { data } = await api.get(`progress-check/${id}/${toogle}`);
-        console.log(data, `progress-check/${id}/${toogle}`);
-        return data.data.map((item) => {
-            return {
-                id: item?.id,
-                name: item?.name,
-                cavityType: item?.cavity_type,
-                stdMeasurement: {
-                    id: item?.std_measurement?.id,
-                    segments:
-                        item?.std_measurement?.special_accept_segments?.map(
-                            (el) => {
-                                return {
-                                    id: el?.id,
-                                    character: el?.character,
-                                    nominal: el?.nominal_type,
-                                    nominalValue: el?.nominal_value,
-                                    saUpper: el?.standard_upper,
-                                    saLower: el?.standard_lower,
-                                    tool: el?.tool,
-                                    cavity: el?.cavity_results?.map((e) => {
-                                        return {
-                                            id: e?.id,
-                                            actualResult: e?.actual_result,
-                                            actualResultJudgement:
-                                                e?.actual_result_judgement,
-                                        };
-                                    }),
-                                };
-                            }
-                        ),
-                },
-            };
-        });
+    async get3dSegments(id: string): Promise<Segment[]> {
+        const { data } = await api.get(`progress-check/${id}/3d`);
+        return data.data.map((item) =>
+            Segment.create({
+                id: item.id,
+                name: item.name,
+                type: item.cavity_type,
+                pacSegments: item.std_measurement?.special_accept_segments.map(
+                    (pacSegment) =>
+                        PacSegment.create({
+                            id: pacSegment.id,
+                            character: pacSegment.character,
+                            nominal: pacSegment.nominal_type,
+                            nominalValue: pacSegment.nominal_value,
+                            upper: pacSegment.standard_upper,
+                            lower: pacSegment.standard_lower,
+                            saUpper: pacSegment.special_accept_upper,
+                            saLower: pacSegment.special_accept_lower,
+                            checked: false,
+                            result: "~",
+                            judgement: "~",
+                            saResult: "~",
+                            saJudgement: "~",
+                            tool: {
+                                id: pacSegment.tool?.id,
+                                idTool: pacSegment.tool?.id_tool,
+                                toolCode: pacSegment.tool?.code,
+                                name: pacSegment.tool?.name,
+                                address: pacSegment.tool?.address,
+                                checked: false,
+                            },
+                        })
+                ),
+                checked: false,
+            })
+        );
+    }
+    async getHistories(id: string): Promise<History[]> {
+        const {data} = await api.get(`progress-check/${id}/history`)
+        return data.data.map(item => History.create({
+            id:item.id,
+            date: item.date,
+            problemDetail: item.problem,
+            char: item.char,
+            remark: item.remark,
+        }))
     }
 }

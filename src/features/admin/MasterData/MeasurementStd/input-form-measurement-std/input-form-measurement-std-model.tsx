@@ -3,7 +3,7 @@ import { PartApiRepository } from "@data/api/part-api-repository";
 import { ToolApiRepository } from "@data/api/tool-api-repository";
 import { MeasurementStd } from "@domain/models/measurement-std";
 import { IPart, Part } from "@domain/models/part";
-import { Segment } from "@domain/models/segment";
+import { PacSegment } from "@domain/models/pac-segment";
 import { Tool } from "@domain/models/tool";
 import { PartRepository } from "@domain/repositories/part-repository";
 import { ToolRepository } from "@domain/repositories/tool-repository";
@@ -22,7 +22,7 @@ export function useInputMeasurementStd() {
         MeasurementStd.create({
             part: undefined,
             segments: [
-                Segment.create({
+                PacSegment.create({
                     character: "",
                     nominal: "",
                     nominalValue: "",
@@ -44,8 +44,8 @@ export function useInputMeasurementStd() {
     const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
     const [saveConfirmShow, setSaveConfirmShow] = useState(false);
     const [successConfirmShow, setSuccessConfirmShow] = useState(false);
-    const [tempSegment, setTempSegment] = useState<Segment>(
-        Segment.create({
+    const [tempSegment, setTempSegment] = useState<PacSegment>(
+        PacSegment.create({
             character: "",
             nominal: "",
             nominalValue: "",
@@ -121,7 +121,7 @@ export function useInputMeasurementStd() {
     };
     const onShowNominalModal = (
         e: React.MouseEvent<HTMLButtonElement>,
-        segment: Segment
+        segment: PacSegment
     ) => {
         setNominalModalShow(true);
         setMeasurementStd((prevState) => {

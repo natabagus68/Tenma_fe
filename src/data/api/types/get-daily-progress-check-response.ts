@@ -19,8 +19,8 @@ export interface Datum {
     lot_production:      null | string;
     checked_by:          null | string;
     label_no:            null | string;
-    accept_sample_time:  null | string;
-    measure_sample_time: null | string;
+    accept_sample_time:  null | Date;
+    measure_sample_time: null | Date;
     actual_part_weight:  null | string;
     judgement:           string;
     judgement_3d:        string;
