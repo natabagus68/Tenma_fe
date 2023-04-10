@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../common/components";
+import { Breadcrumbs } from "../../../../common/components";
 
 const AddSegmentData = () => {
     const navigate = useNavigate();

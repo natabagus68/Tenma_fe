@@ -13,6 +13,7 @@ import { StoreDailyProgressCheckReq } from "./types/store-daily-progress-check-r
 import { StoreDailyProgressCheckRes } from "./types/store-daily-progress-check-res";
 import { UpdateDailyProgressCheckReq } from "./types/update-daily-progress-check-req";
 import { UpdateDailyProgressCheckRes } from "./types/update-daily-progress-check-res";
+import { MeasurementStd } from "@domain/models/measurement-std";
 
 export class DailyProgressCheckApiRepository
     implements DailyProgressCheckRepository
@@ -198,5 +199,42 @@ export class DailyProgressCheckApiRepository
     async destroy(id: string): Promise<boolean> {
         await api.delete(`progress-check/${id}`);
         return true;
+    }
+
+    async getCavity(id: string, toogle: string) {
+        const { data } = await api.get(`progress-check/${id}/${toogle}`);
+        console.log(data, `progress-check/${id}/${toogle}`);
+        return data.data.map((item) => {
+            return {
+                id: item?.id,
+                name: item?.name,
+                cavityType: item?.cavity_type,
+                stdMeasurement: {
+                    id: item?.std_measurement?.id,
+                    segments:
+                        item?.std_measurement?.special_accept_segments?.map(
+                            (el) => {
+                                return {
+                                    id: el?.id,
+                                    character: el?.character,
+                                    nominal: el?.nominal_type,
+                                    nominalValue: el?.nominal_value,
+                                    saUpper: el?.standard_upper,
+                                    saLower: el?.standard_lower,
+                                    tool: el?.tool,
+                                    cavity: el?.cavity_results?.map((e) => {
+                                        return {
+                                            id: e?.id,
+                                            actualResult: e?.actual_result,
+                                            actualResultJudgement:
+                                                e?.actual_result_judgement,
+                                        };
+                                    }),
+                                };
+                            }
+                        ),
+                },
+            };
+        });
     }
 }

@@ -32,8 +32,9 @@ import DailyProgessCheckView from "../features/admin/DailyProgressCheck/daily-pr
 import DailyProgressCheckCreateView from "../features/admin/DailyProgressCheck/daily-progress-check-create/daily-progress-check-create-view";
 import EditDataDailyProcessCheck from "../features/admin/DailyProgressCheck/EditDataDailyProcessCheck";
 import DailyProgressCheckDetailView from "../features/admin/DailyProgressCheck/daily-progress-check-detail/daily-progress-check-detail-view";
-import AddSegmentData from "../features/admin/DailyProgressCheck/AddSegmentData";
-import AddHistory from "../features/admin/DailyProgressCheck/AddHistory";
+import AddSegmentData from "../features/admin/DailyProgressCheck/daily-progress-add-history/AddHistory";
+import AddSegmentTwoD from "@features/admin/DailyProgressCheck/add-segment-2d-daily-progress-check/add-segment-two-d";
+import AddHistory from "../features/admin/DailyProgressCheck/add-segment-3d-daily-progress-check/AddSegmentData";
 import Report from "../features/admin/Report/Report";
 import ReportDetail from "../features/admin/Report/ReportDetail";
 import Detail from "../features/admin/Report/Detail";
@@ -279,12 +280,16 @@ export default createBrowserRouter([
                                 element: <DailyProgressCheckDetailView />,
                             },
                             {
-                                path: "add-segment-data",
+                                path: "add-segment-data-3d",
                                 element: <AddSegmentData />,
                             },
                             {
                                 path: "add-history-data",
                                 element: <AddHistory />,
+                            },
+                            {
+                                path: "add-segment-data-2d",
+                                element: <AddSegmentTwoD />,
                             },
                         ],
                     },

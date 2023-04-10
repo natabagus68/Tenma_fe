@@ -1,8 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CavasitySMeasurent = () => {
-    const navigate = useNavigate();
+const CavasitySMeasurent = ({ model }) => {
     return (
         <div>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 mt-10">
@@ -54,27 +53,33 @@ const CavasitySMeasurent = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td className="py-4 border text-center">
-                                    Character
-                                </td>
-                                <td className="py-4 border text-center">
-                                    Nominal
-                                </td>
-                                <td className="py-4 border text-center">
-                                    Upper
-                                </td>
-                                <td className="py-4 border text-center">
-                                    Lower
-                                </td>
-                                <td className="py-4 border text-center">Act</td>
-                                <td className="py-4 border text-center">
-                                    Exceed
-                                </td>
-                                <td className="py-4 border text-center">
-                                    Tool
-                                </td>
-                            </tr>
+                            {model.segments.map((item, ind) => {
+                                return (
+                                    <tr>
+                                        <td className="py-4 border text-center">
+                                            {item.character}
+                                        </td>
+                                        <td className="py-4 border text-center">
+                                            {item.nominalValue}
+                                        </td>
+                                        <td className="py-4 border text-center">
+                                            {item.upper}
+                                        </td>
+                                        <td className="py-4 border text-center">
+                                            {item.lower}
+                                        </td>
+                                        <td className="py-4 border text-center">
+                                            {item.saUpper}
+                                        </td>
+                                        <td className="py-4 border text-center">
+                                            {item.saLower}
+                                        </td>
+                                        <td className="py-4 border text-center">
+                                            {item.tool?.name}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>

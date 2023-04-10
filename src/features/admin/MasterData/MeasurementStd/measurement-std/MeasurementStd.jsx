@@ -71,7 +71,9 @@ const MeasurementStd = () => {
                                             <button
                                                 className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
                                                 onClick={(e) =>
-                                                    measurementStd.toDetail()
+                                                    measurementStd.toDetail(
+                                                        item.id
+                                                    )
                                                 }
                                             >
                                                 <EyeIcon />

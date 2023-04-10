@@ -2,12 +2,12 @@ import { DailyProgressCheckApiRepository } from "@data/api/daily-progress-check-
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { DailyProgressCheckRepository } from "@domain/repositories/daily-progress-check-repository";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function useDailyProgressCheckDetail() {
     const { id } = useParams();
-    const dailyProgressCheckRepo: DailyProgressCheckRepository =
-        new DailyProgressCheckApiRepository();
+    const navigate = useNavigate();
+    const dailyProgressCheckRepo = new DailyProgressCheckApiRepository();
     const [dailyProgressCheck, setDailyProgressCheck] =
         useState<DailyProgressCheck>(
             DailyProgressCheck.create({
@@ -32,18 +32,30 @@ export function useDailyProgressCheckDetail() {
                 checked: false,
             })
         );
+
+    const [segments, setSegments] = useState({});
     const fetchDetail = () => {
         dailyProgressCheckRepo.detail(id);
     };
     const [toogle, setToogle] = useState<"2d" | "3d">("2d");
-    const onToogle = () => {};
-    const onAddSegment = () => {};
+    const onToogle = () => {
+        if (toogle == "2d") {
+            setToogle("3d");
+        } else {
+            setToogle("2d");
+        }
+    };
+    const onAddSegment = () => {
+        navigate("add-segment-data-" + toogle);
+    };
     const onAddHistory = () => {};
     const onDownloadReport = () => {};
     const onBack = () => {};
     useEffect(() => {
-        fetchDetail();
-    }, [id]);
+        dailyProgressCheckRepo
+            .getCavity(id, toogle)
+            .then((result) => setSegments(result));
+    }, [toogle]);
     return {
         dailyProgressCheck,
         toogle,

@@ -42,7 +42,9 @@ const DailyProgressCheckDetailView = () => {
                                     // className={`bg-black md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out`}
                                 ></div>
                             </div>
-                            {dailyProgressCheckDetail.toogle == '3d' ? '3D' : '2D'}
+                            {dailyProgressCheckDetail.toogle == "3d"
+                                ? "3D"
+                                : "2D"}
                         </div>
 
                         <div className="flex gap-4">
@@ -61,7 +63,9 @@ const DailyProgressCheckDetailView = () => {
 
                             <button
                                 className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex"
-                                onClick={dailyProgressCheckDetail.onDownloadReport}
+                                onClick={
+                                    dailyProgressCheckDetail.onDownloadReport
+                                }
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +118,11 @@ const DailyProgressCheckDetailView = () => {
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
                                         {/* {dailyProgressCheckDetail.dailyProgressCheck.part/} */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.part?.partName}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.part
+                                                ?.partName
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -124,7 +132,11 @@ const DailyProgressCheckDetailView = () => {
                                     <Td className="border-none font-bold">
                                         {/* 1101000001 */}
                                         {/* {state?.part_cd} */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.part?.partCode}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.part
+                                                ?.partCode
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -134,7 +146,11 @@ const DailyProgressCheckDetailView = () => {
                                     <Td className="bg-gray-50 border-none font-bold">
                                         {/* Adjani */}
                                         {/* {state?.part_name} */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.part?.customerModel}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.part
+                                                ?.customerModel
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -144,7 +160,11 @@ const DailyProgressCheckDetailView = () => {
                                     <Td className="border-none font-bold">
                                         {/* E1-F3-C6-9E-E3-AE */}
                                         {/* {state?.item_group_cd} */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.machine?.noMachine}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.machine
+                                                ?.noMachine
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -154,7 +174,11 @@ const DailyProgressCheckDetailView = () => {
                                     <Td className="bg-gray-50 border-none font-bold">
                                         {/* 07/02/2023 */}
                                         {/* {state?.item_group_name} */}
-                                        {moment(dailyProgressCheckDetail.dailyProgressCheck.inspectionDate).format('DD/MM/YYYY')}
+                                        {moment(
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck
+                                                .inspectionDate
+                                        ).format("DD/MM/YYYY")}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -164,7 +188,10 @@ const DailyProgressCheckDetailView = () => {
                                     <Td className="border-none font-bold">
                                         {/* Part Weight QIS */}
                                         {/* {state?.old_part_number} */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.weightPart}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.weightPart
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -174,7 +201,11 @@ const DailyProgressCheckDetailView = () => {
                                     <Td className="bg-gray-50 border-none font-bold">
                                         {/* 23207A */}
                                         {/* {state?.customer_model?.name} */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.lotProduction}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck
+                                                .lotProduction
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -201,14 +232,20 @@ const DailyProgressCheckDetailView = () => {
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
                                         {/* Shift 2{state?.customer?.name} */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.shift}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.shift
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
                                     <Td className=" border-none">PIC</Td>
                                     <Td className="border-none font-bold">
                                         {/* Bramantra */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.pic?.name}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.pic?.name
+                                        }
                                         {/* {state?.material?.id_material} */}
                                     </Td>
                                 </Tr>
@@ -218,7 +255,10 @@ const DailyProgressCheckDetailView = () => {
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
                                         {/* 01 */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.labelNo}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.labelNo
+                                        }
                                         {/* {state?.material?.color?.name} */}
                                     </Td>
                                 </Tr>
@@ -228,7 +268,11 @@ const DailyProgressCheckDetailView = () => {
                                     </Td>
                                     <Td className="border-none font-bold">
                                         {/* 14:00 */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.acceptSampleTime}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck
+                                                .acceptSampleTime
+                                        }
                                         {/* {state?.customer_model_group.name} */}
                                     </Td>
                                 </Tr>
@@ -238,7 +282,11 @@ const DailyProgressCheckDetailView = () => {
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
                                         {/* 18:10 */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.measureSampleTime}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck
+                                                .measureSampleTime
+                                        }
                                         {/* {state?.unit_cd} */}
                                     </Td>
                                 </Tr>
@@ -248,7 +296,10 @@ const DailyProgressCheckDetailView = () => {
                                     </Td>
                                     <Td className="border-none font-bold">
                                         {/* 299.8 gram */}
-                                        {dailyProgressCheckDetail.dailyProgressCheck.weightPart || `~`} gram
+                                        {dailyProgressCheckDetail
+                                            .dailyProgressCheck.weightPart ||
+                                            `~`}{" "}
+                                        gram
                                         {/* {state?.material?.detail} */}
                                     </Td>
                                 </Tr>
@@ -257,7 +308,18 @@ const DailyProgressCheckDetailView = () => {
                                         Judgement
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        <JudgementIcon value={dailyProgressCheckDetail.toogle == '2d' ? dailyProgressCheckDetail.dailyProgressCheck.judgement2d : dailyProgressCheckDetail.dailyProgressCheck.judgement3d} />
+                                        <JudgementIcon
+                                            value={
+                                                dailyProgressCheckDetail.toogle ==
+                                                "2d"
+                                                    ? dailyProgressCheckDetail
+                                                          .dailyProgressCheck
+                                                          .judgement2d
+                                                    : dailyProgressCheckDetail
+                                                          .dailyProgressCheck
+                                                          .judgement3d
+                                            }
+                                        />
                                         {/* {state?.product_weight} gram */}
                                     </Td>
                                 </Tr>
@@ -265,7 +327,10 @@ const DailyProgressCheckDetailView = () => {
                                     <Td className=" border-none">Update at</Td>
                                     <Td className="border-none font-bold">
                                         {/* 17:48 */}
-                                        {moment(dailyProgressCheckDetail.dailyProgressCheck.updatedAt).format('HH:mm')}
+                                        {moment(
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.updatedAt
+                                        ).format("HH:mm")}
                                         {/* {state?.material?.detail} */}
                                     </Td>
                                 </Tr>

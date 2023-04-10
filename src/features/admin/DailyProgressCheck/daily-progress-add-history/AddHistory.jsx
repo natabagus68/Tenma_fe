@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../common/components";
+import { Breadcrumbs } from "../../../../common/components";
 
 const AddHistory = () => {
     const navigate = useNavigate();
