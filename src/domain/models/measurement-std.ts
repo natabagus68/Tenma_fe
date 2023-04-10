@@ -33,6 +33,10 @@ export class MeasurementStd extends Entity<IMeasurementStd> {
                 saUpper: 0,
                 saLower: 0,
                 checked: false,
+                result: "",
+                judgement: "",
+                saResult: "",
+                saJudgement: "",
             }).unmarshall()
         );
         return this;

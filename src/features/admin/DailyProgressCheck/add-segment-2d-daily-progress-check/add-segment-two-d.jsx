@@ -1,7 +1,9 @@
 import { Breadcrumbs } from "@common/components";
 import React from "react";
+import useAddSegmentTwoD from "./add-segment-2d-progess-check-view-model";
 
 const AddSegmentTwoD = () => {
+    const model = useAddSegmentTwoD();
     return (
         <>
             <div>

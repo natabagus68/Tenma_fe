@@ -62,6 +62,10 @@ export function useDailyProgressCheckDetail() {
             navigate(
                 `${config.pathPrefix}daily-progress-check/${id}/create-segment`
             );
+        } else {
+            navigate(
+                `${config.pathPrefix}daily-progress-check/${id}/add-segment-data-2d`
+            );
         }
     };
     const onAddHistory = () => {};

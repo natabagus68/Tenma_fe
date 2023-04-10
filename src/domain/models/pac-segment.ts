@@ -19,6 +19,22 @@ export interface IPacSegment {
 }
 
 export class PacSegment extends Entity<IPacSegment> {
+    static PacSegment(arg0: {
+        character: string;
+        nominal: string;
+        nominalValue: string;
+        upper: string;
+        lower: string;
+        saUpper: string;
+        saLower: string;
+        checked: false;
+        result: string;
+        judgement: string;
+        saResult: string;
+        saJudgement: string;
+    }): import("./measurement-std").MeasurementStd {
+        throw new Error("Method not implemented.");
+    }
     static create(props: IPacSegment): PacSegment {
         return new PacSegment(props);
     }
