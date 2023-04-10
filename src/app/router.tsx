@@ -283,25 +283,10 @@ export default createBrowserRouter([
                     {
                         path: ":id/create-history",
                         element: <AddHistory />,
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <DailyProgressCheckDetailView />,
-                            },
-                            {
-                                path: "add-segment-data-3d",
-                                element: <AddSegmentData />,
-                            },
-                            {
-                                path: "add-history-data",
-                                element: <AddHistory />,
-                            },
-                            {
-                                path: "add-segment-data-2d",
-                                element: <AddSegmentTwoD />,
-                            },
-                        ],
+                    },
+                    {
+                        path: ":id/add-segment-data-2d",
+                        element: <AddSegmentTwoD />,
                     },
                 ],
             },
