@@ -23,6 +23,7 @@ export class CustomerApiRepository implements CustomerRepository {
         const {
             data: { data = {} },
         } = await api.get(`customer/${id}`);
+        console.log({ data });
         return Customer.create({
             id: data.id,
             name: data.name,

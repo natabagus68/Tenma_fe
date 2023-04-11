@@ -31,6 +31,10 @@ export function useInputMeasurementStd() {
                     saUpper: 0,
                     saLower: 0,
                     checked: false,
+                    result: "",
+                    judgement: "",
+                    saResult: "",
+                    saJudgement: ""
                 }),
             ],
             checked: false,
@@ -54,6 +58,10 @@ export function useInputMeasurementStd() {
             saUpper: 0,
             saLower: 0,
             checked: false,
+            result: "",
+            judgement: "",
+            saResult: "",
+            saJudgement: ""
         })
     );
 

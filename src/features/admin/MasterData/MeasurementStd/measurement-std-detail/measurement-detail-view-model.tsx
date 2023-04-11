@@ -1,10 +1,11 @@
 import { MeasurementStdApiRepository } from "../../../../../data/api/measurement-std-api-repository";
 import { MeasurementStd } from "../../../../../domain/models/measurement-std";
 import { useNavigate, useParams } from "react-router-dom";
-import { PaginatedData } from "../../../../../domain/models/paginated-data";
 import { useState, useEffect } from "react";
-import { Segment } from "../../../../../domain/models/segment";
 import { Part } from "../../../../../domain/models/part";
+import { Segment } from "@domain/models/segment";
+import { Measurement } from "@domain/models/measurement";
+import { config } from "@common/utils";
 
 export default function useMeasurementDetail() {
     const { id } = useParams();
@@ -14,7 +15,7 @@ export default function useMeasurementDetail() {
         MeasurementStd.create({
             part: Part.createEmpty(),
             segments: [
-                Segment.create({
+                Measurement.create({
                     character: "",
                     nominal: "",
                     nominalValue: "",
@@ -22,6 +23,10 @@ export default function useMeasurementDetail() {
                     lower: 0,
                     saUpper: 0,
                     saLower: 0,
+                    result: "",
+                    judgement: "",
+                    saResult: "",
+                    saJudgement: "",
                     checked: false,
                 }),
             ],
@@ -29,7 +34,11 @@ export default function useMeasurementDetail() {
         })
     );
 
-    const toEdit = (id: string) => {};
+    const toEdit = () => {
+        navigate(
+            `${config.pathPrefix}master-data/measurement-std/${id}/edit-data`
+        );
+    };
     const back = () => {
         navigate("../");
     };
@@ -41,5 +50,6 @@ export default function useMeasurementDetail() {
         id,
         measurement,
         back,
+        toEdit,
     };
 }

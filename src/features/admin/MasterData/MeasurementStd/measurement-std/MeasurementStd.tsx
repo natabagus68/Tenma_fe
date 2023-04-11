@@ -13,11 +13,6 @@ const MeasurementStd = () => {
     const measurementStd = useMeasurement();
     return (
         <>
-            <ModalDelete
-                showModal={measurementStd.showModal}
-                setShowModal={measurementStd.setShowModal}
-                onConfirm={measurementStd.onConfirm}
-            />
             <div>
                 <Breadcrumbs items={["Measurement Std"]} />
             </div>
@@ -65,7 +60,7 @@ const MeasurementStd = () => {
                                             {item.part.partName}
                                         </td>
                                         <td className="py-6 text-center pl-3 text-gray-600 ">
-                                            {item.part.customerModel.name}
+                                            {item.part.customerModel}
                                         </td>
                                         <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
                                             <button
@@ -109,9 +104,10 @@ const MeasurementStd = () => {
                     </table>
                 </div>
                 <div className="w-full flex justify-end pt-5 pr-5">
-                    <Pagination row={1} limit={10} />
+                    <Pagination row={ 1 } limit={ 10 } page={ undefined } />
                 </div>
             </div>
+            <ModalDelete showModal={ measurementStd.deleteConfirmShow } setShowModal={ measurementStd.setDeleteConfirmShow } onConfirm={measurementStd.onConfirmDelete} />
         </>
     );
 };
