@@ -91,28 +91,76 @@ export class Measurement extends Entity<IMeasurement> {
         return this._props.result;
     }
     get judgement(): string {
+        console.log(parseFloat(this._props.nominalValue) + +this._props.upper);
+        console.log(parseFloat(this._props.result));
         if (
-            parseInt(this._props.result) < this._props.upper &&
-            parseInt(this._props.result) > this._props.lower &&
-            this._props.nominal.toLowerCase() === "decimal"
+            parseFloat(this._props.result) >
+            parseFloat(this._props.nominalValue)
         ) {
-            return "ng";
+            if (
+                parseFloat(this._props.nominalValue) + +this._props.upper >
+                parseFloat(this._props.result)
+            ) {
+                return "ok";
+            } else {
+                const count =
+                    parseFloat(this._props.result) -
+                    parseFloat(this._props.nominalValue) -
+                    this._props.upper;
+
+                return count.toString();
+            }
         } else {
-            return "ok";
+            if (
+                parseFloat(this._props.nominalValue) + +this._props.lower <
+                parseFloat(this._props.result)
+            ) {
+                return "ok";
+            } else {
+                const count =
+                    parseFloat(this._props.result) -
+                    parseFloat(this._props.nominalValue) -
+                    +this._props.lower;
+
+                return count.toString();
+            }
         }
     }
     get saResult(): string {
         return this._props.saResult;
     }
     get saJudgement(): string {
-        if (
-            parseInt(this._props.saResult) < this._props.saUpper &&
-            parseInt(this._props.saResult) > this._props.saLower &&
-            this._props.nominal.toLowerCase() === "decimal"
-        ) {
-            return "ng";
-        } else {
-            return "ok";
+        if (this._props.saJudgement !== "ok") {
+            if (
+                parseInt(this._props.saResult) >
+                parseInt(this._props.nominalValue)
+            ) {
+                if (
+                    parseInt(this._props.nominalValue) + +this._props.upper >
+                    parseInt(this._props.saResult)
+                ) {
+                    return "ok";
+                } else {
+                    return (
+                        parseInt(this._props.saResult) -
+                        parseInt(this._props.nominalValue) +
+                        +this._props.saUpper
+                    ).toString();
+                }
+            } else {
+                if (
+                    parseInt(this._props.nominalValue) + +this._props.saLower <
+                    parseInt(this._props.saResult)
+                ) {
+                    return "ok";
+                } else {
+                    return (
+                        parseInt(this._props.saResult) -
+                        parseInt(this._props.nominalValue) -
+                        +this._props.saLower
+                    ).toString();
+                }
+            }
         }
     }
     get checked(): boolean {

@@ -15,7 +15,7 @@ const AddSegmentTwoD = () => {
                 <>
                     <div
                         key={item.id}
-                        className="m-auto w-full border-2 border-gray-100  rounded-lg mb-4"
+                        className="m-auto w-full border-t-2 border-x-2 rounded-t-lg border-gray-100   mt-4"
                     >
                         <div className="w-full py-5 px-12 flex gap-5 items-center">
                             <h1 className="font-[700] text-2xl text-gray-700 font-sans">
@@ -37,7 +37,7 @@ const AddSegmentTwoD = () => {
                     </div>
 
                     <div>
-                        <table className="w-full mt-5 border-none">
+                        <table className="w-full border border-gray-100 rounded-b-lg">
                             <thead>
                                 <tr>
                                     <th
@@ -120,14 +120,14 @@ const AddSegmentTwoD = () => {
                                             <td className="border bg-white ">
                                                 <div className="w-full flex justify-between">
                                                     <div className="py-5 pr-3 h-full text-start w-[50%] border-r border-gray-100 pl-2">
-                                                        {model.segments[index]
-                                                            .measurements[
+                                                        {model.segments[
+                                                            index
+                                                        ].measurements[
                                                             index2
-                                                        ].judgement === "ok" ? (
+                                                        ].nominal.toLowerCase() !==
+                                                        "decimal" ? (
                                                             <input
-                                                                step="0.00001"
-                                                                type="number"
-                                                                min={0}
+                                                                type="text"
                                                                 value={
                                                                     model
                                                                         .segments[
@@ -149,7 +149,8 @@ const AddSegmentTwoD = () => {
                                                             />
                                                         ) : (
                                                             <input
-                                                                type="text"
+                                                                step="0.00001"
+                                                                type="number"
                                                                 min={0}
                                                                 value={
                                                                     model
@@ -187,14 +188,15 @@ const AddSegmentTwoD = () => {
                                             </td>
                                             <td className="border bg-white flex justify-between">
                                                 <div className="py-5 pr-4 h-full text-start w-[50%] border-r border-gray-100 pl-2">
-                                                    {model.segments[index]
-                                                        .measurements[index2]
-                                                        .saJudgement ===
-                                                    "ok" ? (
+                                                    {model.segments[
+                                                        index
+                                                    ].measurements[
+                                                        index2
+                                                    ].nominal.toLowerCase() ==
+                                                    "decimal" ? (
                                                         <input
                                                             step="0.00001"
-                                                            type="number"
-                                                            min={0}
+                                                            type="  "
                                                             value={
                                                                 model.segments[
                                                                     index

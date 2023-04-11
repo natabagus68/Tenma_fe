@@ -117,6 +117,14 @@ export function useDailyProgressCheckDetail() {
             `${config.pathPrefix}daily-progress-check/${id}/history/${history.id}/edit`
         );
     };
+    const toEditSegment2d = () => {
+        navigate(
+            `${config.pathPrefix}daily-progress-check/${id}/edit-segment-data-2d`,
+            {
+                state: "edit",
+            }
+        );
+    };
     useEffect(() => {
         fetchDetail();
         if (toogle === "3d") {
@@ -141,5 +149,6 @@ export function useDailyProgressCheckDetail() {
         onDownloadReport,
         onBack,
         onEditHistory,
+        toEditSegment2d,
     };
 }
