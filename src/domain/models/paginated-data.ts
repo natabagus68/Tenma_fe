@@ -46,4 +46,8 @@ export class PaginatedData<T> {
     duplicate(): PaginatedData<T> {
         return PaginatedData.create<T>(this.unmarshall());
     }
+    updateData(data: T[]): PaginatedData<T> {
+        this.data = data;
+        return this;
+    }
 }

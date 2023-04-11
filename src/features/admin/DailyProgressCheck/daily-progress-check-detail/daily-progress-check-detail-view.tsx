@@ -263,17 +263,11 @@ const DailyProgressCheckDetailView = () => {
                                         Measure sample (time)
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        {(dailyProgressCheckDetail
-                                            .dailyProgressCheck
-                                            .measureSampleTime &&
-                                            `${dailyProgressCheckDetail.dailyProgressCheck.measureSampleTime}` !==
-                                                "Invalid date" &&
-                                            moment(
-                                                dailyProgressCheckDetail
-                                                    .dailyProgressCheck
-                                                    .measureSampleTime
-                                            ).format("HH:mm")) ||
-                                            ""}
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck
+                                                .measureSampleTime
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
