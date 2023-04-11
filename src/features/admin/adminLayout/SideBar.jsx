@@ -49,7 +49,7 @@ export const SideBar = () => {
                 >
                     <NavItem
                         to={"master-data/measurement-std"}
-                        label={"Measurement Std."}
+                        label={"Measurement Std"}
                     />
                     <NavItem to={"master-data/part"} label={"Part"} />
                     <NavItem to={"master-data/customer"} label={"Customer"} />

@@ -12,34 +12,36 @@ const AddSegmentTwoD = () => {
                 />
             </div>
             {model.segments.map((item, index) => (
-                <div
-                    key={item.id}
-                    className="m-auto w-full border-2 border-gray-100  rounded-lg mb-4"
-                >
-                    <div className="w-full py-5 px-12 flex gap-5 items-center">
-                        <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                            Input Segment
-                        </h1>
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Input name"
-                                value={model.segments[index].name}
-                                name="name"
-                                onChange={(e) =>
-                                    model.onInputNameChange(e, index)
-                                }
-                                className="py-3 w-52 px-5 text-md text-gray-600 font-rubik border border-gray-200 rounded-md outline-none placeholder:text-center"
-                            />
+                <>
+                    <div
+                        key={item.id}
+                        className="m-auto w-full border-2 border-gray-100  rounded-lg mb-4"
+                    >
+                        <div className="w-full py-5 px-12 flex gap-5 items-center">
+                            <h1 className="font-[700] text-2xl text-gray-700 font-sans">
+                                Input Segment
+                            </h1>
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Input name"
+                                    value={model.segments[index].name}
+                                    name="name"
+                                    onChange={(e) =>
+                                        model.onInputNameChange(e, index)
+                                    }
+                                    className="py-3 w-52 px-5 text-md text-gray-600 font-rubik border border-gray-200 rounded-md outline-none placeholder:text-center"
+                                />
+                            </div>
                         </div>
                     </div>
 
                     <div>
-                        <table className="w-full mt-5">
+                        <table className="w-full mt-5 border-none">
                             <thead>
                                 <tr>
                                     <th
-                                        className="py-5 border bg-white text-center"
+                                        className="py-5 border  bg-white text-center"
                                         colSpan={4}
                                     >
                                         Standard
@@ -250,7 +252,7 @@ const AddSegmentTwoD = () => {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </>
             ))}
 
             <div className="w-full text-center mt-5">
