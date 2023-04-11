@@ -64,6 +64,23 @@ const PartFormView = () => {
                         </div>
                         <div className="flex flex-col gap-2 text-left my-2">
                             <label className="font-sans text-gray-700">
+                                Part Name
+                            </label>
+                            <input
+                                type="text"
+                                value={partForm.part?.partName}
+                                onChange={(e) =>
+                                    partForm.onFormChange(
+                                        "partName",
+                                        e.target.value
+                                    )
+                                }
+                                className="w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
+                                placeholder="Input part code"
+                            />
+                        </div>
+                        <div className="flex flex-col gap-2 text-left my-2">
+                            <label className="font-sans text-gray-700">
                                 Item Group CD
                             </label>
                             <input
@@ -127,7 +144,7 @@ const PartFormView = () => {
                                         : "text-gray-700"
                                 } w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white`}
                                 name="customer_model_id"
-                                value={partForm.part?.customerModelId || ''}
+                                value={partForm.part?.customerModelId || ""}
                                 onChange={(e) =>
                                     partForm.onFormChange(
                                         "customerModelId",
@@ -156,7 +173,7 @@ const PartFormView = () => {
                                         : "text-gray-700"
                                 } w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white`}
                                 name="customer_id"
-                                value={partForm.part?.customerId || ''}
+                                value={partForm.part?.customerId || ""}
                                 onChange={(e) =>
                                     partForm.onFormChange(
                                         "customerId",
@@ -185,7 +202,9 @@ const PartFormView = () => {
                                         : "text-gray-700"
                                 } w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white`}
                                 name="customer_model_group_id"
-                                value={partForm.part?.customerModelGroupId || ''}
+                                value={
+                                    partForm.part?.customerModelGroupId || ""
+                                }
                                 onChange={(e) =>
                                     partForm.onFormChange(
                                         "customerModelGroupId",
@@ -214,7 +233,7 @@ const PartFormView = () => {
                                         : "text-gray-700"
                                 } w-full border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-mono bg-white`}
                                 name="material_id"
-                                value={partForm.part?.material || ''}
+                                value={partForm.part?.material || ""}
                                 onChange={(e) =>
                                     partForm.onFormChange(
                                         "material",
@@ -238,7 +257,9 @@ const PartFormView = () => {
                                 Material Details
                             </label>
                             <div className="w-full bg-[#D0D3D9] rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono">
-                                {partForm.part?.materialDetails || "-"}
+                                {partForm.materials.find(
+                                    (item) => item.id == partForm.part?.material
+                                )?.materialDetail || "-"}
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 text-left my-2">
@@ -246,7 +267,9 @@ const PartFormView = () => {
                                 Material Color
                             </label>
                             <div className="w-full bg-[#D0D3D9] rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono">
-                                {partForm.part?.materialColor || "-"}
+                                {partForm.materials.find(
+                                    (item) => item.id == partForm.part?.material
+                                )?.color?.materialColor || "-"}
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 text-left my-2">
@@ -287,7 +310,7 @@ const PartFormView = () => {
                         </div>
                         <div className="flex gap-2 text-left mt-10">
                             <button
-                                onClick={e => partForm.onSubmit()}
+                                onClick={(e) => partForm.onSubmit()}
                                 type="button"
                                 role="button"
                                 className="px-12 py-3 rounded-lg bg-gray-600 text-white items-center flex justify-center hover:bg-gray-800"
@@ -298,7 +321,7 @@ const PartFormView = () => {
                                 type="button"
                                 role="button"
                                 className="px-12 py-3 rounded-lg border  text-black items-center flex justify-center hover:bg-gray-300"
-                                onClick={ (e) => partForm.onCancel() }
+                                onClick={(e) => partForm.onCancel()}
                             >
                                 cancel
                             </button>

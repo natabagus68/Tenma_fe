@@ -1,4 +1,7 @@
-import { MeasurementStd } from "@domain/models/measurement-std";
+import {
+    IMeasurementStd,
+    MeasurementStd,
+} from "@domain/models/measurement-std";
 import { MeasurementStdApiRepository } from "@data/api/measurement-std-api-repository";
 import { PaginatedData } from "@domain/models/paginated-data";
 import { config } from "@common/utils";
@@ -19,6 +22,7 @@ export default function useMeasurement() {
             data: [],
         })
     );
+    const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
 
     const toDetail = (id: string) => {
         navigate(
@@ -35,31 +39,47 @@ export default function useMeasurement() {
         navigate(`add-data`);
     };
 
-    // const onDelete = (id: string) => {
-    //     setMeasurementStd((prev) => {
-    //         const measurement = PaginatedData.create(prev.unmarshall());
-    //         measurement.data.forEach((item) => {
-    //             item.id == id ? item.check() : item.uncheck();
-    //         });
-    //         return measurement;
-    //     });
-    //     setShowModal(true);
-    // };
-
-    const onConfirm = async (e: React.MouseEvent) => {
-        e.preventDefault();
-        const { id } = measurementStd.data.find((item) => item.checked);
-        setMeasurementStd((prev) => {
-            const measurement = PaginatedData.create(prev.unmarshall());
-            measurement.data.filter((item) => !item.checked);
-            return measurement;
-        });
-
-        await measurementStdRepository.destroy(id);
-        setShowModal(false);
+    const onDelete = (id: string) => {
+        setMeasurementStd((prev) =>
+            PaginatedData.create<MeasurementStd>({
+                ...prev.unmarshall(),
+                data: prev.unmarshall().data.map((item) =>
+                    item.id == id
+                        ? MeasurementStd.create({
+                              id: item.id,
+                              part: item.part,
+                              segments: item.segments,
+                              checked: true,
+                          })
+                        : MeasurementStd.create({
+                              id: item.id,
+                              part: item.part,
+                              segments: item.segments,
+                              checked: false,
+                          })
+                ),
+            })
+        );
+        setDeleteConfirmShow(true);
     };
 
-    const onCancel = () => {};
+    const onCancel = () => {
+        navigate(-1)
+    };
+    const onConfirmDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        measurementStdRepository
+            .destroy(measurementStd.data.find((item) => item.checked).id)
+            .then(() => {
+                setDeleteConfirmShow(false);
+                measurementStdRepository
+                    .get({
+                        limit: measurementStd.limit,
+                        page: measurementStd.page,
+                    })
+                    .then((result) => setMeasurementStd(result));
+            });
+    };
     useEffect(() => {
         measurementStdRepository
             .get({
@@ -74,7 +94,10 @@ export default function useMeasurement() {
         toDetail,
         toEdit,
         toAddData,
-        onConfirm,
         onCancel,
+        onDelete,
+        deleteConfirmShow,
+        setDeleteConfirmShow,
+        onConfirmDelete,
     };
 }

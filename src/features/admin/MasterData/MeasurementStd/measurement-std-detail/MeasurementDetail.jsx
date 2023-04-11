@@ -12,7 +12,7 @@ const MeasurementDetail = () => {
     return (
         <>
             <div>
-                <Breadcrumbs items={["Measurement Std", "Detail"]} />
+                <Breadcrumbs items={ ["Measurement Std", "Detail"] } />
             </div>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
@@ -21,14 +21,14 @@ const MeasurementDetail = () => {
                     </h1>
                     <div className="flex gap-3 justify-end pr-5">
                         <button
-                            onClick={model.back}
+                            onClick={ model.back }
                             className="py-[12px] px-[20px] bg-white border border-gray-500 text-gray-100 align-middle rounded-md flex gap-2 items-center"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                strokeWidth={1.5}
+                                strokeWidth={ 1.5 }
                                 stroke="currentColor"
                                 className="w-6 h-6"
                             >
@@ -40,12 +40,12 @@ const MeasurementDetail = () => {
                             </svg>
                             Back
                         </button>
-                        <button className="py-[12px] px-[20px] bg-[#F79009] text-white align-middle rounded-md flex gap-3 items-center">
+                        <button onClick={ e => model.toEdit() } className="py-[12px] px-[20px] bg-[#F79009] text-white align-middle rounded-md flex gap-3 items-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                strokeWidth={1.5}
+                                strokeWidth={ 1.5 }
                                 stroke="currentColor"
                                 className="w-6 h-6"
                             >
@@ -67,7 +67,7 @@ const MeasurementDetail = () => {
                                     Part Name
                                 </Td>
                                 <Td className="py-4 text-center font-bold bg-gray-300 border-none">
-                                    {model.measurement.part.partName}
+                                    { model.measurement.part.partName }
                                 </Td>
                             </Tr>
                             <Tr>
@@ -75,7 +75,7 @@ const MeasurementDetail = () => {
                                     Part Code (Item CD)
                                 </Td>
                                 <Td className="py-4 text-center font-bold border-none">
-                                    {model.measurement.part.partCode}
+                                    { model.measurement.part.partCode }
                                 </Td>
                             </Tr>
                             <Tr>
@@ -83,7 +83,7 @@ const MeasurementDetail = () => {
                                     Model
                                 </Td>
                                 <Td className="py-4 text-center font-bold bg-gray-300 border-none">
-                                    {model.measurement.part.customerModel.name}
+                                    { model.measurement.part.customerModel }
                                 </Td>
                             </Tr>
                         </tbody>
@@ -91,8 +91,8 @@ const MeasurementDetail = () => {
                 </div>
             </div>
 
-            <CavasitySMeasurent model={model.measurement} />
-            {/* <Cavasity2Measurement /> */}
+            <CavasitySMeasurent model={ model.measurement } />
+            {/* <Cavasity2Measurement /> */ }
         </>
     );
 };

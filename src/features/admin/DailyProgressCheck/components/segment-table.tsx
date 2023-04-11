@@ -8,11 +8,6 @@ const SegmentTable = ({ segment }: { segment: Segment }) => {
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
                         {segment.name}
                     </h1>
-                    <div className="flex gap-4 w-1/2 items-center justify-end">
-                        <button className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md">
-                            + Delete
-                        </button>
-                    </div>
                 </div>
                 <div>
                     <table className="w-full">

@@ -3,11 +3,12 @@ import { CustomerModel } from "@domain/models/customer-model";
 import { CustomerApiRepository } from "@data/api/customer-api-repository";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { CustomerModelApiRepository } from "@data/api/customer-model-api-repository";
 
 export default function useCustomerModelForm() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const customerModelRepository = new CustomerApiRepository();
+    const customerModelRepository = new CustomerModelApiRepository();
     const [customerModel, setCustomerModel] = useState<CustomerModel>(
         CustomerModel.create({
             id: "",
