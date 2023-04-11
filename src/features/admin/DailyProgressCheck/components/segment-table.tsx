@@ -1,6 +1,15 @@
 import React from "react";
 import { Segment } from "@domain/models/segment";
-const SegmentTable = ({ segment }: { segment: Segment }) => {
+import { useDailyProgressCheckDetail } from "../daily-progress-check-detail/daily-progress-check-detail-model";
+const SegmentTable = ({
+    segment = Segment.create({
+        name: "",
+        type: "",
+        pacSegments: [],
+        checked: false,
+    }),
+    model = useDailyProgressCheckDetail(),
+}) => {
     return (
         <>
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 mt-10">
@@ -9,7 +18,12 @@ const SegmentTable = ({ segment }: { segment: Segment }) => {
                         {segment.name}
                     </h1>
                     <div className="flex gap-4 w-1/2 items-center justify-end">
-                        <button className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md">
+                        <button
+                            onClick={(e) => model.deleteSegment(e, segment.id)}
+                            type="button"
+                            role="button"
+                            className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md"
+                        >
                             + Delete
                         </button>
                     </div>

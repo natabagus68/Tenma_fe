@@ -16,8 +16,8 @@ export interface Data {
     part_weight_qis:     string;
     lot_production:      string;
     label_no:            number;
-    accept_sample_time:  Date;
-    measure_sample_time: Date;
+    accept_sample_time:  string;
+    measure_sample_time: string;
     actual_part_weight:  number;
     part_id:             string;
     machine_id:          string;

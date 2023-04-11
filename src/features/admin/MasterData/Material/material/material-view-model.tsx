@@ -51,6 +51,9 @@ export default function useMaterial() {
         });
     };
     const onPageChange = (page: number) => {};
+    const onCancel = (e:React.MouseEvent<HTMLButtonElement>) => {
+        navigate(-1)
+    }
     useEffect(() => {
         materialRepository
             .get({ limit: material.limit, page: material.page })
@@ -67,5 +70,6 @@ export default function useMaterial() {
         onPageChange,
         deleteConfirmShow,
         setDeleteConfirmShow,
+        onCancel
     };
 }

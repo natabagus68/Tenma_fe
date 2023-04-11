@@ -9,12 +9,6 @@ export interface ISegment {
     checked:boolean;
 }
 export class Segment extends Entity<ISegment> {
-    static Segment(arg0: { character: string; nominal: string; nominalValue: string; upper: number; lower: number; saUpper: number; saLower: number; checked: false; }): IMeasurement {
-        throw new Error("Method not implemented.");
-    }
-    static Segment(arg0: { character: string; nominal: string; nominalValue: string; upper: number; lower: number; saUpper: number; saLower: number; checked: false; }): IMeasurement {
-        throw new Error("Method not implemented.");
-    }
     static create(props: ISegment): Segment {
         return new Segment(props);
     }

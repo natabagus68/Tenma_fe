@@ -7,12 +7,12 @@ const MaterialFormView = () => {
     return (
         <>
             <div>
-                <Breadcrumbs items={ ["Material", "Add Data"] } />
+                <Breadcrumbs items={ ["Material", materialForm.id ? "Edit Data" : "Add Data"] } />
             </div>
             <div className="m-auto w-full border-2 border-gray-100  rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Add Data
+                        { materialForm.id ? "Edit Data" : "Add Data" }
                     </h1>
                 </div>
                 <div className="border-t-2 border-gray-100 pt-10 px-5 pb-80">
@@ -72,6 +72,8 @@ const MaterialFormView = () => {
                             </button>
                             <button
                                 className="px-12 py-3 rounded-lg border  text-black items-center flex justify-center hover:bg-gray-300"
+                                type="button"
+                                role="button"
                                 onClick={ materialForm.onCancel }
                             >
                                 Cancel
