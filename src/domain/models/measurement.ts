@@ -91,13 +91,29 @@ export class Measurement extends Entity<IMeasurement> {
         return this._props.result;
     }
     get judgement(): string {
-        return this._props.judgement;
+        if (
+            parseInt(this._props.result) < this._props.upper &&
+            parseInt(this._props.result) > this._props.lower &&
+            this._props.nominal.toLowerCase() === "decimal"
+        ) {
+            return "ng";
+        } else {
+            return "ok";
+        }
     }
     get saResult(): string {
         return this._props.saResult;
     }
     get saJudgement(): string {
-        return this._props.saJudgement;
+        if (
+            parseInt(this._props.saResult) < this._props.saUpper &&
+            parseInt(this._props.saResult) > this._props.saLower &&
+            this._props.nominal.toLowerCase() === "decimal"
+        ) {
+            return "ng";
+        } else {
+            return "ok";
+        }
     }
     get checked(): boolean {
         return !!this._props.checked;

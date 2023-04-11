@@ -280,4 +280,45 @@ export class DailyProgressCheckApiRepository
             })
         );
     }
+
+    async get2dSegments(id: string): Promise<Segment[]> {
+        const { data } = await api.get(`progress-check/${id}/2d`);
+        return data.data.map((item) =>
+            Segment.create({
+                id: item.id,
+                name: item.name,
+                type: item.cavity_type,
+                pacSegments: item.std_measurement?.special_accept_segments.map(
+                    (pacSegment) =>
+                        Measurement.create({
+                            id: pacSegment.id,
+                            character: pacSegment.character,
+                            nominal: pacSegment.nominal_type,
+                            nominalValue: pacSegment.nominal_value,
+                            upper: pacSegment.standard_upper,
+                            lower: pacSegment.standard_lower,
+                            saUpper: pacSegment.special_accept_upper,
+                            saLower: pacSegment.special_accept_lower,
+                            checked: false,
+                            result: pacSegment.cavity_results.actual_result,
+                            judgement:
+                                pacSegment.cavity_results
+                                    .actual_result_judgement,
+                            saResult: pacSegment.cavity_results.sa_result,
+                            saJudgement:
+                                pacSegment.cavity_results.sa_result_judgement,
+                            tool: {
+                                id: pacSegment.tool?.id,
+                                idTool: pacSegment.tool?.id_tool,
+                                toolCode: pacSegment.tool?.code,
+                                name: pacSegment.tool?.name,
+                                address: pacSegment.tool?.address,
+                                checked: false,
+                            },
+                        })
+                ),
+                checked: false,
+            })
+        );
+    }
 }

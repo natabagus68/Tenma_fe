@@ -56,6 +56,11 @@ export function useDailyProgressCheckDetail() {
             .get3dSegments(id)
             .then((res) => setSegments(res));
     };
+    const fetchSegment2d = () => {
+        dailyProgressCheckRepo
+            .get2dSegments(id)
+            .then((result) => setSegments(result));
+    };
     const fetchHistory = () => {
         historyRepo.get(id).then((res) => setHistories(res));
     };
@@ -144,7 +149,11 @@ export function useDailyProgressCheckDetail() {
     };
     useEffect(() => {
         fetchDetail();
-        fetchSegment();
+        if (toogle === "3d") {
+            fetchSegment();
+        } else {
+            fetchSegment2d();
+        }
         fetchHistory();
     }, [id, toogle]);
     return {

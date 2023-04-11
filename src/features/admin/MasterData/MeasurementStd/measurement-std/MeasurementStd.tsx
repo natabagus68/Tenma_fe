@@ -32,16 +32,16 @@ const MeasurementStd = () => {
                     <table className="w-full">
                         <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Part Code (Item CD)
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Part Name
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Model
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -53,16 +53,16 @@ const MeasurementStd = () => {
                                         className="border-b-2 border-gray-100"
                                         key={ind}
                                     >
-                                        <td className="py-6 text-center pl-3 text-gray-600 ">
+                                        <td className="py-6 text-start pl-10 text-gray-600 ">
                                             {item.part.partCode}
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600 ">
+                                        <td className="py-6 text-start pl-10 text-gray-600 ">
                                             {item.part.partName}
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600 ">
+                                        <td className="py-6 text-start pl-10 text-gray-600 ">
                                             {item.part.customerModel}
                                         </td>
-                                        <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
+                                        <td className="py-6  pl-10 text-gray-600 flex gap-3 justify-start">
                                             <button
                                                 className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
                                                 onClick={(e) =>
@@ -104,10 +104,14 @@ const MeasurementStd = () => {
                     </table>
                 </div>
                 <div className="w-full flex justify-end pt-5 pr-5">
-                    <Pagination row={ 1 } limit={ 10 } page={ undefined } />
+                    <Pagination row={1} limit={10} page={undefined} />
                 </div>
             </div>
-            <ModalDelete showModal={ measurementStd.deleteConfirmShow } setShowModal={ measurementStd.setDeleteConfirmShow } onConfirm={measurementStd.onConfirmDelete} />
+            <ModalDelete
+                showModal={measurementStd.deleteConfirmShow}
+                setShowModal={measurementStd.setDeleteConfirmShow}
+                onConfirm={measurementStd.onConfirmDelete}
+            />
         </>
     );
 };

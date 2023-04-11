@@ -62,8 +62,10 @@ const DailyProgessCheckView = () => {
                                 className="w-[100px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
                             >
                                 <option value="">Semua</option>
-                                {dailyProgressCheck.pic.map(item => (
-                                    <option value={item.name} key={item.id}>{item.name}</option>
+                                {dailyProgressCheck.pic.map((item) => (
+                                    <option value={item.name} key={item.id}>
+                                        {item.name}
+                                    </option>
                                 ))}
                             </select>
                         </div>
@@ -120,32 +122,32 @@ const DailyProgessCheckView = () => {
                     <table className="w-full">
                         <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Update at
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Part Code
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Model
                                 </th>
 
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Shift
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     3D
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     2D
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     PIC
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Judgement
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -157,36 +159,36 @@ const DailyProgessCheckView = () => {
                                         key={item.id}
                                         className="border-b-2 border-gray-100"
                                     >
-                                        <td className="py-6 text-center pl-3 text-gray-600 items-center">
+                                        <td className="py-6 text-start pl-10 text-gray-600 items-center">
                                             {moment(item.updatedAt).format(
                                                 "HH:mm"
                                             )}
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             {item.partCode}
                                         </td>
 
-                                        <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             {item.model}
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             {item.shift}
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             <DimantionIcon value={item.has3d} />
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             <DimantionIcon value={item.has2d} />
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             {item.pic.name}
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             <JudgemnetIcon
                                                 value={item.judgement2d}
                                             />
                                         </td>
-                                        <td className="py-6  pl-3 text-gray-600  items-center flex gap-3 justify-center">
+                                        <td className="py-6  pl-10 text-gray-600  items-center flex gap-3 justify-start">
                                             <button
                                                 onClick={(e) =>
                                                     dailyProgressCheck.onDetail(

@@ -322,7 +322,13 @@ const DailyProgressCheckDetailView = () => {
                     </div>
                 </div>
             </div>
-            {dailyProgressCheckDetail.toogle === "3d" && (
+            {dailyProgressCheckDetail.toogle === "3d" ? (
+                <>
+                    {dailyProgressCheckDetail.segments.map((item) => (
+                        <SegmentTable key={item.id} segment={item} />
+                    ))}
+                </>
+            ) : (
                 <>
                     {dailyProgressCheckDetail.segments.map((item) => (
                         <SegmentTable

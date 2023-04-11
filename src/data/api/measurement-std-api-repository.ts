@@ -91,7 +91,7 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                 return Measurement.create({
                     id: el.id,
                     character: el.character,
-                    nominal: el.nominal,
+                    nominal: el.nominal_type,
                     nominalValue: el.nominal_value,
                     upper: el.standard_upper,
                     lower: el.standard_lower,
@@ -174,8 +174,9 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
             checked: false,
         });
     }
-    async update(params: MeasurementStd): Promise<MeasurementStd> {
-        const { data } = await api.patch(`std-measurement/${params.id}`, {
+    async update(id: string, params: MeasurementStd): Promise<MeasurementStd> {
+        console.log(params, "....update params");
+        const { data } = await api.put(`std-measurement/${id}`, {
             part_code: params.part.id,
             segments: params.segments.map((item) => {
                 return {

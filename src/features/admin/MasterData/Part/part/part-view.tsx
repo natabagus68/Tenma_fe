@@ -41,19 +41,19 @@ const Part = () => {
                         <table className="w-full">
                             <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                                 <tr>
-                                    <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                    <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                         Cust. Item CD
                                     </th>
-                                    <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                    <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                         Part Code
                                     </th>
-                                    <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                    <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                         Part Name
                                     </th>
-                                    <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                    <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                         OLD Part Number
                                     </th>
-                                    <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                    <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                         Action
                                     </th>
                                 </tr>
@@ -65,19 +65,19 @@ const Part = () => {
                                             className="border-b-2 border-gray-100"
                                             key={i}
                                         >
-                                            <td className="py-6 text-center pl-3 text-gray-600 ">
+                                            <td className="py-6 text-start pl-10 text-gray-600 ">
                                                 {item.custItemId}
                                             </td>
-                                            <td className="py-6 text-center pl-3 text-gray-600 ">
+                                            <td className="py-6 text-start pl-10 text-gray-600 ">
                                                 {item.partCode}
                                             </td>
-                                            <td className="py-6 text-center pl-3 text-gray-600 ">
+                                            <td className="py-6 text-start pl-10 text-gray-600 ">
                                                 {item.partName}
                                             </td>
-                                            <td className="py-6 text-center pl-3 text-gray-600 ">
+                                            <td className="py-6 text-start pl-10 text-gray-600 ">
                                                 {item.oldPartNumber}
                                             </td>
-                                            <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
+                                            <td className="py-6  pl-10 text-gray-600 flex gap-3 justify-start">
                                                 <button
                                                     className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
                                                     onClick={(e) =>
