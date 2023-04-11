@@ -166,8 +166,9 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
             checked: false,
         });
     }
-    async update(params: MeasurementStd): Promise<MeasurementStd> {
-        const { data } = await api.patch(`std-measurement/${params.id}`, {
+    async update(id: string, params: MeasurementStd): Promise<MeasurementStd> {
+        console.log(params, "....update params");
+        const { data } = await api.put(`std-measurement/${id}`, {
             part_code: params.part.id,
             segments: params.segments.map((item) => {
                 return {
@@ -243,16 +244,16 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
                     lower: item.standard_lower,
                     saUpper: item.special_accept_upper,
                     saLower: item.special_accept_lower,
-                    result: '',
-                    judgement: '',
-                    saResult: '',
-                    saJudgement: '',
-                    tool : {
-                        idTool : item.tool?.id_tool,
-                        toolCode : item.tool?.code,
-                        name : item.tool?.name,
-                        address : item.tool?.address,
-                        checked : !!item.tool?.checked,
+                    result: "",
+                    judgement: "",
+                    saResult: "",
+                    saJudgement: "",
+                    tool: {
+                        idTool: item.tool?.id_tool,
+                        toolCode: item.tool?.code,
+                        name: item.tool?.name,
+                        address: item.tool?.address,
+                        checked: !!item.tool?.checked,
                     },
                     checked: false,
                 })

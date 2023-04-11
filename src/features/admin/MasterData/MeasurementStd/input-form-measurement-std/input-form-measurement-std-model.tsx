@@ -15,6 +15,7 @@ export function useInputMeasurementStd() {
     const toolRepo: ToolRepository = new ToolApiRepository();
     const measurementRepository = new MeasurementStdApiRepository();
     const { id } = useParams();
+    console.log(id, "id");
     const navigate = useNavigate();
     const [parts, setParts] = useState<Part[]>([]);
     const [tools, setTools] = useState<Tool[]>([]);
@@ -31,6 +32,10 @@ export function useInputMeasurementStd() {
                     saUpper: 0,
                     saLower: 0,
                     checked: false,
+                    result: "",
+                    judgement: "",
+                    saResult: "",
+                    saJudgement: "",
                 }),
             ],
             checked: false,
@@ -54,6 +59,10 @@ export function useInputMeasurementStd() {
             saUpper: 0,
             saLower: 0,
             checked: false,
+            result: "",
+            judgement: "",
+            saResult: "",
+            saJudgement: "",
         })
     );
 
@@ -111,13 +120,13 @@ export function useInputMeasurementStd() {
     const onSave = async (e: React.MouseEvent) => {
         e.preventDefault();
         id
-            ? measurementRepository.update(measurementStd)
+            ? measurementRepository.update(id, measurementStd)
             : measurementRepository.store(measurementStd);
 
         navigate("../");
     };
     const onCancel = () => {
-        navigate('../')
+        navigate("../");
     };
     const onShowNominalModal = (
         e: React.MouseEvent<HTMLButtonElement>,

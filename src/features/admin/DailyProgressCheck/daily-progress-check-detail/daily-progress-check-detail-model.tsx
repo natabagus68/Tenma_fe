@@ -13,8 +13,7 @@ export function useDailyProgressCheckDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
     const historyRepo: HistoryRepository = new HistoryApiRepository();
-    const dailyProgressCheckRepo: DailyProgressCheckRepository =
-        new DailyProgressCheckApiRepository();
+    const dailyProgressCheckRepo = new DailyProgressCheckApiRepository();
     const [dailyProgressCheck, setDailyProgressCheck] =
         useState<DailyProgressCheck>(
             DailyProgressCheck.create({
@@ -50,6 +49,11 @@ export function useDailyProgressCheckDetail() {
         dailyProgressCheckRepo
             .get3dSegments(id)
             .then((res) => setSegments(res));
+    };
+    const fetchSegment2d = () => {
+        dailyProgressCheckRepo
+            .get2dSegments(id)
+            .then((result) => setSegments(result));
     };
     const fetchHistory = () => {
         historyRepo.get(id).then((res) => setHistories(res));
@@ -105,14 +109,23 @@ export function useDailyProgressCheckDetail() {
                 setConfirmDeleteHistoryShow(false);
             });
     };
-    const onEditHistory = (e:React.MouseEvent<HTMLButtonElement>, history:History) => {
-        navigate(`${config.pathPrefix}daily-progress-check/${id}/history/${history.id}/edit`)
-    }
+    const onEditHistory = (
+        e: React.MouseEvent<HTMLButtonElement>,
+        history: History
+    ) => {
+        navigate(
+            `${config.pathPrefix}daily-progress-check/${id}/history/${history.id}/edit`
+        );
+    };
     useEffect(() => {
         fetchDetail();
-        fetchSegment();
+        if (toogle === "3d") {
+            fetchSegment();
+        } else {
+            fetchSegment2d();
+        }
         fetchHistory();
-    }, [id]);
+    }, [id, toogle]);
     return {
         dailyProgressCheck,
         segments,
