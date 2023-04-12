@@ -37,7 +37,7 @@ import AddSegmentData from "../features/admin/DailyProgressCheck/daily-progress-
 import AddSegmentTwoD from "@features/admin/DailyProgressCheck/add-segment-2d-daily-progress-check/add-segment-two-d";
 import AddHistory from "../features/admin/DailyProgressCheck/add-segment-3d-daily-progress-check/AddSegmentData";
 import ReportView from "../features/admin/Report/report/report-view";
-import ReportDetail from "../features/admin/Report/ReportDetail";
+import ReportDetailView from "../features/admin/Report/report-detail/report-detail-view";
 import Detail from "../features/admin/Report/Detail";
 import MeasurementDetail from "../features/admin/MasterData/MeasurementStd/measurement-std-detail/MeasurementDetail";
 import InputFormMeasurementView from "../features/admin/MasterData/MeasurementStd/input-form-measurement-std/input-form-measurement-view";
@@ -308,13 +308,13 @@ export default createBrowserRouter([
                         element: <ReportView />,
                     },
                     {
+                        path: ":id/detail",
+                        element: <ReportDetailView />,
+                    },
+                    {
                         path: "part-details",
                         element: <Root />,
                         children: [
-                            {
-                                path: "",
-                                element: <ReportDetail />,
-                            },
 
                             {
                                 path: "report-detail",

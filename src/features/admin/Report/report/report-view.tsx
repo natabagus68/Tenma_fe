@@ -2,8 +2,12 @@ import React from "react";
 import { Breadcrumbs } from "../../../../common/components";
 import { EyeIcon } from "../../../../common/components/icons";
 import Pagination from "../../../../common/components/pagination/Pagination";
+import { useReport } from "./report-model";
+import moment from "moment";
+import { ExportModal } from "../partials/export-modal";
 
 const ReportView = () => {
+    const model = useReport();
     return (
         <>
             <div>
@@ -21,20 +25,30 @@ const ReportView = () => {
                             <label className="text-gray-600">PIC</label>
                             <select
                                 name="pic"
-                                id=""
+                                value={model.reportParam.pic}
+                                onChange={model.onReportParamChange}
                                 className="w-[100px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
                             >
-                                <option value="1">1</option>
+                                <option value="">Semua</option>
+                                {model.pic.map((item) => (
+                                    <option value={item.name} key={item.id}>
+                                        {item.name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="flex gap-3 items-center">
                             <label className="text-gray-600">Judgement</label>
                             <select
-                                name="pic"
-                                id=""
+                                name="judgement"
+                                value={model.reportParam.judgement}
+                                onChange={model.onReportParamChange}
                                 className="w-[150px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
                             >
-                                <option>semua</option>
+                                <option>Semua</option>
+                                <option value="OK">OK</option>
+                                <option value="NG">NG</option>
+                                <option value="Waiting">Waiting</option>
                             </select>
                         </div>
                     </div>
@@ -57,7 +71,9 @@ const ReportView = () => {
 
                         <input
                             type="text"
-                            name="search"
+                            name="q"
+                            value={model.reportParam.q}
+                            onChange={model.onReportParamChange}
                             placeholder="Search Part Code"
                             className="outline-none pl-9 py-4  border border-gray-100 rounded-xl w-[280px] text-rubik  text-sm placeholder:text-gray-100 text-gray-600"
                         />
@@ -71,7 +87,7 @@ const ReportView = () => {
                                     ID CD
                                 </th>
                                 <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
-                                    part Name
+                                    Part Name
                                 </th>
                                 <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
                                     Last Report
@@ -86,59 +102,70 @@ const ReportView = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="border-b-2 border-gray-100">
-                                <td className="py-6 text-center pl-3 text-gray-600 items-center">
-                                    4212421
-                                </td>
-                                <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                    NSHk32324
-                                </td>
+                            {model.report.data.map((item) => (
+                                <tr
+                                    key={item.id}
+                                    className="border-b-2 border-gray-100"
+                                >
+                                    <td className="py-6 text-center pl-3 text-gray-600 items-center">
+                                        {item.idCode}
+                                    </td>
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        {item.partName}
+                                    </td>
 
-                                <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                    345678765
-                                </td>
-                                <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                    345678765
-                                </td>
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        {moment(item.lastReport).format(
+                                            "DD/MM/YYYY"
+                                        )}
+                                    </td>
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        {item.pic}
+                                    </td>
 
-                                <td className="py-6  pl-3 text-gray-600   items-center flex gap-8 justify-center">
-                                    <button
-                                        // onClick={(e) => {
-                                        //     e.preventDefault();
-                                        //     // navigate("detail");
-                                        // }}
-                                        className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
-                                    >
-                                        <EyeIcon />
-                                        Detail
-                                    </button>
-
-                                    {/* download button */}
-                                    <button>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="w-6 h-6"
+                                    <td className="py-6  pl-3 text-gray-600   items-center flex gap-8 justify-center">
+                                        <button
+                                            onClick={(e) =>
+                                                model.onDetail(e, item.id)
+                                            }
+                                            className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                                            />
-                                        </svg>
-                                    </button>
-                                </td>
-                            </tr>
+                                            <EyeIcon />
+                                            Detail
+                                        </button>
+
+                                        {/* download button */}
+                                        <button
+                                            onClick={(e) =>
+                                                model.onDownload(e, item.id)
+                                            }
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="w-6 h-6"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={1} limit={10} page={undefined} />
+                        <Pagination row={10} limit={10} page={undefined} />
                     </div>
                 </div>
             </div>
+            <ExportModal model={model} />
         </>
     );
 };

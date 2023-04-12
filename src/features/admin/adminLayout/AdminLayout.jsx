@@ -65,7 +65,7 @@ export const AdminLayout = () => {
                         </div>
                     </div>
                 </div>
-                <div className="relative z-0">
+                <div className="relative">
                     <SideBar />
                     <div
                         className={`${

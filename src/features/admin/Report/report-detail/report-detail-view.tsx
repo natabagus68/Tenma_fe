@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../common/components";
-import { EyeIcon } from "../../../common/components/icons";
-import Pagination from "../../../common/components/pagination/Pagination";
-import JudgemnetIcon from "../DailyProgressCheck/icon/JudgemnetIcon";
+import { Breadcrumbs } from "../../../../common/components";
+import { EyeIcon } from "../../../../common/components/icons";
+import Pagination from "../../../../common/components/pagination/Pagination";
+import JudgemnetIcon from "../../DailyProgressCheck/icon/JudgemnetIcon";
 
-const ReportDetail = () => {
+const ReportDetailView = () => {
     const navigate = useNavigate();
     return (
         <>
@@ -165,7 +165,7 @@ const ReportDetail = () => {
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={1} limit={10} />
+                        <Pagination row={1} limit={10} page={undefined} />
                     </div>
                 </div>
             </div>
@@ -173,4 +173,4 @@ const ReportDetail = () => {
     );
 };
 
-export default ReportDetail;
+export default ReportDetailView;
