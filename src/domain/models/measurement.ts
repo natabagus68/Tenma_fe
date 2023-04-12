@@ -108,7 +108,7 @@ export class Measurement extends Entity<IMeasurement> {
                     parseFloat(this._props.nominalValue) -
                     this._props.upper;
 
-                return count.toString();
+                return (count || '').toString();
             }
         } else {
             if (
@@ -122,7 +122,7 @@ export class Measurement extends Entity<IMeasurement> {
                     parseFloat(this._props.nominalValue) -
                     +this._props.lower;
 
-                return count.toString();
+                return (count || '').toString();
             }
         }
     }
@@ -143,8 +143,8 @@ export class Measurement extends Entity<IMeasurement> {
                 } else {
                     return (
                         parseInt(this._props.saResult) -
-                        parseInt(this._props.nominalValue) +
-                        +this._props.saUpper
+                            parseInt(this._props.nominalValue) +
+                            +this._props.saUpper || ""
                     ).toString();
                 }
             } else {
@@ -156,8 +156,8 @@ export class Measurement extends Entity<IMeasurement> {
                 } else {
                     return (
                         parseInt(this._props.saResult) -
-                        parseInt(this._props.nominalValue) -
-                        +this._props.saLower
+                            parseInt(this._props.nominalValue) -
+                            +this._props.saLower || ""
                     ).toString();
                 }
             }

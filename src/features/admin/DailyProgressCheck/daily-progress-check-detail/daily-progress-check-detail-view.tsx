@@ -337,13 +337,18 @@ const DailyProgressCheckDetailView = () => {
                     </div>
                 </div>
             </div>
-            {dailyProgressCheckDetail.toogle === "3d" ? (
+            {dailyProgressCheckDetail.toogle === "3d" && (
                 <>
                     {dailyProgressCheckDetail.segments.map((item) => (
-                        <SegmentTable key={item.id} segment={item} />
+                        <SegmentTable
+                            key={item.id}
+                            segment={item}
+                            model={dailyProgressCheckDetail}
+                        />
                     ))}
                 </>
-            ) : (
+            )}
+            {dailyProgressCheckDetail.toogle === "2d" && (
                 <>
                     {dailyProgressCheckDetail.segments.map((item) => (
                         <SegmentTable
@@ -355,13 +360,13 @@ const DailyProgressCheckDetailView = () => {
                 </>
             )}
             <HistoryFormView model={dailyProgressCheckDetail} />
-            {/* <ModalDelete
+            <ModalDelete
                 showModal={dailyProgressCheckDetail.deleteSegmentConfirmShow}
                 setShowModal={
                     dailyProgressCheckDetail.setDeleteSegmentConfirmShow
                 }
                 onConfirm={dailyProgressCheckDetail.confirmDeleteSegment}
-            /> */}
+            />
         </>
     );
 };
