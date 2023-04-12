@@ -1,20 +1,26 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../../common/components";
+import { useNavigate } from "react-router-dom";
+import { Breadcrumbs } from "../../../../../common/components";
+import useFormAccount from "./account-form-view-model";
 
-const EditAccount = () => {
-    const [showHidePW, setShowHidePW] = useState(false);
-    const navigate = useNavigate();
-    const { state } = useLocation();
+const AddAccount = () => {
+    const model = useFormAccount();
+    console.log(model.access);
     return (
         <>
             <div>
-                <Breadcrumbs items={["User", "Account", "Edit Data"]} />
+                <Breadcrumbs
+                    items={[
+                        "User",
+                        "Account",
+                        model.id ? "Edit data" : "Add Data",
+                    ]}
+                />
             </div>
             <div className="m-auto w-full border-2 border-gray-100  rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Edit Data
+                        Add Data
                     </h1>
                 </div>
                 <div className="border-t-2 border-gray-100 pt-10 px-5 pb-80">
@@ -23,6 +29,9 @@ const EditAccount = () => {
                             <label className="text-gray-600">Nama</label>
                             <input
                                 type="text"
+                                value={model.account.name}
+                                onChange={(e) => model.onChangeInput(e)}
+                                name="name"
                                 className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                             />
                         </div>
@@ -30,23 +39,28 @@ const EditAccount = () => {
                             <label className="text-gray-600">Email</label>
                             <input
                                 type="Email"
+                                value={model.account.email}
+                                name="email"
+                                onChange={(e) => model.onChangeInput(e)}
                                 className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                             />
                         </div>
                         <div className="flex flex-col gap-3 mt-3 relative">
                             <label className="text-gray-600">Password</label>
                             <input
-                                type={showHidePW ? "text" : "password"}
+                                value={model.account.password}
+                                onChange={(e) => model.onChangeInput(e)}
+                                name="password"
+                                type={model.passwordShow ? "text" : "password"}
                                 className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
                             />
                             <div
                                 onClick={(e) => {
-                                    e.preventDefault();
-                                    setShowHidePW(!showHidePW);
+                                    model.onPasswordShow(e);
                                 }}
                                 className="inline  absolute top-11 left-[76.5%] text-gray-600"
                             >
-                                {showHidePW ? (
+                                {model.passwordShow ? (
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -86,20 +100,43 @@ const EditAccount = () => {
                         </div>
                         <div className="flex flex-col gap-3 mt-3">
                             <label className="text-gray-600">Role</label>
-                            <select className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono">
-                                <option value="1">data</option>
+                            <select
+                                name="role_id"
+                                value={model.account.role_id}
+                                onChange={(e) => model.onChangeInput(e)}
+                                className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
+                            >
+                                {model.access.data.map((item, index) =>
+                                    item.id == model.account.role_id ? (
+                                        <option
+                                            value={item.id}
+                                            key={index}
+                                            selected
+                                        >
+                                            {item.name}
+                                        </option>
+                                    ) : (
+                                        <option
+                                            value={item.id}
+                                            key={index}
+                                            selected
+                                        >
+                                            {item.name}
+                                        </option>
+                                    )
+                                )}
                             </select>
                         </div>
                         <div className="flex gap-4 mt-6">
-                            <button className="px-12 py-3 rounded-lg bg-gray-600 text-white items-center flex justify-center hover:bg-gray-800">
+                            <button
+                                onClick={(e) => model.onSave(e)}
+                                className="px-12 py-3 rounded-lg bg-gray-600 text-white items-center flex justify-center hover:bg-gray-800"
+                            >
                                 Save
                             </button>
                             <button
                                 className="px-12 py-3 rounded-lg border  text-black items-center flex justify-center hover:bg-gray-300"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("../");
-                                }}
+                                onClick={model.onCancel}
                             >
                                 Cancel
                             </button>
@@ -111,4 +148,4 @@ const EditAccount = () => {
     );
 };
 
-export default EditAccount;
+export default AddAccount;

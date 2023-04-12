@@ -7,7 +7,7 @@ export interface IUserProps {
     email: string;
     password: string;
     role_id: string | null;
-    is_active: boolean;
+    is_verified: boolean;
     photo: string | null;
     email_verified_at: Date | null;
     fcm_token: string | null;
@@ -30,7 +30,7 @@ export class User extends Entity<IUserProps> implements IUser {
             email: this.email,
             password: this.password,
             role_id: this.role_id,
-            is_active: this.is_active,
+            is_verified: this.is_verified,
             photo: this.photo,
             email_verified_at: this.email_verified_at,
             fcm_token: this.fcm_token,
@@ -52,6 +52,9 @@ export class User extends Entity<IUserProps> implements IUser {
         this._props.checked = false;
         return this;
     }
+    updateUser(props: IUserProps) {
+        this._props = props;
+    }
     get id(): string {
         return this._props.id;
     }
@@ -67,9 +70,13 @@ export class User extends Entity<IUserProps> implements IUser {
     get role_id(): string | null {
         return this._props.role_id;
     }
-    get is_active(): boolean {
-        return this._props.is_active;
+    get is_verified(): boolean {
+        return this._props.is_verified;
     }
+    set is_verified(value) {
+        this._props.is_verified = value;
+    }
+
     get photo(): string | null {
         return this._props.photo;
     }

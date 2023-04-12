@@ -98,8 +98,9 @@ const Account = () => {
                                                 {/* Switch */}
                                                 <div
                                                     className={`bg-black md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out ${
-                                                        item.is_active &&
-                                                        `transform translate-x-5`
+                                                        item.is_verified
+                                                            ? `transform translate-x-5`
+                                                            : ""
                                                     }`}
                                                 ></div>
                                             </div>
