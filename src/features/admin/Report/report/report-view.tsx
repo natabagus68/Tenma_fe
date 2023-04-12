@@ -1,13 +1,9 @@
 import React from "react";
-import { Breadcrumbs } from "../../../common/components";
-import {
-    EyeIcon,
-    PenAltIcon,
-    TrashIcon,
-} from "../../../common/components/icons";
-import Pagination from "../../../common/components/pagination/Pagination";
+import { Breadcrumbs } from "../../../../common/components";
+import { EyeIcon } from "../../../../common/components/icons";
+import Pagination from "../../../../common/components/pagination/Pagination";
 
-const Report = () => {
+const ReportView = () => {
     return (
         <>
             <div>
@@ -107,10 +103,10 @@ const Report = () => {
 
                                 <td className="py-6  pl-3 text-gray-600   items-center flex gap-8 justify-center">
                                     <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            navigate("detail");
-                                        }}
+                                        // onClick={(e) => {
+                                        //     e.preventDefault();
+                                        //     // navigate("detail");
+                                        // }}
                                         className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
                                     >
                                         <EyeIcon />
@@ -139,7 +135,7 @@ const Report = () => {
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={1} limit={10} />
+                        <Pagination row={1} limit={10} page={undefined} />
                     </div>
                 </div>
             </div>
@@ -147,4 +143,4 @@ const Report = () => {
     );
 };
 
-export default Report;
+export default ReportView;
