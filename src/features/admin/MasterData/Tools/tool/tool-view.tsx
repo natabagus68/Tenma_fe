@@ -28,19 +28,19 @@ const ToolView = () => {
                     <table className="w-full">
                         <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     ID Tools
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Tool Code
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Name
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Address
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -51,20 +51,20 @@ const ToolView = () => {
                                     key={item.id}
                                     className="border-b-2 border-gray-100"
                                 >
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.idTool}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.toolCode}
                                     </td>
 
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.name}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.address}
                                     </td>
-                                    <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
+                                    <td className="py-6  pl-10 text-gray-600 flex gap-3 justify-start">
                                         <button
                                             onClick={() => tool.onEdit(item.id)}
                                             className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-md text-white flex gap-2"

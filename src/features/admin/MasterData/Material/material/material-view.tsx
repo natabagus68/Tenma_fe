@@ -27,19 +27,19 @@ const MaterialView = () => {
                     <table className="w-full">
                         <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     ID Material
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Material
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Material Details
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Material Color
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -50,19 +50,19 @@ const MaterialView = () => {
                                     key={item.id}
                                     className="border-b-2 border-gray-100"
                                 >
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.idMaterial}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.name}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.materialDetail}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.color?.materialColor}
                                     </td>
-                                    <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
+                                    <td className="py-6  pl-10 text-gray-600 flex gap-3 justify-start">
                                         <button
                                             onClick={(e) =>
                                                 material.onEdit(item.id)

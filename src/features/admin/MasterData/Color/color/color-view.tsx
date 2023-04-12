@@ -15,7 +15,7 @@ const Color = () => {
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 ">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Tools.
+                        Color
                     </h1>
                     <button
                         className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md"
@@ -28,14 +28,14 @@ const Color = () => {
                     <table className="w-full">
                         <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     ID Color
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Material Color
                                 </th>
 
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -46,14 +46,14 @@ const Color = () => {
                                     key={item.id}
                                     className="border-b-2 border-gray-100"
                                 >
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.idColor}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.materialColor}
                                     </td>
 
-                                    <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
+                                    <td className="py-6  pl-10 text-gray-600 flex gap-3 justify-start">
                                         <button
                                             onClick={() =>
                                                 color.onEdit(item.id)
