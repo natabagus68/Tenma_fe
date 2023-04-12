@@ -293,6 +293,10 @@ export default createBrowserRouter([
                         path: ":id/add-segment-data-2d",
                         element: <AddSegmentTwoD />,
                     },
+                    {
+                        path: ":id/edit-segment-data-2d",
+                        element: <AddSegmentTwoD />,
+                    },
                 ],
             },
             {

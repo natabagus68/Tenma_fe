@@ -48,12 +48,27 @@ const DailyProgressCheckDetailView = () => {
                         </div>
 
                         <div className="flex gap-4">
-                            <button
-                                className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
-                                onClick={dailyProgressCheckDetail.onAddSegment}
-                            >
-                                + Add Segment Data
-                            </button>
+                            {dailyProgressCheckDetail.segments.length > 0 &&
+                            dailyProgressCheckDetail.toogle === "2d" ? (
+                                <button
+                                    className="py-[12px] px-[20px] bg-[#F79009] text-white align-middle rounded-md"
+                                    onClick={
+                                        dailyProgressCheckDetail.toEditSegment2d
+                                    }
+                                >
+                                    + Edit Segment Data
+                                </button>
+                            ) : (
+                                <button
+                                    className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
+                                    onClick={
+                                        dailyProgressCheckDetail.onAddSegment
+                                    }
+                                >
+                                    + Add Segment Data
+                                </button>
+                            )}
+
                             <button
                                 className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
                                 onClick={dailyProgressCheckDetail.onAddHistory}

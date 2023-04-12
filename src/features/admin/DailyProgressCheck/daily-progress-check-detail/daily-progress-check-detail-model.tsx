@@ -36,8 +36,8 @@ export function useDailyProgressCheckDetail() {
                 inspectionDate: undefined,
                 lotProduction: "",
                 labelNo: "",
-                acceptSampleTime: '',
-                measureSampleTime: '',
+                acceptSampleTime: "",
+                measureSampleTime: "",
                 weightPart: 0,
                 checked: false,
             })
@@ -123,6 +123,14 @@ export function useDailyProgressCheckDetail() {
             `${config.pathPrefix}daily-progress-check/${id}/history/${history.id}/edit`
         );
     };
+    const toEditSegment2d = () => {
+        navigate(
+            `${config.pathPrefix}daily-progress-check/${id}/edit-segment-data-2d`,
+            {
+                state: "edit",
+            }
+        );
+    };
     const deleteSegment = (
         e: React.MouseEvent<HTMLButtonElement>,
         id: Segment["id"]
@@ -130,12 +138,19 @@ export function useDailyProgressCheckDetail() {
         setSegments((prevState) =>
             prevState.map((item) =>
                 item.id == id
-                    ? Segment.create({ ...item.unmarshall(), checked: true })
-                    : Segment.create({ ...item.unmarshall(), checked: false })
+                    ? Segment.create({
+                          ...item.unmarshall(),
+                          checked: true,
+                      })
+                    : Segment.create({
+                          ...item.unmarshall(),
+                          checked: false,
+                      })
             )
         );
         setDeleteSegmentConfirmShow(true);
     };
+
     const confirmDeleteSegment = (e: React.MouseEvent<HTMLButtonElement>) => {
         segmentRepo
             .destroy(id, segments.find((item) => item.checked).id)
@@ -171,6 +186,7 @@ export function useDailyProgressCheckDetail() {
         onDownloadReport,
         onBack,
         onEditHistory,
+        toEditSegment2d,
         deleteSegmentConfirmShow,
         setDeleteSegmentConfirmShow,
         deleteSegment,

@@ -1,18 +1,21 @@
 import { MeasurementStdApiRepository } from "@data/api/measurement-std-api-repository";
 import { Segment2dApiRepository } from "@data/api/segment-2d-api-repository";
+import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { MeasurementStd } from "@domain/models/measurement-std";
 import { Segment2D } from "@domain/models/segment-2d";
 import { MeasurementStdRepository } from "@domain/repositories/measurement-std-repository";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export function useAddSegment2dModel() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { state } = useLocation();
     const measuremntStdRepo: MeasurementStdRepository =
         new MeasurementStdApiRepository();
     const segment2dRepo: Segment2dApiRepository = new Segment2dApiRepository();
     const [segments, setSegments] = useState<Segment2D[]>([]);
+
     const [measurementStd, setMeasurementStd] = useState<MeasurementStd>(
         MeasurementStd.create({
             part: undefined,
@@ -27,12 +30,19 @@ export function useAddSegment2dModel() {
         measuremntStdRepo.getByProcessId(id).then((result) => {
             setMeasurementStd(result);
             setSegments((prevState) => [
-                ...prevState,
+                // ...prevState,
                 Segment2D.create({
                     name: "",
                     measurements: result.segments,
                 }),
             ]);
+        });
+    };
+
+    const fetchSegment2dForEdit = () => {
+        segment2dRepo.show(id).then((result) => {
+            console.log(result);
+            setSegments(result);
         });
     };
     const onAddSegment = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -86,11 +96,16 @@ export function useAddSegment2dModel() {
 
     const onSave = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        segment2dRepo.store(id, segments).then((result) => navigate(-1));
+        if (!state) {
+            segment2dRepo.store(id, segments).then((result) => navigate(-1));
+        } else {
+            segment2dRepo.update(id, segments).then((result) => navigate(-1));
+        }
     };
 
     useEffect(() => {
-        fetchMeasurementStd();
+        if (state) fetchSegment2dForEdit();
+        else fetchMeasurementStd();
     }, []);
     return {
         segments,
