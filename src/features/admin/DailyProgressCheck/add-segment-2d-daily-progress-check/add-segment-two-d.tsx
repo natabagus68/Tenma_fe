@@ -159,7 +159,7 @@ const AddSegmentTwoD = () => {
                                                             />
                                                         ) : (
                                                             <input
-                                                                step="0.00001"
+                                                                step="0.001"
                                                                 type="number"
                                                                 min={0}
                                                                 value={
