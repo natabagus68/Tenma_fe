@@ -1,11 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../../common/components";
-import { Td } from "../../../../common/components/table/Td";
-import { Tr } from "../../../../common/components/table/Tr";
+import { Breadcrumbs } from "../../../../../common/components";
+import { Td } from "../../../../../common/components/table/Td";
+import { Tr } from "../../../../../common/components/table/Tr";
+import useDetailAccount from "./detail-account-view-model";
 
 const DetailAccount = () => {
-    const navigate = useNavigate();
+    const model = useDetailAccount();
     return (
         <>
             <div>
@@ -20,10 +21,7 @@ const DetailAccount = () => {
                         <div className="flex gap-2">
                             <button
                                 className="py-[12px] px-[20px] border border-gray-100 align-middle rounded-md flex gap-2"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("../");
-                                }}
+                                onClick={(e) => model.onBack(e)}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -42,11 +40,8 @@ const DetailAccount = () => {
                                 Back
                             </button>
                             <button
+                                onClick={model.toEdit}
                                 className="py-[12px] px-[20px] bg-[#F79009] text-white align-middle rounded-md flex"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate("/user/account/edit-data");
-                                }}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -83,14 +78,14 @@ const DetailAccount = () => {
                                         Name
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        Afif Chandra
+                                        {model.account.name}
                                         {/* {state?.cust_item_cd} */}
                                     </Td>
                                 </Tr>
                                 <Tr>
                                     <Td className=" border-none">Email</Td>
                                     <Td className="border-none font-bold">
-                                        contoh@gmail.com
+                                        {model.account.email}
                                         {/* {state?.part_cd} */}
                                     </Td>
                                 </Tr>
@@ -99,7 +94,7 @@ const DetailAccount = () => {
                                         Role
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        Adjani
+                                        {model.account?.roles[0]?.name}
                                     </Td>
                                 </Tr>
                             </tbody>

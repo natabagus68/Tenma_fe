@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../../common/components";
-import { PenAltIcon } from "../../../../common/components/icons";
-import Pagination from "../../../../common/components/pagination/Pagination";
-import Modal from "./Modal/Modal";
+import { Breadcrumbs } from "../../../../../common/components";
+import { PenAltIcon } from "../../../../../common/components/icons";
+import Pagination from "../../../../../common/components/pagination/Pagination";
+import Modal from "../Modal/Modal";
 
 const Menu = () => {
     const navigate = useNavigate();

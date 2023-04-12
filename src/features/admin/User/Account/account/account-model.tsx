@@ -4,11 +4,11 @@ import { PaginatedData } from "@domain/models/paginated-data";
 import { User } from "@domain/models/user";
 import { UserRepository } from "@domain/repositories/user-repository";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function useAccount() {
     const navigate = useNavigate();
-    const userRepo: UserRepository = new UserApiRepository();
+    const userRepo: UserApiRepository = new UserApiRepository();
     const [userParam, setUserParam] = useState({
         page: 1,
         limit: 10,
@@ -26,6 +26,17 @@ export function useAccount() {
     const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
     const onToogleActive = (e: React.MouseEvent<any>, id: User["id"]) => {
         e.preventDefault();
+        userRepo.updateVerify(id).then(() => {
+            setAccount((prevState) => {
+                const object = prevState.duplicate();
+                const newData = object.data.map((item) => {
+                    if (item.id == id) item.is_verified = !item.is_verified;
+                    return item;
+                });
+                object.updateData(newData);
+                return object;
+            });
+        });
     };
     const onDetail = (
         e: React.MouseEvent<HTMLButtonElement>,
@@ -36,7 +47,7 @@ export function useAccount() {
     };
     const onEdit = (e: React.MouseEvent<HTMLButtonElement>, id: User["id"]) => {
         e.preventDefault();
-        navigate(`${config.pathPrefix}user/${id}/edit`);
+        navigate(`${config.pathPrefix}user/${id}/edit-account-user`);
     };
     const onDelete = (
         e: React.MouseEvent<HTMLButtonElement>,
@@ -64,18 +75,32 @@ export function useAccount() {
                     );
                     return newState;
                 });
+
+                setDeleteConfirmShow(false);
             });
     };
     const onCreateNewAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         navigate(`${config.pathPrefix}user/create`);
     };
+
     useEffect(() => {
-        // userRepo.get({
-        //     q: userParam.q,
-        //     limit: userParam.limit,
-        //     page: userParam.page
-        // }).then(result => setAccount(PaginatedData.d))
+        userRepo
+            .get({
+                q: userParam.q,
+                limit: userParam.limit,
+                page: userParam.page,
+            })
+            .then((result) =>
+                setAccount(
+                    PaginatedData.create({
+                        limit: userParam.limit,
+                        page: userParam.page,
+                        lastPage: 0,
+                        data: result,
+                    })
+                )
+            );
     }, [userParam]);
     return {
         account,

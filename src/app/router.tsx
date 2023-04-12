@@ -43,13 +43,12 @@ import MeasurementDetail from "../features/admin/MasterData/MeasurementStd/measu
 import InputFormMeasurementView from "../features/admin/MasterData/MeasurementStd/input-form-measurement-std/input-form-measurement-view";
 
 import Account from "../features/admin/User/Account/account/account-view";
-import DetailAccount from "../features/admin/User/Account/DetailAccount";
-import AddAccount from "../features/admin/User/Account/AddAccount";
-import EditAccount from "../features/admin/User/Account/EditAccount";
-import Access from "../features/admin/User/Access/Access";
-import Menu from "../features/admin/User/Access/Menu";
-import AddNewRole from "../features/admin/User/Access/AddNewRole";
-import EditRole from "../features/admin/User/Access/EditRole";
+import DetailAccount from "../features/admin/User/Account/detail-account/DetailAccount";
+import AddAccount from "../features/admin/User/Account/account-form/account-form-view";
+import Access from "../features/admin/User/Access/access/user-access-view";
+import Menu from "../features/admin/User/Access/menu/user-access-menu-view";
+import InputFormUserAccess from "../features/admin/User/Access/input-form-user-access/input-form-user-access-view";
+
 import LayoutCustomer from "../features/admin/MasterData/Customer/LayoutCustomer";
 import CustomerModel from "../features/admin/MasterData/Customer/CustomerModel/CustomerModel";
 import CustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/CustomerModelGroup";
@@ -337,34 +336,35 @@ export default createBrowserRouter([
                         element: <AddAccount />,
                     },
                     {
+                        path: ":id/edit-account-user",
+                        element: <AddAccount />,
+                    },
+                    {
                         path: ":id/detail",
                         element: <DetailAccount />,
                     },
+
                     {
-                        path: ":id/edit",
-                        element: <EditAccount />,
-                    },
-                ],
-            },
-            {
-                path: "access",
-                element: <Root />,
-                children: [
-                    {
-                        path: "",
-                        element: <Access />,
-                    },
-                    {
-                        path: "menu",
-                        element: <Menu />,
-                    },
-                    {
-                        path: "add-new-role",
-                        element: <AddNewRole />,
-                    },
-                    {
-                        path: "edit-new-role/:id",
-                        element: <EditRole />,
+                        path: "access",
+                        element: <Root />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Access />,
+                            },
+                            {
+                                path: "menu",
+                                element: <Menu />,
+                            },
+                            {
+                                path: "add-new-role",
+                                element: <InputFormUserAccess />,
+                            },
+                            {
+                                path: "edit-new-role/:id",
+                                element: <InputFormUserAccess />,
+                            },
+                        ],
                     },
                 ],
             },

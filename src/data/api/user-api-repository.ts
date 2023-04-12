@@ -6,7 +6,30 @@ import { api } from "./_api";
 import { Access } from "@domain/models/access";
 
 export class UserApiRepository implements UserRepository {
-    constructor(private _api = api) {}
+    async create(props: User): Promise<User> {
+        const { data } = await api.post("user", {
+            name: props.name,
+            email: props.email,
+            password: props.password,
+            role: props.role_id,
+        });
+        return User.create({
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            role_id: data.role_id,
+            is_verified: data.is_verified,
+            photo: data.photo,
+            email_verified_at: data.email_verified_at,
+            fcm_token: data.fcm_token,
+            created_at: data.created_at,
+            updated_at: data.updated_at,
+            deleted_at: data.deleted_at,
+            roles: data.roles,
+            checked: data.checked,
+            id: data.id,
+        });
+    }
     async login(
         email: string,
         password: string,
@@ -25,7 +48,7 @@ export class UserApiRepository implements UserRepository {
                 email: data.data?.user?.email,
                 password: data.data?.user?.password,
                 role_id: data.data?.user?.role_id,
-                is_active: data.data?.user?.is_active,
+                is_verified: data.data?.user?.is_verified,
                 photo: data.data?.user?.photo,
                 email_verified_at: data.data?.user?.email_verified_at,
                 fcm_token: data.data?.user?.fcm_token,
@@ -46,7 +69,7 @@ export class UserApiRepository implements UserRepository {
                 email: data.data?.user?.email,
                 password: data.data?.user?.password,
                 role_id: data.data?.user?.role_id,
-                is_active: data.data?.user?.is_active,
+                is_verified: data.data?.user?.is_verified,
                 photo: data.data?.user?.photo,
                 email_verified_at: data.data?.user?.email_verified_at,
                 fcm_token: data.data?.user?.fcm_token,
@@ -71,7 +94,7 @@ export class UserApiRepository implements UserRepository {
                 email: item.email,
                 password: item.password,
                 role_id: item.role_id,
-                is_active: item.is_active,
+                is_verified: item.is_verified,
                 photo: item.photo,
                 email_verified_at: item.email_verified_at,
                 fcm_token: item.fcm_token,
@@ -79,16 +102,62 @@ export class UserApiRepository implements UserRepository {
                 updated_at: item.updated_at,
                 deleted_at: item.deleted_at,
                 roles: [],
+                checked: false,
             })
         );
     }
-    create(props: User): Promise<User> {
-        throw new Error("Method not implemented.");
+
+    async update(id: string, props: User): Promise<User> {
+        const { data } = await api.put("user/" + id, {
+            name: props.name,
+            email: props.email,
+            password: props.password,
+            role: props.role_id,
+        });
+
+        return User.create({
+            name: data.data.name,
+            email: data.data.email,
+            password: data.data.password,
+            role_id: data.data.role_id,
+            is_verified: data.data.is_verified,
+            photo: data.data.photo,
+            email_verified_at: data.data.email_verified_at,
+            fcm_token: data.data.fcm_token,
+            created_at: data.data.created_at,
+            updated_at: data.data.updated_at,
+            deleted_at: data.data.deleted_at,
+            roles: data.data.roles,
+            checked: data.data.checked,
+            id: data.data.id,
+        });
     }
-    update(id: string, data: User): Promise<User> {
-        throw new Error("Method not implemented.");
+    async delete(id: string): Promise<boolean> {
+        await api.delete("user/" + id);
+        return true;
     }
-    delete(id: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async updateVerify(id: string): Promise<boolean> {
+        await api.put(`user/${id}/verify`);
+        return true;
+    }
+
+    async show(id: string): Promise<User> {
+        const { data } = await api.get("user/" + id);
+        return User.create({
+            name: data.data.name,
+            email: data.data.email,
+            password: data.data.password,
+            role_id: data.data.role_id,
+            is_verified: data.data.is_verified,
+            photo: data.data.photo,
+            email_verified_at: data.data.email_verified_at,
+            fcm_token: data.data.fcm_token,
+            created_at: data.data.created_at,
+            updated_at: data.data.updated_at,
+            deleted_at: data.data.deleted_at,
+            roles: data.data.roles,
+            checked: data.data.checked,
+            id: data.data.id,
+        });
     }
 }

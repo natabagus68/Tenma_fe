@@ -28,13 +28,13 @@ const Machine = () => {
                     <table className="w-full">
                         <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     ID Machine
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     No. Machine
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -45,13 +45,13 @@ const Machine = () => {
                                     key={item.id}
                                     className="border-b-2 border-gray-100"
                                 >
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.idMachine}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.noMachine}
                                     </td>
-                                    <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
+                                    <td className="py-6  pl-10 text-gray-600 flex gap-3 justify-start">
                                         <button
                                             onClick={(e) =>
                                                 machine.onEdit(item.id)
