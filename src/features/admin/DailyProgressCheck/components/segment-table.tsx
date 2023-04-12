@@ -18,14 +18,18 @@ const SegmentTable = ({
                         {segment.name}
                     </h1>
                     <div className="flex gap-4 w-1/2 items-center justify-end">
-                        <button
-                            onClick={(e) => model.deleteSegment(e, segment.id)}
-                            type="button"
-                            role="button"
-                            className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md"
-                        >
-                            + Delete
-                        </button>
+                        {model.toogle === "2d" ? null : (
+                            <button
+                                onClick={(e) =>
+                                    model.deleteSegment(e, segment.id)
+                                }
+                                type="button"
+                                role="button"
+                                className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md"
+                            >
+                                + Delete
+                            </button>
+                        )}
                     </div>
                 </div>
                 <div>

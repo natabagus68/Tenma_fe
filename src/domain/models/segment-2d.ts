@@ -6,6 +6,7 @@ export interface ISegment2D {
     id?: string;
     name: string;
     measurements?: IMeasurement[];
+    checked?: boolean;
 }
 
 export class Segment2D extends Entity<ISegment2D> {
@@ -42,5 +43,8 @@ export class Segment2D extends Entity<ISegment2D> {
     }
     get measurements(): Measurement[] {
         return this._props.measurements.map((item) => Measurement.create(item));
+    }
+    get checked(): boolean | undefined {
+        return this._props.checked;
     }
 }

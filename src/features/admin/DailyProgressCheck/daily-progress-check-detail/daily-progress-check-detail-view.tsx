@@ -355,13 +355,13 @@ const DailyProgressCheckDetailView = () => {
                 </>
             )}
             <HistoryFormView model={dailyProgressCheckDetail} />
-            <ModalDelete
+            {/* <ModalDelete
                 showModal={dailyProgressCheckDetail.deleteSegmentConfirmShow}
                 setShowModal={
                     dailyProgressCheckDetail.setDeleteSegmentConfirmShow
                 }
                 onConfirm={dailyProgressCheckDetail.confirmDeleteSegment}
-            />
+            /> */}
         </>
     );
 };
