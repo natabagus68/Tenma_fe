@@ -19,13 +19,13 @@ export interface Datum {
     lot_production:      null | string;
     checked_by:          null | string;
     label_no:            null | string;
-    accept_sample_time:  null | Date;
-    measure_sample_time: null | Date;
+    accept_sample_time:  null | string;
+    measure_sample_time: null | string;
     actual_part_weight:  null | string;
     judgement:           string;
     judgement_3d:        string;
     judgement_2d:        string;
-    updated_at:          Date;
+    updated_at:          string;
     part:                Part;
     machine:             Machine;
 }

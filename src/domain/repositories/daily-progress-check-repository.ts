@@ -25,6 +25,7 @@ export interface DailyProgressCheckRepository {
     store(data: IDPCStorePayload): Promise<DailyProgressCheck>;
     update(data: DailyProgressCheck): Promise<DailyProgressCheck>;
     destroy(id: DailyProgressCheck["id"]): Promise<boolean>;
-    get3dSegments(id:DailyProgressCheck['id']):Promise<Segment[]>
-    getPic():Promise<Pic[]>
+    get3dSegments(id: DailyProgressCheck["id"]): Promise<Segment[]>;
+    get2dSegments(id: string): Promise<Segment[]>;
+    getPic(): Promise<Pic[]>;
 }

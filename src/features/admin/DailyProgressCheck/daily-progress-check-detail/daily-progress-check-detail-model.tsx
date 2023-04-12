@@ -1,11 +1,13 @@
 import { config } from "@common/utils";
 import { DailyProgressCheckApiRepository } from "@data/api/daily-progress-check-api-repository";
 import { HistoryApiRepository } from "@data/api/history-api-repository";
+import { Segment3dApiRepository } from "@data/api/segment-3d-api-repository";
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { History } from "@domain/models/history";
 import { Segment } from "@domain/models/segment";
 import { DailyProgressCheckRepository } from "@domain/repositories/daily-progress-check-repository";
 import { HistoryRepository } from "@domain/repositories/history-repository";
+import { Segment3dRepository } from "@domain/repositories/segment-3d-repository";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -13,7 +15,9 @@ export function useDailyProgressCheckDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
     const historyRepo: HistoryRepository = new HistoryApiRepository();
-    const dailyProgressCheckRepo = new DailyProgressCheckApiRepository();
+    const dailyProgressCheckRepo: DailyProgressCheckRepository =
+        new DailyProgressCheckApiRepository();
+    const segmentRepo: Segment3dRepository = new Segment3dApiRepository();
     const [dailyProgressCheck, setDailyProgressCheck] =
         useState<DailyProgressCheck>(
             DailyProgressCheck.create({
@@ -32,14 +36,16 @@ export function useDailyProgressCheckDetail() {
                 inspectionDate: undefined,
                 lotProduction: "",
                 labelNo: "",
-                acceptSampleTime: new Date(),
-                measureSampleTime: new Date(),
+                acceptSampleTime: "",
+                measureSampleTime: "",
                 weightPart: 0,
                 checked: false,
             })
         );
     const [segments, setSegments] = useState<Segment[]>([]);
     const [histories, setHistories] = useState<History[]>([]);
+    const [deleteSegmentConfirmShow, setDeleteSegmentConfirmShow] =
+        useState(false);
     const fetchDetail = () => {
         dailyProgressCheckRepo
             .detail(id)
@@ -124,31 +130,67 @@ export function useDailyProgressCheckDetail() {
                 state: "edit",
             }
         );
-    };
-    useEffect(() => {
-        fetchDetail();
-        if (toogle === "3d") {
-            fetchSegment();
-        } else {
-            fetchSegment2d();
-        }
-        fetchHistory();
-    }, [id, toogle]);
-    return {
-        dailyProgressCheck,
-        segments,
-        histories,
-        toogle,
-        confirmDeleteHistoryShow,
-        setConfirmDeleteHistoryShow,
-        onDeleteHistory,
-        onConfirmDeleteHistory,
-        onToogle,
-        onAddHistory,
-        onAddSegment,
-        onDownloadReport,
-        onBack,
-        onEditHistory,
-        toEditSegment2d,
+        const deleteSegment = (
+            e: React.MouseEvent<HTMLButtonElement>,
+            id: Segment["id"]
+        ) => {
+            setSegments((prevState) =>
+                prevState.map((item) =>
+                    item.id == id
+                        ? Segment.create({
+                              ...item.unmarshall(),
+                              checked: true,
+                          })
+                        : Segment.create({
+                              ...item.unmarshall(),
+                              checked: false,
+                          })
+                )
+            );
+            setDeleteSegmentConfirmShow(true);
+        };
+        const confirmDeleteSegment = (
+            e: React.MouseEvent<HTMLButtonElement>
+        ) => {
+            segmentRepo
+                .destroy(id, segments.find((item) => item.checked).id)
+                .then(() => {
+                    setDeleteSegmentConfirmShow(false);
+                    setSegments((prevState) =>
+                        prevState.filter((item) => !item.checked)
+                    );
+                });
+            setDeleteSegmentConfirmShow(false);
+        };
+        useEffect(() => {
+            fetchDetail();
+            if (toogle === "3d") {
+                fetchSegment();
+            } else {
+                fetchSegment2d();
+            }
+            fetchHistory();
+        }, [id, toogle]);
+        return {
+            dailyProgressCheck,
+            segments,
+            histories,
+            toogle,
+            confirmDeleteHistoryShow,
+            setConfirmDeleteHistoryShow,
+            onDeleteHistory,
+            onConfirmDeleteHistory,
+            onToogle,
+            onAddHistory,
+            onAddSegment,
+            onDownloadReport,
+            onBack,
+            onEditHistory,
+            toEditSegment2d,
+            deleteSegmentConfirmShow,
+            setDeleteSegmentConfirmShow,
+            deleteSegment,
+            confirmDeleteSegment,
+        };
     };
 }

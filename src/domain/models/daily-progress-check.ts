@@ -9,7 +9,7 @@ export interface IDailyProgressCheck {
     judgement: string;
     judgement2d: string;
     judgement3d: string;
-    updatedAt: Date;
+    updatedAt: string;
     partCode: string;
     model: string;
     shift: string;
@@ -22,8 +22,8 @@ export interface IDailyProgressCheck {
     inspectionDate: Date;
     lotProduction: string;
     labelNo: string;
-    acceptSampleTime: Date;
-    measureSampleTime: Date;
+    acceptSampleTime: string;
+    measureSampleTime: string;
     weightPart: number;
     checked: boolean;
     part?: IPart;
@@ -85,7 +85,7 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
     get judgement3d(): string {
         return this._props.judgement3d;
     }
-    get updatedAt(): Date {
+    get updatedAt(): string {
         return this._props.updatedAt;
     }
     get partCode(): string {
@@ -121,10 +121,10 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
     get labelNo(): string {
         return this._props.labelNo;
     }
-    get acceptSampleTime(): Date {
+    get acceptSampleTime(): string {
         return this._props.acceptSampleTime;
     }
-    get measureSampleTime(): Date {
+    get measureSampleTime(): string {
         return this._props.measureSampleTime;
     }
     get weightPart(): number {

@@ -30,7 +30,7 @@ import Color from "../features/admin/MasterData/Color/color/color-view";
 import ColorFormView from "../features/admin/MasterData/Color/color-form/color-form-view";
 import DailyProgessCheckView from "../features/admin/DailyProgressCheck/daily-progress-check/daily-progress-check-view";
 import DailyProgressCheckCreateView from "../features/admin/DailyProgressCheck/daily-progress-check-create/daily-progress-check-create-view";
-import DailyProgressCheckEditView from "../features/admin/DailyProgressCheck/daily-progress-check-edit/daily-progress-check-edit-view.tsx";
+import DailyProgressCheckEditView from "../features/admin/DailyProgressCheck/daily-progress-check-edit/daily-progress-check-edit-view";
 import DailyProgressCheckDetailView from "../features/admin/DailyProgressCheck/daily-progress-check-detail/daily-progress-check-detail-view";
 import CreateSegmentView from "../features/admin/DailyProgressCheck/create-segment/create-segment-view";
 import AddSegmentData from "../features/admin/DailyProgressCheck/daily-progress-add-history/history-form/history-form-view";
@@ -42,7 +42,7 @@ import Detail from "../features/admin/Report/Detail";
 import MeasurementDetail from "../features/admin/MasterData/MeasurementStd/measurement-std-detail/MeasurementDetail";
 import InputFormMeasurementView from "../features/admin/MasterData/MeasurementStd/input-form-measurement-std/input-form-measurement-view";
 
-import Account from "../features/admin/User/Account/Account";
+import Account from "../features/admin/User/Account/account/account-view";
 import DetailAccount from "../features/admin/User/Account/DetailAccount";
 import AddAccount from "../features/admin/User/Account/AddAccount";
 import EditAccount from "../features/admin/User/Account/EditAccount";
@@ -329,48 +329,42 @@ export default createBrowserRouter([
                 element: <Root />,
                 children: [
                     {
-                        path: "Account",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <Account />,
-                            },
-                            {
-                                path: "detail",
-                                element: <DetailAccount />,
-                            },
-                            {
-                                path: "add-data",
-                                element: <AddAccount />,
-                            },
-                            {
-                                path: "edit-data",
-                                element: <EditAccount />,
-                            },
-                        ],
+                        path: "",
+                        element: <Account />,
                     },
                     {
-                        path: "access",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <Access />,
-                            },
-                            {
-                                path: "menu",
-                                element: <Menu />,
-                            },
-                            {
-                                path: "add-new-role",
-                                element: <AddNewRole />,
-                            },
-                            {
-                                path: "edit-new-role/:id",
-                                element: <EditRole />,
-                            },
-                        ],
+                        path: "create",
+                        element: <AddAccount />,
+                    },
+                    {
+                        path: ":id/detail",
+                        element: <DetailAccount />,
+                    },
+                    {
+                        path: ":id/edit",
+                        element: <EditAccount />,
+                    },
+                ],
+            },
+            {
+                path: "access",
+                element: <Root />,
+                children: [
+                    {
+                        path: "",
+                        element: <Access />,
+                    },
+                    {
+                        path: "menu",
+                        element: <Menu />,
+                    },
+                    {
+                        path: "add-new-role",
+                        element: <AddNewRole />,
+                    },
+                    {
+                        path: "edit-new-role/:id",
+                        element: <EditRole />,
                     },
                 ],
             },

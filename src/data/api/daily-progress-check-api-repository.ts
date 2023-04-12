@@ -85,13 +85,13 @@ export class DailyProgressCheckApiRepository
         const { data } = await api.get<ShowDailyProgressCheckRes>(
             `progress-check/${id}`
         );
-        return DailyProgressCheck.create({
+        const newState = DailyProgressCheck.create({
             id: data.data.id,
             picId: data.data.pic,
             judgement: data.data.judgement,
             judgement2d: data.data.judgement_2d,
             judgement3d: data.data.judgement_3d,
-            updatedAt: moment(data.data.inspection_date).toDate(),
+            updatedAt: data.data.inspection_date?.toString(),
             partCode: data.data.part?.part_cd,
             model: "Unknown",
             shift: data.data.shift,
@@ -137,6 +137,7 @@ export class DailyProgressCheckApiRepository
                 checked: false,
             },
         });
+        return newState;
     }
     async store(payload: IDPCStorePayload): Promise<DailyProgressCheck> {
         const { data } = await api.post<
@@ -157,7 +158,7 @@ export class DailyProgressCheckApiRepository
             judgement: data.data.judgement,
             judgement2d: data.data.judgement_2d,
             judgement3d: data.data.judgement_3d,
-            updatedAt: data.data.updated_at,
+            updatedAt: moment(data.data.updated_at).format("HH:mm"),
             partCode: data.data.part_id,
             model: "Unknown",
             shift: data.data.shift,
@@ -205,7 +206,7 @@ export class DailyProgressCheckApiRepository
             judgement: data.data.judgement,
             judgement2d: data.data.judgement_2d,
             judgement3d: data.data.judgement_3d,
-            updatedAt: data.data.updated_at,
+            updatedAt: moment(data.data.updated_at).format("HH:mm"),
             partCode: data.data.part_id,
             model: "Unknown",
             shift: data.data.shift,
@@ -237,7 +238,7 @@ export class DailyProgressCheckApiRepository
                 id: item.id,
                 name: item.name,
                 type: item.cavity_type,
-                pacSegments: item.std_measurement?.special_accept_segments.map(
+                pacSegments: (item.std_measurement?.special_accept_segments || []).map(
                     (pacSegment) =>
                         Measurement.create({
                             id: pacSegment.id,

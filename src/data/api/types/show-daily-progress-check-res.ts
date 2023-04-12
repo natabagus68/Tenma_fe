@@ -14,8 +14,8 @@ export interface Data {
     lot_production:      string;
     checked_by:          null;
     label_no:            number;
-    accept_sample_time:  Date;
-    measure_sample_time: Date;
+    accept_sample_time:  string;
+    measure_sample_time: string;
     actual_part_weight:  number;
     judgement:           string;
     judgement_3d:        string;

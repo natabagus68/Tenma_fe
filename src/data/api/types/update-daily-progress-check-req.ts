@@ -9,7 +9,7 @@ export interface UpdateDailyProgressCheckReq {
     part_weight_qis:     string;
     lot_production:      string;
     label_no:            string;
-    accept_sample_time:  Date;
-    measure_sample_time: Date;
+    accept_sample_time:  string;
+    measure_sample_time: string;
     actual_part_weight:  string;
 }

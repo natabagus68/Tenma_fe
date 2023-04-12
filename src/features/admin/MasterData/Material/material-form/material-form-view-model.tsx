@@ -45,7 +45,8 @@ export function useMaterialForm() {
             : await materialRepository.store(material);
         navigate(-1);
     };
-    const onCancel = () => {
+    const onCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         navigate(-1);
     };
     useEffect(() => {
@@ -57,6 +58,7 @@ export function useMaterialForm() {
         }
     }, []);
     return {
+        id,
         material,
         onMaterialChange,
         onSave,

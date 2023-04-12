@@ -7,6 +7,7 @@ import JudgementIcon from "../icon/JudgemnetIcon";
 import { useDailyProgressCheckDetail } from "./daily-progress-check-detail-model";
 import moment from "moment";
 import HistoryFormView from "../components/DateTable";
+import ModalDelete from "@common/components/Modal/ModalDelete";
 const DailyProgressCheckDetailView = () => {
     const dailyProgressCheckDetail = useDailyProgressCheckDetail();
     return (
@@ -178,11 +179,14 @@ const DailyProgressCheckDetailView = () => {
                                         Inspection Date
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        {moment(
-                                            dailyProgressCheckDetail
-                                                .dailyProgressCheck
-                                                .inspectionDate
-                                        ).format("DD/MM/YYYY")}
+                                        {dailyProgressCheckDetail
+                                            .dailyProgressCheck
+                                            .inspectionDate &&
+                                            moment(
+                                                dailyProgressCheckDetail
+                                                    .dailyProgressCheck
+                                                    .inspectionDate
+                                            ).format("DD/MM/YYYY")}
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -193,7 +197,8 @@ const DailyProgressCheckDetailView = () => {
                                         {
                                             dailyProgressCheckDetail
                                                 .dailyProgressCheck.weightPart
-                                        }
+                                        }{" "}
+                                        gram
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -261,11 +266,11 @@ const DailyProgressCheckDetailView = () => {
                                         Accept sample (time)
                                     </Td>
                                     <Td className="border-none font-bold">
-                                        {moment(
+                                        {
                                             dailyProgressCheckDetail
                                                 .dailyProgressCheck
                                                 .acceptSampleTime
-                                        ).format("HH:mm") || ""}
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -273,11 +278,11 @@ const DailyProgressCheckDetailView = () => {
                                         Measure sample (time)
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        {moment(
+                                        {
                                             dailyProgressCheckDetail
                                                 .dailyProgressCheck
                                                 .measureSampleTime
-                                        ).format("HH:mm") || ""}
+                                        }
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -285,10 +290,11 @@ const DailyProgressCheckDetailView = () => {
                                         Weight Part
                                     </Td>
                                     <Td className="border-none font-bold">
-                                        {dailyProgressCheckDetail
-                                            .dailyProgressCheck.weightPart ||
-                                            `~`}{" "}
-                                        gram
+                                        {
+                                            dailyProgressCheckDetail
+                                                .dailyProgressCheck.weightPart
+                                        }
+                                        &nbsp;gram
                                     </Td>
                                 </Tr>
                                 <Tr>
@@ -313,10 +319,17 @@ const DailyProgressCheckDetailView = () => {
                                 <Tr>
                                     <Td className=" border-none">Update at</Td>
                                     <Td className="border-none font-bold">
-                                        {moment(
-                                            dailyProgressCheckDetail
-                                                .dailyProgressCheck.updatedAt
-                                        ).format("HH:mm")}
+                                        {dailyProgressCheckDetail
+                                            .dailyProgressCheck.updatedAt &&
+                                            dailyProgressCheckDetail.dailyProgressCheck.updatedAt
+                                                ?.toString()
+                                                .toLowerCase() !==
+                                                "invalid date" &&
+                                            moment(
+                                                dailyProgressCheckDetail
+                                                    .dailyProgressCheck
+                                                    .updatedAt
+                                            ).format("HH:mm")}
                                     </Td>
                                 </Tr>
                             </tbody>
@@ -333,11 +346,22 @@ const DailyProgressCheckDetailView = () => {
             ) : (
                 <>
                     {dailyProgressCheckDetail.segments.map((item) => (
-                        <SegmentTable key={item.id} segment={item} />
+                        <SegmentTable
+                            key={item.id}
+                            segment={item}
+                            model={dailyProgressCheckDetail}
+                        />
                     ))}
                 </>
             )}
             <HistoryFormView model={dailyProgressCheckDetail} />
+            <ModalDelete
+                showModal={dailyProgressCheckDetail.deleteSegmentConfirmShow}
+                setShowModal={
+                    dailyProgressCheckDetail.setDeleteSegmentConfirmShow
+                }
+                onConfirm={dailyProgressCheckDetail.confirmDeleteSegment}
+            />
         </>
     );
 };
