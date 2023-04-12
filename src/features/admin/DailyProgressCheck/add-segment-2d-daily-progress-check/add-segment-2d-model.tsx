@@ -47,13 +47,23 @@ export function useAddSegment2dModel() {
     };
     const onAddSegment = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        setSegments((prevState) => [
-            ...prevState,
-            Segment2D.create({
-                name: "",
-                measurements: measurementStd.segments,
-            }),
-        ]);
+        if (!state) {
+            setSegments((prevState) => [
+                ...prevState,
+                Segment2D.create({
+                    name: "",
+                    measurements: measurementStd.segments,
+                }),
+            ]);
+        } else {
+            setSegments((prevState) => [
+                ...prevState,
+                Segment2D.create({
+                    name: "",
+                    measurements: prevState[0].measurements,
+                }),
+            ]);
+        }
     };
 
     const onChangeInput = (
@@ -103,6 +113,20 @@ export function useAddSegment2dModel() {
         }
     };
 
+    const deleteTableUpdate = (
+        e: React.MouseEvent<HTMLButtonElement>,
+        index: number
+    ) => {
+        e.preventDefault();
+        setSegments((prevState) => {
+            const data = prevState.filter((item, i) => {
+                if (i !== index) return item;
+            });
+
+            return data;
+        });
+    };
+
     useEffect(() => {
         if (state) fetchSegment2dForEdit();
         else fetchMeasurementStd();
@@ -115,5 +139,6 @@ export function useAddSegment2dModel() {
         onChangeInput,
         onInputNameChange,
         onSave,
+        deleteTableUpdate,
     };
 }

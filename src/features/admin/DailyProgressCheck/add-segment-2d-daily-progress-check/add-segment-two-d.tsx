@@ -33,6 +33,16 @@ const AddSegmentTwoD = () => {
                                     className="py-3 w-52 px-5 text-md text-gray-600 font-rubik border border-gray-200 rounded-md outline-none placeholder:text-center"
                                 />
                             </div>
+                            <div className="relative left-[800px]">
+                                <button
+                                    onClick={(e) =>
+                                        model.deleteTableUpdate(e, index)
+                                    }
+                                    className="px-14 py-3 bg-red-500 text-white rounded-md shadow-md hover:scale-95 hover:bg-red-700"
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                     </div>
 
