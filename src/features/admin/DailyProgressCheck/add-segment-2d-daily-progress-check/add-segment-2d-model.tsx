@@ -104,7 +104,7 @@ export function useAddSegment2dModel() {
     };
 
     useEffect(() => {
-        if (state == "edit") fetchSegment2dForEdit();
+        if (state) fetchSegment2dForEdit();
         else fetchMeasurementStd();
     }, []);
     return {

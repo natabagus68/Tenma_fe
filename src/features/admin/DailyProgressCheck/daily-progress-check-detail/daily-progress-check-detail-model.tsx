@@ -130,67 +130,66 @@ export function useDailyProgressCheckDetail() {
                 state: "edit",
             }
         );
-        const deleteSegment = (
-            e: React.MouseEvent<HTMLButtonElement>,
-            id: Segment["id"]
-        ) => {
-            setSegments((prevState) =>
-                prevState.map((item) =>
-                    item.id == id
-                        ? Segment.create({
-                              ...item.unmarshall(),
-                              checked: true,
-                          })
-                        : Segment.create({
-                              ...item.unmarshall(),
-                              checked: false,
-                          })
-                )
-            );
-            setDeleteSegmentConfirmShow(true);
-        };
-        const confirmDeleteSegment = (
-            e: React.MouseEvent<HTMLButtonElement>
-        ) => {
-            segmentRepo
-                .destroy(id, segments.find((item) => item.checked).id)
-                .then(() => {
-                    setDeleteSegmentConfirmShow(false);
-                    setSegments((prevState) =>
-                        prevState.filter((item) => !item.checked)
-                    );
-                });
-            setDeleteSegmentConfirmShow(false);
-        };
-        useEffect(() => {
-            fetchDetail();
-            if (toogle === "3d") {
-                fetchSegment();
-            } else {
-                fetchSegment2d();
-            }
-            fetchHistory();
-        }, [id, toogle]);
-        return {
-            dailyProgressCheck,
-            segments,
-            histories,
-            toogle,
-            confirmDeleteHistoryShow,
-            setConfirmDeleteHistoryShow,
-            onDeleteHistory,
-            onConfirmDeleteHistory,
-            onToogle,
-            onAddHistory,
-            onAddSegment,
-            onDownloadReport,
-            onBack,
-            onEditHistory,
-            toEditSegment2d,
-            deleteSegmentConfirmShow,
-            setDeleteSegmentConfirmShow,
-            deleteSegment,
-            confirmDeleteSegment,
-        };
+    };
+    const deleteSegment = (
+        e: React.MouseEvent<HTMLButtonElement>,
+        id: Segment["id"]
+    ) => {
+        setSegments((prevState) =>
+            prevState.map((item) =>
+                item.id == id
+                    ? Segment.create({
+                          ...item.unmarshall(),
+                          checked: true,
+                      })
+                    : Segment.create({
+                          ...item.unmarshall(),
+                          checked: false,
+                      })
+            )
+        );
+        setDeleteSegmentConfirmShow(true);
+    };
+
+    const confirmDeleteSegment = (e: React.MouseEvent<HTMLButtonElement>) => {
+        segmentRepo
+            .destroy(id, segments.find((item) => item.checked).id)
+            .then(() => {
+                setDeleteSegmentConfirmShow(false);
+                setSegments((prevState) =>
+                    prevState.filter((item) => !item.checked)
+                );
+            });
+        setDeleteSegmentConfirmShow(false);
+    };
+    useEffect(() => {
+        fetchDetail();
+        if (toogle === "3d") {
+            fetchSegment();
+        } else {
+            fetchSegment2d();
+        }
+        fetchHistory();
+    }, [id, toogle]);
+    return {
+        dailyProgressCheck,
+        segments,
+        histories,
+        toogle,
+        confirmDeleteHistoryShow,
+        setConfirmDeleteHistoryShow,
+        onDeleteHistory,
+        onConfirmDeleteHistory,
+        onToogle,
+        onAddHistory,
+        onAddSegment,
+        onDownloadReport,
+        onBack,
+        onEditHistory,
+        toEditSegment2d,
+        deleteSegmentConfirmShow,
+        setDeleteSegmentConfirmShow,
+        deleteSegment,
+        confirmDeleteSegment,
     };
 }
