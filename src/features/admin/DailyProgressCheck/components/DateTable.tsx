@@ -2,6 +2,7 @@ import React from "react";
 import { useDailyProgressCheckDetail } from "../daily-progress-check-detail/daily-progress-check-detail-model";
 import ModalDelete from "@common/components/Modal/ModalDelete";
 import moment from "moment";
+import { PenAltIcon } from "@common/components/icons";
 
 const HistoryFormView = ({ model = useDailyProgressCheckDetail() }) => {
     return (
@@ -17,36 +18,44 @@ const HistoryFormView = ({ model = useDailyProgressCheckDetail() }) => {
                         <table className="w-full">
                             <thead className=" border-y-2 border-gray-100">
                                 <tr>
-                                    <th className="py-6 bg-gray-50">Date</th>
-                                    <th className="py-6 bg-gray-50">
+                                    <th className="py-6 text-start bg-gray-50">
+                                        Date
+                                    </th>
+                                    <th className="py-6 text-start bg-gray-50">
                                         Problem Details
                                     </th>
-                                    <th className="py-6 bg-gray-50">Char</th>
-                                    <th className="py-6 bg-gray-50">Remark</th>
-                                    <th className="py-6 bg-gray-50">Action</th>
+                                    <th className="py-6 text-start bg-gray-50">
+                                        Char
+                                    </th>
+                                    <th className="py-6 text-start bg-gray-50">
+                                        Remark
+                                    </th>
+                                    <th className="py-6 text-start bg-gray-50">
+                                        Action
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {model.histories.map((item) => (
                                     <tr key={item.id}>
-                                        <td className="text-center border-b-2 border-gray-100 py-6">
+                                        <td className="text-start border-b-2 border-gray-100 py-6">
                                             {moment(item.date).format(
                                                 "DD/MM/YYYY"
                                             )}
                                         </td>
-                                        <td className="text-center border-b-2 border-gray-100 py-6">
+                                        <td className="text-start border-b-2 border-gray-100 py-6">
                                             {item.problemDetail}
                                         </td>
-                                        <td className="text-center border-b-2 border-gray-100 py-6">
+                                        <td className="text-start border-b-2 border-gray-100 py-6">
                                             {item.char}
                                         </td>
-                                        <td className="text-center border-b-2 border-gray-100 py-6">
+                                        <td className="text-start border-b-2 border-gray-100 py-6">
                                             {item.remark}
                                         </td>
-                                        <td className="text-center border-b-2 border-gray-100 py-6">
+                                        <td className="text-start border-b-2 border-gray-100 py-6">
                                             <div className="flex gap-4 items-center">
                                                 <button
-                                                    className="py-[12px] px-[20px] bg-[#F79009]  text-white align-middle rounded-md"
+                                                    className="py-[12px] px-[20px] bg-[#F79009]  text-white align-middle rounded-md flex items-center gap-3"
                                                     onClick={(e) =>
                                                         model.onEditHistory(
                                                             e,
@@ -54,7 +63,8 @@ const HistoryFormView = ({ model = useDailyProgressCheckDetail() }) => {
                                                         )
                                                     }
                                                 >
-                                                    + Edit
+                                                    <PenAltIcon />
+                                                    Edit
                                                 </button>
 
                                                 <button
