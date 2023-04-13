@@ -8,7 +8,7 @@ const AddSegmentTwoD = () => {
         <>
             <div>
                 <Breadcrumbs
-                    items={["Daily Progress Check", "Details 3D", "Add Data"]}
+                    items={["Daily Progress Check", "Details 2D", "Add Data"]}
                 />
             </div>
             {model.segments.map((item, index) => (

@@ -19,7 +19,7 @@ const MeasurementStd = () => {
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Measurement Std.
+                        Measurement Std
                     </h1>
                     <button
                         className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md"

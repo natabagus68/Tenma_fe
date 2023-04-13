@@ -10,25 +10,25 @@ const PartDetail = () => {
     return (
         <>
             <div>
-                <Breadcrumbs items={ ["Part", "Detail"] } />
+                <Breadcrumbs items={["Part", "Detail"]} />
             </div>
             <div>
                 <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-52 ">
                     <div className="w-full py-5 px-12 flex justify-between items-center">
                         <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                            Details.
+                            Details
                         </h1>
                         <div className="flex items-center gap-3">
                             <button
                                 className="py-[12px] px-[20px] border text-gray-600 text-center items-center rounded-md flex gap-2"
-                                onClick={ (e) => partDetail.onBack() }
+                                onClick={(e) => partDetail.onBack()}
                             >
                                 <div className="rotate-180">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
-                                        strokeWidth={ 1.5 }
+                                        strokeWidth={1.5}
                                         stroke="currentColor"
                                         className="w-4 h-4"
                                     >
@@ -41,7 +41,10 @@ const PartDetail = () => {
                                 </div>
                                 Back
                             </button>
-                            <button onClick={ e => partDetail.onEdit() } className="py-[12px] px-[20px] bg-[#F79009] text-white text-center items-center rounded-md flex gap-2 ">
+                            <button
+                                onClick={(e) => partDetail.onEdit()}
+                                className="py-[12px] px-[20px] bg-[#F79009] text-white text-center items-center rounded-md flex gap-2 "
+                            >
                                 <PenAltIcon />
                                 Edit
                             </button>
@@ -49,7 +52,7 @@ const PartDetail = () => {
                     </div>
 
                     <div className="border-t-2 border-gray-100 py-8 px-8 flex ">
-                        {/* table 1 */ }
+                        {/* table 1 */}
                         <div className="w-1/2 flex justify-center">
                             <table className="border-none w-[90%]">
                                 <tbody>
@@ -58,7 +61,8 @@ const PartDetail = () => {
                                             Cust, Item CD
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            { partDetail.part.customer }, { partDetail.part.custItemId }
+                                            {partDetail.part.customer},{" "}
+                                            {partDetail.part.custItemId}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -66,7 +70,7 @@ const PartDetail = () => {
                                             Part Code
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            { partDetail.part.partCode }
+                                            {partDetail.part.partCode}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -74,7 +78,7 @@ const PartDetail = () => {
                                             Part Name
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            { partDetail.part.partName }
+                                            {partDetail.part.partName}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -82,7 +86,7 @@ const PartDetail = () => {
                                             Item Group CD
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            { partDetail.part.itemGroupCode }
+                                            {partDetail.part.itemGroupCode}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -90,7 +94,7 @@ const PartDetail = () => {
                                             Item Group Name
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            { partDetail.part.itemGroupName }
+                                            {partDetail.part.itemGroupName}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -98,7 +102,7 @@ const PartDetail = () => {
                                             Old Part Number
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            { partDetail.part.oldPartNumber }
+                                            {partDetail.part.oldPartNumber}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -106,7 +110,7 @@ const PartDetail = () => {
                                             Customer Model
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            { partDetail.part.customerModel }
+                                            {partDetail.part.customerModel}
                                         </Td>
                                     </Tr>
                                 </tbody>
@@ -118,7 +122,7 @@ const PartDetail = () => {
                             </table>
                         </div>
 
-                        {/* table 2 */ }
+                        {/* table 2 */}
                         <div className="w-1/2 flex justify-center">
                             <table className="border-none w-[90%]">
                                 <tbody>
@@ -127,7 +131,7 @@ const PartDetail = () => {
                                             Customer
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            { partDetail.part.customer }
+                                            {partDetail.part.customer}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -135,7 +139,7 @@ const PartDetail = () => {
                                             Material
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            { partDetail.part.material }
+                                            {partDetail.part.material}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -143,7 +147,7 @@ const PartDetail = () => {
                                             Material Color
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            { partDetail.part.materialColor }
+                                            {partDetail.part.materialColor}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -151,7 +155,7 @@ const PartDetail = () => {
                                             Customer Model Group
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            { partDetail.part.customerModelGroup }
+                                            {partDetail.part.customerModelGroup}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -159,7 +163,7 @@ const PartDetail = () => {
                                             Unit CD
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            { partDetail.part.unitCd }
+                                            {partDetail.part.unitCd}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -167,7 +171,7 @@ const PartDetail = () => {
                                             Material Details
                                         </Td>
                                         <Td className="border-none font-bold">
-                                            { partDetail.part.materialDetails }
+                                            {partDetail.part.materialDetails}
                                         </Td>
                                     </Tr>
                                     <Tr>
@@ -175,7 +179,7 @@ const PartDetail = () => {
                                             Product Weight
                                         </Td>
                                         <Td className="bg-gray-50 border-none font-bold">
-                                            { partDetail.part.productWeight } gram
+                                            {partDetail.part.productWeight} gram
                                         </Td>
                                     </Tr>
                                 </tbody>

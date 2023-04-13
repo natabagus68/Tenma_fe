@@ -41,7 +41,7 @@ const HistoryFormView = () => {
 
                         <div className="flex flex-col gap-3 mt-3">
                             <label className="text-gray-600">
-                                Hystory Problem
+                                History Problem
                             </label>
                             <input
                                 type="text"

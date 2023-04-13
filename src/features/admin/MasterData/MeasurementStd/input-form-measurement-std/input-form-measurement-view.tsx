@@ -17,7 +17,7 @@ const InputFormMeasurementView = () => {
             <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        {model.id ? "Edit" : "Add"} Measurement Std.
+                        {model.id ? "Edit" : "Add"} Measurement Std
                     </h1>
                 </div>
                 <div className="border-t-2 border-gray-100 py-14 px-8">
