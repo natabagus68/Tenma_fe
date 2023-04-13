@@ -26,6 +26,7 @@
         "react-tailwindcss-select": "^1.8.5",
         "sweetalert2": "^11.7.3",
         "uid": "^2.0.2",
+        "xlsx": "^0.18.5",
         "yup": "^1.0.2"
     },
     "devDependencies": {

@@ -4,11 +4,15 @@ import { Breadcrumbs } from "../../../../common/components";
 import { EyeIcon } from "../../../../common/components/icons";
 import Pagination from "../../../../common/components/pagination/Pagination";
 import JudgemnetIcon from "../../DailyProgressCheck/icon/JudgemnetIcon";
+import useReportDetail from "./report-detail-model";
+import { DownloadModal } from "../partials/download-modal";
 
 const ReportDetailView = () => {
     const navigate = useNavigate();
+    const model = useReportDetail();
     return (
         <>
+            <DownloadModal model={model} />
             <div>
                 <Breadcrumbs items={["Report", "Part Details"]} />
             </div>
@@ -18,7 +22,10 @@ const ReportDetailView = () => {
                         Part Check Report - A0B1C044
                     </h1>
                     <div className="w-1/2 flex justify-end gap-3">
-                        <button className="py-[12px] px-[20px] border border-gray-100 items-center rounded-md text-gray-600 flex gap-2">
+                        <button
+                            onClick={model.toBack}
+                            className="py-[12px] px-[20px] border border-gray-100 items-center rounded-md text-gray-600 flex gap-2"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -36,7 +43,10 @@ const ReportDetailView = () => {
                             Back
                         </button>
 
-                        <button className="py-[12px] px-[20px] border border-gray-100 items-center rounded-md text-white flex gap-2 bg-gray-600">
+                        <button
+                            onClick={model.openModalDownload}
+                            className="py-[12px] px-[20px] border border-gray-100 items-center rounded-md text-white flex gap-2 bg-gray-600"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -129,39 +139,40 @@ const ReportDetailView = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="border-b-2 border-gray-100">
-                                <td className="py-6 text-center pl-3 text-gray-600 items-center">
-                                    4212421
-                                </td>
-                                <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                    NSHk32324
-                                </td>
+                            {model.reportDetail.data.map((item, index) => (
+                                <tr className="border-b-2 border-gray-100">
+                                    <td className="py-6 text-center pl-3 text-gray-600 items-center">
+                                        4212421
+                                    </td>
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        NSHk32324
+                                    </td>
 
-                                <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                    345678765
-                                </td>
-                                <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                    345678765
-                                </td>
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        345678765
+                                    </td>
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        345678765
+                                    </td>
 
-                                <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                    <JudgemnetIcon value={"Ok"} />
-                                </td>
-                                <td className="py-6  pl-3 text-gray-600   items-center flex gap-8 justify-center">
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            navigate("report-detail");
-                                        }}
-                                        className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
-                                    >
-                                        <EyeIcon />
-                                        Detail
-                                    </button>
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <JudgemnetIcon value={"Ok"} />
+                                    </td>
+                                    <td className="py-6  pl-3 text-gray-600   items-center flex gap-8 justify-center">
+                                        <button
+                                            onClick={() =>
+                                                model.toDetailPart(item.id)
+                                            }
+                                            className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
+                                        >
+                                            <EyeIcon />
+                                            Detail
+                                        </button>
 
-                                    {/* download button */}
-                                </td>
-                            </tr>
+                                        {/* download button */}
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">

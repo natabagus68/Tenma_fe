@@ -1,4 +1,5 @@
 import { Entity } from "./_entity";
+import { Part } from "./part";
 
 export interface IReport {
     id?: string;
@@ -6,6 +7,7 @@ export interface IReport {
     partName: string;
     lastReport: Date;
     pic: string;
+    part: Part;
     checked: boolean;
 }
 export class Report extends Entity<IReport> {
@@ -19,6 +21,7 @@ export class Report extends Entity<IReport> {
             partName: this.partName,
             lastReport: this.lastReport,
             pic: this.pic,
+            part: this.part,
             checked: this.checked,
         };
     }
@@ -40,6 +43,9 @@ export class Report extends Entity<IReport> {
     }
     get pic(): string {
         return this._props.pic;
+    }
+    get part(): Part {
+        return this._props.part;
     }
     get checked(): boolean {
         return this._props.checked;

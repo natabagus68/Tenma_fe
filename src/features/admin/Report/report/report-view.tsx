@@ -83,20 +83,20 @@ const ReportView = () => {
                     <table className="w-full">
                         <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     ID CD
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Part Name
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Last Report
                                 </th>
 
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     PIC
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -107,26 +107,26 @@ const ReportView = () => {
                                     key={item.id}
                                     className="border-b-2 border-gray-100"
                                 >
-                                    <td className="py-6 text-center pl-3 text-gray-600 items-center">
+                                    <td className="py-6 text-start pl-10 text-gray-600 items-center">
                                         {item.idCode}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                    <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                         {item.partName}
                                     </td>
 
-                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                    <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                         {moment(item.lastReport).format(
                                             "DD/MM/YYYY"
                                         )}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                    <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                         {item.pic}
                                     </td>
 
-                                    <td className="py-6  pl-3 text-gray-600   items-center flex gap-8 justify-center">
+                                    <td className="py-6  pl-10 text-gray-600   items-center flex gap-8 justify-start">
                                         <button
                                             onClick={(e) =>
-                                                model.onDetail(e, item.id)
+                                                model.onDetail(e, item.part.id)
                                             }
                                             className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
                                         >

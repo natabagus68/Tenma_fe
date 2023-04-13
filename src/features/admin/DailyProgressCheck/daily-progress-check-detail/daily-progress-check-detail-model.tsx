@@ -1,6 +1,7 @@
 import { config } from "@common/utils";
 import { DailyProgressCheckApiRepository } from "@data/api/daily-progress-check-api-repository";
 import { HistoryApiRepository } from "@data/api/history-api-repository";
+import { ReportApiRepository } from "@data/api/report-api-repository";
 import { Segment3dApiRepository } from "@data/api/segment-3d-api-repository";
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { History } from "@domain/models/history";
@@ -9,11 +10,13 @@ import { DailyProgressCheckRepository } from "@domain/repositories/daily-progres
 import { HistoryRepository } from "@domain/repositories/history-repository";
 import { Segment3dRepository } from "@domain/repositories/segment-3d-repository";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export function useDailyProgressCheckDetail() {
     const { id } = useParams();
+    const { state } = useLocation();
     const navigate = useNavigate();
+    const reportRepo = new ReportApiRepository();
     const historyRepo: HistoryRepository = new HistoryApiRepository();
     const dailyProgressCheckRepo: DailyProgressCheckRepository =
         new DailyProgressCheckApiRepository();
@@ -61,6 +64,20 @@ export function useDailyProgressCheckDetail() {
             .get2dSegments(id)
             .then((result) => setSegments(result));
     };
+
+    // =====report
+
+    const fetchRepo2d = () => {
+        reportRepo.get2dSegments(id).then((result) => setSegments(result));
+    };
+    const fetchRepo3d = () => {
+        reportRepo.get3dSegments(id).then((result) => setSegments(result));
+    };
+
+    const fetchDetailReport = () => {};
+
+    // ===========
+
     const fetchHistory = () => {
         historyRepo.get(id).then((res) => setHistories(res));
     };
