@@ -10,6 +10,7 @@ import { Pic } from "@domain/models/pic";
 import { TableParam } from "types";
 import { Segment } from "@domain/models/segment";
 import { Measurement } from "@domain/models/measurement";
+import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 
 export class ReportApiRepository implements ReportRepository {
     async getPic(): Promise<Pic[]> {
@@ -169,5 +170,63 @@ export class ReportApiRepository implements ReportRepository {
             },
         });
         return data.data;
+    }
+
+    async getpartReportDetail(id: string): Promise<DailyProgressCheck> {
+        const { data } = await api.get(`report/${id}/report-detail`);
+        const newState = DailyProgressCheck.create({
+            id: data.data.id,
+            picId: data.data.pic,
+            judgement: data.data.judgement,
+            judgement2d: data.data.judgement_2d,
+            judgement3d: data.data.judgement_3d,
+            updatedAt: data.data.inspection_date?.toString(),
+            partCode: data.data.part?.part_cd,
+            model: "Unknown",
+            shift: data.data.shift,
+            has3d: data.data.judgement_3d?.length > 0,
+            has2d: data.data.judgement_2d?.length > 0,
+            partId: data.data.part?.id,
+            machineId: data.data.machine.id,
+            inspectionDate: data.data.inspection_date,
+            lotProduction: data.data.lot_production,
+            labelNo: `${data.data.label_no}`,
+            acceptSampleTime: data.data.accept_sample_time,
+            measureSampleTime: data.data.measure_sample_time,
+            weightPart: Number(data.data.part_weight_qis),
+            checked: false,
+            pic: {
+                checked: false,
+                name: data.data.pic,
+            },
+            part: {
+                id: data.data.part?.id,
+                custItemId: data.data.part?.cust_item_cd,
+                partCode: data.data.part?.part_cd,
+                partName: data.data.part?.part_name,
+                oldPartNumber: data.data.part?.old_part_number,
+                itemGroupCode: data.data.part?.item_group_cd,
+                itemGroupName: data.data.part?.item_group_name,
+                customerModel: data.data.part?.customer_model?.name,
+                customer: data.data.part?.customer?.name,
+                material: data.data.part?.material?.id_material,
+                materialColor: data.data.part?.material?.color?.name,
+                customerModelGroup: data.data.part?.customer_model_group?.name,
+                unitCd: data.data.part?.unit_cd,
+                materialDetails: data.data.part?.material?.detail,
+                productWeight: data.data.part?.product_weight,
+                customerModelId: data.data.part?.customer_model?.id,
+                customerId: data.data.part?.customer?.id,
+                customerModelGroupId: data.data.part?.customer_model_group?.id,
+            },
+            machine: {
+                id: data.data.machine.id,
+                idMachine: data.data.machine.id_machine,
+                noMachine: data.data.machine.no,
+                checked: false,
+            },
+        });
+
+        return newState;
     }
 }

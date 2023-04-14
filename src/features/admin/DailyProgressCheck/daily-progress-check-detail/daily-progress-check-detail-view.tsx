@@ -49,7 +49,8 @@ const DailyProgressCheckDetailView = () => {
 
                         <div className="flex gap-4">
                             {dailyProgressCheckDetail.segments.length > 0 &&
-                            dailyProgressCheckDetail.toogle === "2d" ? (
+                            dailyProgressCheckDetail.toogle === "2d" &&
+                            !dailyProgressCheckDetail.location ? (
                                 <button
                                     className="py-[12px] px-[20px] bg-[#F79009] text-white align-middle rounded-md"
                                     onClick={
@@ -58,7 +59,7 @@ const DailyProgressCheckDetailView = () => {
                                 >
                                     + Edit Segment Data
                                 </button>
-                            ) : (
+                            ) : !dailyProgressCheckDetail.location ? (
                                 <button
                                     className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
                                     onClick={
@@ -67,14 +68,18 @@ const DailyProgressCheckDetailView = () => {
                                 >
                                     + Add Segment Data
                                 </button>
-                            )}
+                            ) : null}
 
-                            <button
-                                className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
-                                onClick={dailyProgressCheckDetail.onAddHistory}
-                            >
-                                + Add History Data
-                            </button>
+                            {!dailyProgressCheckDetail.location ? (
+                                <button
+                                    className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
+                                    onClick={
+                                        dailyProgressCheckDetail.onAddHistory
+                                    }
+                                >
+                                    + Add History Data
+                                </button>
+                            ) : null}
 
                             <button
                                 className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex"
@@ -302,7 +307,7 @@ const DailyProgressCheckDetailView = () => {
                                         Judgement
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        <JudgementIcon
+                                        {/* <JudgementIcon
                                             value={
                                                 dailyProgressCheckDetail.toogle ==
                                                 "2d"
@@ -313,7 +318,7 @@ const DailyProgressCheckDetailView = () => {
                                                           .dailyProgressCheck
                                                           .judgement3d
                                             }
-                                        />
+                                        /> */}
                                     </Td>
                                 </Tr>
                                 <Tr>

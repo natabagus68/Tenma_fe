@@ -44,7 +44,9 @@ export default function useReportDetail() {
     };
 
     const toDetailPart = (id: string) => {
-        navigate(`${config.pathPrefix}daily-progress-check/${id}/detail`);
+        navigate(`${config.pathPrefix}daily-progress-check/${id}/detail`, {
+            state: "report",
+        });
     };
     const toBack = () => {
         navigate("../");

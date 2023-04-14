@@ -16,6 +16,7 @@ export function useDailyProgressCheckDetail() {
     const { id } = useParams();
     const { state } = useLocation();
     const navigate = useNavigate();
+    const [location, setLocation] = useState(false);
     const reportRepo = new ReportApiRepository();
     const historyRepo: HistoryRepository = new HistoryApiRepository();
     const dailyProgressCheckRepo: DailyProgressCheckRepository =
@@ -68,13 +69,20 @@ export function useDailyProgressCheckDetail() {
     // =====report
 
     const fetchRepo2d = () => {
-        reportRepo.get2dSegments(id).then((result) => setSegments(result));
+        reportRepo.get2dSegments(id).then((result) => {
+            console.log("berhasil");
+            setSegments(result);
+        });
     };
     const fetchRepo3d = () => {
         reportRepo.get3dSegments(id).then((result) => setSegments(result));
     };
 
-    const fetchDetailReport = () => {};
+    const fetchDetailReport = () => {
+        reportRepo.getpartReportDetail(id).then((result) => {
+            setDailyProgressCheck(result);
+        });
+    };
 
     // ===========
 
@@ -180,13 +188,23 @@ export function useDailyProgressCheckDetail() {
         setDeleteSegmentConfirmShow(false);
     };
     useEffect(() => {
-        fetchDetail();
-        if (toogle === "3d") {
-            fetchSegment();
+        if (state) {
+            setLocation(true);
+            fetchDetailReport();
+            if (toogle === "3d") {
+                fetchRepo3d();
+            } else {
+                fetchRepo2d();
+            }
         } else {
-            fetchSegment2d();
+            fetchDetail();
+            if (toogle === "3d") {
+                fetchSegment();
+            } else {
+                fetchSegment2d();
+            }
+            fetchHistory();
         }
-        fetchHistory();
     }, [id, toogle]);
     return {
         dailyProgressCheck,
@@ -208,5 +226,6 @@ export function useDailyProgressCheckDetail() {
         setDeleteSegmentConfirmShow,
         deleteSegment,
         confirmDeleteSegment,
+        location,
     };
 }
