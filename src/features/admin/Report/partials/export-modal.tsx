@@ -42,6 +42,9 @@ export const ExportModal = ({ model = useReport() }) => {
                                 <div className="col-span-3">
                                     <div className="relative">
                                         <input
+                                            name="dateFrom"
+                                            value={model.exportDate.dateFrom}
+                                            onChange={model.exportHandleForm}
                                             className="rounded-[4px] border border-[#667085] pl-[42px] pr-[22px] py-4 placeholder:text-[#667085] w-full"
                                             type="date"
                                             id="dateFromInput"
@@ -74,6 +77,9 @@ export const ExportModal = ({ model = useReport() }) => {
                                 <div className="col-span-3">
                                     <div className="relative">
                                         <input
+                                            name="dateTo"
+                                            value={model.exportDate.dateTo}
+                                            onChange={model.exportHandleForm}
                                             className="rounded-[4px] border border-[#667085] pl-[42px] pr-[22px] py-4 placeholder:text-[#667085] w-full appearance-none"
                                             type="date"
                                             id="dateFromInput"
@@ -99,7 +105,10 @@ export const ExportModal = ({ model = useReport() }) => {
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-3 mt-6">
-                                <button className="rounded bg-[#1BBDD4] border border-[#1BBDD4] p-3 text-white text-sm font-semibold">
+                                <button
+                                    onClick={model.buttonExportModal}
+                                    className="rounded bg-[#1BBDD4] border border-[#1BBDD4] p-3 text-white text-sm font-semibold"
+                                >
                                     Export
                                 </button>
                                 <button className="rounded bg-white border border-[#B8B6B6] p-3 text-[#514E4E] text-sm font-semibold">

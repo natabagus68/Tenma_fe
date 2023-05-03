@@ -5,6 +5,7 @@ import Pagination from "../../../../common/components/pagination/Pagination";
 import { useReport } from "./report-model";
 import moment from "moment";
 import { ExportModal } from "../partials/export-modal";
+import TableExcel from "../tabel-export/tabel-excel-view";
 
 const ReportView = () => {
     const model = useReport();
@@ -137,7 +138,10 @@ const ReportView = () => {
                                         {/* download button */}
                                         <button
                                             onClick={(e) =>
-                                                model.onDownload(e, item.id)
+                                                model.onDownload(
+                                                    e,
+                                                    item.part.id
+                                                )
                                             }
                                         >
                                             <svg
@@ -166,6 +170,7 @@ const ReportView = () => {
                 </div>
             </div>
             <ExportModal model={model} />
+            {/* <TableExcel ref={model.tableRef} /> */}
         </>
     );
 };

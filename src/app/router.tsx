@@ -54,6 +54,7 @@ import CustomerModelGroup from "../features/admin/MasterData/Customer/CustomerMo
 import InputFormCustomerModel from "../features/admin/MasterData/Customer/CustomerModel/InputFormCustomerModel";
 import InputFormCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/InputFormCustomerModelGroup";
 import HistoryFormView from "../features/admin/DailyProgressCheck/daily-progress-add-history/history-form/history-form-view";
+import TableExcel from "@features/admin/Report/tabel-export/tabel-excel-view";
 const Root = () => {
     return <Outlet />;
 };
@@ -62,6 +63,10 @@ export default createBrowserRouter([
     {
         path: config.pathPrefix,
         element: <Navigate to={`${config.pathPrefix}login`} />,
+    },
+    {
+        path: "table",
+        element: <TableExcel />,
     },
     {
         path: config.pathPrefix,
@@ -358,6 +363,7 @@ export default createBrowserRouter([
             },
         ],
     },
+
     {
         path: "*",
         element: <Error404 />,

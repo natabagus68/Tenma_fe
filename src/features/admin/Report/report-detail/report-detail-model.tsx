@@ -6,7 +6,7 @@ import { Report } from "@domain/models/report";
 import { ReportRepository } from "@domain/repositories/report-repository";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-// import XLSX from "xlsx";
+import * as XLSX from "xlsx";
 export default function useReportDetail() {
     const { id } = useParams();
     const navigate = useNavigate();

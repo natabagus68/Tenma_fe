@@ -44,8 +44,8 @@ export const DownloadModal = ({ model = useReportDetail() }) => {
                                         <input
                                             name="dateFrom"
                                             value={model.downoladParam.dateFrom}
-                                            onChange={(e) =>
-                                                model.onChangeInputDownload(e)
+                                            onChange={
+                                                model.onChangeInputDownload
                                             }
                                             className="rounded-[4px] border border-[#667085] pl-[42px] pr-[22px] py-4 placeholder:text-[#667085] w-full"
                                             type="date"
@@ -80,10 +80,10 @@ export const DownloadModal = ({ model = useReportDetail() }) => {
                                     <div className="relative">
                                         <input
                                             name="dateTo"
-                                            onChange={(e) =>
-                                                model.onChangeInputDownload(e)
-                                            }
                                             value={model.downoladParam.dateTo}
+                                            onChange={
+                                                model.onChangeInputDownload
+                                            }
                                             className="rounded-[4px] border border-[#667085] pl-[42px] pr-[22px] py-4 placeholder:text-[#667085] w-full appearance-none"
                                             type="date"
                                             id="dateFromInput"
@@ -111,7 +111,7 @@ export const DownloadModal = ({ model = useReportDetail() }) => {
                             <div className="grid grid-cols-2 gap-3 mt-6">
                                 <button
                                     type="submit"
-                                    onClick={(e) => model.onDowloadReport(e)}
+                                    onClick={model.onDowloadReport}
                                     className="rounded bg-[#1BBDD4] border border-[#1BBDD4] p-3 text-white text-sm font-semibold"
                                 >
                                     Download

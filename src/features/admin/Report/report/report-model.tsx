@@ -4,13 +4,19 @@ import { PaginatedData } from "@domain/models/paginated-data";
 import { Pic } from "@domain/models/pic";
 import { Report } from "@domain/models/report";
 import { ReportRepository } from "@domain/repositories/report-repository";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import * as XLSX from "xlsx";
 export function useReport() {
-    let reportRepo: ReportRepository = new ReportApiRepository();
+    let reportRepo = new ReportApiRepository();
+    const [id, setId] = useState<string>("");
     const navigate = useNavigate();
+    const tableRef = useRef(null);
     const [pic, setPic] = useState<Pic[]>([]);
+    const [exportDate, setExportDate] = useState({
+        dateFrom: "",
+        dateTo: "",
+    });
     const [report, setReport] = useState<PaginatedData<Report>>(
         PaginatedData.create({
             page: 1,
@@ -61,6 +67,7 @@ export function useReport() {
         id: Report["id"]
     ) => {
         e.preventDefault();
+        setId(id);
         setExportModalShow(true);
     };
     const onExport = (e: React.FormEvent<HTMLFormElement>) => {
@@ -70,7 +77,30 @@ export function useReport() {
     const onCancelExport = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setExportModalShow(false);
+        setId("");
     };
+
+    const exportHandleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setExportDate((prevState) => {
+            const duplicate = { ...prevState, [e.target.name]: e.target.value };
+            return duplicate;
+        });
+    };
+
+    const buttonExportModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        reportRepo.getRepotForDownload(id, exportDate).then((result) => {
+            console.log(result);
+            const worksheet = XLSX.utils.json_to_sheet(result);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "sheet1");
+            XLSX.writeFile(workbook, "DataSheet.xlsx");
+            console.log(tableRef.current);
+            setExportModalShow(false);
+            setId("");
+        });
+    };
+
     useEffect(() => {
         fetchPic();
     }, []);
@@ -82,10 +112,14 @@ export function useReport() {
         reportParam,
         pic,
         exportModalShow,
+        exportDate,
+        tableRef,
         onReportParamChange,
         onDetail,
         onDownload,
         onExport,
         onCancelExport,
+        exportHandleForm,
+        buttonExportModal,
     };
 }
