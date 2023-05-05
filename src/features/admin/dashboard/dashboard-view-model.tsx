@@ -39,6 +39,7 @@ export const dashboardModel = () => {
 
     const fetchSumaryData = () => {
         dashboardRepo.getSumaryChart().then((result) => {
+            console.log(result, "sumary das");
             setSumaryData(result);
         });
     };

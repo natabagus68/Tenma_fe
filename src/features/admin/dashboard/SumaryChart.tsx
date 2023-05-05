@@ -43,7 +43,8 @@ export const SumaryChart = ({ datas }) => {
             initChart();
         } else {
             try {
-                chart.current.update();
+                chart.current.destroy();
+                initChart();
             } catch (e) {
                 chart.current.destroy();
                 initChart();

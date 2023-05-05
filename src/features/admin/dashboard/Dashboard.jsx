@@ -89,7 +89,7 @@ export const Dashboard = () => {
                     <div className="px-6 py-3">
                         <p className="text-xl">Summary Judgement</p>
                     </div>
-                    {model.sumaryData.ok ? (
+                    {model.sumaryData ? (
                         <SumaryChart
                             datas={[
                                 model.sumaryData.ok,

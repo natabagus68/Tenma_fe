@@ -1,4 +1,6 @@
 import { Breadcrumbs } from "@common/components";
+import JudgemnetIcon from "@common/components/JudgemnetIcon";
+import DimantionIcon from "@features/admin/DailyProgressCheck/icon/DimantionIcon";
 import moment from "moment";
 import { useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
@@ -144,19 +146,19 @@ const Traceability = () => {
                             Clooney
                         </td>
                         <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            Shift 1kkkkkkkkkkk
+                            Shift 1
                         </td>
                         <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            3D
+                            <DimantionIcon value={true} />
                         </td>
                         <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            2D
+                            <DimantionIcon value={false} />
                         </td>
                         <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            PIC
+                            Felecia Kartika
                         </td>
                         <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            Judgement
+                            <JudgemnetIcon value={"waiting"} />
                         </td>
                     </tbody>
                 </table>
