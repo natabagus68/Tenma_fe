@@ -122,10 +122,12 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
         return this._props.labelNo;
     }
     get acceptSampleTime(): string {
-        return this._props.acceptSampleTime;
+        if (this._props.acceptSampleTime === "Invalid date") return "-";
+        else return this._props.acceptSampleTime;
     }
     get measureSampleTime(): string {
-        return this._props.measureSampleTime;
+        if (this._props.measureSampleTime === "Invalid date") return "-";
+        else return this._props.measureSampleTime;
     }
     get weightPart(): number {
         return this._props.weightPart;

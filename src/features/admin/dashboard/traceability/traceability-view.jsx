@@ -1,5 +1,6 @@
 import { Breadcrumbs } from "@common/components";
 import JudgemnetIcon from "@common/components/JudgemnetIcon";
+import Pagination from "@common/components/pagination/Pagination";
 import DimantionIcon from "@features/admin/DailyProgressCheck/icon/DimantionIcon";
 import moment from "moment";
 import { useState } from "react";
@@ -162,6 +163,9 @@ const Traceability = () => {
                         </td>
                     </tbody>
                 </table>
+                <div className="w-full flex justify-end mt-5 pr-8">
+                    <Pagination />
+                </div>
             </div>
         </>
     );

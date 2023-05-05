@@ -30,13 +30,13 @@ const Weighting = () => {
                                 <option selected disabled>
                                     Tools
                                 </option>
-                                {/* {model?.dataTools?.map((item) => {
+                                {model?.dataTools?.map((item) => {
                                     return (
                                         <option value={item.id}>
                                             {item?.name}
                                         </option>
                                     );
-                                })} */}
+                                })}
                             </select>
                         </div>
                         <div className="flex flex-col gap-2">

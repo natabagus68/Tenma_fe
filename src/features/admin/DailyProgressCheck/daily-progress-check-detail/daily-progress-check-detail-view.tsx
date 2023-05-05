@@ -307,7 +307,7 @@ const DailyProgressCheckDetailView = () => {
                                         Judgement
                                     </Td>
                                     <Td className="bg-gray-50 border-none font-bold">
-                                        {/* <JudgementIcon
+                                        <JudgementIcon
                                             value={
                                                 dailyProgressCheckDetail.toogle ==
                                                 "2d"
@@ -318,7 +318,7 @@ const DailyProgressCheckDetailView = () => {
                                                           .dailyProgressCheck
                                                           .judgement3d
                                             }
-                                        /> */}
+                                        />
                                     </Td>
                                 </Tr>
                                 <Tr>

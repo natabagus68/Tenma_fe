@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export const dashboardModel = () => {
     const navigate = useNavigate();
+    const [sumaryRunner, setSumaryRunner] = useState(false);
     const dashboardRepo = new DashboatApiRepository();
     const [barQuery, setBarQuery] = useState<string>("daily");
     const [traceability, setTraceability] = useState("");
@@ -41,6 +42,7 @@ export const dashboardModel = () => {
         dashboardRepo.getSumaryChart().then((result) => {
             console.log(result, "sumary das");
             setSumaryData(result);
+            setSumaryRunner(true);
         });
     };
     const fetchProgessCheck = () => {
@@ -79,6 +81,7 @@ export const dashboardModel = () => {
         progressCheckData,
         bar,
         barQuery,
+        sumaryRunner,
         handleChangeBarQuery,
         handleTreacibilityTime,
         toTraceability,
