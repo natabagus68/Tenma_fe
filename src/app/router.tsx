@@ -55,6 +55,8 @@ import InputFormCustomerModel from "../features/admin/MasterData/Customer/Custom
 import InputFormCustomerModelGroup from "../features/admin/MasterData/Customer/CustomerModelGroup/InputFormCustomerModelGroup";
 import HistoryFormView from "../features/admin/DailyProgressCheck/daily-progress-add-history/history-form/history-form-view";
 import TableExcel from "@features/admin/Report/tabel-export/tabel-excel-view";
+import Weighting from "@features/admin/weighting/weighting-view";
+import Traceability from "@features/admin/dashboard/traceability/traceability-view";
 const Root = () => {
     return <Outlet />;
 };
@@ -86,9 +88,28 @@ export default createBrowserRouter([
         children: [
             {
                 path: "dashboard",
-                element: <Dashboard />,
+                element: <Root />,
+                children: [
+                    {
+                        path: "",
+                        element: <Dashboard />,
+                    },
+                    {
+                        path: "traceability",
+                        element: <Traceability />,
+                    },
+                ],
             },
-
+            {
+                path: "weighting",
+                element: <Root />,
+                children: [
+                    {
+                        path: "",
+                        element: <Weighting />,
+                    },
+                ],
+            },
             {
                 path: "master-data",
                 element: <Root />,

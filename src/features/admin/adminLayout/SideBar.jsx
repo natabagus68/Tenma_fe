@@ -10,6 +10,7 @@ import {
     ReportIcon,
     CubeIcon,
 } from "../../../common/components/icons";
+import ScaleIcon from "@common/components/icons/ScaleIcon";
 
 export const SideBar = () => {
     const { navOpen } = useSelector((state) => state.adminLayout);
@@ -42,7 +43,11 @@ export const SideBar = () => {
                     label={`Report`}
                     icon={<ReportIcon className="mr-3 -mb-1" />}
                 />
-
+                <NavItem
+                    to={`weighting`}
+                    label={`Weighting`}
+                    icon={<ScaleIcon className="mr-3 -mb-1 w-6 h-6" />}
+                />
                 <NavItem
                     label={`Master Data`}
                     icon={<CubeIcon className="mr-3 -mb-1" />}

@@ -70,8 +70,8 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
         this._props.checked = false;
         return this;
     }
-    duplicate():DailyProgressCheck{
-        return DailyProgressCheck.create(this.unmarshall())
+    duplicate(): DailyProgressCheck {
+        return DailyProgressCheck.create(this.unmarshall());
     }
     get picId(): string {
         return this._props.picId;

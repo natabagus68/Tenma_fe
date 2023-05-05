@@ -1,7 +1,7 @@
-const TableExcel = ({ ref }) => {
+const TableExcel = () => {
     return (
         <>
-            <div ref={ref} className="flex gap-8">
+            <div className="flex gap-8">
                 <div>
                     <table>
                         <tr>

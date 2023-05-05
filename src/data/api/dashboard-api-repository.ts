@@ -15,8 +15,10 @@ export class DashboatApiRepository {
         });
     }
 
-    async getProgressCheck(): Promise<ProgressCheck> {
-        const { data } = await api.get("dashboard/progress-check-data");
+    async getProgressCheck(endPoint?: string): Promise<ProgressCheck> {
+        const { data } = await api.get(
+            `dashboard/progress-check-data${endPoint ? "-" + endPoint : ""}`
+        );
         return ProgressCheck.create({
             part: data.data.total_part,
             progressCheck: data.data.total_progress_check,
@@ -27,8 +29,9 @@ export class DashboatApiRepository {
 
     async getBarCharData(props: string): Promise<Bar> {
         const { data } = await api.get(`dashboard/part-checking-${props}`);
+
         return Bar.create({
-            date: data.data.map((el) => el.date),
+            date: data.data.map((el) => el.date || el.month),
             data3D: data.data.map((el) => el.total_3d),
             data2D: data.data.map((el) => el.total_2d),
         });

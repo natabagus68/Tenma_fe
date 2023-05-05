@@ -170,7 +170,6 @@ const ReportView = () => {
                 </div>
             </div>
             <ExportModal model={model} />
-            {/* <TableExcel ref={model.tableRef} /> */}
         </>
     );
 };

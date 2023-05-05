@@ -5,7 +5,7 @@ import { api } from "./_api";
 import { PaginatedData } from "@domain/models/paginated-data";
 
 export class ToolApiRepository implements ToolRepository {
-    async get(props: TableParam): Promise<PaginatedData<Tool>> {
+    async get(props?: TableParam): Promise<PaginatedData<Tool>> {
         const { data } = await api.get(`tool`, {
             params: { page: props.page, limit: props.limit },
         });
@@ -75,5 +75,18 @@ export class ToolApiRepository implements ToolRepository {
     async destroy(id: string): Promise<boolean> {
         await api.delete(`tool/${id}`);
         return true;
+    }
+    async getTools(): Promise<Tool[]> {
+        const { data } = await api.get("tool");
+        return data.data.map((item) => {
+            return Tool.create({
+                id: item.id,
+                idTool: item.id_tool,
+                toolCode: item.code,
+                name: item.name,
+                address: item.address,
+                checked: false,
+            });
+        });
     }
 }

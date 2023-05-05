@@ -4,6 +4,7 @@ import { TableParam } from "types";
 
 export interface ToolRepository {
     get(props: TableParam): Promise<PaginatedData<Tool>>;
+    getTools(): Promise<Tool[]>;
     show(id: Tool["id"]): Promise<Tool>;
     store(tool: Tool): Promise<Tool>;
     update(tool: Tool): Promise<Tool>;
