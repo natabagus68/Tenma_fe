@@ -28,4 +28,6 @@ export interface DailyProgressCheckRepository {
     get3dSegments(id: DailyProgressCheck["id"]): Promise<Segment[]>;
     get2dSegments(id: string): Promise<Segment[]>;
     getPic(): Promise<Pic[]>;
+    updateJudgmen(id: string, togle: string, data: string): Promise<boolean>;
+    updateJudgmentUniv(id: string, data: string): Promise<boolean>;
 }

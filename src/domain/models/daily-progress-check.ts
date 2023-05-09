@@ -79,11 +79,20 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
     get judgement(): string {
         return this._props.judgement;
     }
+    set judgement(value) {
+        this._props.judgement = value;
+    }
     get judgement2d(): string {
         return this._props.judgement2d;
     }
     get judgement3d(): string {
         return this._props.judgement3d;
+    }
+    set judgement2d(value) {
+        this._props.judgement2d = value;
+    }
+    set judgement3d(value) {
+        this._props.judgement3d = value;
     }
     get updatedAt(): string {
         return this._props.updatedAt;

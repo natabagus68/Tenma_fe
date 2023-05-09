@@ -15,12 +15,12 @@ import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 export class ReportApiRepository implements ReportRepository {
     async getPic(): Promise<Pic[]> {
         const { data } = await api.get(`report/pic`);
-        return (data.data || []).map((item) =>
-            Pic.create({
+        return (data.data || []).map((item) => {
+            return Pic.create({
                 name: item.name,
                 checked: false,
-            })
-        );
+            });
+        });
     }
     async get(param: IReportParam): Promise<PaginatedData<Report>> {
         const { data } = await api.get(`report`, {
@@ -36,6 +36,7 @@ export class ReportApiRepository implements ReportRepository {
             page: param.page,
             limit: param.limit,
             lastPage: data.totalPage,
+            totalRow: data.totalRows,
             data: (data.data || []).map((item) =>
                 Report.create({
                     id: item.id,

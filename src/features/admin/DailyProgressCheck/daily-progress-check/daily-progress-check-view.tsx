@@ -154,7 +154,7 @@ const DailyProgessCheckView = () => {
                         </thead>
                         <tbody>
                             {dailyProgressCheck.dailyProgressCheck.data.map(
-                                (item) => (
+                                (item, i) => (
                                     <tr
                                         key={item.id}
                                         className="border-b-2 border-gray-100"
@@ -175,17 +175,28 @@ const DailyProgessCheckView = () => {
                                             {item.shift}
                                         </td>
                                         <td className="py-6 text-start pl-10 text-gray-600  items-center ">
-                                            <DimantionIcon value={item.has3d} />
+                                            <DimantionIcon
+                                                value={item.judgement3d}
+                                            />
                                         </td>
                                         <td className="py-6 text-start pl-10 text-gray-600  items-center ">
-                                            <DimantionIcon value={item.has2d} />
+                                            <DimantionIcon
+                                                value={item.judgement3d}
+                                            />
                                         </td>
                                         <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             {item.pic.name}
                                         </td>
                                         <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             <JudgemnetIcon
-                                                value={item.judgement2d}
+                                                value={item.judgement}
+                                                changer={(e) =>
+                                                    dailyProgressCheck.handleChangeJudgment(
+                                                        e,
+                                                        item.id,
+                                                        i
+                                                    )
+                                                }
                                             />
                                         </td>
                                         <td className="py-6  pl-10 text-gray-600  items-center flex gap-3 justify-start">

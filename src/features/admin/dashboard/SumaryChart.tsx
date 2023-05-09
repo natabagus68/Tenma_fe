@@ -3,8 +3,8 @@ import Chart from "../../../common/components/Chart";
 import { Sumary } from "@domain/models/sumary-dashbord-chart";
 import { DashboatApiRepository } from "@data/api/dashboard-api-repository";
 
-export const SumaryChart = ({ datas }) => {
-    console.log(datas, "component");
+export const SumaryChart = ({ datas, total }) => {
+    console.log(datas[3], "component");
     const ctx: any = useRef();
     const chart: any = useRef();
     const initChart = () => {
@@ -54,8 +54,14 @@ export const SumaryChart = ({ datas }) => {
 
     return (
         <>
-            <div className="flex justify-center">
+            <div className="flex justify-center relative">
                 <canvas className="w-1/2" ref={ctx}></canvas>
+                <div className="absolute text-center items-center top-[103px] left-[356px] scale-125">
+                    <h1 className="text-4xl text-gray-700 font-semibold">
+                        {total}
+                    </h1>
+                    <p className="text-gray-600 text-xl">Total</p>
+                </div>
             </div>
         </>
     );

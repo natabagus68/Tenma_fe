@@ -318,6 +318,9 @@ const DailyProgressCheckDetailView = () => {
                                                           .dailyProgressCheck
                                                           .judgement3d
                                             }
+                                            changer={
+                                                dailyProgressCheckDetail.handelChangeJudgment
+                                            }
                                         />
                                     </Td>
                                 </Tr>

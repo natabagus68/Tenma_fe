@@ -5,7 +5,11 @@ import DimantionIcon from "@features/admin/DailyProgressCheck/icon/DimantionIcon
 import moment from "moment";
 import { useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
+import { useTraceability } from "./traceabilty-view-model";
 const Traceability = () => {
+    const model = useTraceability();
+    console.log(model.shift, "model");
+
     return (
         <>
             <div className="mb-4 w-full flex justify-between items-center">
@@ -22,23 +26,50 @@ const Traceability = () => {
                         <input
                             type="text"
                             placeholder="Trace..."
+                            name="partCode"
+                            value={model.params.partCode}
+                            onChange={model.handleParams}
                             className="border border-gray-100 outline-none py-2 px-2 placeholder:text-center text-gray-700 placeholder:text-100 rounded-md"
                         />
                     </div>
                     <div className="flex gap-3 items-center">
                         <label className="text-gray-600 ">PIC</label>
-                        <select className="border border-gray-100 outline-none py-2 px-4 text-gray-700 rounded-md bg-transparent ">
+                        <select
+                            name="pic"
+                            value={model.params.pic}
+                            onChange={model.handleParams}
+                            className="border border-gray-100 outline-none py-2 px-4 text-gray-700 rounded-md bg-transparent "
+                        >
                             <option disabled selected>
                                 Select manpower
                             </option>
+                            {model.pic.map((item, i) => {
+                                return (
+                                    <option key={i} value={item.pic}>
+                                        {item.pic}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
                     <div className="flex gap-3 items-center">
                         <label className="text-gray-600 ">Shift</label>
-                        <select className="border border-gray-300 outline-none py-2 px-4 text-gray-700 rounded-md bg-transparent ">
+                        <select
+                            name="shift"
+                            value={model.params.shift}
+                            onChange={model.handleParams}
+                            className="border border-gray-300 outline-none py-2 px-4 text-gray-700 rounded-md bg-transparent "
+                        >
                             <option disabled selected>
-                                Select shit
+                                Select shift
                             </option>
+                            {model.shift.map((item, i) => {
+                                return (
+                                    <option key={i} value={item.shift}>
+                                        {item.shift}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
                     <div className="flex gap-3 items-center">
@@ -49,7 +80,9 @@ const Traceability = () => {
                                 "outline-none border border-gray-100 rounded-md px-3 py-2 text-sm placeholder:px-1 w-60"
                             }
                             placeholder="April 4, 2023 - May 3, 2023"
-                            showShortcuts={true}
+                            // showShortcuts={true}
+                            value={model.value}
+                            onChange={model.handleValueChange}
                         />
                     </div>
                     <div className="relative items-center">
@@ -70,6 +103,7 @@ const Traceability = () => {
 
                         <button
                             type="submit"
+                            onClick={model.onSubmitSearch}
                             className="px-11 py-2 bg-[#1BBDD4] text-center text-white rounded-md"
                         >
                             Search
@@ -85,21 +119,29 @@ const Traceability = () => {
                     <div className="flex">
                         <div className="px-5 border-r border-gray-600 flex gap-2 items-center ">
                             <p className="text-gray-400 text-sm">Total Part</p>
-                            <span className="font-bold text-sm">123</span>
+                            <span className="font-bold text-sm">
+                                {model.traceability?.totalPart || ""}
+                            </span>
                         </div>
                         <div className="px-5 border-r border-gray-600 flex gap-2 items-center ">
                             <p className="text-gray-400 text-sm">
                                 Progress Check
                             </p>
-                            <span className="font-bold text-sm">92</span>
+                            <span className="font-bold text-sm">
+                                {model.traceability?.progressCheck || ""}
+                            </span>
                         </div>
                         <div className="px-5 border-r border-gray-600 flex gap-2 items-center ">
                             <p className="text-gray-400 text-sm">3D Check</p>
-                            <span className="font-bold text-sm">40</span>
+                            <span className="font-bold text-sm">
+                                {model.traceability?.check3d || ""}
+                            </span>
                         </div>
                         <div className="px-5 flex gap-2 items-center ">
                             <p className="text-gray-400 text-sm">2D Check</p>
-                            <span className="font-bold text-sm">12</span>
+                            <span className="font-bold text-sm">
+                                {model.traceability?.check2d || ""}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -134,37 +176,62 @@ const Traceability = () => {
                         </th>
                     </thead>
                     <tbody>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            10:12
-                        </td>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            18/09/2016
-                        </td>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            A0B1C044
-                        </td>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            Clooney
-                        </td>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            Shift 1
-                        </td>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            <DimantionIcon value={true} />
-                        </td>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            <DimantionIcon value={false} />
-                        </td>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            Felecia Kartika
-                        </td>
-                        <td className="border-b border-gray-400 text-left px-6 py-4 ">
-                            <JudgemnetIcon value={"waiting"} />
-                        </td>
+                        {model.traceability
+                            ? model.traceability?.data.map((item, index) => {
+                                  return (
+                                      <tr key={index}>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              {moment(item.updatedAt).format(
+                                                  "LT"
+                                              )}
+                                          </td>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              {moment(item.updatedAt).format(
+                                                  "L"
+                                              )}
+                                          </td>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              {item.partCode}
+                                          </td>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              {item.model}
+                                          </td>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              {item.shift}
+                                          </td>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              <DimantionIcon
+                                                  value={item.judgement3d}
+                                              />
+                                          </td>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              <DimantionIcon
+                                                  value={item.judgement2d}
+                                              />
+                                          </td>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              {item.pic.name}
+                                          </td>
+                                          <td className="border-b border-gray-400 text-left px-6 py-4 ">
+                                              <JudgemnetIcon
+                                                  value={item.judgement}
+                                              />
+                                          </td>
+                                      </tr>
+                                  );
+                              })
+                            : ""}
                     </tbody>
                 </table>
                 <div className="w-full flex justify-end mt-5 pr-8">
-                    <Pagination />
+                    {model.traceability ? (
+                        <Pagination
+                            row={model.traceability?.totalRow || 0}
+                            limit={model.traceability?.limit || 0}
+                            page={model.traceability?.page || 0}
+                            onClick={model.onHandlePAgination}
+                        />
+                    ) : null}
                 </div>
             </div>
         </>

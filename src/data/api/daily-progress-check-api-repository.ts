@@ -321,4 +321,23 @@ export class DailyProgressCheckApiRepository
             })
         );
     }
+
+    async updateJudgmen(
+        id: string,
+        togel: string,
+        data: string
+    ): Promise<boolean> {
+        await api.put(`progress-check/${id}/${togel}/update-judgement`, {
+            judgement: data,
+        });
+
+        return true;
+    }
+
+    async updateJudgmentUniv(id: string, data: string): Promise<boolean> {
+        await api.put(`progress-check/${id}/update-judgement`, {
+            judgement: data,
+        });
+        return true;
+    }
 }

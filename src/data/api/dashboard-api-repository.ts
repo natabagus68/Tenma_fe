@@ -2,10 +2,13 @@ import { Sumary } from "@domain/models/sumary-dashbord-chart";
 import { api } from "./_api";
 import { ProgressCheck } from "@domain/models/progress-check-dashboard";
 import { Bar } from "@domain/models/bar-chart-dashboard";
+import { Revenue } from "@domain/models/revenue";
 
 export class DashboatApiRepository {
-    async getSumaryChart(): Promise<Sumary> {
-        const data = await api.get("dashboard/summary-judgement");
+    async getSumaryChart(time?: string): Promise<Sumary> {
+        const data = await api.get(
+            `dashboard/summary-judgement${time ? "-" + time : ""}`
+        );
 
         return Sumary.create({
             total: data.data.data.total,
@@ -34,6 +37,34 @@ export class DashboatApiRepository {
             date: data.data.map((el) => el.date || el.month),
             data3D: data.data.map((el) => el.total_3d),
             data2D: data.data.map((el) => el.total_2d),
+        });
+    }
+
+    async getRevenue(params: any): Promise<Revenue[]> {
+        const { data } = await api.get(
+            "dashboard/quality-trend/" + params.part + "/" + params.character
+        );
+
+        return data.data.map((item) => {
+            return Revenue.create({
+                nominal: item.nominal_value,
+                upper: item.standard_upper,
+                lower: item.standard_lower,
+                saUpper: item.special_accept_upper,
+                saLower: item.special_accept_lower,
+                saResult: item.special_accept_result,
+                result: item.actual_result,
+                createdAt: item.created_at,
+            });
+        });
+    }
+
+    async getCharackter(part: string) {
+        const { data } = await api.get(`dashboard/${part}/character`);
+        return data.data.map((item) => {
+            return {
+                character: item.character,
+            };
         });
     }
 }

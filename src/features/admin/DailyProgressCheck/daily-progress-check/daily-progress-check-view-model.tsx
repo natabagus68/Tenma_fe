@@ -82,6 +82,30 @@ export function useDailyProgressCheck() {
             );
         setDeleteConfirmShow(false);
     };
+
+    const handleChangeJudgment = async (
+        e: React.ChangeEvent<HTMLInputElement>,
+        id: string,
+        index: number
+    ) => {
+        setDailyProgressCheck((prev) => {
+            const data = prev.duplicate();
+            data.updateData({
+                ...prev.data.map((item, i) => {
+                    if (i === index) {
+                        item.unmarshall().judgement = e.target.value;
+                    }
+                    return item;
+                }),
+            });
+            return data;
+        });
+        await dailyProgressCheckRepository.updateJudgmentUniv(
+            id,
+            e.target.value
+        );
+    };
+
     useEffect(() => {
         fetchDailyProgressCheck();
         dailyProgressCheckRepository.getPic().then((res) => setPic(res));
@@ -110,5 +134,6 @@ export function useDailyProgressCheck() {
         onDetail,
         onCancelDelete,
         onConfirmDelete,
+        handleChangeJudgment,
     };
 }

@@ -187,6 +187,35 @@ export function useDailyProgressCheckDetail() {
             });
         setDeleteSegmentConfirmShow(false);
     };
+
+    const handelChangeJudgment = async (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        if (toogle == "2d") {
+            setDailyProgressCheck((prev) => {
+                const data = prev.duplicate();
+                data.judgement2d = e.target.value;
+                return DailyProgressCheck.create(data);
+            });
+            await dailyProgressCheckRepo.updateJudgmen(
+                id,
+                "2d",
+                e.target.value
+            );
+        } else {
+            setDailyProgressCheck((prev) => {
+                const data = prev.duplicate();
+                data.judgement3d = e.target.value;
+                return DailyProgressCheck.create(data);
+            });
+            await dailyProgressCheckRepo.updateJudgmen(
+                id,
+                "3d",
+                e.target.value
+            );
+        }
+    };
+
     useEffect(() => {
         if (state) {
             setLocation(true);
@@ -226,6 +255,7 @@ export function useDailyProgressCheckDetail() {
         setDeleteSegmentConfirmShow,
         deleteSegment,
         confirmDeleteSegment,
+        handelChangeJudgment,
         location,
     };
 }

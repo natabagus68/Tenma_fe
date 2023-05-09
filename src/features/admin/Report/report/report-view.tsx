@@ -46,7 +46,7 @@ const ReportView = () => {
                                 onChange={model.onReportParamChange}
                                 className="w-[150px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
                             >
-                                <option>Semua</option>
+                                <option value="">Semua</option>
                                 <option value="OK">OK</option>
                                 <option value="NG">NG</option>
                                 <option value="Waiting">Waiting</option>
@@ -165,7 +165,12 @@ const ReportView = () => {
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={10} limit={10} page={undefined} />
+                        <Pagination
+                            row={model.report.totalRow}
+                            limit={model.report.limit}
+                            page={model.report.page}
+                            onClick={model.handlePagination}
+                        />
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
 export function useReport() {
-    let reportRepo = new ReportApiRepository();
+    const reportRepo = new ReportApiRepository();
     const [id, setId] = useState<string>("");
     const navigate = useNavigate();
     const tableRef = useRef(null);
@@ -22,6 +22,7 @@ export function useReport() {
             page: 1,
             limit: 10,
             lastPage: 1,
+            totalRow: 0,
             data: [],
         })
     );
@@ -101,6 +102,16 @@ export function useReport() {
         });
     };
 
+    const handlePagination = (value: number) => {
+        setReport((prev) => {
+            const data = PaginatedData.create({
+                ...prev.unmarshall(),
+                page: value,
+            });
+            return data;
+        });
+    };
+
     useEffect(() => {
         fetchPic();
     }, []);
@@ -121,5 +132,6 @@ export function useReport() {
         onCancelExport,
         exportHandleForm,
         buttonExportModal,
+        handlePagination,
     };
 }

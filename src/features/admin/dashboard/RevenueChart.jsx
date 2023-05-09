@@ -1,53 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "./../../../common/components/Chart";
 
-export const RevenueChart = () => {
+export const RevenueChart = ({ datas }) => {
+    // console.log(datas.map((e) => e.result));
     const ctx = useRef();
     const chart = useRef();
     const [blue, setBlue] = useState(12);
     const [frequent, setFrequent] = useState("this_year");
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        setData(datas);
+    }, [datas]);
 
     useEffect(() => {
         const initChart = () => {
             chart.current = new Chart(ctx.current, {
                 type: "line",
                 data: {
-                    labels: [
-                        ["12:00", "Jan"],
-                        "Feb",
-                        "Mar",
-                        "Apr",
-                        "Mei",
-                        "Jun",
-                        "Jul",
-                        "Ags",
-                        "Sep",
-                        "Okt",
-                        "Nov",
-                        "Des",
-                    ],
+                    labels: data.map((item) => item.createdAt),
                     datasets: [
                         {
-                            data: [
-                                75, 75, 75, 100, 200, 120, 90, 140, 150, 120,
-                                90, 150,
-                            ],
-                            borderWidth: 1,
-                            borderColor: "#229BD8",
+                            label: "actual result",
+                            backgroundColor: "#F5A618",
+                            data: data.map((item) => Number(item.result)),
+                        },
+                        {
+                            label: "special accept result",
+                            backgroundColor: "#D0D3D9",
+                            data: data.map((item) => Number(item.saResult)),
                         },
                     ],
                 },
                 options: {
-                    responsive: false,
-                    animations: {
-                        tension: {
-                            duration: 1000,
-                            easing: "linear",
-                            from: 1,
-                            to: 0,
-                            loop: true,
-                        },
-                    },
+                    responsive: true,
                     plugins: {
                         legend: {
                             display: false,
@@ -69,42 +55,29 @@ export const RevenueChart = () => {
         } else {
             try {
                 // chart.current.data.datasets[0].data = [20, blue, 3, 5, 2, 3];
-                chart.current.update();
+                chart.current.destroy();
+                initChart();
             } catch (e) {
                 chart.current.destroy();
                 initChart();
             }
         }
-    }, []);
+    }, [datas]);
 
     return (
         <>
-            <div className="">
-                <canvas className="w-full" ref={ctx}></canvas>
+            <div className="w-full">
+                <canvas className="w-[700px]" ref={ctx}></canvas>
             </div>
             <div className="flex justify-center w-full gap-6 mt-4">
                 <div className="flex gap-2">
-                    <input
-                        type="radio"
-                        name="frequent"
-                        id="this_yearfrequent_input"
-                        defaultValue={`this_year`}
-                        checked={frequent == `this_year`}
-                        onChange={(e) => setFrequent(e.target.value)}
-                    />
+                    <div className="w-11 h-6 bg-[#F5A618]"></div>
                     <label htmlFor="this_yearfrequent_input">
                         Actual Result
                     </label>
                 </div>
                 <div className="flex gap-2">
-                    <input
-                        type="radio"
-                        name="frequent"
-                        id="last_year_frequent_input"
-                        defaultValue={`last_year`}
-                        checked={frequent == `last_year`}
-                        onChange={(e) => setFrequent(e.target.value)}
-                    />
+                    <div className="w-11 h-6 bg-[#D0D3D9]"></div>
                     <label htmlFor="last_year_frequent_input">SA Result</label>
                 </div>
             </div>

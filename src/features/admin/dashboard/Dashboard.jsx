@@ -14,7 +14,6 @@ import { BarChart } from "./BarChart";
 import { dashboardModel } from "./dashboard-view-model";
 export const Dashboard = () => {
     const model = dashboardModel();
-
     return (
         <>
             <div className="flex gap-3 text-gray-500 font-body mb-6">
@@ -69,36 +68,70 @@ export const Dashboard = () => {
                 <div className="flex justify-between">
                     <div className="mb-2">Quality Trends</div>
                     <div className="flex gap-4">
-                        <select name="" id="" className="outline-none px-6">
+                        <select
+                            name="part"
+                            value={model.revenueQuery.part}
+                            onChange={model.handleChangeRevenue}
+                            className="outline-none px-6"
+                        >
                             <option value="" disabled selected>
                                 Part
                             </option>
+                            {model.part.data.map((item) => {
+                                return (
+                                    <option value={item.id}>
+                                        {item.partCode}
+                                    </option>
+                                );
+                            })}
                         </select>
-                        <select name="" id="" className="outline-none px-6">
+                        <select
+                            name="character"
+                            value={model.revenueQuery.character}
+                            onChange={model.handleChangeRevenue}
+                            className="outline-none px-6"
+                        >
                             <option value="" disabled selected>
                                 Character
                             </option>
+                            {model.character.map((item) => {
+                                return (
+                                    <option value={item.character}>
+                                        {item.character}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
                 </div>
-                <RevenueChart />
+                {model.revenue && <RevenueChart datas={model?.revenue} />}
             </div>
 
             <div className="w-full flex justify-between mt-5 gap-4">
                 <div className="w-1/2 rounded-md shadow-lg bg-white justify-center items-center">
-                    <div className="px-6 py-3">
+                    <div className="px-6 py-3 flex justify-between">
                         <p className="text-xl">Summary Judgement</p>
+                        <select
+                            onChange={model.handleSumaryQuery}
+                            className="px-6 py-2 rounded-md outline-none bg-transparent"
+                        >
+                            <option value="">Today</option>
+                            <option value="month">Month</option>
+                            <option value="year">Year</option>
+                        </select>
                     </div>
-                    {model.sumaryRunner ? (
-                        <SumaryChart
-                            datas={[
-                                model.sumaryData.ok,
-                                model.sumaryData.waiting,
-                                model.sumaryData.ng,
-                            ]}
-                        />
-                    ) : null}
-
+                    <div className="relative">
+                        {model.sumaryRunner ? (
+                            <SumaryChart
+                                datas={[
+                                    model.sumaryData.ok,
+                                    model.sumaryData.waiting,
+                                    model.sumaryData.ng,
+                                ]}
+                                total={model.sumaryData.total}
+                            />
+                        ) : null}
+                    </div>
                     <div className="w-full flex gap-3 justify-center py-6">
                         <div className="flex gap-2 items-center">
                             <div className="w-8 h-8 bg-[#12B569] rounded-full"></div>
@@ -121,7 +154,7 @@ export const Dashboard = () => {
                             name="barQuery"
                             value={model.barQuery}
                             onChange={model.handleChangeBarQuery}
-                            className="px-3 py-2 outline-none rounded-md"
+                            className="px-3 py-2 outline-none rounded-md bg-transparent"
                         >
                             <option value="daily">Daily</option>
                             <option value="monthly">Monthly</option>
