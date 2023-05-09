@@ -15,6 +15,7 @@ export default function useCustomerMOdelGroup() {
             page: 0,
             limit: 0,
             lastPage: 0,
+            totalRow: 0,
             data: [],
         })
     );
@@ -60,6 +61,12 @@ export default function useCustomerMOdelGroup() {
             return cust;
         });
     };
+    const onPageChange = (page: number) => {
+        setCustomerModelGroup((prev) => {
+            const data = PaginatedData.create({ ...prev.unmarshall(), page });
+            return data;
+        });
+    };
     useEffect(() => {
         customerModelGroupRepository
             .get({
@@ -77,5 +84,6 @@ export default function useCustomerMOdelGroup() {
         showModal,
         setShowModal,
         onConfirm,
+        onPageChange,
     };
 }

@@ -17,6 +17,7 @@ export function useReport() {
         dateFrom: "",
         dateTo: "",
     });
+    const [pdfData, setPdfData] = useState([]);
     const [report, setReport] = useState<PaginatedData<Report>>(
         PaginatedData.create({
             page: 1,
@@ -79,6 +80,10 @@ export function useReport() {
         e.preventDefault();
         setExportModalShow(false);
         setId("");
+        setExportDate({
+            dateFrom: "",
+            dateTo: "",
+        });
     };
 
     const exportHandleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,14 +96,14 @@ export function useReport() {
     const buttonExportModal = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         reportRepo.getRepotForDownload(id, exportDate).then((result) => {
-            console.log(result);
-            const worksheet = XLSX.utils.json_to_sheet(result);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, "sheet1");
-            XLSX.writeFile(workbook, "DataSheet.xlsx");
-            console.log(tableRef.current);
+            setPdfData(result);
             setExportModalShow(false);
             setId("");
+            setExportDate({
+                dateFrom: "",
+                dateTo: "",
+            });
+            console.log(pdfData);
         });
     };
 
@@ -125,6 +130,7 @@ export function useReport() {
         exportModalShow,
         exportDate,
         tableRef,
+        pdfData,
         onReportParamChange,
         onDetail,
         onDownload,

@@ -15,6 +15,7 @@ export default function useCustomerModel() {
             page: 0,
             limit: 0,
             lastPage: 0,
+            totalRow: 0,
             data: [],
         })
     );
@@ -54,6 +55,12 @@ export default function useCustomerModel() {
             return cust;
         });
     };
+    const onPageChange = (page: number) => {
+        setCustomerModel((prev) => {
+            const data = PaginatedData.create({ ...prev.unmarshall(), page });
+            return data;
+        });
+    };
     useEffect(() => {
         customerModelRepository
             .get({ limit: customerModel.limit, page: customerModel.page })
@@ -68,5 +75,6 @@ export default function useCustomerModel() {
         onConfirmDelete,
         showModal,
         setShowModal,
+        onPageChange,
     };
 }

@@ -15,6 +15,7 @@ export default function () {
             page: 0,
             limit: 0,
             lastPage: 0,
+            totalRow: 0,
             data: [],
         })
     );
@@ -56,6 +57,15 @@ export default function () {
             return cust;
         });
     };
+    const onPageChange = (page: number) => {
+        setCustomer((prev) => {
+            const data = PaginatedData.create({
+                ...prev.unmarshall(),
+                page,
+            });
+            return data;
+        });
+    };
     useEffect(() => {
         customerRepository
             .get({ limit: customer.limit, page: customer.page })
@@ -72,5 +82,6 @@ export default function () {
         setShowModal,
         openModal,
         onConfirm,
+        onPageChange
     };
 }

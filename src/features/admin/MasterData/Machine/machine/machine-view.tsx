@@ -89,9 +89,10 @@ const Machine = () => {
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
                         <Pagination
-                            row={1}
-                            limit={10}
+                            row={machine.machine.totalRow}
+                            limit={machine.machine.limit}
                             page={machine.machine.page}
+                            onClick={machine.onPageChange}
                         />
                     </div>
                 </div>

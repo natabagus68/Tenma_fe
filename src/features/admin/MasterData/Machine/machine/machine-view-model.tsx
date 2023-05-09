@@ -12,6 +12,7 @@ export function useMachine() {
             page: 1,
             limit: 10,
             lastPage: 1,
+            totalRow: 0,
             data: [],
         })
     );

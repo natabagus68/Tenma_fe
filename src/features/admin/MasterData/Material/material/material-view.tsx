@@ -87,7 +87,12 @@ const MaterialView = () => {
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={1} limit={10} page={1} />
+                        <Pagination
+                            row={material.material.totalRow}
+                            limit={material.material.limit}
+                            page={material.material.page}
+                            onClick={material.onPageChange}
+                        />
                     </div>
                 </div>
             </div>

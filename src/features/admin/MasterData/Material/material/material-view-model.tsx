@@ -15,6 +15,7 @@ export default function useMaterial() {
             page: 0,
             limit: 0,
             lastPage: 0,
+            totalRow: 0,
             data: [],
         })
     );
@@ -50,10 +51,18 @@ export default function useMaterial() {
             return material;
         });
     };
-    const onPageChange = (page: number) => {};
-    const onCancel = (e:React.MouseEvent<HTMLButtonElement>) => {
-        navigate(-1)
-    }
+    const onPageChange = (page: number) => {
+        setMaterial((prev) => {
+            const data = PaginatedData.create({
+                ...prev.unmarshall(),
+                page,
+            });
+            return data;
+        });
+    };
+    const onCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        navigate(-1);
+    };
     useEffect(() => {
         materialRepository
             .get({ limit: material.limit, page: material.page })
@@ -70,6 +79,6 @@ export default function useMaterial() {
         onPageChange,
         deleteConfirmShow,
         setDeleteConfirmShow,
-        onCancel
+        onCancel,
     };
 }

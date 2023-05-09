@@ -56,7 +56,12 @@ const CustomerModel = () => {
                 </tbody>
             </table>
             <div className="flex items-center justify-end mt-4 px-5">
-                <Pagination row={1} limit={10} />
+                <Pagination
+                    row={customerModel.customerModel.totalRow}
+                    limit={customerModel.customerModel.limit}
+                    page={customerModel.customerModel.page}
+                    onClick={customerModel.onPageChange}
+                />
             </div>
         </>
     );

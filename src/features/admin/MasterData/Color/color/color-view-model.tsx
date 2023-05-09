@@ -15,6 +15,7 @@ export default function useColor() {
             page: 0,
             limit: 0,
             lastPage: 0,
+            totalRow: 0,
             data: [],
         })
     );
@@ -44,7 +45,15 @@ export default function useColor() {
             return color;
         });
     };
-    const onPageChange = (page: number) => {};
+    const onPageChange = (page: number) => {
+        setColor((prev) => {
+            const data = PaginatedData.create({
+                ...prev.unmarshall(),
+                page: page,
+            });
+            return data;
+        });
+    };
     useEffect(() => {
         colorRepository
             .get({ limit: color.limit, page: color.page })

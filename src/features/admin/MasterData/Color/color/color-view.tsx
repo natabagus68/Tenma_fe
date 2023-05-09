@@ -78,7 +78,12 @@ const Color = () => {
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={1} limit={10} page={undefined} />
+                        <Pagination
+                            row={color.color.totalRow}
+                            limit={color.color.limit}
+                            page={color.color.page}
+                            onClick={color.onPageChange}
+                        />
                     </div>
                 </div>
             </div>

@@ -61,7 +61,12 @@ const Customer = () => {
                 </tbody>
             </table>
             <div className="flex items-center justify-end mt-4 px-5">
-                <Pagination row={1} limit={10} />
+                <Pagination
+                    row={customer.customer.totalRow}
+                    limit={customer.customer.limit}
+                    page={customer.customer.page}
+                    onClick={customer.onPageChange}
+                />
             </div>
         </>
     );

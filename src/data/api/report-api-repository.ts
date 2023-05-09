@@ -170,7 +170,10 @@ export class ReportApiRepository implements ReportRepository {
                 date_to: params.dateTo,
             },
         });
-        return data.data;
+        const result = data.data.filter(
+            (item) => item.daily_progress.length !== 0
+        );
+        return result;
     }
 
     async getpartReportDetail(id: string): Promise<DailyProgressCheck> {

@@ -104,7 +104,12 @@ const MeasurementStd = () => {
                     </table>
                 </div>
                 <div className="w-full flex justify-end pt-5 pr-5">
-                    <Pagination row={1} limit={10} page={undefined} />
+                    <Pagination
+                        row={measurementStd.measurementStd.totalRow}
+                        limit={measurementStd.measurementStd.limit}
+                        page={measurementStd.measurementStd.page}
+                        onClick={measurementStd.onPageChange}
+                    />
                 </div>
             </div>
             <ModalDelete

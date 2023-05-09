@@ -19,6 +19,7 @@ export default function useMeasurement() {
             page: 1,
             limit: 10,
             lastPage: 0,
+            totalRow: 0,
             data: [],
         })
     );
@@ -64,7 +65,13 @@ export default function useMeasurement() {
     };
 
     const onCancel = () => {
-        navigate(-1)
+        navigate(-1);
+    };
+    const onPageChange = (page: number) => {
+        setMeasurementStd((prev) => {
+            const data = PaginatedData.create({ ...prev.unmarshall(), page });
+            return data;
+        });
     };
     const onConfirmDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -87,7 +94,7 @@ export default function useMeasurement() {
                 page: measurementStd.page,
             })
             .then((result) => setMeasurementStd(result));
-    }, []);
+    }, [measurementStd]);
 
     return {
         measurementStd,
@@ -99,5 +106,6 @@ export default function useMeasurement() {
         deleteConfirmShow,
         setDeleteConfirmShow,
         onConfirmDelete,
+        onPageChange,
     };
 }
