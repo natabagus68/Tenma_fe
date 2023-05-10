@@ -148,6 +148,7 @@ const TableExcel = ({ datas, ref }) => {
                                             <th
                                                 className="border border-gray-200 bg-[#F0F1F3] text-center py-5"
                                                 rowSpan={
+                                                    item.cavity_type == "2D" &&
                                                     item.std_measurement
                                                         .special_accept_segments
                                                         .length + 1
@@ -194,12 +195,11 @@ const TableExcel = ({ datas, ref }) => {
                                                 }
                                             )}
 
-                                        {/* 3D */}
-
                                         <tr>
                                             <th
                                                 className="border border-gray-200 bg-[#F0F1F3] text-center py-5"
                                                 rowSpan={
+                                                    item.cavity_type == "3D" &&
                                                     item.std_measurement
                                                         .special_accept_segments
                                                         .length + 1
