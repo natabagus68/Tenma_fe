@@ -367,7 +367,7 @@ export default createBrowserRouter([
                                 element: <Access />,
                             },
                             {
-                                path: "menu",
+                                path: ":id/menu",
                                 element: <Menu />,
                             },
                             {

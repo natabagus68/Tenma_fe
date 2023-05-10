@@ -20,8 +20,20 @@ export class AccessApiRepository implements AccessRepository {
             }),
         });
     }
-    show(id: string): Promise<Access> {
-        throw new Error("Method not implemented.");
+    async show(id: string): Promise<PaginatedData<Access>> {
+        const { data } = await api.get(`access/${id}/menu`);
+        return PaginatedData.create({
+            page: data.page,
+            limit: data.limit,
+            lastPage: data.lastPage,
+            totalRow: data.totalRows,
+            data: data.data.map((e) => {
+                return Access.create({
+                    id: e.id,
+                    name: e.name,
+                });
+            }),
+        });
     }
     update(id: string, access: Access): Promise<Access> {
         throw new Error("Method not implemented.");
@@ -30,6 +42,7 @@ export class AccessApiRepository implements AccessRepository {
         await api.post("access", { name });
     }
     async destroy(id: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+        await api.delete("");
+        return true;
     }
 }

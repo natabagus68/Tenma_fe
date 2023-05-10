@@ -7,6 +7,7 @@ import { CustomerApiRepository } from "@data/api/customer-api-repository";
 import { CustomerRepository } from "@domain/repositories/customer-repository";
 
 export default function () {
+    const [id, setId] = useState<string>("");
     const customerRepository: CustomerRepository = new CustomerApiRepository();
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -43,19 +44,27 @@ export default function () {
             return cust;
         });
         setShowModal(!showModal);
+        setId(id);
     };
 
-    const onConfirm = async (e: React.MouseEvent) => {
+    const onConfirm = async (e: React.MouseEvent, id: string) => {
         e.preventDefault();
-        const id = customer.data.find((item) => item.checked).id;
-        console.log(id);
+
         await customerRepository.destroy(id);
-        setShowModal(false);
         setCustomer((prev) => {
-            const cust = PaginatedData.create<Customer>(prev.unmarshall());
-            cust.data = cust.data.filter((item) => !item.checked);
-            return cust;
+            return PaginatedData.create({
+                ...prev.unmarshall(),
+                data: prev.unmarshall().data.filter((e) => e.id !== id),
+            });
         });
+
+        setShowModal(!showModal);
+        setId("");
+    };
+
+    const onCancelModal = () => {
+        setId("");
+        setShowModal(!showModal);
     };
     const onPageChange = (page: number) => {
         setCustomer((prev) => {
@@ -72,9 +81,10 @@ export default function () {
             .then((result) => {
                 return setCustomer(result);
             });
-    }, []);
+    }, [customer]);
 
     return {
+        id,
         customer,
         onEdit,
         onAddData,
@@ -82,6 +92,7 @@ export default function () {
         setShowModal,
         openModal,
         onConfirm,
-        onPageChange
+        onPageChange,
+        onCancelModal,
     };
 }

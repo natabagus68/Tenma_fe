@@ -1,22 +1,28 @@
 import React from "react";
 
-export default function ModalDelete({ showModal, setShowModal, onConfirm = null }) {
+export default function ModalDelete({
+    showModal,
+    setShowModal,
+    onCancel,
+    onConfirm = null,
+    id = null,
+}) {
     return (
         <>
-            { showModal ? (
+            {showModal ? (
                 <>
                     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                            {/*content*/ }
+                            {/*content*/}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none px-20 pt-12">
-                                {/*header*/ }
+                                {/*header*/}
                                 <div className="flex items-center flex-col  justify-center p-5 rounded-t ">
                                     <div className="w-32 h-32 relative rounded-full bg-red-500 text-center items-center">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
-                                            strokeWidth={ 1.5 }
+                                            strokeWidth={1.5}
                                             stroke="currentColor"
                                             className="w-62 h-12 absolute top-10 left-10 text-white "
                                         >
@@ -38,19 +44,19 @@ export default function ModalDelete({ showModal, setShowModal, onConfirm = null 
                                         </p>
                                     </div>
                                 </div>
-                                {/*footer*/ }
+                                {/*footer*/}
                                 <div className="flex items-center justify-center p-6 rounded-b gap-3">
                                     <button
                                         className="text-gray-600 background-transparent  uppercase px-12 py-3 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 border border-gray-100 rounded-md"
                                         type="button"
-                                        onClick={ () => setShowModal(false) }
+                                        onClick={onCancel}
                                     >
                                         Cancel
                                     </button>
                                     <button
                                         className="bg-red-500 text-white active:bg-red-600  uppercase text-sm px-12 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={ onConfirm }
+                                        onClick={(e) => onConfirm(e, id)}
                                     >
                                         Delete
                                     </button>
@@ -60,7 +66,7 @@ export default function ModalDelete({ showModal, setShowModal, onConfirm = null 
                     </div>
                     <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
                 </>
-            ) : null }
+            ) : null}
         </>
     );
 }

@@ -13,6 +13,7 @@ export default function useUserAccess() {
             page: 0,
             limit: 10,
             lastPage: 0,
+            totalRow: 0,
             data: [],
         })
     );
@@ -24,8 +25,8 @@ export default function useUserAccess() {
             .then((result) => setAccess(result));
     };
 
-    const toMenu = () => {
-        navigate(`${config.pathPrefix}user/access/menu`);
+    const toMenu = (id: string) => {
+        navigate(`${config.pathPrefix}user/access/${id}/menu`);
     };
     const toEdit = (id: string) => {
         navigate(`${config.pathPrefix}user/access/edit-new-role/${id}`);
@@ -34,6 +35,14 @@ export default function useUserAccess() {
         navigate(`${config.pathPrefix}user/access/add-new-role`);
     };
 
+    const onPageChange = (page: number) => {
+        setAccess((prev) => {
+            return PaginatedData.create({
+                ...prev.unmarshall(),
+                page,
+            });
+        });
+    };
     const toDelete = (id: string) => {};
     const confirmDelete = () => {};
 
@@ -48,5 +57,6 @@ export default function useUserAccess() {
         toAddData,
         toDelete,
         confirmDelete,
+        onPageChange,
     };
 }

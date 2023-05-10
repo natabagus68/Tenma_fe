@@ -53,7 +53,12 @@ const Access = () => {
                                         {item.name}
                                     </td>
                                     <td className="py-6  pl-80 text-gray-600 flex gap-3 justify-start">
-                                        <button className="py-[12px] px-[20px] bg-sky-standart items-center rounded-md text-white flex gap-2">
+                                        <button
+                                            onClick={() =>
+                                                model.toMenu(item.id)
+                                            }
+                                            className="py-[12px] px-[20px] bg-sky-standart items-center rounded-md text-white flex gap-2"
+                                        >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="none"
@@ -94,7 +99,12 @@ const Access = () => {
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={1} limit={10} />
+                        <Pagination
+                            row={model.access.totalRows}
+                            limit={model.access.limit}
+                            page={model.access.page}
+                            onClick={model.onPageChange}
+                        />
                     </div>
                 </div>
             </div>

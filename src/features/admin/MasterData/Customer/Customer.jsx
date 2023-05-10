@@ -11,15 +11,15 @@ import useCustomer from "./customer-view-model";
 import ModalDelete from "@common/components/Modal/ModalDelete";
 const Customer = () => {
     const customer = useCustomer();
-    if (customer.customer) {
-        console.log(customer.customer);
-    }
+
     return (
         <>
             <ModalDelete
                 showModal={customer.showModal}
                 setShowModal={customer.setShowModal}
+                onCancel={customer.onCancelModal}
                 onConfirm={customer.onConfirm}
+                id={customer.id}
             />
             <table className="w-full">
                 <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
