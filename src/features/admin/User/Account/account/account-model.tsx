@@ -20,6 +20,7 @@ export function useAccount() {
             page: 1,
             limit: 10,
             lastPage: 1,
+            totalRow: 0,
             data: [],
         })
     );
@@ -84,6 +85,15 @@ export function useAccount() {
         navigate(`${config.pathPrefix}user/create`);
     };
 
+    const onPageChange = (page: number) => {
+        setAccount((prev) => {
+            return PaginatedData.create({
+                ...prev.unmarshall(),
+                page,
+            });
+        });
+    };
+
     useEffect(() => {
         userRepo
             .get({
@@ -112,5 +122,6 @@ export function useAccount() {
         onDelete,
         onConfirmDelete,
         onCreateNewAccount,
+        onPageChange,
     };
 }

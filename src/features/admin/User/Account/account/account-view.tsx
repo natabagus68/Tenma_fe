@@ -152,7 +152,12 @@ const Account = () => {
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end mt-4 px-5">
-                        <Pagination row={1} limit={10} page={undefined} />
+                        <Pagination
+                            row={model.account.totalRow}
+                            limit={model.account.limit}
+                            page={model.account.page}
+                            onClick={model.onPageChange}
+                        />
                     </div>
                 </div>
             </div>
