@@ -6,7 +6,7 @@ const JudgemnetIcon = ({ value, changer }) => {
     return (
         <select
             onChange={changer}
-            value={value}
+            value={input}
             className={`py-2 rounded-full ${
                 input === "waiting"
                     ? "bg-yellow-500"
@@ -17,16 +17,10 @@ const JudgemnetIcon = ({ value, changer }) => {
                     : ""
             }  text-white  text-center inline px-3 outline-none`}
         >
-            {value}
-            <option value="waiting" selected={input === "waiting"}>
-                Waiting
-            </option>
-            <option value="ok" selected={input === "ok"}>
-                OK
-            </option>
-            <option value="ng" selected={input === "ng"}>
-                NG
-            </option>
+            {/* {value} */}
+            <option value="waiting">Waiting</option>
+            <option value="ok">OK</option>
+            <option value="ng">NG</option>
         </select>
     );
 };

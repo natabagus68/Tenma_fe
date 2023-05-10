@@ -179,7 +179,9 @@ const ReportView = () => {
                 {model.pdfData.length !== 0
                     ? model.pdfData.map((item) => {
                           return item.daily_progress.map((e) => {
-                              return <TableExcel datas={e} />;
+                              return (
+                                  <TableExcel datas={e} ref={model.tableRef} />
+                              );
                           });
                       })
                     : null}

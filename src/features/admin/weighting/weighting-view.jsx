@@ -1,6 +1,7 @@
 import { Breadcrumbs } from "@common/components";
 import { useWeighting } from "./weighting-view-model";
 import ModalConfirm from "@common/components/Modal/ModalConfirm";
+import moment from "moment";
 
 const Weighting = () => {
     const model = useWeighting();
@@ -128,6 +129,7 @@ const Weighting = () => {
                         </thead>
                         <tbody>
                             {model.weighting?.map((item) => {
+                                console.log(item.progressCheck);
                                 return (
                                     <tr>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
@@ -137,13 +139,19 @@ const Weighting = () => {
                                             TRX123456344
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
-                                            {item.progressCheck.part.partCode}
+                                            {item.progressCheck.part.part_cd}
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
-                                            {item.progressCheck.weightPart}
+                                            {item.progressCheck.part_weight_qis}
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
-                                            {item.progressCheck.updatedAt}
+                                            {moment(
+                                                item.progressCheck.updated_at
+                                            ).format("l")}
+                                            &nbsp;
+                                            {moment(
+                                                item.progressCheck.updated_at
+                                            ).format("LT")}
                                         </td>
                                     </tr>
                                 );

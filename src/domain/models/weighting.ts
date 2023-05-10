@@ -7,7 +7,7 @@ import { Transaction } from "./transaction";
 export interface IWeighting {
     id?: string;
     tools: Tool;
-    progressCheck: DailyProgressCheck;
+    progressCheck: [];
 }
 
 export class Weighting extends Entity<IWeighting> {
@@ -28,7 +28,7 @@ export class Weighting extends Entity<IWeighting> {
     get tools(): Tool {
         return this._props.tools;
     }
-    get progressCheck(): DailyProgressCheck {
+    get progressCheck(): [] {
         return this._props.progressCheck;
     }
 }

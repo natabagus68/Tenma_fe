@@ -84,26 +84,20 @@ export function useDailyProgressCheck() {
     };
 
     const handleChangeJudgment = async (
-        e: React.ChangeEvent<HTMLInputElement>,
+        e: React.ChangeEvent<HTMLSelectElement>,
         id: string,
         index: number
     ) => {
+        const value = `${e.target.value}`;
+        await dailyProgressCheckRepository.updateJudgmentUniv(id, value);
         setDailyProgressCheck((prev) => {
-            const data = prev.duplicate();
-            data.updateData({
-                ...prev.data.map((item, i) => {
-                    if (i === index) {
-                        item.unmarshall().judgement = e.target.value;
-                    }
-                    return item;
-                }),
+            const newState = prev.duplicate();
+            newState.data = newState.data.map((item, i) => {
+                i == index ? (item.judgement = value) : true;
+                return item;
             });
-            return data;
+            return newState;
         });
-        await dailyProgressCheckRepository.updateJudgmentUniv(
-            id,
-            e.target.value
-        );
     };
 
     useEffect(() => {

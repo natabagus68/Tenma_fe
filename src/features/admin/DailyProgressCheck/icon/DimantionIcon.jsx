@@ -3,7 +3,7 @@ import React from "react";
 const DimantionIcon = ({ value }) => {
     let input = "";
     if (typeof value === "string") input += value.toLowerCase();
-    console.log(input, "icon");
+    // console.log(input, "icon");
     if (input === "ok") {
         return (
             <>

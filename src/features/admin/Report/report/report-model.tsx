@@ -4,14 +4,15 @@ import { PaginatedData } from "@domain/models/paginated-data";
 import { Pic } from "@domain/models/pic";
 import { Report } from "@domain/models/report";
 import { ReportRepository } from "@domain/repositories/report-repository";
+import jsPDF from "jspdf";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as XLSX from "xlsx";
+
 export function useReport() {
     const reportRepo = new ReportApiRepository();
     const [id, setId] = useState<string>("");
     const navigate = useNavigate();
-    const tableRef = useRef(null);
+    const tableRef = useRef<HTMLElement>(null);
     const [pic, setPic] = useState<Pic[]>([]);
     const [exportDate, setExportDate] = useState({
         dateFrom: "",
@@ -116,6 +117,18 @@ export function useReport() {
             return data;
         });
     };
+
+    // const downloadToPDF = () => {
+    //     var doc = new jsPDF();
+
+    //     doc.html(tableRef, {
+    //         callback: function (doc) {
+    //             doc.save();
+    //         },
+    //         x: 10,
+    //         y: 10,
+    //     });
+    // };
 
     useEffect(() => {
         fetchPic();

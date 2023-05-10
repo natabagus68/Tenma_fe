@@ -181,7 +181,7 @@ const DailyProgessCheckView = () => {
                                         </td>
                                         <td className="py-6 text-start pl-10 text-gray-600  items-center ">
                                             <DimantionIcon
-                                                value={item.judgement3d}
+                                                value={item.judgement2d}
                                             />
                                         </td>
                                         <td className="py-6 text-start pl-10 text-gray-600  items-center ">

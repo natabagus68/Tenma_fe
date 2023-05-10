@@ -1,8 +1,8 @@
 import moment from "moment";
 import LogoTenma from "../../../../assets/tenma.png";
-const TableExcel = ({ datas }) => {
+const TableExcel = ({ datas, ref }) => {
     return (
-        <>
+        <div ref={ref}>
             <div className=" w-[90%] m-auto  py-12 h-screen left-12  ">
                 <div className="flex justify-between items-top">
                     <div className=" flex flex-col gap-3">
@@ -32,7 +32,7 @@ const TableExcel = ({ datas }) => {
                                 <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
                                     {datas.part.part_name}
                                 </td>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
+                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 pr-52 border border-gray-200">
                                     -
                                 </td>
                             </tr>
@@ -43,7 +43,7 @@ const TableExcel = ({ datas }) => {
                                 <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
                                     {datas.part.part_cd}
                                 </td>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
+                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 pr-52 border border-gray-200">
                                     -
                                 </td>
                             </tr>
@@ -54,7 +54,7 @@ const TableExcel = ({ datas }) => {
                                 <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
                                     {datas.part.customer_model.name}
                                 </td>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
+                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 pr-52 border border-gray-200">
                                     -
                                 </td>
                             </tr>
@@ -452,7 +452,7 @@ const TableExcel = ({ datas }) => {
                     </table>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

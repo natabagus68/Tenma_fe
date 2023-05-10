@@ -79,7 +79,7 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
     get judgement(): string {
         return this._props.judgement;
     }
-    set judgement(value) {
+    set judgement(value: string) {
         this._props.judgement = value;
     }
     get judgement2d(): string {

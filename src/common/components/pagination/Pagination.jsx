@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const Pagination = ({ row, limit, page, onClick = null }) => {
-    console.log(row, limit);
+    // console.log(row, limit);
     const [count, setCount] = useState([]);
     useEffect(() => {
         const counting = Math.ceil(Number(row) / Number(limit));
