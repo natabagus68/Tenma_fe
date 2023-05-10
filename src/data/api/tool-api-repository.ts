@@ -13,6 +13,7 @@ export class ToolApiRepository implements ToolRepository {
             page: props.page,
             limit: props.limit,
             lastPage: data.totalPage,
+            totalRow: data.totalRows,
             data: (data.data || []).map((item) =>
                 Tool.create({
                     id: item.id,

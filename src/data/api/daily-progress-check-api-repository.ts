@@ -31,6 +31,7 @@ export class DailyProgressCheckApiRepository
             page: props.page,
             limit: props.limit,
             lastPage: data.totalPage,
+            totalRow:data.totalRows,
             data: data.data.map((item) =>
                 DailyProgressCheck.create({
                     id: item.id,

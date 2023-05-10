@@ -19,6 +19,7 @@ export class MachineApiRepository implements MachineRepository {
             page: props.page,
             limit: props.limit,
             lastPage: data.totalPage,
+            totalRow: data.totalRows,
             data: (data.data || []).map((item) =>
                 Machine.create({
                     id: item.id,
@@ -68,7 +69,7 @@ export class MachineApiRepository implements MachineRepository {
         return Machine.create({
             id: data.id,
             idMachine: data.id_machine,
-            noMachine : data.no,
+            noMachine: data.no,
             checked: false,
         });
     }

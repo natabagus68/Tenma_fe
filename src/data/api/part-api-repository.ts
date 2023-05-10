@@ -38,6 +38,7 @@ export class PartApiRepository implements PartRepository {
             limit: tableParam.limit,
             page: tableParam.page,
             q: tableParam.q,
+            totalRow: data.totalRows,
         });
     }
     async show(id: string): Promise<Part> {

@@ -16,6 +16,7 @@ export class MeasurementStdApiRepository implements MeasurementStdRepository {
             page: params.page,
             limit: params.limit,
             lastPage: data.totalPage,
+            totalRow: data.totalRows,
             data: data.data.map((item) => {
                 return MeasurementStd.create({
                     id: item.id,

@@ -13,6 +13,7 @@ export class ColorApiRepository implements ColorRepository {
             page: props.page,
             limit: props.limit,
             lastPage: data.totalPage,
+            totalRow: data.totalRows,
             data: (data.data || []).map((item) =>
                 Color.create({
                     id: item.id,

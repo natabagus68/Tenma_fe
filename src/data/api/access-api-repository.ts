@@ -11,6 +11,7 @@ export class AccessApiRepository implements AccessRepository {
             page: params.page,
             limit: params.limit,
             lastPage: data.totalPage,
+            totalRow: data.totalRows,
             data: (data.data || []).map((el) => {
                 return Access.create({
                     id: el.id,

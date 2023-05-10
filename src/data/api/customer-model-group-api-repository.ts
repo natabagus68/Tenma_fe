@@ -21,6 +21,7 @@ export class CustomerModelGroupApiRepository
             page: data.page,
             limit: data.limit,
             lastPage: data.totalPage,
+            totalRow: data.totalRows,
         });
     }
     async show(id: string): Promise<CustomerModelGroup> {

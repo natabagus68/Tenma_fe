@@ -17,6 +17,7 @@ export class CustomerModelApiRepository implements CustomerModelRepository {
             page: data.page,
             limit: data.limit,
             lastPage: data.totalPage,
+            totalRow:data.totalRows,
         });
     }
     async show(id: string): Promise<CustomerModel> {
