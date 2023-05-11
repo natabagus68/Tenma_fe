@@ -2,16 +2,18 @@ import { config } from "@common/utils";
 import { DailyProgressCheckApiRepository } from "@data/api/daily-progress-check-api-repository";
 import { ReportApiRepository } from "@data/api/report-api-repository";
 import { PaginatedData } from "@domain/models/paginated-data";
+import { Pic } from "@domain/models/pic";
 import { Report } from "@domain/models/report";
 import { ReportRepository } from "@domain/repositories/report-repository";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as XLSX from "xlsx";
+
 export default function useReportDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [DownloadModalShow, setDownloadModalShow] = useState(false);
     const reportRepo = new ReportApiRepository();
+    const [pic, setPic] = useState<Pic[]>([]);
     const [reportDetail, setReportDetail] = useState<PaginatedData<Report>>(
         PaginatedData.create({
             page: 1,
@@ -73,16 +75,24 @@ export default function useReportDetail() {
     const onDowloadReport = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         reportRepo.getRepotForDownload(id, downoladParam).then((result) => {
-            // const json = JSON.parse(result);
-            // const workbook = XLSX.utils.book_new();
-            // const worksheet = XLSX.utils.json_to_sheet(json);
-            // XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-            // XLSX.writeFile(workbook, "data.xlsx");
             console.log(result);
             setDownloadModalShow(false);
         });
     };
 
+    const fetchPic = () => {
+        reportRepo.getPic().then((result) => setPic(result));
+    };
+    const handleParams = (
+        e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+    ) => {
+        setReportParam((prev) => {
+            return { ...prev, [e.target.name]: e.target.value };
+        });
+    };
+    useEffect(() => {
+        fetchPic();
+    }, []);
     useEffect(() => {
         fetchData();
     }, [reportParam]);
@@ -91,7 +101,10 @@ export default function useReportDetail() {
         reportDetail,
         toBack,
         toDetailPart,
+        handleParams,
+        pic,
         DownloadModalShow,
+        reportParam,
         openModalDownload,
         cancelModelDownload,
         onChangeInputDownload,

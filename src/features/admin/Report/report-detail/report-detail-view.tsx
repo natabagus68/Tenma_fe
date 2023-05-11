@@ -73,20 +73,29 @@ const ReportDetailView = () => {
                             <label className="text-gray-600">PIC</label>
                             <select
                                 name="pic"
-                                id=""
-                                className="w-[100px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
+                                value={model.reportParam.pic}
+                                onChange={model.handleParams}
+                                className="w-[150px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
                             >
-                                <option value="1">1</option>
+                                <option value={""}>semua</option>
+                                {model.pic?.map((e) => {
+                                    return (
+                                        <option value={e.id}>{e.name}</option>
+                                    );
+                                })}
                             </select>
                         </div>
                         <div className="flex gap-3 items-center">
                             <label className="text-gray-600">Judgement</label>
                             <select
-                                name="pic"
-                                id=""
-                                className="w-[150px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
+                                name="judgement"
+                                value={model.reportParam.judgement}
+                                onChange={model.handleParams}
+                                className="w-[100px] py-2 px-3 bg-white outline-none border border-gray-100 rounded-md"
                             >
-                                <option>semua</option>
+                                <option value="Waiting">Waiting</option>
+                                <option value="OK">OK</option>
+                                <option value="NG">NG</option>
                             </select>
                         </div>
                     </div>
@@ -110,6 +119,8 @@ const ReportDetailView = () => {
                         <input
                             type="text"
                             name="search"
+                            value={model.reportParam.search}
+                            onChange={model.handleParams}
                             placeholder="Search Part Code"
                             className="outline-none pl-9 py-4  border border-gray-100 rounded-xl w-[280px] text-rubik  text-sm placeholder:text-gray-100 text-gray-600"
                         />
