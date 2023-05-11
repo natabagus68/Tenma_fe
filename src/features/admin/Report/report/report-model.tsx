@@ -7,12 +7,14 @@ import { ReportRepository } from "@domain/repositories/report-repository";
 import jsPDF from "jspdf";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
 
 export function useReport() {
+    const [count, setCount] = useState(0);
     const reportRepo = new ReportApiRepository();
     const [id, setId] = useState<string>("");
     const navigate = useNavigate();
-    const tableRef = useRef<HTMLElement>(null);
+    const tableRef = useRef();
     const [pic, setPic] = useState<Pic[]>([]);
     const [exportDate, setExportDate] = useState({
         dateFrom: "",
@@ -104,7 +106,7 @@ export function useReport() {
                 dateFrom: "",
                 dateTo: "",
             });
-            console.log(pdfData);
+            downloadToPDF();
         });
     };
 
@@ -117,18 +119,19 @@ export function useReport() {
             return data;
         });
     };
-
-    // const downloadToPDF = () => {
-    //     var doc = new jsPDF();
-
-    //     doc.html(tableRef, {
-    //         callback: function (doc) {
-    //             doc.save();
-    //         },
-    //         x: 10,
-    //         y: 10,
-    //     });
-    // };
+    let i = 0;
+    const downloadToPDF = () => {
+        if (pdfData) {
+            setTimeout(() => {
+                let html = window.document.querySelectorAll(".table-export");
+                html.forEach((e, i) => {
+                    e.setAttribute("key", `${i}`);
+                    window.document.body.innerHTML = e.outerHTML;
+                    window.print();
+                });
+            }, 500);
+        }
+    };
 
     useEffect(() => {
         fetchPic();
@@ -137,6 +140,7 @@ export function useReport() {
         fetchReport();
     }, [reportParam]);
     return {
+        count,
         report,
         reportParam,
         pic,
@@ -144,6 +148,7 @@ export function useReport() {
         exportDate,
         tableRef,
         pdfData,
+        setCount,
         onReportParamChange,
         onDetail,
         onDownload,
@@ -152,5 +157,6 @@ export function useReport() {
         exportHandleForm,
         buttonExportModal,
         handlePagination,
+        // downloadToPDF,
     };
 }

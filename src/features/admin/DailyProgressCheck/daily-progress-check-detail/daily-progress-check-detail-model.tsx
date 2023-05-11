@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export function useDailyProgressCheckDetail() {
-    const { id } = useParams();
+    const { id = "" } = useParams();
     const { state } = useLocation();
     const navigate = useNavigate();
     const [location, setLocation] = useState(false);
@@ -218,6 +218,7 @@ export function useDailyProgressCheckDetail() {
 
     useEffect(() => {
         if (state) {
+            console.log(dailyProgressCheck);
             setLocation(true);
             fetchDetailReport();
             if (toogle === "3d") {

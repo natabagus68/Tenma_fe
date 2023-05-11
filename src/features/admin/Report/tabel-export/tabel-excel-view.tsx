@@ -1,8 +1,8 @@
 import moment from "moment";
 import LogoTenma from "../../../../assets/tenma.png";
-const TableExcel = ({ datas, ref }) => {
+const TableExcel = ({ datas }) => {
     return (
-        <div ref={ref}>
+        <div>
             <div className=" w-[90%] m-auto  py-12 h-screen left-12  ">
                 <div className="flex justify-between items-top">
                     <div className=" flex flex-col gap-3">
@@ -52,7 +52,7 @@ const TableExcel = ({ datas, ref }) => {
                                     MODEL
                                 </th>
                                 <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    {datas.part.customer_model.name}
+                                    {datas.part?.customer_model?.name || ""}
                                 </td>
                                 <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 pr-52 border border-gray-200">
                                     -
@@ -63,7 +63,7 @@ const TableExcel = ({ datas, ref }) => {
                                     MACHINE NO.
                                 </th>
                                 <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    {datas.machine.no}
+                                    {datas.machine?.no || ""}
                                 </td>
 
                                 <th className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
@@ -86,7 +86,7 @@ const TableExcel = ({ datas, ref }) => {
                         {/* cavity */}
                         {datas.cavities.map((item) => {
                             return (
-                                <>
+                                <div key={item.id}>
                                     <thead>
                                         <tr>
                                             <th
@@ -164,7 +164,7 @@ const TableExcel = ({ datas, ref }) => {
                                             item.std_measurement.special_accept_segments.map(
                                                 (el) => {
                                                     return (
-                                                        <tr>
+                                                        <tr key={el.id}>
                                                             <td className="bg-[#ffff] text-left px-4 border border-gray-200">
                                                                 {el.character}
                                                             </td>
@@ -188,7 +188,7 @@ const TableExcel = ({ datas, ref }) => {
                                                                 0
                                                             </td>
                                                             <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                {el.tool.name}
+                                                                {el?.tool?.name}
                                                             </td>
                                                         </tr>
                                                     );
@@ -215,7 +215,7 @@ const TableExcel = ({ datas, ref }) => {
                                                 (el) => {
                                                     return (
                                                         <>
-                                                            <tr>
+                                                            <tr key={el.id}>
                                                                 <td className="bg-[#ffff] text-left px-4 border border-gray-200">
                                                                     {
                                                                         el.character
@@ -252,7 +252,7 @@ const TableExcel = ({ datas, ref }) => {
                                                 }
                                             )}
                                     </tbody>
-                                </>
+                                </div>
                             );
                         })}
                     </table>
@@ -335,7 +335,7 @@ const TableExcel = ({ datas, ref }) => {
                                             el.std_measurement.special_accept_segments.map(
                                                 (item) => {
                                                     return (
-                                                        <tr>
+                                                        <tr key={el.id}>
                                                             <td className="px-2 py-2 border border-gray-200 text-center">
                                                                 {
                                                                     item
@@ -397,7 +397,7 @@ const TableExcel = ({ datas, ref }) => {
                         <tbody>
                             {datas.progress_check_histories.map((el) => {
                                 return (
-                                    <tr>
+                                    <tr key={el.id}>
                                         <td className="py-2 bg-white border border-gray-200 px-8">
                                             {el.date}
                                         </td>

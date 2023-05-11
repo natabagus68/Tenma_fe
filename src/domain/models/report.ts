@@ -1,4 +1,5 @@
 import { Entity } from "./_entity";
+import { Machine } from "./machine";
 import { Part } from "./part";
 
 export interface IReport {
@@ -9,6 +10,8 @@ export interface IReport {
     pic: string;
     part: Part;
     checked: boolean;
+    judgement: string;
+    machine: Machine;
 }
 export class Report extends Entity<IReport> {
     static create(props: IReport): Report {
@@ -23,6 +26,8 @@ export class Report extends Entity<IReport> {
             pic: this.pic,
             part: this.part,
             checked: this.checked,
+            judgement: this.judgement,
+            machine: this.machine,
         };
     }
     duplicate(): Report {
@@ -49,5 +54,11 @@ export class Report extends Entity<IReport> {
     }
     get checked(): boolean {
         return this._props.checked;
+    }
+    get judgement(): string {
+        return this._props.judgement;
+    }
+    get machine(): Machine {
+        return this._props.machine;
     }
 }

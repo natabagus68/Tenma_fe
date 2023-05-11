@@ -24,7 +24,7 @@ export function useWeighting() {
     const weightingRepo: WeightingRepository = new WeightingApiRepository();
     const toolRepo: ToolRepository = new ToolApiRepository();
     const fetchWeightingData = () => {
-        weightingRepo.getWeighting().then((result) => {
+        weightingRepo.getWeighting(search).then((result) => {
             setWeighting(result);
         });
     };
@@ -63,9 +63,13 @@ export function useWeighting() {
             setTransaction(result);
         });
     };
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    };
     useEffect(() => {
         fetchWeightingData();
-    }, [confirm]);
+    }, [confirm, search]);
 
     useEffect(() => {
         getTools();
@@ -78,9 +82,11 @@ export function useWeighting() {
         addData,
         dataTools,
         transaction,
+        search,
         setModal,
         handleAddDataForm,
         storeAddData,
         onConfirm,
+        handleSearch,
     };
 }

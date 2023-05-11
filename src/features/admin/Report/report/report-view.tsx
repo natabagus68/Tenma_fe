@@ -175,12 +175,17 @@ const ReportView = () => {
                 </div>
             </div>
             <ExportModal model={model} />
-            <div className="">
+            <div className="hidden">
                 {model.pdfData.length !== 0
-                    ? model.pdfData.map((item) => {
-                          return item.daily_progress.map((e) => {
+                    ? model.pdfData.map((item, i) => {
+                          return item.daily_progress.map((e, x) => {
                               return (
-                                  <TableExcel datas={e} ref={model.tableRef} />
+                                  <div
+                                      ref={model.tableRef}
+                                      className={`table-export`}
+                                  >
+                                      <TableExcel datas={e} />;
+                                  </div>
                               );
                           });
                       })

@@ -6,8 +6,12 @@ import { Transaction } from "@domain/models/transaction";
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 
 export class WeightingApiRepository implements WeightingRepository {
-    async getWeighting(): Promise<Weighting[]> {
-        const { data } = await api.get("weighting-log");
+    async getWeighting(search?: string): Promise<Weighting[]> {
+        const { data } = await api.get("weighting-log", {
+            params: {
+                search,
+            },
+        });
 
         const res = data.data.map((item) => {
             return Weighting.create({

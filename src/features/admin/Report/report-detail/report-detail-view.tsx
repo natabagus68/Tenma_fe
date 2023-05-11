@@ -6,6 +6,8 @@ import Pagination from "../../../../common/components/pagination/Pagination";
 import JudgemnetIcon from "../../DailyProgressCheck/icon/JudgemnetIcon";
 import useReportDetail from "./report-detail-model";
 import { DownloadModal } from "../partials/download-modal";
+import moment from "moment";
+import JudgemnetIcon2 from "@common/components/JudgemnetIcon";
 
 const ReportDetailView = () => {
     const navigate = useNavigate();
@@ -142,21 +144,23 @@ const ReportDetailView = () => {
                             {model.reportDetail.data.map((item, index) => (
                                 <tr className="border-b-2 border-gray-100">
                                     <td className="py-6 text-center pl-3 text-gray-600 items-center">
-                                        4212421
+                                        {item.idCode}
                                     </td>
                                     <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                        NSHk32324
-                                    </td>
-
-                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                        345678765
-                                    </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                        345678765
+                                        {moment(item.lastReport).format("l")}
                                     </td>
 
                                     <td className="py-6 text-center pl-3 text-gray-600  items-center ">
-                                        <JudgemnetIcon value={"Ok"} />
+                                        {item.machine?.noMachine || ""}
+                                    </td>
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        {item.pic}
+                                    </td>
+
+                                    <td className="py-6 text-center pl-3 text-gray-600  items-center ">
+                                        <JudgemnetIcon2
+                                            value={item.judgement}
+                                        />
                                     </td>
                                     <td className="py-6  pl-3 text-gray-600   items-center flex gap-8 justify-center">
                                         <button

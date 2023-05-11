@@ -374,6 +374,7 @@ const DailyProgressCheckDetailView = () => {
                     dailyProgressCheckDetail.setDeleteSegmentConfirmShow
                 }
                 onConfirm={dailyProgressCheckDetail.confirmDeleteSegment}
+                onCancel={null}
             />
         </>
     );

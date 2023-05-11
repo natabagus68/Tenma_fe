@@ -1,6 +1,6 @@
 import React from "react";
 
-const JudgemnetIcon = ({ value }) => {
+const JudgemnetIcon2 = ({ value = "" }) => {
     const input = value.toLowerCase();
     if (input === "waiting") {
         return (
@@ -25,4 +25,4 @@ const JudgemnetIcon = ({ value }) => {
     }
 };
 
-export default JudgemnetIcon;
+export default JudgemnetIcon2;

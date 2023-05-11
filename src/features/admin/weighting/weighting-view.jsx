@@ -100,6 +100,8 @@ const Weighting = () => {
                         <input
                             type="text"
                             name="search"
+                            value={model.search}
+                            onChange={model.handleSearch}
                             placeholder="Search tools or id trx"
                             className="w-full py-2 px-11 border border-gray-100 outline-none rounded-md placeholder:text-gray-400 text-gray-600"
                         />
@@ -133,16 +135,18 @@ const Weighting = () => {
                                 return (
                                     <tr>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
-                                            {item.tools?.name}
+                                            {item.tools?.name || ""}
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
                                             TRX123456344
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
-                                            {item.progressCheck.part.part_cd}
+                                            {item.progressCheck?.part
+                                                ?.part_cd || ""}
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
-                                            {item.progressCheck.part_weight_qis}
+                                            {item.progressCheck
+                                                ?.part_weight_qis || ""}
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
                                             {moment(

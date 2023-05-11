@@ -46,6 +46,8 @@ export class ReportApiRepository implements ReportRepository {
                     pic: item.pic,
                     part: item.part,
                     checked: false,
+                    judgement: item.judgement,
+                    machine: item.machine,
                 })
             ),
         });
@@ -73,6 +75,8 @@ export class ReportApiRepository implements ReportRepository {
                     pic: item.pic,
                     part: item.part,
                     checked: false,
+                    judgement: item.judgement,
+                    machine: item.machine,
                 })
             ),
         });
@@ -178,6 +182,7 @@ export class ReportApiRepository implements ReportRepository {
 
     async getpartReportDetail(id: string): Promise<DailyProgressCheck> {
         const { data } = await api.get(`report/${id}/report-detail`);
+        console.log(data.data);
         const newState = DailyProgressCheck.create({
             id: data.data.id,
             picId: data.data.pic,
