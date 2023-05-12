@@ -70,7 +70,6 @@ export function useDailyProgressCheckDetail() {
 
     const fetchRepo2d = () => {
         reportRepo.get2dSegments(id).then((result) => {
-            console.log("berhasil");
             setSegments(result);
         });
     };
@@ -218,7 +217,6 @@ export function useDailyProgressCheckDetail() {
 
     useEffect(() => {
         if (state) {
-            console.log(dailyProgressCheck);
             setLocation(true);
             fetchDetailReport();
             if (toogle === "3d") {

@@ -131,7 +131,6 @@ const Weighting = () => {
                         </thead>
                         <tbody>
                             {model.weighting?.map((item) => {
-                                console.log(item.progressCheck);
                                 return (
                                     <tr>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">

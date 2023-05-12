@@ -80,6 +80,7 @@ export const useAccessMenu = () => {
                 is_permission_active: item.active,
             };
         });
+        console.log(data);
         await menuRepo.updatePermission(id, modelId, data);
         setModelId("");
         setPermisions([]);

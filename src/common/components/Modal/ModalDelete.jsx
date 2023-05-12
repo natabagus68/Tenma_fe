@@ -3,7 +3,7 @@ import React from "react";
 export default function ModalDelete({
     showModal,
     setShowModal,
-    onCancel,
+    onCancel = null,
     onConfirm = null,
     id = null,
 }) {

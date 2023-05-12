@@ -93,6 +93,11 @@ export function useAccount() {
             });
         });
     };
+    const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserParam((prev) => {
+            return { ...prev, q: e.target.value };
+        });
+    };
 
     useEffect(() => {
         userRepo
@@ -115,6 +120,7 @@ export function useAccount() {
     return {
         account,
         deleteConfirmShow,
+        userParam,
         setDeleteConfirmShow,
         onToogleActive,
         onDetail,
@@ -123,5 +129,6 @@ export function useAccount() {
         onConfirmDelete,
         onCreateNewAccount,
         onPageChange,
+        onSearch,
     };
 }

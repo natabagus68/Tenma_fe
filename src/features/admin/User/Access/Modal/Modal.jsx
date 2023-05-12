@@ -50,7 +50,7 @@ const Modal = ({
                                 <button
                                     className="text-white bg-sky-standart  uppercase px-12 py-3 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 border border-gray-100 rounded-md"
                                     type="button"
-                                    onClick={(e) => onSave(e)}
+                                    onClick={onSave}
                                 >
                                     Save Permissions
                                 </button>
