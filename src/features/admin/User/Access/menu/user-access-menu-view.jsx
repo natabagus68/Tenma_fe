@@ -10,10 +10,17 @@ const Menu = () => {
     const model = useAccessMenu();
     return (
         <>
-            <Modal
-                showHide={model.showModal}
-                setShowHide={model.setShowModal}
-            />
+            {model.permisions && (
+                <Modal
+                    showHide={model.showModal}
+                    setShowHide={model.setShowModal}
+                    data={model.permisions}
+                    onChange={model.handleChangeCheckedPermission}
+                    onCancel={model.onCancelModalPermission}
+                    onSave={model.savePermissions}
+                />
+            )}
+
             <div>
                 <Breadcrumbs items={["User", "Account"]} />
             </div>
@@ -69,7 +76,7 @@ const Menu = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {model.menu.data.map((item) => {
+                            {model.menu.data.map((item, i) => {
                                 return (
                                     <tr
                                         key={item.id}
@@ -78,13 +85,35 @@ const Menu = () => {
                                         <td className="py-6 text-center pl-3 text-gray-600 ">
                                             <input
                                                 type="checkbox"
+                                                checked={item.active}
+                                                value={item.active}
+                                                onChange={(e) =>
+                                                    model.changeActiveMEnu(
+                                                        e,
+                                                        i,
+                                                        item.moduleId
+                                                    )
+                                                }
                                                 className="w-8 h-8 accent-gray-700  "
                                             />
                                         </td>
                                         <td className="py-6 text-center pl-3 text-gray-600 ">
                                             {item.name}
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600 "></td>
+                                        <td className="py-6 text-center pl-3 text-gray-600 ">
+                                            {item.permission.map((e, i) => {
+                                                if (e.active) {
+                                                    return (
+                                                        <p>
+                                                            {e.name}{" "}
+                                                            {i !== e.length
+                                                                ? " "
+                                                                : " | "}
+                                                        </p>
+                                                    );
+                                                }
+                                            })}
+                                        </td>
                                         <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
                                             <button
                                                 onClick={() =>

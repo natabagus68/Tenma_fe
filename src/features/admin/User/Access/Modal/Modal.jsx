@@ -1,6 +1,14 @@
 import React from "react";
 
-const Modal = ({ showHide, setShowHide }) => {
+const Modal = ({
+    showHide,
+    setShowHide,
+    data = [],
+    onChange = null,
+    onCancel = null,
+    onSave = null,
+}) => {
+    console.log(data);
     if (showHide) {
         return (
             <>
@@ -17,74 +25,23 @@ const Modal = ({ showHide, setShowHide }) => {
                                     Check to grant access{" "}
                                 </p>
 
-                                <div className="w-full flex justify-between mt-5">
-                                    <div className="w-full flex flex-col gap-4 justify-start ">
-                                        <div className="flex gap-3 items-center">
-                                            <input
-                                                type="checkbox"
-                                                className="w-8 h-8 accent-gray-700  "
-                                            />
-                                            <label className="text-gray-400 text-xl">
-                                                View Data
-                                            </label>
-                                        </div>
-                                        <div className="flex gap-3 items-center">
-                                            <input
-                                                type="checkbox"
-                                                className="w-8 h-8 accent-gray-700  "
-                                            />
-                                            <label className="text-gray-400 text-xl">
-                                                Delete Data
-                                            </label>
-                                        </div>
-                                        <div className="flex gap-3 items-center">
-                                            <input
-                                                type="checkbox"
-                                                className="w-8 h-8 accent-gray-700  "
-                                            />
-                                            <label className="text-gray-400 text-xl">
-                                                Edit Data
-                                            </label>
-                                        </div>
-                                        <div className="flex gap-3 items-center">
-                                            <input
-                                                type="checkbox"
-                                                className="w-8 h-8 accent-gray-700  "
-                                            />
-                                            <label className="text-gray-400 text-xl">
-                                                Add Data
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div className="w-full flex flex-col gap-4 pl-9">
-                                        <div className="flex gap-3 items-center justify-start">
-                                            <input
-                                                type="checkbox"
-                                                className="w-8 h-8 accent-gray-700  "
-                                            />
-                                            <label className="text-gray-400 text-xl">
-                                                Download Data
-                                            </label>
-                                        </div>
-                                        <div className="flex gap-3 items-center justify-start">
-                                            <input
-                                                type="checkbox"
-                                                className="w-8 h-8 accent-gray-700  "
-                                            />
-                                            <label className="text-gray-400 text-xl ">
-                                                Filter Data
-                                            </label>
-                                        </div>
-                                        <div className="flex gap-3 items-center justify-start">
-                                            <input
-                                                type="checkbox"
-                                                className="w-8 h-8 accent-gray-700  "
-                                            />
-                                            <label className="text-gray-400 text-xl">
-                                                Search Data
-                                            </label>
-                                        </div>
+                                <div className="w-full">
+                                    <div className="w-full flex flex-col gap-3 ">
+                                        {data.map((item, i) => {
+                                            return (
+                                                <div className="flex gap-3 items-center ">
+                                                    <input
+                                                        type="checkbox"
+                                                        value={data[i].active}
+                                                        onChange={onChange}
+                                                        className="w-8 h-8 accent-gray-700  "
+                                                    />
+                                                    <label className="text-gray-400 text-xl">
+                                                        {item.name}
+                                                    </label>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </div>
@@ -93,14 +50,14 @@ const Modal = ({ showHide, setShowHide }) => {
                                 <button
                                     className="text-white bg-sky-standart  uppercase px-12 py-3 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 border border-gray-100 rounded-md"
                                     type="button"
-                                    onClick={() => setShowHide(false)}
+                                    onClick={(e) => onSave(e)}
                                 >
                                     Save Permissions
                                 </button>
                                 <button
                                     className="text-gray-100 border border-gray-100 uppercase text-sm px-12 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
-                                    onClick={() => setShowHide(false)}
+                                    onClick={onCancel}
                                 >
                                     Cancel
                                 </button>
