@@ -1,5 +1,6 @@
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { History } from "@domain/models/history";
+import { IMeasurement, Measurement } from "@domain/models/measurement";
 import { PaginatedData } from "@domain/models/paginated-data";
 import { Pic } from "@domain/models/pic";
 import { Segment } from "@domain/models/segment";
@@ -30,4 +31,9 @@ export interface DailyProgressCheckRepository {
     getPic(): Promise<Pic[]>;
     updateJudgmen(id: string, togle: string, data: string): Promise<boolean>;
     updateJudgmentUniv(id: string, data: string): Promise<boolean>;
+    updateCavity3D(
+        id: string,
+        cavityID: string,
+        data: IMeasurement[]
+    ): Promise<boolean>;
 }

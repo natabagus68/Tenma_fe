@@ -1,6 +1,8 @@
 import React from "react";
 import { Segment } from "@domain/models/segment";
 import { useDailyProgressCheckDetail } from "../daily-progress-check-detail/daily-progress-check-detail-model";
+import { EditIcon } from "@common/components/icons/EditIcon";
+import { PenAltIcon, PenIcon } from "@common/components/icons";
 const SegmentTable = ({
     segment = Segment.create({
         name: "",
@@ -8,31 +10,91 @@ const SegmentTable = ({
         pacSegments: [],
         checked: false,
     }),
+
+    index = null,
     model = useDailyProgressCheckDetail(),
 }) => {
     return (
         <>
-            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 mt-10">
+            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 mt-10 overflow-x-scroll">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
                         {segment.name}
                     </h1>
                     <div className="flex gap-4 w-1/2 items-center justify-end">
-                        {model.toogle === "2d" ? null : (
+                        {model.toogle === "2d" ? null : model.onEditSegment ? (
                             <button
                                 onClick={(e) =>
-                                    model.deleteSegment(e, segment.id)
+                                    model.saveSegment(
+                                        e,
+                                        model.segments[index].id
+                                    )
                                 }
-                                type="button"
-                                role="button"
-                                className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md"
+                                className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
                             >
-                                + Delete
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-5 h-5"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                                    />
+                                </svg>
+                                Save Cavity
                             </button>
+                        ) : (
+                            <div className="flex gap-5">
+                                <button
+                                    type="button"
+                                    role="button"
+                                    className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="w-5 h-5"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                        />
+                                    </svg>
+                                    Upload Comparisson
+                                </button>
+                                <button
+                                    onClick={model.editSegment}
+                                    type="button"
+                                    role="button"
+                                    className="py-[12px] px-[20px] bg-[#F79009] text-white align-middle rounded-md flex items-center gap-2"
+                                >
+                                    <PenIcon />
+                                    Edit Cavity
+                                </button>
+                                <button
+                                    onClick={(e) =>
+                                        model.deleteSegment(e, segment.id)
+                                    }
+                                    type="button"
+                                    role="button"
+                                    className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md"
+                                >
+                                    + Delete
+                                </button>
+                            </div>
                         )}
                     </div>
                 </div>
-                <div>
+                <div className="">
                     <table className="w-full">
                         <thead>
                             <tr>
@@ -91,7 +153,7 @@ const SegmentTable = ({
                             </tr>
                         </thead>
                         <tbody>
-                            {segment.pacSegments?.map((segment) => (
+                            {segment.pacSegments?.map((segment, i) => (
                                 <tr key={segment.id}>
                                     <td className="border bg-white text-center py-5">
                                         {segment.character}
@@ -115,13 +177,51 @@ const SegmentTable = ({
                                         {segment.tool?.name}
                                     </td>
                                     <td className="border bg-white text-center py-5">
-                                        {segment.result}
+                                        {model.onEditSegment ? (
+                                            <input
+                                                type="text"
+                                                name="result"
+                                                value={
+                                                    model.segments[index]
+                                                        .pacSegments[i].result
+                                                }
+                                                onChange={(e) =>
+                                                    model.handleEditSegment(
+                                                        e,
+                                                        index,
+                                                        i
+                                                    )
+                                                }
+                                                className="border border-gray-300 rounded-lg outline-none w-12 text-sm py-3 px-1.5"
+                                            />
+                                        ) : (
+                                            segment.result
+                                        )}
                                     </td>
                                     <td className="border bg-white text-center py-5">
                                         {segment.judgement}
                                     </td>
                                     <td className="border bg-white text-center py-5">
-                                        {segment.saResult}
+                                        {model.onEditSegment ? (
+                                            <input
+                                                type="text"
+                                                name="saResult"
+                                                value={
+                                                    model.segments[index]
+                                                        .pacSegments[i].saResult
+                                                }
+                                                onChange={(e) =>
+                                                    model.handleEditSegment(
+                                                        e,
+                                                        index,
+                                                        i
+                                                    )
+                                                }
+                                                className="border border-gray-300 rounded-lg outline-none w-12 text-sm py-3 px-1.5"
+                                            />
+                                        ) : (
+                                            segment.saResult
+                                        )}
                                     </td>
                                     <td className="border bg-white text-center py-5">
                                         {segment.saJudgement}

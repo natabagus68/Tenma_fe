@@ -347,11 +347,12 @@ const DailyProgressCheckDetailView = () => {
             </div>
             {dailyProgressCheckDetail.toogle === "3d" && (
                 <>
-                    {dailyProgressCheckDetail.segments.map((item) => (
+                    {dailyProgressCheckDetail.segments.map((item, i) => (
                         <SegmentTable
                             key={item.id}
                             segment={item}
                             model={dailyProgressCheckDetail}
+                            index={i}
                         />
                     ))}
                 </>

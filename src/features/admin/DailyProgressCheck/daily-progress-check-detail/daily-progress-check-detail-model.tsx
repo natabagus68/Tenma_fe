@@ -5,6 +5,7 @@ import { ReportApiRepository } from "@data/api/report-api-repository";
 import { Segment3dApiRepository } from "@data/api/segment-3d-api-repository";
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { History } from "@domain/models/history";
+import { IMeasurement, Measurement } from "@domain/models/measurement";
 import { Segment } from "@domain/models/segment";
 import { DailyProgressCheckRepository } from "@domain/repositories/daily-progress-check-repository";
 import { HistoryRepository } from "@domain/repositories/history-repository";
@@ -17,6 +18,7 @@ export function useDailyProgressCheckDetail() {
     const { state } = useLocation();
     const navigate = useNavigate();
     const [location, setLocation] = useState(false);
+    const [onEditSegment, setOnEditSegment] = useState<boolean>(false);
     const reportRepo = new ReportApiRepository();
     const historyRepo: HistoryRepository = new HistoryApiRepository();
     const dailyProgressCheckRepo: DailyProgressCheckRepository =
@@ -215,6 +217,44 @@ export function useDailyProgressCheckDetail() {
         }
     };
 
+    const editSegment = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        setOnEditSegment(true);
+    };
+    const saveSegment = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        cavityID
+    ) => {
+        e.preventDefault();
+        const data: IMeasurement[] = segments
+            .find((item) => item.id === cavityID)
+            .pacSegments.map((item) => item);
+        console.log(data);
+        await dailyProgressCheckRepo.updateCavity3D(id, cavityID, data);
+        setOnEditSegment(false);
+    };
+
+    const handleEditSegment = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        iSegment: number,
+        iMeas: number
+    ) => {
+        setSegments((prev) => {
+            const data = prev.map((el, i) => {
+                if (iSegment == i) {
+                    el.pacSegments.map((item, ex) => {
+                        if (iMeas === ex) {
+                            item[e.target.name] = e.target.value;
+                        }
+                        return item;
+                    });
+                }
+                return el;
+            });
+
+            return data;
+        });
+    };
     useEffect(() => {
         if (state) {
             setLocation(true);
@@ -256,5 +296,9 @@ export function useDailyProgressCheckDetail() {
         confirmDeleteSegment,
         handelChangeJudgment,
         location,
+        editSegment,
+        onEditSegment,
+        saveSegment,
+        handleEditSegment,
     };
 }
