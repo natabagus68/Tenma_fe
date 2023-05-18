@@ -5,6 +5,7 @@ import { ReportApiRepository } from "@data/api/report-api-repository";
 import { Segment3dApiRepository } from "@data/api/segment-3d-api-repository";
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { History } from "@domain/models/history";
+import { IMeasurement, Measurement } from "@domain/models/measurement";
 import { Segment } from "@domain/models/segment";
 import { DailyProgressCheckRepository } from "@domain/repositories/daily-progress-check-repository";
 import { HistoryRepository } from "@domain/repositories/history-repository";
@@ -17,10 +18,10 @@ export function useDailyProgressCheckDetail() {
     const { state } = useLocation();
     const navigate = useNavigate();
     const [location, setLocation] = useState(false);
+    const [onEditSegment, setOnEditSegment] = useState<boolean>(false);
     const reportRepo = new ReportApiRepository();
     const historyRepo: HistoryRepository = new HistoryApiRepository();
-    const dailyProgressCheckRepo: DailyProgressCheckRepository =
-        new DailyProgressCheckApiRepository();
+    const dailyProgressCheckRepo = new DailyProgressCheckApiRepository();
     const segmentRepo: Segment3dRepository = new Segment3dApiRepository();
     const [dailyProgressCheck, setDailyProgressCheck] =
         useState<DailyProgressCheck>(
@@ -215,6 +216,62 @@ export function useDailyProgressCheckDetail() {
         }
     };
 
+    const editSegment = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        setOnEditSegment(true);
+    };
+    const saveSegment = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        cavityID
+    ) => {
+        e.preventDefault();
+        const data: IMeasurement[] = segments
+            .find((item) => item.id === cavityID)
+            .pacSegments.map((item) => item);
+        console.log(data);
+        await dailyProgressCheckRepo.updateCavity3D(id, cavityID, data);
+        setOnEditSegment(false);
+    };
+
+    const handleEditSegment = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        iSegment: number,
+        iMeas: number
+    ) => {
+        setSegments((prev) => {
+            const data = prev.map((el, i) => {
+                if (iSegment == i) {
+                    el.pacSegments.map((item, ex) => {
+                        if (iMeas === ex) {
+                            item[e.target.name] = e.target.value;
+                        }
+                        return item;
+                    });
+                }
+                return el;
+            });
+
+            return data;
+        });
+    };
+
+    const uploadComparisson = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        cavityID: string
+    ) => {
+        // e.preventDefault();
+        console.log(e.target.files[0]);
+        const form = new FormData();
+        form.append("file", e.target.files[0]);
+
+        dailyProgressCheckRepo
+            .uploadComparisson(id, cavityID, form)
+            .then(() => {
+                console.log("berhasil");
+            })
+            .catch((error) => console.log(error));
+    };
+
     useEffect(() => {
         if (state) {
             setLocation(true);
@@ -256,5 +313,10 @@ export function useDailyProgressCheckDetail() {
         confirmDeleteSegment,
         handelChangeJudgment,
         location,
+        editSegment,
+        onEditSegment,
+        saveSegment,
+        handleEditSegment,
+        uploadComparisson,
     };
 }

@@ -15,9 +15,11 @@ import { UpdateDailyProgressCheckReq } from "./types/update-daily-progress-check
 import { UpdateDailyProgressCheckRes } from "./types/update-daily-progress-check-res";
 import moment from "moment";
 import { History } from "@domain/models/history";
-import { Measurement } from "@domain/models/measurement";
+import { IMeasurement, Measurement } from "@domain/models/measurement";
 import { Segment } from "@domain/models/segment";
 import { Pic } from "@domain/models/pic";
+import { MeasurementStd } from "@domain/models/measurement-std";
+import { Comparisson } from "@domain/models/comparisson";
 
 export class DailyProgressCheckApiRepository
     implements DailyProgressCheckRepository
@@ -31,7 +33,7 @@ export class DailyProgressCheckApiRepository
             page: props.page,
             limit: props.limit,
             lastPage: data.totalPage,
-            totalRow:data.totalRows,
+            totalRow: data.totalRows,
             data: data.data.map((item) =>
                 DailyProgressCheck.create({
                     id: item.id,
@@ -268,6 +270,24 @@ export class DailyProgressCheckApiRepository
                         },
                     })
                 ),
+                comparisson: item.cavity_comparators.map((el) => {
+                    const data =
+                        el.std_measurement_comparator.sa_segment_comps.map(
+                            (ex) => {
+                                return Comparisson.create({
+                                    result: ex.cavity_comp_res.actual_result,
+                                    resultJudgment:
+                                        ex.cavity_comp_res
+                                            .actual_result_judgement,
+                                    saResult: ex.cavity_comp_res.sa_result,
+                                    saResultJudgment:
+                                        ex.cavity_comp_res.sa_result_judgement,
+                                });
+                            }
+                        );
+
+                    return data;
+                }),
                 checked: false,
             })
         );
@@ -318,6 +338,7 @@ export class DailyProgressCheckApiRepository
                             },
                         })
                 ),
+
                 checked: false,
             })
         );
@@ -339,6 +360,37 @@ export class DailyProgressCheckApiRepository
         await api.put(`progress-check/${id}/update-judgement`, {
             judgement: data,
         });
+        return true;
+    }
+
+    async updateCavity3D(
+        id: string,
+        cavityID: string,
+        data: IMeasurement[]
+    ): Promise<boolean> {
+        console.log(data);
+        await api.put(`progress-check/${id}/3d/${cavityID}`, {
+            measurements: data.map((item) => {
+                return {
+                    actual_result: item.result,
+                    actual_result_judgment: item.judgement,
+                    sa_result: item.saResult,
+                    sa_result_judgement: item.saJudgement,
+                };
+            }),
+        });
+        return true;
+    }
+
+    async uploadComparisson(
+        pcId: string,
+        cavityID: string,
+        data: FormData
+    ): Promise<boolean> {
+        await api.post(
+            `progress-check/${pcId}/3d/${cavityID}/comparator`,
+            data
+        );
         return true;
     }
 }

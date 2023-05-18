@@ -90,9 +90,11 @@ export class Measurement extends Entity<IMeasurement> {
     get result(): string {
         return this._props.result;
     }
+    set result(value) {
+        this._props.result = value;
+    }
     get judgement(): string {
-        console.log(parseFloat(this._props.nominalValue) + +this._props.upper);
-        console.log(parseFloat(this._props.result));
+      ;
         if (
             parseFloat(this._props.result) >
             parseFloat(this._props.nominalValue)
@@ -108,7 +110,7 @@ export class Measurement extends Entity<IMeasurement> {
                     parseFloat(this._props.nominalValue) -
                     this._props.upper;
 
-                return (count || '').toString();
+                return (count || "").toString();
             }
         } else {
             if (
@@ -122,12 +124,15 @@ export class Measurement extends Entity<IMeasurement> {
                     parseFloat(this._props.nominalValue) -
                     +this._props.lower;
 
-                return (count || '').toString();
+                return (count || "").toString();
             }
         }
     }
     get saResult(): string {
         return this._props.saResult;
+    }
+    set saResult(value) {
+        this._props.saResult = value;
     }
     get saJudgement(): string {
         if (this._props.saJudgement !== "ok") {

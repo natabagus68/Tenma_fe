@@ -21,7 +21,7 @@ export class MenuApirepository implements MenuRepository {
                     moduleId: item.module_id,
                     permission: item.permissions.map((el) => {
                         return Permission.create({
-                            id: el.permission_id,
+                            id: el.id,
                             name: el.name,
                             active: el.is_permission_active,
                             used: el.is_permission_used,

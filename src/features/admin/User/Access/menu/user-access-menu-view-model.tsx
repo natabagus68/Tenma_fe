@@ -46,6 +46,7 @@ export const useAccessMenu = () => {
                 setPermisions((prev) => {
                     return item.permission.map((el) => {
                         return Permission.create({
+                            id: el.id,
                             name: el.name,
                             active: el.active,
                             used: el.used,
@@ -75,10 +76,11 @@ export const useAccessMenu = () => {
     const savePermissions = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const data = permisions.map((item) => {
-            return {
+            const data = {
                 permission_id: item.id,
                 is_permission_active: item.active,
             };
+            return data;
         });
         console.log(data);
         await menuRepo.updatePermission(id, modelId, data);
