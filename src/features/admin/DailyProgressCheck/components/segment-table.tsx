@@ -8,6 +8,7 @@ const SegmentTable = ({
         name: "",
         type: "",
         pacSegments: [],
+        comparisson: [],
         checked: false,
     }),
 
@@ -16,12 +17,12 @@ const SegmentTable = ({
 }) => {
     return (
         <>
-            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 mt-10 overflow-x-scroll">
+            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 mt-10  overflow-x-scroll">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
                         {segment.name}
                     </h1>
-                    <div className="flex gap-4 w-1/2 items-center justify-end">
+                    <div className="flex gap-4 max-w-1/2 items-center justify-end">
                         {model.toogle === "2d" ? null : model.onEditSegment ? (
                             <button
                                 onClick={(e) =>
@@ -50,27 +51,41 @@ const SegmentTable = ({
                             </button>
                         ) : (
                             <div className="flex gap-5">
-                                <button
-                                    type="button"
-                                    role="button"
-                                    className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={1.5}
-                                        stroke="currentColor"
-                                        className="w-5 h-5"
+                                <div>
+                                    <label
+                                        htmlFor="comparisson"
+                                        className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
                                     >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                                        />
-                                    </svg>
-                                    Upload Comparisson
-                                </button>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-5 h-5"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                            />
+                                        </svg>
+                                        Upload Comparisson
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="comparisson"
+                                        onChange={(e) =>
+                                            model.uploadComparisson(
+                                                e,
+                                                model.segments[index].id
+                                            )
+                                        }
+                                        className="hidden"
+                                    />
+                                </div>
+
                                 <button
                                     onClick={model.editSegment}
                                     type="button"
@@ -94,7 +109,7 @@ const SegmentTable = ({
                         )}
                     </div>
                 </div>
-                <div className="">
+                <div className="flex w-screen ">
                     <table className="w-full">
                         <thead>
                             <tr>
@@ -230,6 +245,55 @@ const SegmentTable = ({
                             ))}
                         </tbody>
                     </table>
+
+                    <div className="h-full w-full flex">
+                        {segment.comparisson.map((el) => {
+                            return (
+                                <>
+                                    <table className="">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    className="py-5 text-center border bg-[#B8EBF2] w-40 h-full"
+                                                    rowSpan={2}
+                                                    colSpan={2}
+                                                >
+                                                    Result
+                                                </th>
+                                                <th
+                                                    className="py-5 text-center border bg-[#FEF4E6] w-40 h-full"
+                                                    colSpan={2}
+                                                    rowSpan={2}
+                                                >
+                                                    SA Result
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {el.map((x) => {
+                                                return (
+                                                    <tr>
+                                                        <td className="border bg-white text-center py-5 px-3">
+                                                            {x.result}
+                                                        </td>
+                                                        <td className="border bg-white text-center py-5 px-3">
+                                                            {x.resultJudgment}
+                                                        </td>
+                                                        <td className="border bg-white text-center py-5 px-3">
+                                                            {x.saResult}
+                                                        </td>
+                                                        <td className="border bg-white text-center py-5 px-3">
+                                                            {x.saResultJudgment}
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </>

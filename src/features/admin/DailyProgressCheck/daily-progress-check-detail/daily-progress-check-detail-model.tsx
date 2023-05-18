@@ -21,8 +21,7 @@ export function useDailyProgressCheckDetail() {
     const [onEditSegment, setOnEditSegment] = useState<boolean>(false);
     const reportRepo = new ReportApiRepository();
     const historyRepo: HistoryRepository = new HistoryApiRepository();
-    const dailyProgressCheckRepo: DailyProgressCheckRepository =
-        new DailyProgressCheckApiRepository();
+    const dailyProgressCheckRepo = new DailyProgressCheckApiRepository();
     const segmentRepo: Segment3dRepository = new Segment3dApiRepository();
     const [dailyProgressCheck, setDailyProgressCheck] =
         useState<DailyProgressCheck>(
@@ -255,6 +254,24 @@ export function useDailyProgressCheckDetail() {
             return data;
         });
     };
+
+    const uploadComparisson = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        cavityID: string
+    ) => {
+        // e.preventDefault();
+        console.log(e.target.files[0]);
+        const form = new FormData();
+        form.append("file", e.target.files[0]);
+
+        dailyProgressCheckRepo
+            .uploadComparisson(id, cavityID, form)
+            .then(() => {
+                console.log("berhasil");
+            })
+            .catch((error) => console.log(error));
+    };
+
     useEffect(() => {
         if (state) {
             setLocation(true);
@@ -300,5 +317,6 @@ export function useDailyProgressCheckDetail() {
         onEditSegment,
         saveSegment,
         handleEditSegment,
+        uploadComparisson,
     };
 }

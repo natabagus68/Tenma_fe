@@ -1,12 +1,14 @@
 import { IMeasurement } from "./measurement";
 import { Entity } from "./_entity";
+import { IComparisson } from "./comparisson";
 
 export interface ISegment {
     id?: string;
     name: string;
     type: string;
     pacSegments: IMeasurement[];
-    checked:boolean;
+    comparisson?: IComparisson[][] | undefined;
+    checked: boolean;
 }
 export class Segment extends Entity<ISegment> {
     static create(props: ISegment): Segment {
@@ -18,23 +20,24 @@ export class Segment extends Entity<ISegment> {
             name: this.name,
             type: this.type,
             pacSegments: this.pacSegments,
+            comparisson: this.comparisson,
             checked: this.checked,
         };
     }
     duplicate(): Segment {
         return Segment.create(this.unmarshall());
     }
-    replace(props:ISegment):Segment{
-        this._props = props
-        return this
+    replace(props: ISegment): Segment {
+        this._props = props;
+        return this;
     }
-    check():Segment{
-        this._props.checked = true
-        return this
+    check(): Segment {
+        this._props.checked = true;
+        return this;
     }
-    uncheck():Segment{
-        this._props.checked = false
-        return this
+    uncheck(): Segment {
+        this._props.checked = false;
+        return this;
     }
     get name(): string {
         return this._props.name;
@@ -44,6 +47,9 @@ export class Segment extends Entity<ISegment> {
     }
     get pacSegments(): IMeasurement[] {
         return this._props.pacSegments;
+    }
+    get comparisson(): IComparisson[][] {
+        return this._props.comparisson;
     }
     get checked(): boolean {
         return !!this._props.checked;
