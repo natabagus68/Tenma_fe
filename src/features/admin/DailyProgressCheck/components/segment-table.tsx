@@ -28,7 +28,7 @@ const SegmentTable = ({
                                 onClick={(e) =>
                                     model.saveSegment(
                                         e,
-                                        model.segments[index].id
+                                        model.segments?.[index].id
                                     )
                                 }
                                 className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
@@ -168,7 +168,7 @@ const SegmentTable = ({
                             </tr>
                         </thead>
                         <tbody>
-                            {segment.pacSegments?.map((segment, i) => (
+                            {segment?.pacSegments?.map((segment, i) => (
                                 <tr key={segment.id}>
                                     <td className="border bg-white text-center py-5">
                                         {segment.character}
@@ -247,7 +247,7 @@ const SegmentTable = ({
                     </table>
 
                     <div className="h-full w-full flex">
-                        {segment.comparisson.map((el) => {
+                        {segment?.comparisson?.map((el) => {
                             return (
                                 <>
                                     <table className="">
@@ -270,7 +270,7 @@ const SegmentTable = ({
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {el.map((x) => {
+                                            {el?.map((x) => {
                                                 return (
                                                     <tr>
                                                         <td className="border bg-white text-center py-5 px-3">

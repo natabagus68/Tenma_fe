@@ -184,7 +184,24 @@ const AddSegmentTwoD = () => {
                                                         )}
                                                     </div>
                                                     <div className=" w-full text-center items-center flex justify-center">
-                                                        <p className="m-auto">
+                                                        <p
+                                                            className={`m-auto ${
+                                                                model.segments[
+                                                                    index
+                                                                ].measurements[
+                                                                    index2
+                                                                ].judgement.toLowerCase() ==
+                                                                    "ok" ||
+                                                                model.segments[
+                                                                    index
+                                                                ].measurements[
+                                                                    index2
+                                                                ].judgement.toLowerCase() ==
+                                                                    "good"
+                                                                    ? "text-black"
+                                                                    : "text-red-500"
+                                                            }`}
+                                                        >
                                                             {
                                                                 model.segments[
                                                                     index
@@ -247,7 +264,24 @@ const AddSegmentTwoD = () => {
                                                     )}
                                                 </div>
                                                 <div className=" w-full text-center items-center flex justify-center">
-                                                    <p className="m-auto">
+                                                    <p
+                                                        className={`m-auto ${
+                                                            model.segments[
+                                                                index
+                                                            ].measurements[
+                                                                index2
+                                                            ].saJudgement ==
+                                                                "ok" ||
+                                                            model.segments[
+                                                                index
+                                                            ].measurements[
+                                                                index2
+                                                            ].saJudgement ==
+                                                                "good"
+                                                                ? "text-black"
+                                                                : "text-red-500"
+                                                        }`}
+                                                    >
                                                         {
                                                             model.segments[
                                                                 index

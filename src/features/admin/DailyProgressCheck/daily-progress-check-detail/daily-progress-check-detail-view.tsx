@@ -10,6 +10,7 @@ import HistoryFormView from "../components/DateTable";
 import ModalDelete from "@common/components/Modal/ModalDelete";
 const DailyProgressCheckDetailView = () => {
     const dailyProgressCheckDetail = useDailyProgressCheckDetail();
+
     return (
         <>
             <div>
@@ -359,7 +360,7 @@ const DailyProgressCheckDetailView = () => {
             )}
             {dailyProgressCheckDetail.toogle === "2d" && (
                 <>
-                    {dailyProgressCheckDetail.segments.map((item) => (
+                    {dailyProgressCheckDetail?.segments?.map((item) => (
                         <SegmentTable
                             key={item.id}
                             segment={item}

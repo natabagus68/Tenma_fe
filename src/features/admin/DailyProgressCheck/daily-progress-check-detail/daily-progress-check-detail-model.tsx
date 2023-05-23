@@ -260,7 +260,7 @@ export function useDailyProgressCheckDetail() {
         cavityID: string
     ) => {
         // e.preventDefault();
-        console.log(e.target.files[0]);
+        console.log(id, cavityID);
         const form = new FormData();
         form.append("file", e.target.files[0]);
 
