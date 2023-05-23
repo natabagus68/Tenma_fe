@@ -94,7 +94,6 @@ export class Measurement extends Entity<IMeasurement> {
         this._props.result = value;
     }
     get judgement(): string {
-      ;
         if (
             parseFloat(this._props.result) >
             parseFloat(this._props.nominalValue)
@@ -110,7 +109,11 @@ export class Measurement extends Entity<IMeasurement> {
                     parseFloat(this._props.nominalValue) -
                     this._props.upper;
 
-                return (count || "").toString();
+                if (isNaN(count)) {
+                    return "";
+                } else {
+                    return count.toFixed(5).toString();
+                }
             }
         } else {
             if (
@@ -124,7 +127,11 @@ export class Measurement extends Entity<IMeasurement> {
                     parseFloat(this._props.nominalValue) -
                     +this._props.lower;
 
-                return (count || "").toString();
+                if (isNaN(count)) {
+                    return "";
+                } else {
+                    return count.toFixed(5).toString();
+                }
             }
         }
     }
@@ -146,11 +153,16 @@ export class Measurement extends Entity<IMeasurement> {
                 ) {
                     return "ok";
                 } else {
-                    return (
+                    const count =
                         parseInt(this._props.saResult) -
-                            parseInt(this._props.nominalValue) +
-                            +this._props.saUpper || ""
-                    ).toString();
+                        parseInt(this._props.nominalValue) +
+                        +this._props.saUpper;
+
+                    if (isNaN(count)) {
+                        return "";
+                    } else {
+                        return count.toFixed(5).toString();
+                    }
                 }
             } else {
                 if (
@@ -159,11 +171,16 @@ export class Measurement extends Entity<IMeasurement> {
                 ) {
                     return "ok";
                 } else {
-                    return (
+                    const count =
                         parseInt(this._props.saResult) -
-                            parseInt(this._props.nominalValue) -
-                            +this._props.saLower || ""
-                    ).toString();
+                        parseInt(this._props.nominalValue) -
+                        +this._props.saLower;
+
+                    if (isNaN(count)) {
+                        return "";
+                    } else {
+                        return count.toFixed(5).toString();
+                    }
                 }
             }
         }
