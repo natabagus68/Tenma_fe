@@ -298,7 +298,8 @@ const DailyProgressCheckDetailView = () => {
                                     <Td className="border-none font-bold">
                                         {
                                             dailyProgressCheckDetail
-                                                .dailyProgressCheck.weightPart
+                                                .dailyProgressCheck
+                                                .actWeightPart
                                         }
                                         &nbsp;gram
                                     </Td>
