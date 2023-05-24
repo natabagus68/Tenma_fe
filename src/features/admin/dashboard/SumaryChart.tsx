@@ -56,7 +56,7 @@ export const SumaryChart = ({ datas, total }) => {
         <>
             <div className="flex justify-center relative">
                 <canvas className="w-1/2" ref={ctx}></canvas>
-                <div className="absolute text-center items-center top-[103px] left-[356px] scale-125">
+                <div className="absolute text-center items-center top-24 left-42 scale-125">
                     <h1 className="text-4xl text-gray-700 font-semibold">
                         {total}
                     </h1>
