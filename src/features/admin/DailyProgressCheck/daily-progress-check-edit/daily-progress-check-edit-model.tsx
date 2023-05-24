@@ -37,6 +37,7 @@ export function useDailyProgressCheckEdit() {
                 acceptSampleTime: null,
                 measureSampleTime: null,
                 weightPart: 0,
+                actWeightPart: 0,
                 checked: false,
             })
         );
@@ -46,10 +47,12 @@ export function useDailyProgressCheckEdit() {
     const onDailyProgressCheckChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
-        setDailyProgressCheck((prevState) => DailyProgressCheck.create({
+        setDailyProgressCheck((prevState) =>
+            DailyProgressCheck.create({
                 ...prevState.unmarshall(),
                 [e.target.name]: e.target.value,
-            }));
+            })
+        );
     };
     const onPartChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setDailyProgressCheck((prevState) =>

@@ -145,7 +145,7 @@ const Weighting = () => {
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
                                             {item.progressCheck
-                                                ?.part_weight_qis || ""}
+                                                ?.actual_part_weight || ""}
                                         </td>
                                         <td className="py-4 px-4 text-left border-b border-gray-100 items-center text-gray-700">
                                             {moment(

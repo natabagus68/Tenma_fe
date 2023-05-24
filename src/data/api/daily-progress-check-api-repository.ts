@@ -55,6 +55,7 @@ export class DailyProgressCheckApiRepository
                     acceptSampleTime: item.accept_sample_time,
                     measureSampleTime: item.measure_sample_time,
                     weightPart: Number(item.part_weight_qis),
+                    actWeightPart: Number(item.actual_part_weight),
                     checked: false,
                     pic: {
                         checked: false,
@@ -108,6 +109,7 @@ export class DailyProgressCheckApiRepository
             acceptSampleTime: data.data.accept_sample_time,
             measureSampleTime: data.data.measure_sample_time,
             weightPart: Number(data.data.part_weight_qis),
+            actWeightPart: Number(data.data.actual_part_weight),
             checked: false,
             pic: {
                 checked: false,
@@ -201,7 +203,7 @@ export class DailyProgressCheckApiRepository
             label_no: payload.labelNo,
             accept_sample_time: payload.acceptSampleTime,
             measure_sample_time: payload.measureSampleTime,
-            actual_part_weight: payload.weightPart.toString(),
+            actual_part_weight: payload.actWeightPart.toString(),
         });
         return DailyProgressCheck.create({
             id: data.data.id,

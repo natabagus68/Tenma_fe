@@ -63,8 +63,10 @@ const DailyProgressCheckEditView = () => {
                                 onChange={model.onMachineChange}
                                 className="px-3 py-2 w-full border border-gray-100 rounded-md outline-none text-gray-700"
                             >
-                                {model.machines.map(item => (
-                                    <option value={item.id} key={item.id}>{item.idMachine} - {item.noMachine}</option>
+                                {model.machines.map((item) => (
+                                    <option value={item.id} key={item.id}>
+                                        {item.idMachine} - {item.noMachine}
+                                    </option>
                                 ))}
                                 <option value="" disabled>
                                     Choose Machine
@@ -145,7 +147,8 @@ const DailyProgressCheckEditView = () => {
                                 type="time"
                                 name="acceptSampleTime"
                                 value={
-                                    model.dailyProgressCheck.acceptSampleTime?.toString() || ''
+                                    model.dailyProgressCheck.acceptSampleTime?.toString() ||
+                                    ""
                                 }
                                 onChange={model.onDailyProgressCheckChange}
                                 className="px-3 py-2 w-full border border-gray-100 rounded-md outline-none"
@@ -159,7 +162,8 @@ const DailyProgressCheckEditView = () => {
                                 type="time"
                                 name="measureSampleTime"
                                 value={
-                                    model.dailyProgressCheck.measureSampleTime?.toString() || ''
+                                    model.dailyProgressCheck.measureSampleTime?.toString() ||
+                                    ""
                                 }
                                 onChange={model.onDailyProgressCheckChange}
                                 className="px-3 py-2 w-full border border-gray-100 rounded-md outline-none"
@@ -170,8 +174,8 @@ const DailyProgressCheckEditView = () => {
                             <input
                                 type="number"
                                 step="0.0001"
-                                name="weightPart"
-                                value={model.dailyProgressCheck.weightPart}
+                                name="actWeightPart"
+                                value={model.dailyProgressCheck.actWeightPart}
                                 onChange={model.onDailyProgressCheckChange}
                                 className="px-3 py-2 w-full border border-gray-100 rounded-md outline-none"
                             />
@@ -195,7 +199,11 @@ const DailyProgressCheckEditView = () => {
                     </form>
                 </div>
             </div>
-            <ModalConfirm showModal={ model.saveConfirmShow } setShowModal={ model.setSaveConfirmShow } onConfirm={ model.onConfirmSave } />
+            <ModalConfirm
+                showModal={model.saveConfirmShow}
+                setShowModal={model.setSaveConfirmShow}
+                onConfirm={model.onConfirmSave}
+            />
         </>
     );
 };

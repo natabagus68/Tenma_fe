@@ -44,6 +44,7 @@ export function useDailyProgressCheckDetail() {
                 acceptSampleTime: "",
                 measureSampleTime: "",
                 weightPart: 0,
+                actWeightPart: 0,
                 checked: false,
             })
         );

@@ -99,7 +99,7 @@ export class Measurement extends Entity<IMeasurement> {
             parseFloat(this._props.nominalValue)
         ) {
             if (
-                parseFloat(this._props.nominalValue) + +this._props.upper >
+                parseFloat(this._props.nominalValue) + +this._props.upper >=
                 parseFloat(this._props.result)
             ) {
                 return "ok";
@@ -117,7 +117,7 @@ export class Measurement extends Entity<IMeasurement> {
             }
         } else {
             if (
-                parseFloat(this._props.nominalValue) + +this._props.lower <
+                parseFloat(this._props.nominalValue) + +this._props.lower <=
                 parseFloat(this._props.result)
             ) {
                 return "ok";
@@ -148,7 +148,7 @@ export class Measurement extends Entity<IMeasurement> {
                 parseInt(this._props.nominalValue)
             ) {
                 if (
-                    parseInt(this._props.nominalValue) + +this._props.upper >
+                    parseInt(this._props.nominalValue) + +this._props.upper >=
                     parseInt(this._props.saResult)
                 ) {
                     return "ok";
@@ -166,7 +166,7 @@ export class Measurement extends Entity<IMeasurement> {
                 }
             } else {
                 if (
-                    parseInt(this._props.nominalValue) + +this._props.saLower <
+                    parseInt(this._props.nominalValue) + +this._props.saLower <=
                     parseInt(this._props.saResult)
                 ) {
                     return "ok";
