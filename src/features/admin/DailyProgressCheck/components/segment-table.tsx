@@ -6,19 +6,23 @@ import { PenAltIcon, PenIcon } from "@common/components/icons";
 import { Comparisson } from "@domain/models/comparisson";
 const SegmentTable = ({
     segment = Segment.create({
+        id: "",
         name: "",
         type: "",
         pacSegments: [],
         comparisson: [],
         checked: false,
     }),
-
+    key = null,
     index = null,
     model = useDailyProgressCheckDetail(),
 }) => {
     return (
         <>
-            <div className="m-auto border-2 border-gray-100 rounded-lg pb-6 mt-10  overflow-x-scroll flex">
+            <div
+                key={key}
+                className="m-auto border-2 border-gray-100 rounded-lg pb-6 mt-10  overflow-x-scroll flex"
+            >
                 <div>
                     <div className="w-full py-5 px-12 flex justify-between items-center">
                         <h1 className="font-[700] text-2xl text-gray-700 font-sans">
@@ -31,7 +35,7 @@ const SegmentTable = ({
                                     onClick={(e) =>
                                         model.saveSegment(
                                             e,
-                                            model.segments?.[index].id
+                                            model.segments?.[Number(index)].id
                                         )
                                     }
                                     className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
@@ -56,7 +60,7 @@ const SegmentTable = ({
                                 <div className="flex gap-5">
                                     <div>
                                         <label
-                                            htmlFor="comparisson"
+                                            htmlFor={`${segment.id}`}
                                             className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
                                         >
                                             <svg
@@ -78,11 +82,11 @@ const SegmentTable = ({
 
                                         <input
                                             type="file"
-                                            id="comparisson"
+                                            id={`${segment.id}`}
                                             onChange={(e) =>
                                                 model.uploadComparisson(
                                                     e,
-                                                    model.segments[index].id
+                                                    segment.id
                                                 )
                                             }
                                             className="hidden"
@@ -258,10 +262,22 @@ const SegmentTable = ({
                         return (
                             <>
                                 <div>
-                                    <div className="text-center border-x border-gray-100 py-7">
+                                    <div className="px-3 items-center border-x border-gray-100 py-5 flex justify-between">
                                         <h1 className="font-[700] text-2xl text-gray-700 font-sans">
                                             Sample: {i + 1}
                                         </h1>
+                                        <button
+                                            onClick={(e) =>
+                                                model.deleteComparisson(
+                                                    e,
+                                                    segment.id,
+                                                    el.id
+                                                )
+                                            }
+                                            className="py-[12px] px-[20px] bg-[#F04438] text-white align-middle rounded-md"
+                                        >
+                                            Delete
+                                        </button>
                                     </div>
                                     <table className="w-[500px]">
                                         <thead>

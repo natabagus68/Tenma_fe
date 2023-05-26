@@ -6,6 +6,7 @@ import { Segment3dRepository } from "@domain/repositories/segment-3d-repository"
 import { ToolRepository } from "@domain/repositories/tool-repository";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export function useCreateSegment() {
     const segmentRepository: Segment3dRepository = new Segment3dApiRepository();
@@ -66,9 +67,18 @@ export function useCreateSegment() {
         setSaveConfirmShow(true);
     };
     const onConfirmSave = (e: React.MouseEvent<HTMLButtonElement>) => {
-        segmentRepository.store(segment).then((res) => {
-            navigate(-1);
-        });
+        segmentRepository
+            .store(segment)
+            .then((res) => {
+                navigate(-1);
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "ada form yang kosong",
+                });
+            });
     };
     const onCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
         navigate(-1);

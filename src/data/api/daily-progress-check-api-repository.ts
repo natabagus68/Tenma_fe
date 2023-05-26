@@ -278,6 +278,7 @@ export class DailyProgressCheckApiRepository
                         el?.std_measurement_comparator?.sa_segment_comps?.map(
                             (ex) => {
                                 return Comparisson.create({
+                                    id: el.id,
                                     result: ex.cavity_comp_res.actual_result,
                                     resultJudgment:
                                         ex.cavity_comp_res
@@ -289,6 +290,7 @@ export class DailyProgressCheckApiRepository
                             }
                         );
 
+                    data.id = el.id;
                     return data;
                 }),
                 checked: false,
@@ -395,6 +397,17 @@ export class DailyProgressCheckApiRepository
         await api.post(
             `progress-check/${pcId}/3d/${cavityID}/comparator`,
             data
+        );
+        return true;
+    }
+
+    async destroyComparisson(
+        pcID: string,
+        cavityId: string,
+        comparatorId: string
+    ): Promise<boolean> {
+        await api.delete(
+            `progress-check/${pcID}/3d/${cavityId}/comparator/${comparatorId}`
         );
         return true;
     }
