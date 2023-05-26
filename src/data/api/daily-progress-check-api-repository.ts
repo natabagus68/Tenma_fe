@@ -238,7 +238,8 @@ export class DailyProgressCheckApiRepository
     }
     async get3dSegments(id: string): Promise<Segment[]> {
         const { data } = await api.get(`progress-check/${id}/3d`);
-        return data.data.map((item) =>
+
+        const result = data.data.map((item) =>
             Segment.create({
                 id: item.id,
                 name: item.name,
@@ -272,9 +273,9 @@ export class DailyProgressCheckApiRepository
                         },
                     })
                 ),
-                comparisson: item.cavity_comparators.map((el) => {
+                comparisson: item?.cavity_comparators?.map((el) => {
                     const data =
-                        el.std_measurement_comparator.sa_segment_comps.map(
+                        el?.std_measurement_comparator?.sa_segment_comps?.map(
                             (ex) => {
                                 return Comparisson.create({
                                     result: ex.cavity_comp_res.actual_result,
@@ -293,6 +294,8 @@ export class DailyProgressCheckApiRepository
                 checked: false,
             })
         );
+
+        return result;
     }
     async getPic(): Promise<Pic[]> {
         const { data } = await api.get(`progress-check/pic`);
