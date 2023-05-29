@@ -21,7 +21,7 @@ const Modal = ({
                                 <h1 className="text-3xl text-gray-700 text-center">
                                     Dashboard
                                 </h1>
-                                <p className="text-gray-400 font-rubik text-center text-xl">
+                                <p className="text-gray-400 text-center text-xl">
                                     Check to grant access{" "}
                                 </p>
 

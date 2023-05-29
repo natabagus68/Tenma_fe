@@ -70,14 +70,14 @@ export const RevenueChart = ({ datas }) => {
                 <canvas className="w-[700px]" ref={ctx}></canvas>
             </div>
             <div className="flex justify-center w-full gap-6 mt-4">
-                <div className="flex gap-2">
-                    <div className="w-11 h-6 bg-[#F5A618]"></div>
+                <div className="flex gap-2 items-center">
+                    <div className="w-6 h-2 bg-[#F5A618]"></div>
                     <label htmlFor="this_yearfrequent_input">
                         Actual Result
                     </label>
                 </div>
-                <div className="flex gap-2">
-                    <div className="w-11 h-6 bg-[#D0D3D9]"></div>
+                <div className="flex gap-2 items-center">
+                    <div className="w-6 h-2 bg-[#D0D3D9]"></div>
                     <label htmlFor="last_year_frequent_input">SA Result</label>
                 </div>
             </div>

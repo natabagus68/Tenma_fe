@@ -53,7 +53,8 @@ module.exports = {
             fontFamily: {
                 'display': 'Marcellus',
                 'body': 'Lato',
-                'nunito-sans': 'Nunito Sans'
+                'nunito-sans': 'Nunito Sans',
+                'open-sans': 'Open Sans'
             },
         },
     },

@@ -48,7 +48,7 @@ const Account = () => {
                                 value={model.userParam.q}
                                 placeholder="Search "
                                 onChange={model.onSearch}
-                                className="outline-none pl-9 py-4  border border-gray-100 rounded-xl w-[280px] text-rubik  text-sm placeholder:text-gray-100 text-gray-600"
+                                className="outline-none pl-9 py-4  border border-gray-100 rounded-xl w-[280px] text-sm placeholder:text-gray-100 text-gray-600"
                             />
                         </div>
                         <button

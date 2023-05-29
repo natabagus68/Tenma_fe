@@ -30,7 +30,7 @@ const AddSegmentTwoD = () => {
                                     onChange={(e) =>
                                         model.onInputNameChange(e, index)
                                     }
-                                    className="py-3 w-52 px-5 text-md text-gray-600 font-rubik border border-gray-200 rounded-md outline-none placeholder:text-center"
+                                    className="py-3 w-52 px-5 text-md text-gray-600 border border-gray-200 rounded-md outline-none placeholder:text-center"
                                 />
                             </div>
                             <div className="relative left-[800px]">
