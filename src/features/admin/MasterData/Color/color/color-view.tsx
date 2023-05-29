@@ -12,9 +12,9 @@ const Color = () => {
             <div>
                 <Breadcrumbs items={["Color"]} />
             </div>
-            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 ">
-                <div className="w-full py-5 px-12 flex justify-between items-center">
-                    <h1 className="font-[700] text-2xl text-gray-700 font-sans">
+            <div className="m-auto w-full border border-gray-100 rounded-lg pb-6 ">
+                <div className="w-full py-5 px-9 flex justify-between items-center">
+                    <h1 className="font-[700] text-2xl text-gray-700 font-open-sans">
                         Color
                     </h1>
                     <button
@@ -26,7 +26,7 @@ const Color = () => {
                 </div>
                 <div>
                     <table className="w-full">
-                        <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
+                        <thead className="bg-[#FAFAFB] border-y border-gray-100">
                             <tr>
                                 <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     ID Color
@@ -44,7 +44,7 @@ const Color = () => {
                             {color.color.data.map((item) => (
                                 <tr
                                     key={item.id}
-                                    className="border-b-2 border-gray-100"
+                                    className="border-b border-gray-100"
                                 >
                                     <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.idColor}

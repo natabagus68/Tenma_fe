@@ -8,6 +8,7 @@ import {
 import ModalDelete from "../../../../../common/components/Modal/ModalDelete";
 import Pagination from "../../../../../common/components/pagination/Pagination";
 import { useAccount } from "./account-model";
+import ToggleNew  from "../../../../../common/components/input/ToggleNew";
 
 const Account = () => {
     const model = useAccount();
@@ -21,10 +22,10 @@ const Account = () => {
             <div>
                 <Breadcrumbs items={["User", "Account"]} />
             </div>
-            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 ">
-                <div className="w-full py-5 px-12 flex justify-between items-center">
-                    <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Account.
+            <div className="m-auto w-full border border-gray-100 rounded-lg pb-6 ">
+                <div className="w-full py-5 px-10 flex justify-between items-center">
+                    <h1 className="font-[700] text-2xl text-gray-700 font-open-sans">
+                        Account
                     </h1>
                     <div className="flex justify-end gap-4">
                         <div className="relative">
@@ -61,21 +62,21 @@ const Account = () => {
                 </div>
                 <div>
                     <table className="w-full">
-                        <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
+                        <thead className="bg-[#FAFAFB] border-y border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Status
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Nama
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Email
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Role
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -84,43 +85,24 @@ const Account = () => {
                             {model.account.data.map((item) => (
                                 <tr
                                     key={item.id}
-                                    className="border-b-2 border-gray-100"
+                                    className="border-b border-gray-100"
                                 >
-                                    <td className="py-6 text-center pl-3 text-gray-600 items-center flex justify-center ">
-                                        <div className="flex gap-2">
-                                            <div
-                                                className="md:w-14 md:h-7 w-12 h-6 flex items-center bg-gray-400 rounded-full p-1 cursor-pointer"
-                                                onClick={(e) =>
-                                                    model.onToogleActive(
-                                                        e,
-                                                        item.id
-                                                    )
-                                                }
-                                            >
-                                                {/* Switch */}
-                                                <div
-                                                    className={`bg-black md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out ${
-                                                        item.is_verified
-                                                            ? `transform translate-x-5`
-                                                            : ""
-                                                    }`}
-                                                ></div>
-                                            </div>
-                                        </div>
+                                    <td className="py-6 text-start pl-10 text-gray-600 w-100 w-60">
+                                        <ToggleNew status={item.is_verified} id={item.id} handleClick={model.onToogleActive}/>
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.name}
                                     </td>
 
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.email}
                                     </td>
-                                    <td className="py-6 text-center pl-3 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.roles
                                             .map((item) => item.name)
                                             .join(", ")}
                                     </td>
-                                    <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
+                                    <td className="py-6  pl-10 text-gray-600 flex gap-3 justify-start">
                                         <button
                                             onClick={(e) =>
                                                 model.onDetail(e, item.id)

@@ -51,6 +51,9 @@ export default function useMaterial() {
             return material;
         });
     };
+    const onConfirmCancel = () => {
+        setDeleteConfirmShow(false)
+    }
     const onPageChange = (page: number) => {
         setMaterial((prev) => {
             const data = PaginatedData.create({
@@ -80,5 +83,6 @@ export default function useMaterial() {
         deleteConfirmShow,
         setDeleteConfirmShow,
         onCancel,
+        onConfirmCancel,
     };
 }
