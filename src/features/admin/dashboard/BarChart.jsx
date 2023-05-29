@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "./../../../common/components/Chart";
 
-export const BarChart = ({ datas }) => {
+export const BarChart = ({ datas, className }) => {
     const ctx = useRef();
     const chart = useRef();
     useEffect(() => {
-        console.log(datas.data3D);
-
         const initChart = () => {
             chart.current = new Chart(ctx.current, {
                 type: "bar",
@@ -26,7 +24,7 @@ export const BarChart = ({ datas }) => {
                     ],
                 },
                 options: {
-                    responsive: false,
+                    responsive: true,
                     plugins: {
                         legend: {
                             display: false,
@@ -59,12 +57,12 @@ export const BarChart = ({ datas }) => {
 
     return (
         <>
-            <div className="">
+            <div className={`${className}`}>
                 <canvas
                     className="w-full"
                     ref={ctx}
-                    height={400}
-                    width={700}
+                    height={227}
+                    width={554}
                 ></canvas>
             </div>
         </>
