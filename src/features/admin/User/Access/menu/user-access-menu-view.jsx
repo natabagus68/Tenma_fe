@@ -22,16 +22,16 @@ const Menu = () => {
             )}
 
             <div>
-                <Breadcrumbs items={["User", "Account"]} />
+                <Breadcrumbs items={["Access", "Menu"]} />
             </div>
-            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 ">
-                <div className="w-full py-5 px-12 flex justify-between items-center">
+            <div className="m-auto w-full border border-gray-100 rounded-lg pb-6 ">
+                <div className="w-full py-7 px-10 flex justify-between items-center">
                     <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Account.
+                        Menu
                     </h1>
                     <div className="flex justify-end gap-4">
                         <button
-                            className="py-[12px] px-[20px] border border-gray-100 text-gray-500 align-middle rounded-md flex justify-center itemn-center gap-2"
+                            className="py-[12px] px-[20px] border border-[#667085] text-[#667085] align-middle rounded-md flex justify-center itemn-center gap-2"
                             onClick={model.onBack}
                         >
                             <svg
@@ -54,9 +54,9 @@ const Menu = () => {
                 </div>
                 <div>
                     <table className="w-full">
-                        <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
+                        <thead className="bg-[#FAFAFB] border-y border-gray-100">
                             <tr>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     <input
                                         type="checkbox"
                                         disabled
@@ -64,13 +64,13 @@ const Menu = () => {
                                         className="w-8 h-8 accent-gray-700  "
                                     />
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Menu Name
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Permissions
                                 </th>
-                                <th className="py-6 text-center pl-3 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Action
                                 </th>
                             </tr>
@@ -82,7 +82,7 @@ const Menu = () => {
                                         key={item.id}
                                         className="border-b-2 border-gray-100"
                                     >
-                                        <td className="py-6 text-center pl-3 text-gray-600 ">
+                                        <td className="py-6 text-start pl-10 text-gray-600 ">
                                             <input
                                                 type="checkbox"
                                                 checked={item.active}
@@ -97,10 +97,10 @@ const Menu = () => {
                                                 className="w-8 h-8 accent-gray-700  "
                                             />
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600 ">
+                                        <td className="py-6 text-start pl-10 text-gray-600 ">
                                             {item.name}
                                         </td>
-                                        <td className="py-6 text-center pl-3 text-gray-600 ">
+                                        <td className="py-6 text-start pl-10 text-gray-600 ">
                                             {item.permission.map((e, i) => {
                                                 if (e.active) {
                                                     return (
@@ -114,7 +114,7 @@ const Menu = () => {
                                                 }
                                             })}
                                         </td>
-                                        <td className="py-6  pl-3 text-gray-600 flex gap-3 justify-center">
+                                        <td className="py-6  pl-10 text-gray-600 flex gap-3 justify-start">
                                             <button
                                                 onClick={() =>
                                                     model.buttonModal(item.id)

@@ -17,6 +17,7 @@ module.exports = {
                     'foundation-500': '#343C44',
                     'foundation-300': '#777C82',
                     '700': '#5C5E61',
+                    '800': '#514E4E',
                 },
                 green: {
                     '50': '#E7F2EF',
@@ -53,7 +54,8 @@ module.exports = {
             fontFamily: {
                 'display': 'Marcellus',
                 'body': 'Lato',
-                'nunito-sans': 'Nunito Sans'
+                'nunito-sans': 'Nunito Sans',
+                'open-sans' : 'Open Sans'
             },
         },
     },

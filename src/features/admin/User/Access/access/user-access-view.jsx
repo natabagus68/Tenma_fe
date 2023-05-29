@@ -17,15 +17,15 @@ const Access = () => {
             <div>
                 <Breadcrumbs items={["User", "Access"]} />
             </div>
-            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6 ">
-                <div className="w-full py-5 px-12 flex justify-between items-center">
-                    <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                        Access.
+            <div className="m-auto w-full border border-gray-100 rounded-lg pb-6 ">
+                <div className="w-full py-7 px-8 flex justify-between items-center">
+                    <h1 className="font-[700] text-2xl text-gray-700 font-open-sans">
+                        Access
                     </h1>
-                    <div className="flex justify-end gap-4">
+                    <div className="flex justify-end">
                         <button
                             onClick={model.toAddData}
-                            className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md"
+                            className="py-[12px] px-[20px] bg-gray-600 text-white align-middle rounded-md font-open-sans"
                         >
                             + Create New Role
                         </button>
@@ -33,9 +33,9 @@ const Access = () => {
                 </div>
                 <div>
                     <table className="w-full">
-                        <thead className="bg-[#FAFAFB] border-y-2 border-gray-100">
+                        <thead className="bg-[#FAFAFB] border-y border-gray-100">
                             <tr>
-                                <th className="py-6 text-start pl-32 text-gray-600 font-[500]">
+                                <th className="py-6 text-start pl-10 text-gray-600 font-[500]">
                                     Role
                                 </th>
                                 <th className="py-6 text-start pl-80 text-gray-600 font-[500]">
@@ -46,10 +46,10 @@ const Access = () => {
                         <tbody>
                             {model.access.data.map((item, index) => (
                                 <tr
-                                    className="border-b-2 border-gray-100"
+                                    className="border-b border-gray-100"
                                     key={index}
                                 >
-                                    <td className="py-6 text-start pl-32 text-gray-600 ">
+                                    <td className="py-6 text-start pl-10 text-gray-600 ">
                                         {item.name}
                                     </td>
                                     <td className="py-6  pl-80 text-gray-600 flex gap-3 justify-start">
