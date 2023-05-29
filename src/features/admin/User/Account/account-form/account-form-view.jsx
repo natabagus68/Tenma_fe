@@ -8,20 +8,10 @@ const AddAccount = () => {
     console.log(model.access);
     return (
         <>
-            <div>
-                <Breadcrumbs
-                    items={[
-                        "User",
-                        "Account",
-                        model.id ? "Edit data" : "Add Data",
-                    ]}
-                />
-            </div>
+            <Breadcrumbs items={[ "User", "Account", model.id ? "Edit data" : "Add Data", ]} />
             <div className="m-auto w-full border border-gray-100  rounded-lg pb-6">
                 <div className="w-full py-7 px-8 flex justify-between items-center">
-                    <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                    { model.id? "Edit Data" : "Add Data"}
-                    </h1>
+                    <h1 className="font-[700] text-2xl text-gray-700 font-sans">{ model.id? "Edit Data" : "Add Data"}</h1>
                 </div>
                 <div className="border-t border-gray-100 pt-5 px-8 pb-80">
                     <form>

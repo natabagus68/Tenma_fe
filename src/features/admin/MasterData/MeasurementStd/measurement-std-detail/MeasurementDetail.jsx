@@ -25,7 +25,7 @@ const MeasurementDetail = () => {
           </div>
         </div>
         <div className="border-t border-[#D0D3D9] px-8 py-6">
-          <table className="w-1/4">
+          <table className="w-1/2">
             <tbody>
               <tr className="bg-[#F0F1F3]">
                 <td className="p-4">Part Name</td>
