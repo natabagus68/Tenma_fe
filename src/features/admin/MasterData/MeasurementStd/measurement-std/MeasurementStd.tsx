@@ -91,7 +91,7 @@ const MeasurementStd = () => {
                                                         item.id
                                                     )
                                                 }
-                                                className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-md text-white flex gap-2"
+                                                className="py-[12px] px-[20px] bg-red-1000 items-center rounded-md text-white flex gap-2"
                                             >
                                                 <TrashIcon />
                                                 Delete
