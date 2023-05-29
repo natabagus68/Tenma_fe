@@ -28,7 +28,7 @@
         "react-router-dom": "^6.4.2",
         "react-tailwindcss-datepicker": "^1.6.0",
         "react-tailwindcss-select": "^1.8.5",
-        "sweetalert2": "^11.7.3",
+        "sweetalert2": "^11.7.5",
         "uid": "^2.0.2",
         "xlsx": "^0.18.5",
         "yup": "^1.0.2"

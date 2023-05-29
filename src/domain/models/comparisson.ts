@@ -22,9 +22,7 @@ export class Comparisson extends Entity<IComparisson> {
             saResultJudgment: this.saResultJudgment,
         };
     }
-    get id(): string {
-        return this._props.id;
-    }
+
     get result(): string {
         return this._props.result;
     }

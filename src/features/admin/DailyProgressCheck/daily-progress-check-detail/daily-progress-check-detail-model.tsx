@@ -260,17 +260,30 @@ export function useDailyProgressCheckDetail() {
         e: React.ChangeEvent<HTMLInputElement>,
         cavityID: string
     ) => {
-        // e.preventDefault();
-        console.log(id, cavityID);
+        console.log(cavityID);
         const form = new FormData();
         form.append("file", e.target.files[0]);
 
         dailyProgressCheckRepo
             .uploadComparisson(id, cavityID, form)
             .then(() => {
-                console.log("berhasil");
+                fetchSegment();
             })
             .catch((error) => console.log(error));
+    };
+
+    const deleteComparisson = (
+        e: React.MouseEvent<HTMLButtonElement>,
+        cavityId: string,
+        comparisonId: string
+    ) => {
+        e.preventDefault();
+        // console.log(cavtyId, comparisonId);
+        dailyProgressCheckRepo
+            .destroyComparisson(id, cavityId, comparisonId)
+            .then(() => {
+                fetchSegment();
+            });
     };
 
     useEffect(() => {
@@ -298,6 +311,7 @@ export function useDailyProgressCheckDetail() {
         histories,
         toogle,
         confirmDeleteHistoryShow,
+        deleteComparisson,
         setConfirmDeleteHistoryShow,
         onDeleteHistory,
         onConfirmDeleteHistory,

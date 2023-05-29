@@ -30,6 +30,7 @@ module.exports = {
                     '50': '#FCEAEA',
                     '500': '#DE1B1B',
                     'foundation-500': '#F04438',
+                    "1000": '#F04438'
                 },
                 sky: {
                     'base': '#CDCFD0',
