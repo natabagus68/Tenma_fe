@@ -17,6 +17,7 @@ module.exports = {
                     'foundation-500': '#343C44',
                     'foundation-300': '#777C82',
                     '700': '#5C5E61',
+                    '800': '#514E4E',
                 },
                 green: {
                     '50': '#E7F2EF',
@@ -30,6 +31,7 @@ module.exports = {
                     '50': '#FCEAEA',
                     '500': '#DE1B1B',
                     'foundation-500': '#F04438',
+                    "1000": '#F04438'
                 },
                 sky: {
                     'base': '#CDCFD0',
@@ -54,7 +56,7 @@ module.exports = {
                 'display': 'Marcellus',
                 'body': 'Lato',
                 'nunito-sans': 'Nunito Sans',
-                'open-sans': 'Open Sans'
+                'open-sans' : 'Open Sans'
             },
         },
     },

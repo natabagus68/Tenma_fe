@@ -17,23 +17,26 @@ const AddSegmentTwoD = () => {
                         key={item.id}
                         className="m-auto w-full border-t-2 border-x-2 rounded-t-lg border-gray-100   mt-4"
                     >
-                        <div className="w-full py-5 px-12 flex gap-5 items-center">
-                            <h1 className="font-[700] text-2xl text-gray-700 font-sans">
-                                Input Segment
-                            </h1>
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="Input name"
-                                    value={model.segments[index].name}
-                                    name="name"
-                                    onChange={(e) =>
-                                        model.onInputNameChange(e, index)
-                                    }
-                                    className="py-3 w-52 px-5 text-md text-gray-600 border border-gray-200 rounded-md outline-none placeholder:text-center"
-                                />
+                        <div className="w-full py-5 px-12 flex justify-between gap-5 items-center">
+                            <div className="items-center flex gap-3">
+                                <h1 className="font-[700] text-2xl text-gray-700 font-sans">
+                                    Input Segment
+                                </h1>
+                                <div>
+                                    <input
+                                        type="text"
+                                        placeholder="Input name"
+                                        value={model.segments[index].name}
+                                        name="name"
+                                        onChange={(e) =>
+                                            model.onInputNameChange(e, index)
+                                        }
+                                        className="py-3 w-52 px-5 text-md text-gray-600 font-rubik border border-gray-200 rounded-md outline-none placeholder:text-center"
+                                    />
+                                </div>
                             </div>
-                            <div className="relative left-[800px]">
+
+                            <div className="">
                                 <button
                                     onClick={(e) =>
                                         model.deleteTableUpdate(e, index)

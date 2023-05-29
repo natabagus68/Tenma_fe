@@ -4,6 +4,7 @@ import { Breadcrumbs } from "../../../../../common/components";
 import { Td } from "../../../../../common/components/table/Td";
 import { Tr } from "../../../../../common/components/table/Tr";
 import useDetailAccount from "./detail-account-view-model";
+import { PenAltIcon } from "@common/components/icons";
 
 const DetailAccount = () => {
     const model = useDetailAccount();
@@ -12,12 +13,12 @@ const DetailAccount = () => {
             <div>
                 <Breadcrumbs items={["Account", "Detail"]} />
             </div>
-            <div className="m-auto w-full border-2 border-gray-100 rounded-lg pb-6">
+            <div className="m-auto w-full border border-gray-100 rounded-lg pb-6">
                 <div className="w-full py-5 px-12 flex justify-between items-center">
-                    <h1 className="font-[700] text-2xl text-gray-700 font-sans">
+                    <h1 className="font-[700] text-2xl text-gray-700 font-open-sans">
                         Details
                     </h1>
-                    <div className="flex justify-end items-center gap-3">
+                    <div className="flex justify-end items-center gap-4">
                         <div className="flex gap-2">
                             <button
                                 className="py-[12px] px-[20px] border border-gray-100 align-middle rounded-md flex gap-2"
@@ -41,36 +42,34 @@ const DetailAccount = () => {
                             </button>
                             <button
                                 onClick={model.toEdit}
-                                className="py-[12px] px-[20px] bg-[#F79009] text-white align-middle rounded-md flex"
+                                className="py-[12px] px-[20px] bg-[#F79009] text-white items-center  rounded-md flex gap-2"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                                    />
-                                </svg>
+                                <PenAltIcon />
                                 Edit
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div className="border-t-2 border-gray-100 py-8 px-8 flex flex-col gap-8">
-                    <div className="w-full justify-star px-8">
-                        <h1 className="text-4xl text-start">
+                <div className="border-t border-gray-100 py-8 px-12 flex flex-col gap-8">
+                    <div className="w-full justify-star">
+                        <h1 className="text-4xl text-start font-open-sans">
                             User Information
                         </h1>
                     </div>
                     {/* table 1 */}
-                    <div className="w-1/2 flex justify-center">
+                    <div className="w-1/2 flex flex-col justify-center">
+                        <div className="flex flex-row justify-start mb-5 w-auto">
+                            <span className="pr-5">Status:</span>
+                            {
+                                model.account.id? 
+                                    model.account.is_verified? 
+                                        <span className="font-open-sans font-bold text-[#12B569]">Active</span> 
+                                        :
+                                        <span className="font-open-sans font-bold text-[#F04438]">Inactive</span>
+                                    : "" 
+                            }
+                        </div>
                         <table className="border-none w-[90%]">
                             <tbody>
                                 <Tr>

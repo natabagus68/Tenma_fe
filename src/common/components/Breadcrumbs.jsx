@@ -24,7 +24,7 @@ export const Breadcrumbs = ({ items = [], links = [] }) => {
                             onClick={() =>
                                 links[i] && navigate(generateLink(i, arr))
                             }
-                            className={`font-open-sans ${i == arr.length - 1 ? "font-[600] text-[#6F6C6C]":"font-[400] text-[#B8B6B6]"} ${items[i] && i < arr.length - 1 && "cursor-pointer"}`}>
+                            className={`font-semibold ${i == arr.length - 1 ? "font-[600] text-[#6f6c6c]": "font-[400] text-[#b8b6b6]"} ${items[i]  && i < arr.length - 1 && "cursor-pointer"}`}>
                             {item}
                         </div>
                     </div>
