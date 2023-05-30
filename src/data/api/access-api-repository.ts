@@ -20,6 +20,16 @@ export class AccessApiRepository implements AccessRepository {
             }),
         });
     }
+    // async show(id: string): Promise<Access> {
+    //     const {
+    //         data: { data = {} },
+    //     } = await api.get(`access/${id}/menu`);
+    //     console.log(id)
+    //     return Access.create({
+    //         id: data?.id,
+    //         name: data?.name,
+    //     });
+    // }
     async show(id: string): Promise<PaginatedData<Access>> {
         const { data } = await api.get(`access/${id}/menu`);
         return PaginatedData.create({

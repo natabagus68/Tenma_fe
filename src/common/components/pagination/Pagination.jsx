@@ -18,7 +18,7 @@ const Pagination = ({ row, limit, page, onClick = null }) => {
                 disabled={page < 2}
                 type="button"
                 role="button"
-                className="flex gap-4 text-gray-400 items-center px-3 py-2 rounded-md border hover:bg-gray-600 hover:text-white"
+                className="flex gap-4 text-gray-400 items-center px-3 py-2 rounded-md border hover:bg-[#667085] hover:text-white"
             >
                 <div className="rotate-180">
                     <svg

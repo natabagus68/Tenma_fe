@@ -1,13 +1,11 @@
-import React from "react";
-
 export const DashboardCard = ({ label, content, icon }) => {
-    return (
-        <div className="flex  gap-5 px-6 py-8 bg-white rounded-lg shadow-[0px_4px_30px_rgba(0,_0,_0,_0.11)]">
-            {icon}
-            <div className="">
-                <div className="text-xl font-bold">{label}</div>
-                <div className="text-xl text-gray-500">{content}</div>
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex flex-1 gap-4 p-4 bg-white rounded-md border border-[#D0D3D9]">
+      <span>{icon}</span>
+      <div>
+        <div className="text-[20px] font-[900] text-[#6F6C6C]">{label}</div>
+        <div className="text-[#9A9898] font-[400] text-xs">{content}</div>
+      </div>
+    </div>
+  );
 };

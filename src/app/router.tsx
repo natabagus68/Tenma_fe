@@ -15,7 +15,6 @@ import { AreaAccessCreate } from "../features/admin/AreaAccess/AreaAccessCreate"
 
 import MeasurementStd from "../features/admin/MasterData/MeasurementStd/measurement-std/MeasurementStd";
 import Part from "../features/admin/MasterData/Part/part/part-view";
-import { element } from "prop-types";
 import PartDetail from "../features/admin/MasterData/Part/part-detail/part-detail-view";
 import PartFormView from "../features/admin/MasterData/Part/form/part-form-view";
 import Customer from "../features/admin/MasterData/Customer/Customer";
@@ -57,6 +56,7 @@ import HistoryFormView from "../features/admin/DailyProgressCheck/daily-progress
 import TableExcel from "@features/admin/Report/tabel-export/tabel-excel-view";
 import Weighting from "@features/admin/weighting/weighting-view";
 import Traceability from "@features/admin/dashboard/traceability/traceability-view";
+
 const Root = () => {
     return <Outlet />;
 };

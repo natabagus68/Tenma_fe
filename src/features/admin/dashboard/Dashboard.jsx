@@ -1,179 +1,159 @@
-import React from "react";
-import {
-    AreaIcon,
-    ArrowIcon,
-    CompanyIcon,
-    PitIcon,
-    UsersIcon,
-} from "../../../common/components/icons";
-import { Input } from "../../../common/components/input";
+import { Breadcrumbs } from "@common/components";
 import { DashboardCard } from "./DashboardCard";
 import { RevenueChart } from "./RevenueChart";
 import { SumaryChart } from "./SumaryChart";
 import { BarChart } from "./BarChart";
 import { dashboardModel } from "./dashboard-view-model";
+import { TreacebilityIcon } from "@common/components/icons/TreacebilityIcon";
+
 export const Dashboard = () => {
-    const model = dashboardModel();
-    return (
-        <>
-            <div className="flex gap-3 text-gray-500 font-body mb-6">
-                <a>Home</a>/<div className="text-gray-700">Dashboard</div>
+  const model = dashboardModel();
+  return (
+    <div>
+      <Breadcrumbs items={["Dashboard"]} />
+      <div className="w-full px-4 rounded-md mb-6 pb-3 border border-[#D0D3D9] bg-[#FFFFFF] shadow-sm font-open-sans">
+        <div className="w-full flex justify-between items-center py-3">
+          <h1 className="text-[#514E4E] font-semibold">
+            Traceability
+            <span
+              onClick={model.toTraceability}
+              className="text-xs text-blue-500 ml-3 hover:text-blue-600 cursor-pointer"
+            >
+              See more
+            </span>
+          </h1>
+          <select
+            name="traceability"
+            onChange={model.handleTreacibilityTime}
+            className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+          >
+            <option value="">Today</option>
+            <option value="monthly">this month</option>
+            <option value="year">this year</option>
+          </select>
+        </div>
+        <div className="flex gap-4">
+          <DashboardCard
+            label={model?.progressCheckData?.part}
+            content={"TOTAL PART"}
+            icon={<TreacebilityIcon width="50px" bColor="bg-[#12B569]" />}
+          />
+          <DashboardCard
+            label={model?.progressCheckData?.progressCheck}
+            content={"PROGRESS CHECKING"}
+            icon={<TreacebilityIcon width="50px" bColor="bg-[#667085]" />}
+          />
+          <DashboardCard
+            label={model?.progressCheckData?.ThreeDCheck}
+            content={"3D CHECK"}
+            icon={<TreacebilityIcon width="50px" bColor="bg-[#20519F]" />}
+          />
+          <DashboardCard
+            label={model?.progressCheckData?.TwoDCheck}
+            content={"2D CHECK"}
+            icon={<TreacebilityIcon width="50px" bColor="bg-[#F79009]" />}
+          />
+        </div>
+      </div>
+      <div className="flex flex-col rounded-lg shadow-sm px-6 py-4 bg-white relative border border-[#D0D3D9]">
+        <div className="flex justify-between">
+          <div className="mb-2 text-[#514E4E] font-[600]">Quality Trends</div>
+          <div className="flex gap-4">
+            <select
+              name="part"
+              value={model.revenueQuery.part}
+              onChange={model.handleChangeRevenue}
+              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+            >
+              <option value="" disabled selected>
+                Part Code
+              </option>
+              {model.part.data.map((item) => { return <option value={item.id}>{item.partCode}</option>; })}
+            </select>
+            <select
+              name="character"
+              value={model.revenueQuery.character}
+              onChange={model.handleChangeRevenue}
+              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+            >
+              <option value="" disabled selected>
+                Characters
+              </option>
+              {model.character.map((item) => {
+                return <option value={item.character}>{item.character}</option>;
+              })}
+            </select>
+          </div>
+        </div>
+        {model.revenue && <RevenueChart datas={model?.revenue} />}
+      </div>
+      <div className="w-full flex justify-between gap-6 mt-6">
+        <div className="w-1/2 rounded-md shadow-sm bg-white justify-center items-center border border-[#D0D3D9]">
+          <div className="flex justify-between px-6 py-3">
+            <p className="text-xl text-[#514E4E]">Summary Judgement</p>
+            <select
+              onChange={model.handleSumaryQuery}
+              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+            >
+              <option value="">Today</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
+            </select>
+          </div>
+          <div className="relative mt-[26px] mb-[46px]">
+            {model.sumaryRunner ? (
+              <SumaryChart
+                datas={[
+                  model.sumaryData.ok,
+                  model.sumaryData.waiting,
+                  model.sumaryData.ng,
+                ]}
+                total={model.sumaryData.total}
+              />
+            ) : null}
+          </div>
+          <div className="w-full flex gap-8 justify-center mb-[42px] font-open-sans">
+            <div className="flex gap-2 items-center">
+              <div className="w-[16px] h-[16px] bg-[#12B569] rounded-full"></div>
+              <p className="font-[400] text-xs">OK</p>
             </div>
-            <div className="w-full py-2 px-4  rounded-md mb-4 pt-6 shadow-md">
-                <div className="w-full flex justify-between mb-3 items-center">
-                    <h1 className="text-gray-800 font-semibold text-xl">
-                        Traceability
-                        <span
-                            onClick={model.toTraceability}
-                            className="text-sm text-blue-500 ml-3 hover:text-blue-600 cursor-pointer"
-                        >
-                            See more
-                        </span>
-                    </h1>
-
-                    <select
-                        name="traceability"
-                        onChange={model.handleTreacibilityTime}
-                        className="outline-none px-3 py-2 rounded-md"
-                    >
-                        <option value="">today</option>
-                        <option value="monthly">this month</option>
-                        <option value="year">this year</option>
-                    </select>
-                </div>
-                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-3 font-nunito-sans mb-6">
-                    <DashboardCard
-                        label={model?.progressCheckData?.part}
-                        content={"TOTAL PART"}
-                        icon={<CompanyIcon />}
-                    />
-                    <DashboardCard
-                        label={model?.progressCheckData?.progressCheck}
-                        content={"TOTAL PROGRESS CHECK"}
-                        icon={<AreaIcon />}
-                    />
-                    <DashboardCard
-                        label={model?.progressCheckData?.ThreeDCheck}
-                        content={"TOTAL 3D"}
-                        icon={<PitIcon />}
-                    />
-                    <DashboardCard
-                        label={model?.progressCheckData?.TwoDCheck}
-                        content={"TOTAL 2D"}
-                        icon={<UsersIcon />}
-                    />
-                </div>
+            <div className="flex gap-2 items-center">
+              <div className="w-[16px] h-[16px] bg-[#20519F] rounded-full"></div>
+              <p className="font-[400] text-xs">Waiting</p>
             </div>
-            <div className="flex flex-col  rounded-lg shadow-[0px_2px_20px_rgba(0,_0,_0,_0.12)] px-6 py-4 bg-white relative">
-                <div className="flex justify-between">
-                    <div className="mb-2">Quality Trends</div>
-                    <div className="flex gap-4">
-                        <select
-                            name="part"
-                            value={model.revenueQuery.part}
-                            onChange={model.handleChangeRevenue}
-                            className="outline-none px-6"
-                        >
-                            <option value="" disabled selected>
-                                Part
-                            </option>
-                            {model.part.data.map((item) => {
-                                return (
-                                    <option value={item.id}>
-                                        {item.partCode}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                        <select
-                            name="character"
-                            value={model.revenueQuery.character}
-                            onChange={model.handleChangeRevenue}
-                            className="outline-none px-6"
-                        >
-                            <option value="" disabled selected>
-                                Character
-                            </option>
-                            {model.character.map((item) => {
-                                return (
-                                    <option value={item.character}>
-                                        {item.character}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                    </div>
-                </div>
-                {model.revenue && <RevenueChart datas={model?.revenue} />}
+            <div className="flex gap-2 items-center">
+              <div className="w-[16px] h-[16px] bg-[#F79009] rounded-full"></div>
+              <p className="font-[400] text-xs">NG</p>
             </div>
-
-            <div className="w-full flex justify-between mt-5 gap-4">
-                <div className="w-1/2 rounded-md shadow-lg bg-white justify-center items-center">
-                    <div className="px-6 py-3 flex justify-between">
-                        <p className="text-xl">Summary Judgement</p>
-                        <select
-                            onChange={model.handleSumaryQuery}
-                            className="px-6 py-2 rounded-md outline-none bg-transparent"
-                        >
-                            <option value="">Today</option>
-                            <option value="month">Month</option>
-                            <option value="year">Year</option>
-                        </select>
-                    </div>
-                    <div className="relative">
-                        {model.sumaryRunner ? (
-                            <SumaryChart
-                                datas={[
-                                    model.sumaryData.ok,
-                                    model.sumaryData.waiting,
-                                    model.sumaryData.ng,
-                                ]}
-                                total={model.sumaryData.total}
-                            />
-                        ) : null}
-                    </div>
-                    <div className="w-full flex gap-3 justify-center py-6">
-                        <div className="flex gap-2 items-center">
-                            <div className="w-8 h-8 bg-[#12B569] rounded-full"></div>
-                            <p>OK</p>
-                        </div>
-                        <div className="flex gap-2 items-center">
-                            <div className="w-8 h-8 bg-[#20519F] rounded-full"></div>
-                            <p>Waiting</p>
-                        </div>
-                        <div className="flex gap-2 items-center">
-                            <div className="w-8 h-8 bg-[#F79009] rounded-full"></div>
-                            <p>NG</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-1/2 rounded-md shadow-lg bg-white justify-center items-center">
-                    <div className="px-6 py-3 flex justify-between">
-                        <p className="text-xl">Part Checking</p>
-                        <select
-                            name="barQuery"
-                            value={model.barQuery}
-                            onChange={model.handleChangeBarQuery}
-                            className="px-3 py-2 outline-none rounded-md bg-transparent"
-                        >
-                            <option value="daily">Daily</option>
-                            <option value="monthly">Monthly</option>
-                        </select>
-                    </div>
-
-                    {model.bar.date && <BarChart datas={model.bar} />}
-                    <div className="mt-3 flex gap-4 justify-center items-center w-full">
-                        <div className="flex gap-2 items-center">
-                            <div className="w-8 h-5 bg-[#20519F]"></div>
-                            <p className="text-gray-500">3D Check</p>
-                        </div>
-                        <div className="flex gap-2 items-center">
-                            <div className="w-8 h-5 bg-[#F79009]"></div>
-                            <p className="text-gray-500">2D Check</p>
-                        </div>
-                    </div>
-                </div>
+          </div>
+        </div>
+        <div className="w-1/2 rounded-md shadow-sm bg-white px-6 py-3 flex flex-col justify-between border border-[#D0D3D9]">
+          <div className="flex justify-between relative w-[100%]">
+            <p className="text-xl text-[#514E4E] mb-[14px]">Part Checking</p>
+            <p className="absolute -rotate-90 top-[10rem] -left-[40px] text-[10px]">
+              part Quantity
+            </p>
+            <select
+              onChange={model.handleSumaryQuery}
+              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+            >
+              <option value="Daily">Daily</option>
+              <option value="Monthly">Monthly</option>
+            </select>
+          </div>
+          {model.bar.date && <BarChart datas={model.bar} />}
+          <div className="flex gap-6 justify-center items-center w-full my-[20px]">
+            <div className="flex gap-2 items-center">
+              <div className="w-6 h-2 bg-[#20519F]"></div>
+              <p className="font-[400] font-[#6F6C6C] text-xs">3D Check</p>
             </div>
-        </>
-    );
+            <div className="flex gap-2 items-center">
+              <div className="w-6 h-2 bg-[#F79009]"></div>
+              <p className="font-[400] font-[#6F6C6C] text-xs">2D Check</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };

@@ -1,5 +1,3 @@
-import React from "react";
-
 export const ReportIcon = ({ width = 12, height = 6, ...props }) => {
     return (
         <svg
