@@ -1,458 +1,532 @@
 import moment from "moment";
 import LogoTenma from "../../../../assets/tenma.png";
+
 const TableExcel = ({ datas }) => {
     return (
-        <div>
-            <div className=" w-[90%] m-auto  py-12 h-screen left-12  ">
-                <div className="flex justify-between items-top">
-                    <div className=" flex flex-col gap-3">
-                        <h1 className="text-3xl font-bold">
+        <>
+            <div className="w-[80%] m-auto h-screen ">
+                <div className="flex w-full pt-8 justify-between items-center">
+                    <div className="w-[40%]">
+                        <h1 className="text-4xl font-semibold">
                             PT. TENMA CIKARANG INDONESIA{" "}
                         </h1>
-                        <h3 className="text-2xl font-mono">
+                        <h5 className="text-xl font-semibold">
                             AUTOMATIC MEASUREMENT SYSTEM
-                        </h3>
-                        <p className="text-left w-1/2 text-gray-700">
+                        </h5>
+                        <p className="text-[#514E4E] font-sans">
                             Blok L8, Delta Silicon Industrial Park, Jl. Kruing 3
                             No.5A, Sukaresmi, Cikarang Sel., Kabupaten Bekasi,
                             Jawa Barat 17550
                         </p>
                     </div>
-                    <div>
-                        <img src={LogoTenma} alt="logo" width={300} />
-                    </div>
+
+                    <img src={LogoTenma} alt="logo tenma" width={350} />
                 </div>
-                <div className="flex justify-between mt-5">
-                    <table className="scale-90 -ml-14">
-                        <thead>
-                            <tr>
-                                <th className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    PART NAME
-                                </th>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    {datas.part.part_name}
-                                </td>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 pr-52 border border-gray-200">
-                                    -
-                                </td>
-                            </tr>
-                            <tr>
-                                <th className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    PART CODE
-                                </th>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    {datas.part.part_cd}
-                                </td>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 pr-52 border border-gray-200">
-                                    -
-                                </td>
-                            </tr>
-                            <tr>
-                                <th className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    MODEL
-                                </th>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    {datas.part?.customer_model?.name || ""}
-                                </td>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 pr-52 border border-gray-200">
-                                    -
-                                </td>
-                            </tr>
-                            <tr>
-                                <th className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    MACHINE NO.
-                                </th>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    {datas.machine?.no || ""}
-                                </td>
 
-                                <th className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    Part Weight QIS : {datas.part_weight_qis} gr
-                                </th>
-                            </tr>
-                            <tr>
-                                <th className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    INSPECTION DATE
-                                </th>
-                                <td className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    -
-                                </td>
-                                <th className="px-2 py-2 bg-[#F0F1F3]  text-sm text-left w-80 border border-gray-200">
-                                    Lot Production : {datas.lot_production}
-                                </th>
-                            </tr>
-                        </thead>
-
-                        {/* cavity */}
-                        {datas.cavities.map((item) => {
-                            return (
-                                <div key={item.id}>
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                className="border border-gray-200 bg-[#F0F1F3] text-center py-5"
-                                                rowSpan={3}
-                                            >
-                                                <p className="text-md rotate-[270deg]">
+                <main className="flex justify-between gap-3">
+                    <section className="w-1/2">
+                        <table className="w-full">
+                            <thead>
+                                <tr>
+                                    <th className="border border-gray-100 bg-gray-50 text-start py-2 px-4">
+                                        Part Name
+                                    </th>
+                                    <td className="border border-gray-100 bg-gray-50 text-start py-2 px-4 text-blue-500 ">
+                                        {datas?.part?.part_name}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th className="border border-gray-100 bg-gray-50 text-start py-2 px-4">
+                                        PART CODE
+                                    </th>
+                                    <td className="border border-gray-100 bg-gray-50 text-start py-2 px-4 text-blue-500 ">
+                                        {datas?.part?.part_cd}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th className="border border-gray-100 bg-gray-50 text-start py-2 px-4">
+                                        MODEL
+                                    </th>
+                                    <td className="border border-gray-100 bg-gray-50 text-start py-2 px-4 text-blue-500 ">
+                                        {datas?.part?.customer_model?.name}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th className="border border-gray-100 bg-gray-50 text-start py-2 px-4">
+                                        MACHINE NO.
+                                    </th>
+                                    <td className="border border-gray-100 bg-gray-50 text-start text-blue-500 flex  ">
+                                        <div className="px-4 py-2 w-1/3 border-r border-gray-100">
+                                            <p className="text-blue-500">
+                                                {datas?.machine?.no}
+                                            </p>
+                                        </div>
+                                        <div className="px-4 py-2">
+                                            <h1 className="font-semibold text-black">
+                                                Part Weight QIS :{" "}
+                                                {datas?.part_weight_qis} gr
+                                            </h1>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th className="border border-gray-100 bg-gray-50 text-start py-2 px-4">
+                                        INSPECTION DATE
+                                    </th>
+                                    <td className="border border-gray-100 bg-gray-50 text-start text-blue-500 flex  ">
+                                        <div className="px-4 py-2 w-1/3 border-r border-gray-100">
+                                            <p className="text-blue-500">
+                                                {datas?.created_at &&
+                                                    moment(
+                                                        datas?.created_at
+                                                    ).format("L")}
+                                            </p>
+                                        </div>
+                                        <div className="px-4 py-2">
+                                            <h1 className="font-semibold text-black">
+                                                Lot Production :{" "}
+                                                {datas?.lot_production}
+                                            </h1>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <main>
+                            {datas?.cavities?.map((item, i) => {
+                                return (
+                                    <table className={i > 0 ? "mt-8" : ""}>
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    rowSpan={4}
+                                                    className="border border-gray-100 bg-gray-50 text-center px-2"
+                                                >
                                                     Type
-                                                </p>
-                                            </th>
-                                            <th className="w-full border border-gray-200 bg-[#F0F1F3] text-left pl-3">
-                                                {item.name}
-                                            </th>
-                                            <th className="w-full border border-gray-200 bg-[#F0F1F3] text-left pl-3"></th>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                colSpan={4}
-                                                className="bg-[#B8B6B6] text-center border border-gray-200 "
-                                            >
-                                                Standart
-                                            </td>
-                                            <td
-                                                colSpan={2}
-                                                className="bg-[#B8B6B6] text-center border border-gray-200"
-                                            >
-                                                Special Accept SUBMIT
-                                            </td>
-                                            <td
-                                                rowSpan={2}
-                                                className="bg-[#B8B6B6] text-center border border-gray-200"
-                                            >
-                                                Tools
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                Character
-                                            </td>
-                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                Nominal
-                                            </td>
-                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                Upper
-                                            </td>
-                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                Lower
-                                            </td>
-                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                Upper
-                                            </td>
-                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                Lower
-                                            </td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th
-                                                className="border border-gray-200 bg-[#F0F1F3] text-center py-5"
-                                                rowSpan={
-                                                    item.cavity_type == "2D" &&
-                                                    item.std_measurement
-                                                        .special_accept_segments
-                                                        .length + 1
-                                                }
-                                            >
-                                                <p className="text-md rotate-[270deg]">
-                                                    2D
-                                                </p>
-                                            </th>
-                                        </tr>
-                                        {/* 2D */}
-                                        {item.cavity_type === "2D" &&
-                                            item.std_measurement.special_accept_segments.map(
-                                                (el) => {
-                                                    return (
-                                                        <tr key={el.id}>
-                                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                {el.character}
-                                                            </td>
-                                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                {el.nominal}
-                                                            </td>
-                                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                {
-                                                                    el.standard_upper
-                                                                }
-                                                            </td>
-                                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                {
-                                                                    el.standard_lower
-                                                                }
-                                                            </td>
-                                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                {/* {el.cavity_results[0].} */}
-                                                            </td>
-                                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                0
-                                                            </td>
-                                                            <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                {el?.tool?.name}
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th
+                                                    className="w-full border border-gray-100 bg-gray-50 px-5 text-start py-3"
+                                                    colSpan={7}
+                                                >
+                                                    {item.name}
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th
+                                                    colSpan={4}
+                                                    className="text-center py-2 border border-gray-100 bg-[#B8B6B6]"
+                                                >
+                                                    Standard
+                                                </th>
+                                                <th
+                                                    colSpan={2}
+                                                    className="border border-gray-100 bg-[#B8B6B6] py-2 text-center"
+                                                >
+                                                    Standard Accept SUBMIT
+                                                </th>
+                                                <th
+                                                    className="text-center border border-gray-100 bg-[#B8B6B6]"
+                                                    rowSpan={2}
+                                                >
+                                                    Tools
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th className="border border-gray-100 bg-gray-50 text-center py-2 px-3">
+                                                    Character
+                                                </th>
+                                                <th className="border border-gray-100 bg-gray-50 text-center py-2 px-3">
+                                                    Nominal
+                                                </th>
+                                                <th className="border border-gray-100 bg-gray-50 text-center py-2 px-3">
+                                                    Upper
+                                                </th>
+                                                <th className="border border-gray-100 bg-gray-50 text-center py-2 px-3">
+                                                    Lower
+                                                </th>
+                                                <th className="border border-gray-100 bg-gray-50 text-center py-2 px-3">
+                                                    Upper
+                                                </th>
+                                                <th className="border border-gray-100 bg-gray-50 text-center py-2 px-3">
+                                                    Lower
+                                                </th>
+                                            </tr>
+                                        </thead>
 
-                                        <tr>
-                                            <th
-                                                className="border border-gray-200 bg-[#F0F1F3] text-center py-5"
-                                                rowSpan={
-                                                    item.cavity_type == "3D" &&
-                                                    item.std_measurement
-                                                        .special_accept_segments
-                                                        .length + 1
-                                                }
-                                            >
-                                                <p className="text-md rotate-[270deg]">
-                                                    3D
-                                                </p>
-                                            </th>
-                                        </tr>
-                                        {item.cavity_type === "3D" &&
-                                            item.std_measurement.special_accept_segments.map(
-                                                (el) => {
+                                        <tbody>
+                                            {item?.measure_info.map((el) => {
+                                                if (el.cavity_type === "3D")
                                                     return (
                                                         <>
-                                                            <tr key={el.id}>
-                                                                <td className="bg-[#ffff] text-left px-4 border border-gray-200">
+                                                            <tr>
+                                                                <td
+                                                                    rowSpan={
+                                                                        el
+                                                                            .std_measurement
+                                                                            .special_accept_segments
+                                                                            .length +
+                                                                        1
+                                                                    }
+                                                                    className="border border-gray-100 px-2 bg-[#E7F8F0] text-center"
+                                                                >
+                                                                    3D
+                                                                </td>
+                                                            </tr>
+                                                            {el.std_measurement.special_accept_segments.map(
+                                                                (data) => {
+                                                                    return (
+                                                                        <tr>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.character
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.nominal_value
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.standard_upper
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.standard_lower
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.sa_upper
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.sa_lower
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data
+                                                                                        ?.tool
+                                                                                        ?.name
+                                                                                }
+                                                                            </td>
+                                                                        </tr>
+                                                                    );
+                                                                }
+                                                            )}
+                                                        </>
+                                                    );
+                                            })}
+                                            {item?.measure_info.map((el) => {
+                                                if (el.cavity_type === "2D")
+                                                    return (
+                                                        <>
+                                                            <tr>
+                                                                <td
+                                                                    rowSpan={
+                                                                        el
+                                                                            .std_measurement
+                                                                            .special_accept_segments
+                                                                            .length +
+                                                                        1
+                                                                    }
+                                                                    className="border border-gray-100 px-2 bg-[#E9EEF5] text-center"
+                                                                >
+                                                                    2D
+                                                                </td>
+                                                            </tr>
+                                                            {el.std_measurement.special_accept_segments.map(
+                                                                (data) => {
+                                                                    return (
+                                                                        <tr>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.character
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.nominal_value
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.standard_upper
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.standard_lower
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.sa_upper
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data?.sa_lower
+                                                                                }
+                                                                            </td>
+                                                                            <td className="border border-gray-100  px-2 py-3 text-center">
+                                                                                {
+                                                                                    data
+                                                                                        ?.tool
+                                                                                        ?.name
+                                                                                }
+                                                                            </td>
+                                                                        </tr>
+                                                                    );
+                                                                }
+                                                            )}
+                                                        </>
+                                                    );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                );
+                            })}
+                        </main>
+                    </section>
+                    <section className="w-1/2">
+                        <main className="w-ful flex flex-col">
+                            <table className="flex-1">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            className="text-center py-2 border border-gray-100 bg-gray-50 text-blue-500"
+                                            colSpan={8}
+                                        >
+                                            DAILY DIMENSION PART RESULT
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th
+                                            colSpan={2}
+                                            className="text-start py-2 border border-gray-100 bg-gray-50 w-1/3 px-3"
+                                        >
+                                            PIC
+                                        </th>
+                                        <td
+                                            colSpan={2}
+                                            className="text-start px-3 py-2 border border-gray-100 bg-gray-50 text-blue-500"
+                                        >
+                                            : BUDI
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th
+                                            colSpan={2}
+                                            className="text-start py-2 border border-gray-100 bg-gray-50 w-1/3 px-3"
+                                        >
+                                            SHIWFT
+                                        </th>
+                                        <td
+                                            colSpan={2}
+                                            className="text-start px-3 py-2 border border-gray-100 bg-gray-50 text-blue-500"
+                                        >
+                                            : 1
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th
+                                            colSpan={2}
+                                            className="text-start py-2 border border-gray-100 bg-gray-50 w-1/3 px-3"
+                                        >
+                                            No. Label
+                                        </th>
+                                        <td
+                                            colSpan={2}
+                                            className="text-start px-3 py-2 border border-gray-100 bg-gray-50 text-blue-500"
+                                        >
+                                            : 1
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th
+                                            colSpan={2}
+                                            className="text-start py-2 border border-gray-100 bg-gray-50 w-1/3 px-3"
+                                        >
+                                            Terima Sample Jam
+                                        </th>
+                                        <td
+                                            colSpan={2}
+                                            className="text-start px-3 py-2 border border-gray-100 bg-gray-50 text-blue-500"
+                                        >
+                                            : 15:23
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th
+                                            colSpan={2}
+                                            className="text-start py-2 border border-gray-100 bg-gray-50 w-1/3 px-3"
+                                        >
+                                            Ukur Sample Jam
+                                        </th>
+                                        <td
+                                            colSpan={2}
+                                            className="text-start px-3 py-2 border border-gray-100 bg-gray-50 text-blue-500"
+                                        >
+                                            : 14:50
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th
+                                            colSpan={2}
+                                            className="text-start py-2 border border-gray-100 bg-gray-50 w-1/3 px-3"
+                                        >
+                                            Weight Part
+                                        </th>
+                                        <td
+                                            colSpan={2}
+                                            className="text-start px-3 py-2 border border-gray-100 bg-gray-50 text-blue-500"
+                                        >
+                                            : 317 gr
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th
+                                            colSpan={2}
+                                            className="text-center w-1/2 border border-gray-100 py-2 bg-[#E8F8FB]"
+                                        >
+                                            Actual Result
+                                        </th>
+                                        <th
+                                            colSpan={2}
+                                            className="text-center w-1/2 border border-gray-100 py-2 bg-[#FEF4E6]"
+                                        >
+                                            SA Result
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {datas.cavities.map((item) => {
+                                        return item.measure_info.map((el) => {
+                                            return el.std_measurement.special_accept_segments.map(
+                                                (ex) => {
+                                                    console.log(ex);
+                                                    return (
+                                                        <>
+                                                            <tr>
+                                                                <td className="py-2 px-3 text-center border border-gray-100S">
                                                                     {
-                                                                        el.character
+                                                                        ex
+                                                                            .cavity_results
+                                                                            .actual_result
                                                                     }
                                                                 </td>
-                                                                <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                    {el.nominal}
-                                                                </td>
-                                                                <td className="bg-[#ffff] text-left px-4 border border-gray-200">
+                                                                <td className="py-2 px-3 text-center border border-gray-100S">
                                                                     {
-                                                                        el.standard_upper
+                                                                        ex
+                                                                            .cavity_results
+                                                                            .actual_result_judgement
                                                                     }
                                                                 </td>
-                                                                <td className="bg-[#ffff] text-left px-4 border border-gray-200">
+                                                                <td className="py-2 px-3 text-center border border-gray-100S">
                                                                     {
-                                                                        el.standard_lower
+                                                                        ex
+                                                                            .cavity_results
+                                                                            .sa_result
                                                                     }
                                                                 </td>
-                                                                <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                    Upper
-                                                                </td>
-                                                                <td className="bg-[#ffff] text-left px-4 border border-gray-200">
-                                                                    Lower
-                                                                </td>
-                                                                <td className="bg-[#ffff] text-left px-4 border border-gray-200">
+                                                                <td className="py-2 px-3 text-center border border-gray-100S">
                                                                     {
-                                                                        el.tool
-                                                                            .name
+                                                                        ex
+                                                                            .cavity_results
+                                                                            .sa_result_judgement
                                                                     }
                                                                 </td>
                                                             </tr>
                                                         </>
                                                     );
                                                 }
-                                            )}
-                                    </tbody>
-                                </div>
-                            );
-                        })}
-                    </table>
-
-                    <div>
-                        <div className="w-full text-center bg-[#F0F1F3] border border-gray-100">
-                            <h2 className="text-[#20519F] font-bold">
-                                DAILY DIMENSION PART RESULT
-                            </h2>
-                        </div>
-                        {/* one cavity */}
-
-                        <div className="flex">
-                            {/* one content */}
-
-                            <div className="bg-[#F0F1F3] w-full">
-                                <div className="flex justify-between border border-gray-100 w-full px-4  py-1">
-                                    <p className="font-bold">PIC</p>
-                                    <p className="text-[#20519F]">
-                                        : {datas.pic}
-                                    </p>
-                                </div>
-                                <div className="flex justify-between border border-gray-100 w-full px-4  py-1">
-                                    <p className="font-bold">SHIFT</p>
-                                    <p className="text-[#20519F]">
-                                        : {datas.shift}
-                                    </p>
-                                </div>
-                                <div className="flex justify-between border border-gray-100 w-full px-4  py-1">
-                                    <p className="font-bold">No. Label</p>
-                                    <p className="text-[#20519F]">
-                                        : {datas.label_no}
-                                    </p>
-                                </div>
-                                <div className="flex justify-between border border-gray-100 w-full px-4  py-1">
-                                    <p className="font-bold">
-                                        Terima Sample Jam
-                                    </p>
-                                    <p className="text-[#20519F]">
-                                        :{" "}
-                                        {moment(
-                                            datas.accept_sample_time
-                                        ).format("LT")}
-                                    </p>
-                                </div>
-                                <div className="flex justify-between border border-gray-100 w-full px-4  py-1">
-                                    <p className="font-bold">Ukur Sample Jam</p>
-                                    <p className="text-[#20519F]">
-                                        :{" "}
-                                        {moment(
-                                            datas.measure_sample_time
-                                        ).format("LT")}
-                                    </p>
-                                </div>
-                                <div className="flex justify-between border border-gray-100 w-full px-4  py-1">
-                                    <p className="font-bold">Weight Part</p>
-                                    <p className="text-[#20519F]">
-                                        : {datas.actual_part_weight} gr
-                                    </p>
-                                </div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <td
-                                                colSpan={2}
-                                                className="bg-sky-400  text-center w-full"
-                                            >
-                                                Actual Result
-                                            </td>
-                                            <td
-                                                colSpan={2}
-                                                className="bg-[#dda557]  text-center w-full"
-                                            >
-                                                SA Result
-                                            </td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {datas.cavities.map((el) => {
-                                            el.std_measurement.special_accept_segments.map(
-                                                (item) => {
-                                                    return (
-                                                        <tr key={el.id}>
-                                                            <td className="px-2 py-2 border border-gray-200 text-center">
-                                                                {
-                                                                    item
-                                                                        .cavity_results
-                                                                        .actual_result
-                                                                }
-                                                            </td>
-                                                            <td className="px-2 py-2 border border-gray-200 bg-white text-[#20519F] text-center">
-                                                                {
-                                                                    item
-                                                                        .cavity_results
-                                                                        .actual_result_judgement
-                                                                }
-                                                            </td>
-                                                            <td className="px-2 py-2 border border-gray-200 text-center">
-                                                                {
-                                                                    item
-                                                                        .cavity_results
-                                                                        .sa_result
-                                                                }
-                                                            </td>
-                                                            <td className="px-2 py-2 border border-gray-200 bg-white text-[#20519F] text-center">
-                                                                {
-                                                                    item
-                                                                        .cavity_results
-                                                                        .sa_result_judgement
-                                                                }
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                }
                                             );
-                                        })}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* problem table */}
-                <div className="w-full flex justify-between mt-12">
-                    <table>
+                                        });
+                                    })}
+                                </tbody>
+                            </table>
+                        </main>
+                    </section>
+                </main>
+
+                <section className="flex justify-between mt-8 gap-3">
+                    <table className="w-1/2">
                         <thead>
                             <tr>
-                                <th className="py-2 bg-gray-50 border border-gray-200 px-8">
+                                <th className="py-2 px-3 text-center border border-gray-200 bg-gray-50">
                                     Date
                                 </th>
-                                <th className="py-2 bg-gray-50 border border-gray-200 px-8">
+                                <th className="py-2 px-3 text-center border border-gray-200 bg-gray-50">
                                     History Problem
                                 </th>
-                                <th className="py-2 bg-gray-50 border border-gray-200 px-8">
+                                <th className="py-2 px-3 text-center border border-gray-200 bg-gray-50">
                                     Char
                                 </th>
-                                <th className="py-2 bg-gray-50 border border-gray-200 px-8">
+                                <th className="py-2 px-3 text-center border border-gray-200 bg-gray-50">
                                     Remark
                                 </th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            {datas.progress_check_histories.map((el) => {
+                            {datas?.progress_check_histories.map((item) => {
                                 return (
-                                    <tr key={el.id}>
-                                        <td className="py-2 bg-white border border-gray-200 px-8">
-                                            {el.date}
+                                    <tr>
+                                        <td className="py-2 px-3 text-center border border-gray-200">
+                                            {item.date}
                                         </td>
-                                        <td className="py-2 bg-white border border-gray-200 px-8">
-                                            {el.problem}
+                                        <td className="py-2 px-3 text-center border border-gray-200">
+                                            {item.problem}
                                         </td>
-                                        <td className="py-2 bg-white border border-gray-200 px-8">
-                                            {el.char}
+                                        <td className="py-2 px-3 text-center border border-gray-200">
+                                            {item.char}
                                         </td>
-                                        <td className="py-2 bg-white border border-gray-200 px-8">
-                                            {el.remark}
+                                        <td className="py-2 px-3 text-center border border-gray-200">
+                                            {item.remark}
                                         </td>
                                     </tr>
                                 );
                             })}
                         </tbody>
                     </table>
-                    <table>
+
+                    <table className="w-1/2">
                         <thead>
                             <tr>
-                                <th className="py-2 bg-gray-50 border border-gray-200 px-8">
+                                <th className="border border-gray-100 bg-gray-50 py-2 px-3 text-center">
                                     Judgement
                                 </th>
-                                <th className="py-2 bg-gray-50 border border-gray-200 px-8">
+                                <th className="border border-gray-100 bg-gray-50 py-2 px-3 text-center">
                                     Checked
                                 </th>
-                                <th className="py-2 bg-gray-50 border border-gray-200 px-8">
+                                <th className="border border-gray-100 bg-gray-50 py-2 px-3 text-center">
                                     Prepare
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* body */}
                             <tr>
-                                <td className="py-2  border-x border-gray-200 px-8">
+                                <td className="border border-gray-100 py-2 px-3 text-center">
                                     Judgement
                                 </td>
-                                <td className="py-2  border-x border-gray-200 px-8">
+                                <td className="border border-gray-100 py-2 px-3 text-center">
                                     Checked
                                 </td>
-                                <td className="py-2  border-x border-gray-200 px-8">
+                                <td className="border border-gray-100 py-2 px-3 text-center">
                                     Prepare
                                 </td>
                             </tr>
-                            {/* footer */}
-                            <tr>
-                                <td className="py-2  border-b border-l border-gray-200 px-8"></td>
-                                <td className="py-2  border border-gray-200 bg-gray-50 px-8"></td>
-                                <td className="py-2  border border-gray-200 bg-gray-50 px-8"></td>
-                            </tr>
                         </tbody>
                     </table>
-                </div>
+                </section>
             </div>
-        </div>
+        </>
     );
 };
 
