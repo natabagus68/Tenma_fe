@@ -68,7 +68,9 @@ export const Dashboard = () => {
               <option value="" disabled selected>
                 Part Code
               </option>
-              {model.part.data.map((item) => { return <option value={item.id}>{item.partCode}</option>; })}
+              {model.part.data.map((item) => {
+                return <option value={item.id}>{item.partCode}</option>;
+              })}
             </select>
             <select
               name="character"
@@ -134,7 +136,7 @@ export const Dashboard = () => {
               part Quantity
             </p>
             <select
-              onChange={model.handleSumaryQuery}
+              onChange={model.handleChangeBarQuery}
               className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
             >
               <option value="Daily">Daily</option>
@@ -157,3 +159,4 @@ export const Dashboard = () => {
     </div>
   );
 };
+

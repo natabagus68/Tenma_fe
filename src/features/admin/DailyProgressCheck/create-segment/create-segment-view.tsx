@@ -23,8 +23,9 @@ const CreateSegmentView = () => {
             <div className="flex flex-col gap-3">
               <label className="text-gray-600">Tools Code</label>
               <select
-                value={model.segment.tool?.id || ""}
+                // value={model.segment.tool?.id || ""}
                 onChange={model.onToolChange}
+                name="tool"
                 className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-mono"
               >
                 <option disabled selected>
