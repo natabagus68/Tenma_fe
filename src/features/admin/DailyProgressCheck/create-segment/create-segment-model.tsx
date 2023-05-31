@@ -46,7 +46,7 @@ export function useCreateSegment() {
     setSegment((prevState) =>
       Segment3D.create({
         ...prevState.unmarshall(),
-        tool: tools.find((item) => item.id == e.target.value).unmarshall(),
+        tool: e.target.value,
       })
     );
   };
@@ -65,6 +65,7 @@ export function useCreateSegment() {
     setSaveConfirmShow(true);
   };
   const onConfirmSave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(segment);
     segmentRepository
       .store(segment)
       .then((res) => {

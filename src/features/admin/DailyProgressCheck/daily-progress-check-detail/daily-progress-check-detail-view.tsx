@@ -71,7 +71,7 @@ const DailyProgressCheckDetailView = () => {
                 </button>
               ) : null}
 
-              <button
+              {/* <button
                 className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex"
                 onClick={dailyProgressCheckDetail.onDownloadReport}
               >
@@ -90,7 +90,7 @@ const DailyProgressCheckDetailView = () => {
                   />
                 </svg>
                 Download Report
-              </button>
+              </button> */}
               <button
                 className="py-[12px] px-[20px] border border-gray-100 align-middle rounded-md flex gap-2"
                 onClick={dailyProgressCheckDetail.onBack}

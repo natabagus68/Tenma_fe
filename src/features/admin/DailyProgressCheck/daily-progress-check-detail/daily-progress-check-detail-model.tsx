@@ -264,7 +264,7 @@ export function useDailyProgressCheckDetail() {
     comparisonId: string
   ) => {
     e.preventDefault();
-    // console.log(cavtyId, comparisonId);
+    console.log("comparisson id", comparisonId);
     dailyProgressCheckRepo
       .destroyComparisson(id, cavityId, comparisonId)
       .then(() => {

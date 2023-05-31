@@ -22,9 +22,10 @@ const SegmentTable = ({
     <>
       <div
         key={key}
-        className="m-auto border-2 border-gray-100 rounded-lg pb-6 mt-10  overflow-x-scroll flex"
+        className="first-line:m-auto border-2 border-gray-100 rounded-lg pb-6 mt-10 
+           overflow-x-scroll flex"
       >
-        <div>
+        <div className="flex-1 ">
           <div className="w-full py-5 px-12 flex justify-between items-center">
             <h1 className="font-[700] text-2xl text-gray-700 font-sans">
               {segment.name}
@@ -106,7 +107,7 @@ const SegmentTable = ({
               )}
             </div>
           </div>
-          <div className="w-[160vh]">
+          <div className={"w-[160vh]"}>
             <table className="w-full flex-1">
               <thead>
                 <tr>
