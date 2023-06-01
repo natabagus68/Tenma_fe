@@ -292,6 +292,7 @@ export function useDailyProgressCheckDetail() {
     }
   }, [id, toogle]);
   return {
+    state,
     dailyProgressCheck,
     segments,
     histories,

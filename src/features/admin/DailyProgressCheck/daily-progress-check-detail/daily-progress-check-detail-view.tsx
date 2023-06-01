@@ -8,6 +8,7 @@ import { useDailyProgressCheckDetail } from "./daily-progress-check-detail-model
 import moment from "moment";
 import HistoryFormView from "../components/DateTable";
 import ModalDelete from "@common/components/Modal/ModalDelete";
+import { JudgemnetIcon2 as JDG2 } from "@common/components/JudgemnetIcon";
 const DailyProgressCheckDetailView = () => {
   const dailyProgressCheckDetail = useDailyProgressCheckDetail();
 
@@ -16,7 +17,9 @@ const DailyProgressCheckDetailView = () => {
       <div>
         <Breadcrumbs
           items={[
-            "Daily Progress Check",
+            `${
+              dailyProgressCheckDetail.state ? "Report" : "Daily Progress Check"
+            }`,
             `Detail ${dailyProgressCheckDetail.toogle == "2d" ? "2D" : "3D"}`,
           ]}
         />
@@ -233,16 +236,28 @@ const DailyProgressCheckDetailView = () => {
                 <Tr>
                   <Td className="bg-gray-50 border-none">Judgement</Td>
                   <Td className="bg-gray-50 border-none font-bold">
-                    <JudgementIcon
-                      value={
-                        dailyProgressCheckDetail.toogle == "2d"
-                          ? dailyProgressCheckDetail.dailyProgressCheck
-                              .judgement2d
-                          : dailyProgressCheckDetail.dailyProgressCheck
-                              .judgement3d
-                      }
-                      changer={dailyProgressCheckDetail.handelChangeJudgment}
-                    />
+                    {dailyProgressCheckDetail.state ? (
+                      <JDG2
+                        value={
+                          dailyProgressCheckDetail.toogle == "2d"
+                            ? dailyProgressCheckDetail.dailyProgressCheck
+                                .judgement2d
+                            : dailyProgressCheckDetail.dailyProgressCheck
+                                .judgement3d
+                        }
+                      />
+                    ) : (
+                      <JudgementIcon
+                        value={
+                          dailyProgressCheckDetail.toogle == "2d"
+                            ? dailyProgressCheckDetail.dailyProgressCheck
+                                .judgement2d
+                            : dailyProgressCheckDetail.dailyProgressCheck
+                                .judgement3d
+                        }
+                        changer={dailyProgressCheckDetail.handelChangeJudgment}
+                      />
+                    )}
                   </Td>
                 </Tr>
                 <Tr>
