@@ -1,5 +1,3 @@
-import React from "react";
-
 export const JudgemnetIcon2 = ({ value = "" }) => {
   const input = value.toLowerCase();
   if (input === "waiting") {

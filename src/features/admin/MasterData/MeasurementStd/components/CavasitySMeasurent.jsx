@@ -7,18 +7,18 @@ const CavasitySMeasurent = ({ model }) => {
         </div>
         <table className="w-full">
           <thead>
-            <tr>
-              <th className="border-[#D0D3D9] border-t border-r border-b py-4" colSpan={4}>Standart</th>
-              <th className="border-[#D0D3D9] border-t border-r border-b py-4 bg-[#FDDDB3]" colSpan={2}>Special Accept</th>
-              <th className="border-[#D0D3D9] border-t py-4 bg-[#D0D3D9]" rowSpan={2}>Tools</th>
+            <tr className="text-sm">
+              <th className="font-[600] border-[#D0D3D9] border-t border-r border-b py-4" colSpan={4}>Standart</th>
+              <th className="font-[600] border-[#D0D3D9] border-t border-r border-b py-4 bg-[#FDDDB3]" colSpan={2}>Special Accept</th>
+              <th className="font-[600] border-[#D0D3D9] border-t py-4 bg-[#D0D3D9]" rowSpan={2}>Tools</th>
             </tr>
-            <tr>
-              <th className="py-4 bg-[#D0D3D9]">Character</th>
-              <th className="py-4 bg-[#D0D3D9] border-[#F0F1F3] border-l">Nominal</th>
-              <th className="py-4 bg-[#D0D3D9] border-[#F0F1F3] border-l">Upper</th>
-              <th className="py-4 bg-[#D0D3D9] border-[#F0F1F3] border-l">Lower</th>
-              <th className="py-4 bg-[#F0F1F3] border-[#D0D3D9] border-l">Upper</th>
-              <th className="py-4 bg-[#F0F1F3] border-[#D0D3D9] border-l border-r">Lower</th>
+            <tr className="text-sm">
+              <th className="font-[600] py-4 bg-[#D0D3D9]">Character</th>
+              <th className="font-[600] py-4 bg-[#D0D3D9] border-[#F0F1F3] border-l">Nominal</th>
+              <th className="font-[600] py-4 bg-[#D0D3D9] border-[#F0F1F3] border-l">Upper</th>
+              <th className="font-[600] py-4 bg-[#D0D3D9] border-[#F0F1F3] border-l">Lower</th>
+              <th className="font-[600] py-4 bg-[#F0F1F3] border-[#D0D3D9] border-l">Upper</th>
+              <th className="font-[600] py-4 bg-[#F0F1F3] border-[#D0D3D9] border-l border-r">Lower</th>
             </tr>
           </thead>
           <tbody>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { CaretIcon } from "./../components/icons";
 
@@ -26,8 +26,8 @@ export const NavItem = ({
                 className={({ isActive }) =>
                     `flex items-center cursor-pointer ${
                         (isActive && to !== null) || active == true
-                            ? "text-black"
-                            : ""
+                            ? "bg-[#E9EEF5] text-red-500 px-4 py-2 rounded-md mr-8"
+                            : "text-[#514E4E]"
                     }`
                 }
             >
@@ -45,7 +45,7 @@ export const NavItem = ({
                 <div
                     className={`${
                         open || active ? `max-h-screen` : `max-h-0`
-                    } -mb-1 pt-2 flex flex-col gap-2 relative transition-[max-height] overflow-hidden pl-[34px] text-black-200 font-body font-semibold`}
+                    } -mb-1 pt-2 flex flex-col gap-2 relative transition-[max-height] overflow-hidden pl-[34px] text-black-200 font-open-sans font-semibold`}
                 >
                     {children}
                 </div>

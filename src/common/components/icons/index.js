@@ -32,3 +32,4 @@ export * from './CubeIcon';
 export * from './HomeIcon';
 export * from "./TreacebilityIcon";
 export * from "./AddIcon";
+export * from "./MenuIcon";

@@ -7,19 +7,19 @@ const SpecialAcept = ({ model = useInputMeasurementStd() }) => {
   return (
     <>
       <ModalNominal model={model} />
-        <div className="m-auto w-full border border-[#D0D3D9] rounded-md mt-4">
+        <div className="m-auto w-full border border-[#D0D3D9] rounded-md mt-4 font-open-sans">
           <div className="py-[18px] px-8 flex justify-between items-center border-b border-[#D0D3D9]">
-            <h1 className="font-[700] text-2xl font-open-sans">Segment</h1>
+            <h1 className="font-[700] text-2xl">Segment</h1>
           </div>
           <form>
             <table className="w-full">
               <thead>
-                <tr>
+                <tr className="text-sm font-[600]">
                   <th className="py-4 border-[#D0D3D9] border-b border-r" colSpan={4}>Standart</th>
                   <th className="py-4 border-[#D0D3D9] border-b border-r bg-[#FDDDB3]" colSpan={2}>Special Accept</th>
                   <th className="py-4 border-[#D0D3D9] border-b border-r bg-[#D0D3D9]" rowSpan={2}>Tools</th>
                 </tr>
-                <tr>
+                <tr className="text-sm font-[600]">
                   <th className="py-4 border-r border-[#F0F1F3] bg-[#D0D3D9]">Character</th>
                   <th className="py-4 px-8 border-b border-r border-[#F0F1F3] bg-[#D0D3D9]">Nominal</th>
                   <th className="py-4 border-b border-r border-[#F0F1F3] bg-[#D0D3D9]">Upper</th>

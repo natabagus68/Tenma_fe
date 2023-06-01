@@ -101,4 +101,3 @@ const CreateSegmentView = () => {
 };
 
 export default CreateSegmentView;
-

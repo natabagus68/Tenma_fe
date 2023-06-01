@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CustomerModelGroup } from "@domain/models/customer-model-group";
 import { CustomerModelGroupApiRepository } from "@data/api/customer-model-group-api-repository";
+
 export default function useCustomerMOdelGroup() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);

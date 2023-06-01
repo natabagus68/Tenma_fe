@@ -94,4 +94,3 @@ const HistoryFormView = () => {
 };
 
 export default HistoryFormView;
-

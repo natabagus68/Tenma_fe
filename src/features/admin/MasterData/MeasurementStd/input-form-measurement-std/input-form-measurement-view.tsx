@@ -5,23 +5,23 @@ import { useInputMeasurementStd } from "./input-form-measurement-std-model";
 const InputFormMeasurementView = () => {
   const model = useInputMeasurementStd();
   return (
-    <div className="text-[#514E4E]">
-      <Breadcrumbs items={["Measurement Std", model.id ? "Edit Data" : "Add Data"]} />
+    <div className="text-[#514E4E] font-open-sans">
+      <Breadcrumbs items={["Measurement Std.", model.id ? "Edit Data" : "Add Data"]} />
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md">
         <div className="w-full py-[18px] px-8 flex justify-between items-center">
           <h1 className="font-[700] text-2xl">{model.id ? "Edit" : "Add"} Data</h1>
         </div>
-        <div className="border-t border-[#D0D3D9] py-14 px-8">
+        <div className="border-t border-[#D0D3D9] px-8 py-4">
           <form className="flex flex-col gap-3">
             <div className="flex flex-col gap-3 text-start">
-              <label>Part Name - Part Code</label>
+              <label className="font-[400]">Part Code - Part Name</label>
               <select
                 name="id"
                 value={model.measurementStd.part?.id || ""}
                 onChange={model.onPartChange}
-                className="w-full outline-none border border-[#D0D3D9] rounded-md text-gray-600 px-4 py-2"
+                className="w-full outline-none border border-[#D0D3D9] rounded-md text-gray-600 px-4 py-2 text-sm"
               >
-                <option value={""} disabled>Choose</option>
+                <option value={""} disabled>Select part</option>
                 {
                   model.parts.map((item) => (
                     <option value={`${item.id}`} key={item.id}>{`${item.partName} - ${item.partCode}`}</option>
@@ -30,10 +30,10 @@ const InputFormMeasurementView = () => {
               </select>
             </div>
             <div className="flex flex-col gap-3 text-start">
-              <label>Model</label>
+              <label className="font-[400]">Model</label>
               <input
                 value={model.measurementStd.part?.customerModel}
-                className="w-full outline-none bg-gray-50 border-[#D0D3D9] rounded-md text-gray-400 px-4 py-2"
+                className="w-full outline-none bg-gray-50 border-[#D0D3D9] rounded-md text-gray-400 px-4 py-2 text-sm"
                 readOnly
               />
             </div>
@@ -46,10 +46,10 @@ const InputFormMeasurementView = () => {
 
       <div className="w-full py-5 px-5 flex gap-3 border border-[#D0D3D9] rounded-md mt-4">
         <button onClick={(e) => model.onSave(e)}
-          className="text-sm rounded-md text-center border text-[#FFFFFF] bg-[#1BBDD4] border-[#1BBDD4] h-[40px] w-[180px]"
+          className="text-sm rounded-md text-center border h-[40px] w-[180px] font-[600] text-[#B8B6B6] bg-[#D0D3D9] border-[#D0D3D9]"
           >Save</button>
         <button onClick={model.onCancel}
-          className="text-sm rounded-md text-center border bg-white text-[#667085] border-[#667085] h-[40px] w-[180px]"
+          className="text-sm rounded-md text-center border h-[40px] w-[180px] font-[600] bg-[#FFFFFF] text-[#667085] border-[#667085]"
           >Cancel</button>
       </div>
     </div>

@@ -1,13 +1,12 @@
-import React from "react";
-import { Breadcrumbs } from "../../../../../common/components";
+import { Breadcrumbs } from "@common/components";
 import { useToolForm } from "./tool-form-view-model";
 
 const ToolFormView = () => {
   const toolForm = useToolForm();
   return (
-    <>
-      <Breadcrumbs items={["Customer", toolForm.id ? "Edit Data" : "Add Data"]} />
-      <div className="m-auto w-full border border-[#D0D3D9] rounded-md text-[#514E4E]">
+    <div className="font-open-sans text-[#514E4E]">
+      <Breadcrumbs items={["Tools", toolForm.id ? "Edit Data" : "Add Data"]} />
+      <div className="m-auto w-full border border-[#D0D3D9] rounded-md">
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl">{toolForm.id ? "Edit Data" : "Add Data"}</h1>
         </div>
@@ -18,7 +17,8 @@ const ToolFormView = () => {
               <input type="text" name="idTool"
                 value={toolForm.tool.idTool}
                 onChange={toolForm.onToolChange}
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-5 py-2"
+                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-4 py-2 font-[400] text-sm placeholder:text-[#B8B6B6]"
+                placeholder="Input id tools"
               />
             </div>
             <div className="flex flex-col gap-3">
@@ -26,7 +26,8 @@ const ToolFormView = () => {
               <input type="text" name="toolCode"
                 value={toolForm.tool.toolCode}
                 onChange={toolForm.onToolChange}
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-5 py-2"
+                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-4 py-2 font-[400] text-sm placeholder:text-[#B8B6B6]"
+                placeholder="Input tools code"
               />
             </div>
             <div className="flex flex-col gap-3 mt-3">
@@ -34,7 +35,8 @@ const ToolFormView = () => {
               <input type="text" name="name"
                 value={toolForm.tool.name}
                 onChange={toolForm.onToolChange}
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-5 py-2"
+                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-4 py-2 font-[400] text-sm placeholder:text-[#B8B6B6]"
+                placeholder="Input name"
               />
             </div>
             <div className="flex flex-col gap-3 mt-3">
@@ -42,7 +44,8 @@ const ToolFormView = () => {
               <input type="text" name="address"
                 value={toolForm.tool.address}
                 onChange={toolForm.onToolChange}
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-5 py-2"
+                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-4 py-2 font-[400] text-sm placeholder:text-[#B8B6B6]"
+                placeholder="Input address"
               />
             </div>
             <div className="flex gap-4 mt-6">
@@ -57,7 +60,7 @@ const ToolFormView = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

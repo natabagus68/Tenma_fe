@@ -1,108 +1,76 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { Breadcrumbs } from "../../../../../common/components";
-import { Td } from "../../../../../common/components/table/Td";
-import { Tr } from "../../../../../common/components/table/Tr";
-import useDetailAccount from "./detail-account-view-model";
+import { Breadcrumbs } from "@common/components";
+import { ArrowIcon } from "@common/components/icons/ArrowIcon";
+import { Td } from "@common/components/table/Td";
+import { Tr } from "@common/components/table/Tr";
 import { PenAltIcon } from "@common/components/icons";
+import useDetailAccount from "./detail-account-view-model";
 
 const DetailAccount = () => {
-    const model = useDetailAccount();
-    return (
-        <>
-            <div>
-                <Breadcrumbs items={["Account", "Detail"]} />
-            </div>
-            <div className="m-auto w-full border border-gray-100 rounded-lg pb-6">
-                <div className="w-full py-5 px-12 flex justify-between items-center">
-                    <h1 className="font-[700] text-2xl text-gray-700 font-open-sans">
-                        Details
-                    </h1>
-                    <div className="flex justify-end items-center gap-4">
-                        <div className="flex gap-2">
-                            <button
-                                className="py-[12px] px-[20px] border border-gray-100 align-middle rounded-md flex gap-2"
-                                onClick={(e) => model.onBack(e)}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-                                    />
-                                </svg>
-                                Back
-                            </button>
-                            <button
-                                onClick={model.toEdit}
-                                className="py-[12px] px-[20px] bg-[#F79009] text-white items-center  rounded-md flex gap-2"
-                            >
-                                <PenAltIcon />
-                                Edit
-                            </button>
-                        </div>
-                    </div>
+  const model = useDetailAccount();
+  return (
+    <div className="text-[#514E4E] font-open-sans">
+      <Breadcrumbs items={["Account", "Details"]} />
+      <div className="m-auto w-full border rounded-lg">
+        <div className="w-full flex justify-between items-center px-8 py-6">
+          <h1 className="font-[700] text-2xl">Details</h1>
+          <div className="flex justify-end items-center gap-4">
+            <div className="flex gap-3">
+              <button
+                className="py-[12px] px-[20px] border border-[#667085] align-middle rounded-[4px] flex gap-2"
+                onClick={(e) => model.onBack(e)}
+              >
+                <div className="flex items-center gap-3">
+                  <ArrowIcon color={"#667085"} className="-rotate-90" />
+                  <span className="text-sm text-[#667085]">Back</span>
                 </div>
-
-                <div className="border-t border-gray-100 py-8 px-12 flex flex-col gap-8">
-                    <div className="w-full justify-star">
-                        <h1 className="text-4xl text-start font-open-sans">
-                            User Information
-                        </h1>
-                    </div>
-                    {/* table 1 */}
-                    <div className="w-1/2 flex flex-col justify-center">
-                        <div className="flex flex-row justify-start mb-5 w-auto">
-                            <span className="pr-5">Status:</span>
-                            {
-                                model.account.id? 
-                                    model.account.is_verified? 
-                                        <span className="font-open-sans font-bold text-[#12B569]">Active</span> 
-                                        :
-                                        <span className="font-open-sans font-bold text-[#F04438]">Inactive</span>
-                                    : "" 
-                            }
-                        </div>
-                        <table className="border-none w-[90%]">
-                            <tbody>
-                                <Tr>
-                                    <Td className="bg-gray-50 border-none">
-                                        Name
-                                    </Td>
-                                    <Td className="bg-gray-50 border-none font-bold">
-                                        {model.account.name}
-                                        {/* {state?.cust_item_cd} */}
-                                    </Td>
-                                </Tr>
-                                <Tr>
-                                    <Td className=" border-none">Email</Td>
-                                    <Td className="border-none font-bold">
-                                        {model.account.email}
-                                        {/* {state?.part_cd} */}
-                                    </Td>
-                                </Tr>
-                                <Tr>
-                                    <Td className="bg-gray-50 border-none">
-                                        Role
-                                    </Td>
-                                    <Td className="bg-gray-50 border-none font-bold">
-                                        {model.account?.roles[0]?.name}
-                                    </Td>
-                                </Tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+              </button>
+              <button
+                onClick={model.toEdit}
+                className="py-[12px] px-[20px] bg-[#F79009] text-white items-center rounded-[4px] flex gap-2"
+              >
+                <PenAltIcon />
+                <span>Edit</span>
+              </button>
             </div>
-        </>
-    );
+          </div>
+        </div>
+        <div className="border-t flex flex-col px-8 py-6">
+          <div className="w-full justify-star pb-4">
+            <h1 className="text-2xl text-start font-[400]">User Information</h1>
+          </div>
+          {/* table 1 */}
+          <div className="w-1/2 flex flex-col justify-center">
+            <div className="flex flex-row justify-start mb-5 w-auto">
+              <span className="pr-5">Status:</span>
+              {model.account.id ? (
+                model.account.is_verified
+                  ? ( <span className="font-open-sans font-[600] text-[#12B569]">Active</span>
+                ) : ( <span className="font-open-sans font-[600] text-[#F04438]">Inactive</span>)
+              ) : (
+                ""
+              )}
+            </div>
+            <table className="border-none w-[90%]">
+              <tbody>
+                <Tr>
+                  <Td className="bg-gray-50 border-none font-[400]">Name</Td>
+                  <Td className="bg-gray-50 border-none font-[600]">{model.account.name}</Td>
+                </Tr>
+                <Tr>
+                  <Td className=" border-none font-[400]">Email</Td>
+                  <Td className="border-none font-[600]">{model.account.email}</Td>
+                </Tr>
+                <Tr>
+                  <Td className="bg-gray-50 border-none font-[400]">Role</Td>
+                  <Td className="bg-gray-50 border-none font-[600]">{model.account?.roles[0]?.name}</Td>
+                </Tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default DetailAccount;

@@ -4,20 +4,21 @@ import useCustomerModelForm from "./customer-model-form-view-model";
 const InputFormCustomerModel = () => {
   const customerModel = useCustomerModelForm();
   return (
-    <div>
+    <div className="text-[#514E4E] font-open-sans">
       <Breadcrumbs items={[ "Customer Model", customerModel.id ? "Edit Data" : "Add Data", ]} />
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md">
         <div className="w-full flex justify-between items-center px-8 py-6">
-          <h1 className="font-[700] text-2xl text-[#514E4E]">{customerModel.id ? "Edit Data" : "Add Data"}</h1>
+          <h1 className="font-[700] text-2xl">{customerModel.id ? "Edit Data" : "Add Data"}</h1>
         </div>
-        <div className="border-t border-[#D0D3D9] text-[#514E4E]">
+        <div className="border-t border-[#D0D3D9]">
           <form onSubmit={customerModel.onSave}>
             <div className="flex flex-col gap-3 px-8 py-6">
-              <label className="mb-2 font-[600]">Customer Model Name</label>
+              <label className="mb-2 font-[400]">Customer Model Name</label>
               <input type="text" name="name"
                 value={customerModel.customerModel.name}
                 onChange={customerModel.onInputChange}
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-5 py-2"
+                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-5 py-2 text-sm placeholder:text-[#B8B6B6]"
+                placeholder="Input customer model name"
               />
             </div>
             <div className="flex gap-3 px-8 pb-6">

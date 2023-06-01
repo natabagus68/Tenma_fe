@@ -14,12 +14,12 @@ export const Breadcrumbs = ({ items = [], links = [] }) => {
         }
     };
     return (
-        <div className="flex gap-3 text-gray-500 mb-6 items-center font-open-sans">
+        <div className="flex gap-3 text-[#6F6C6C] mb-6 items-center font-open-sans">
             <HomeIcon />
             {items.map((item, i, arr) => {
                 return (
                     <div key={i} className="flex gap-3 items-center">
-                        <CaretIcon className="text-neutral-75" />
+                        <CaretIcon className="text-[#B8B6B6]" />
                         <div
                             onClick={() =>
                                 links[i] && navigate(generateLink(i, arr))
