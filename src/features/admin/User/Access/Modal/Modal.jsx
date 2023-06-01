@@ -1,4 +1,4 @@
-import React from "react";
+import { useAccessMenu } from "../menu/user-access-menu-view-model";
 
 const Modal = ({
   showHide,
@@ -61,3 +61,4 @@ const Modal = ({
 };
 
 export default Modal;
+

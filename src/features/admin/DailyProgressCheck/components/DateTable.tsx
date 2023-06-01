@@ -64,3 +64,4 @@ const HistoryFormView = ({ model = useDailyProgressCheckDetail() }) => {
 };
 
 export default HistoryFormView;
+

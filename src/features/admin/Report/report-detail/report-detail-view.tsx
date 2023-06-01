@@ -3,7 +3,6 @@ import { Breadcrumbs } from "@common/components";
 import { EyeIcon, ArrowIcon, DownloadIcon, SearchIcon } from "@common/components/icons";
 import Pagination from "@common/components/pagination/Pagination";
 import { DownloadModal } from "../partials/download-modal";
-import JudgemnetIcon2 from "@common/components/JudgemnetIcon";
 import useReportDetail from "./report-detail-model";
 
 const ReportDetailView = () => {

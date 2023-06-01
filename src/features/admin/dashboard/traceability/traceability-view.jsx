@@ -1,13 +1,13 @@
 import moment from "moment";
 import Datepicker from "react-tailwindcss-datepicker";
 import DimantionIcon from "@features/admin/DailyProgressCheck/icon/DimantionIcon";
-import JudgemnetIcon from "@common/components/JudgemnetIcon";
+import { JudgemnetIcon2 } from "@common/components/JudgemnetIcon";
 import Pagination from "@common/components/pagination/Pagination";
 import { Breadcrumbs } from "@common/components";
 import { SearchIcon } from "@common/components/icons";
 import { useTraceability } from "./traceabilty-view-model";
 
-export default function Traceability () {
+export default function Traceability() {
   const model = useTraceability();
   return (
     <div className="w-full overflow-hidden font-open-sans text-[#514E4E]">
@@ -38,13 +38,18 @@ export default function Traceability () {
             onChange={model.handleParams}
             className="w-[100%] border border-[#667085] px-4 py-3 outline-none bg-[#FFFFFF] rounded-md text-sm"
           >
-            {
-              model.pic.map((item, i) => (
-                <option key={i} value={item.pic}>
-                  {item.pic}
-                </option>
-              ))
-            }
+            <option value="" selected>
+              Semua
+            </option>
+            {model.pic.map((item, i) => (
+              <>
+                {!item.pic ? null : (
+                  <option key={i} value={item.pic}>
+                    {item.pic}
+                  </option>
+                )}
+              </>
+            ))}
           </select>
         </div>
         <div className="flex flex-1 items-center gap-2 text-[#514E4E]">
@@ -55,13 +60,14 @@ export default function Traceability () {
             onChange={model.handleParams}
             className="w-[100%] border border-[#667085] px-4 py-3 outline-none bg-[#FFFFFF] rounded-md text-sm"
           >
-            {
-              model.shift.map((item, i) => (
-                <option key={i} value={item.shift}>
-                  {item.shift}
-                </option>
-              ))
-            }
+            <option value="" selected>
+              Semua
+            </option>
+            {model.shift.map((item, i) => (
+              <option key={i} value={item.shift}>
+                {item.shift}
+              </option>
+            ))}
           </select>
         </div>
         <div className="flex flex-[1.5] items-center gap-2 text-[#514E4E]">
