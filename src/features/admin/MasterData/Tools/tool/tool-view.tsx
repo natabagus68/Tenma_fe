@@ -12,9 +12,12 @@ const ToolView = () => {
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md">
         <div className="w-full flex justify-between items-center text-[#514E4E] px-8 py-6">
           <h1 className="font-[700] text-2xl">Tools</h1>
-          <button className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
+          <button
+            className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
             onClick={() => tool.onAdd()}
-          >+ Add Data</button>
+          >
+            + Add Data
+          </button>
         </div>
         <div>
           <table className="w-full">
@@ -29,19 +32,24 @@ const ToolView = () => {
             </thead>
             <tbody>
               {tool.tool.data.map((item) => (
-                <tr key={item.id} className="border-b border-[#D0D3D9] text-[#514E4E]">
+                <tr
+                  key={item.id}
+                  className="border-b border-[#D0D3D9] text-[#514E4E]"
+                >
                   <td className="py-[18px] pl-8">{item.idTool}</td>
                   <td className="py-[18px] pl-8">{item.toolCode}</td>
                   <td className="py-[18px] pl-8">{item.name}</td>
                   <td className="py-[18px] pl-8">{item.address}</td>
                   <td className="py-2 px-8 flex items-center gap-3">
-                    <button onClick={() => tool.onEdit(item.id)}
+                    <button
+                      onClick={() => tool.onEdit(item.id)}
                       className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-[4px] text-white flex gap-2"
                     >
                       <PenAltIcon />
                       <span className="text-sm">Edit</span>
                     </button>
-                    <button onClick={() => tool.onDelete(item.id)}
+                    <button
+                      onClick={() => tool.onDelete(item.id)}
                       className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-[4px] text-white flex gap-2"
                     >
                       <TrashIcon />
@@ -53,7 +61,12 @@ const ToolView = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end px-8 py-6">
-            <Pagination row={1} limit={10} page={undefined} />
+            <Pagination
+              row={tool.tool.totalRow}
+              limit={tool.tool.limit}
+              page={tool.tool.page}
+              onClick={tool.changePage}
+            />
           </div>
         </div>
       </div>
@@ -61,9 +74,11 @@ const ToolView = () => {
         showModal={tool.deleteConfirmShow}
         setShowModal={tool.setDeleteConfirmShow}
         onConfirm={tool.onConfirmDelete}
+        onCancel={tool.onCancelDeleteModel}
       />
     </div>
   );
 };
 
 export default ToolView;
+

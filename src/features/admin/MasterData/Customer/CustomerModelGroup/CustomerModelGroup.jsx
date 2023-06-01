@@ -11,11 +11,14 @@ const CustomerModelGroup = () => {
         showModal={cmg.showModal}
         setShowModal={cmg.setShowModal}
         onConfirm={cmg.onConfirm}
+        onCancel={cmg.onCancelModal}
       />
       <table className="w-full">
         <thead className="bg-[#FAFAFB] border-t border-b border-[#D0D3D9]">
           <tr className="">
-            <th className="py-4 text-start pl-10 font-[600] text-sm">Customer Model Group Name</th>
+            <th className="py-4 text-start pl-10 font-[600] text-sm">
+              Customer Model Group Name
+            </th>
             <th className="py-4 text-start pl-10 font-[600] text-sm">Action</th>
           </tr>
         </thead>
@@ -24,7 +27,8 @@ const CustomerModelGroup = () => {
             <tr className="border-b border-[#D0D3D9]" key={ind}>
               <td className="py-2 text-start pl-10 font-[400]">{item.name}</td>
               <td className="py-2  pl-10 flex gap-3 justify-start">
-                <button onClick={() => cmg.toEdit(item.id)}
+                <button
+                  onClick={() => cmg.toEdit(item.id)}
                   className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-[4px] text-white flex gap-2"
                 >
                   <PenAltIcon />
@@ -55,3 +59,4 @@ const CustomerModelGroup = () => {
 };
 
 export default CustomerModelGroup;
+
