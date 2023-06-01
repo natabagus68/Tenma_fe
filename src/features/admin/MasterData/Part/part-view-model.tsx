@@ -6,75 +6,81 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export function usePart(partRepository: PartRepository) {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
-    const navigate = useNavigate();
-    const partRef = useRef<PaginatedData<Part>>(
-        PaginatedData.create<Part>({
-            data: [],
-            lastPage: 1,
-            limit: Number(searchParams.get("limit")) || 10,
-            page: Number(searchParams.get("page")) || 1,
-            q: searchParams.get("q") || "",
-        })
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
+  const navigate = useNavigate();
+  const partRef = useRef<PaginatedData<Part>>(
+    PaginatedData.create<Part>({
+      data: [],
+      lastPage: 1,
+      limit: Number(searchParams.get("limit")) || 10,
+      page: Number(searchParams.get("page")) || 1,
+      q: searchParams.get("q") || "",
+    })
+  );
+  const [part, setPart] = useState<IPaginatedData<IPart>>(
+    partRef.current.unmarshall()
+  );
+  const onAddData = () => {
+    navigate(`${config.pathPrefix}master-data/part/create`);
+  };
+  const onDetail = (part: IPart) => {
+    navigate(`${config.pathPrefix}master-data/part/${part.id}/detail`);
+  };
+  const onEdit = (part: IPart) => {
+    navigate(`${config.pathPrefix}master-data/part/${part.id}/edit`);
+  };
+  const onDelete = (part: IPart) => {
+    partRef.current.data = partRef.current.data.map((item) =>
+      item.id == part.id ? item.check() : item.uncheck()
     );
-    const [part, setPart] = useState<IPaginatedData<IPart>>(
-        partRef.current.unmarshall()
-    );
-    const onAddData = () => {
-        navigate(`${config.pathPrefix}master-data/part/create`);
-    };
-    const onDetail = (part: IPart) => {
-        navigate(`${config.pathPrefix}master-data/part/${part.id}/detail`);
-    };
-    const onEdit = (part: IPart) => {
-        navigate(`${config.pathPrefix}master-data/part/${part.id}/edit`);
-    };
-    const onDelete = (part: IPart) => {
-        partRef.current.data = partRef.current.data.map((item) =>
-            item.id == part.id ? item.check() : item.uncheck()
-        );
-        setPart(partRef.current.unmarshall());
-        setDeleteConfirmShow(true);
-    };
-    const onPageChange = (page: number) => {
-        console.log(page);
-    };
-    const onConfirmDelete = () => {
-        setDeleteConfirmShow(false);
-        partRepository
-            .destroy(partRef.current.data.find((item) => item.checked))
-            .then(() => {
-                loadPart();
-            });
-    };
-    const loadPart = () => {
-        partRepository
-            .get({ limit: part.limit, page: part.page, q: part.q })
-            .then((result) => {
-                partRef.current = result;
-                setPart(partRef.current.unmarshall());
-            });
-    };
-    useEffect(() => {
-        setSearchParams({
-            q: part.q,
-            page: `${part.page}`,
-            limit: `${part.limit}`,
-        });
-    }, [part]);
-    useEffect(() => {
+    setPart(partRef.current.unmarshall());
+    setDeleteConfirmShow(true);
+  };
+  const onPageChange = (page: number) => {
+    console.log(page);
+  };
+  const onConfirmDelete = () => {
+    setDeleteConfirmShow(false);
+    partRepository
+      .destroy(partRef.current.data.find((item) => item.checked))
+      .then(() => {
         loadPart();
-    }, []);
-    return {
-        part,
-        onAddData,
-        onDetail,
-        onEdit,
-        onDelete,
-        onPageChange,
-        deleteConfirmShow,
-        setDeleteConfirmShow,
-        onConfirmDelete,
-    };
+      });
+  };
+  const loadPart = () => {
+    partRepository
+      .get({ limit: part.limit, page: part.page, q: part.q })
+      .then((result) => {
+        partRef.current = result;
+        setPart(partRef.current.unmarshall());
+      });
+  };
+
+  const onCacelComfirmShow = () => {
+    setDeleteConfirmShow(!deleteConfirmShow);
+  };
+  useEffect(() => {
+    setSearchParams({
+      q: part.q,
+      page: `${part.page}`,
+      limit: `${part.limit}`,
+    });
+  }, [part]);
+  useEffect(() => {
+    loadPart();
+  }, []);
+  return {
+    part,
+    onAddData,
+    onDetail,
+    onEdit,
+    onDelete,
+    onPageChange,
+    deleteConfirmShow,
+    setDeleteConfirmShow,
+    onConfirmDelete,
+    onCacelComfirmShow,
+  };
 }
+

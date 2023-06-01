@@ -12,9 +12,12 @@ const MaterialView = () => {
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md">
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl">Material</h1>
-          <button className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
+          <button
+            className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
             onClick={(e) => material.onAdd()}
-          >+ Add Data</button>
+          >
+            + Add Data
+          </button>
         </div>
         <div>
           <table className="w-full">
@@ -29,19 +32,30 @@ const MaterialView = () => {
             </thead>
             <tbody>
               {material.material.data.map((item) => (
-                <tr key={item.id} className="border-b border-[#D0D3D9] text-[#514E4E]">
-                  <td className="py-[18px] px-8 text-left">{item.idMaterial}</td>
+                <tr
+                  key={item.id}
+                  className="border-b border-[#D0D3D9] text-[#514E4E]"
+                >
+                  <td className="py-[18px] px-8 text-left">
+                    {item.idMaterial}
+                  </td>
                   <td className="py-[18px] px-6 text-left">{item.name}</td>
-                  <td className="py-[18px] px-6 text-left">{item.materialDetail}</td>
-                  <td className="py-[18px] px-6 text-left">{item.color?.materialColor}</td>
+                  <td className="py-[18px] px-6 text-left">
+                    {item.materialDetail}
+                  </td>
+                  <td className="py-[18px] px-6 text-left">
+                    {item.color?.materialColor}
+                  </td>
                   <td className="flex gap-3 justify-start items-center py-2">
-                    <button onClick={(e) => material.onEdit(item.id)}
+                    <button
+                      onClick={(e) => material.onEdit(item.id)}
                       className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-[4px] text-white flex gap-2"
                     >
                       <PenAltIcon />
                       <span className="text-sm">Edit</span>
                     </button>
-                    <button onClick={(e) => material.onDelete(item.id)}
+                    <button
+                      onClick={(e) => material.onDelete(item.id)}
                       className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-[4px] text-white flex gap-2"
                     >
                       <TrashIcon />
@@ -66,6 +80,7 @@ const MaterialView = () => {
         showModal={material.deleteConfirmShow}
         setShowModal={material.setDeleteConfirmShow}
         onConfirm={material.onConfirmDelete}
+        onCancel={material.onConfirmCancel}
       />
     </div>
   );
