@@ -1,7 +1,7 @@
 import moment from "moment";
 import Datepicker from "react-tailwindcss-datepicker";
 import DimantionIcon from "@features/admin/DailyProgressCheck/icon/DimantionIcon";
-import JudgemnetIcon from "@common/components/JudgemnetIcon";
+import { JudgemnetIcon2 } from "@common/components/JudgemnetIcon";
 import Pagination from "@common/components/pagination/Pagination";
 import { Breadcrumbs } from "@common/components";
 import { SearchIcon } from "@common/components/icons";
@@ -10,7 +10,7 @@ import { useTraceability } from "./traceabilty-view-model";
 export default function Traceability() {
   const model = useTraceability();
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-hidden min-h-screen">
       <div className="flex justify-between">
         <Breadcrumbs items={["Dashboard", "Traceability"]} />
         <div className="font-[600] text-[#514E4E] flex gap-1">
@@ -182,7 +182,7 @@ export default function Traceability() {
                         {item.pic.name}
                       </td>
                       <td className="border-b border-[#D0D3D9] text-left px-6 py-4">
-                        <JudgemnetIcon value={item.judgement} />
+                        <JudgemnetIcon2 value={item.judgement} />
                       </td>
                     </tr>
                   );
