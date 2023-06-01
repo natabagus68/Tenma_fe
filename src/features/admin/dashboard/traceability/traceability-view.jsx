@@ -1,7 +1,7 @@
 import moment from "moment";
 import Datepicker from "react-tailwindcss-datepicker";
 import DimantionIcon from "@features/admin/DailyProgressCheck/icon/DimantionIcon";
-import { JudgemnetIcon2 } from "@common/components/JudgemnetIcon";
+import { JudgemnetIcon } from "@common/components/JudgemnetIcon";
 import Pagination from "@common/components/pagination/Pagination";
 import { Breadcrumbs } from "@common/components";
 import { SearchIcon } from "@common/components/icons";
