@@ -13,20 +13,15 @@ const Part = () => {
         showModal={part.deleteConfirmShow}
         setShowModal={part.setDeleteConfirmShow}
         onConfirm={part.onConfirmDelete}
-        onCancel={part.onCacelComfirmShow}
       />
       <Breadcrumbs items={["Part"]} />
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md pb-6">
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl">Part</h1>
-          <button
-            type="button"
-            role="button"
+          <button type="button" role="button"
             className="py-[12px] px-[20px] text-white align-middle rounded-[4px] bg-[#667085] text-sm"
             onClick={(e) => part.onAddData()}
-          >
-            + Add Data
-          </button>
+          >+ Add Data</button>
         </div>
         <div>
           <table className="w-full">
@@ -42,31 +37,25 @@ const Part = () => {
             <tbody>
               {part.part.data.map((item, i) => {
                 return (
-                  <tr
-                    className="border-b border-[#D0D3D9] text-left font-[400]"
-                    key={i}
-                  >
+                  <tr className="border-b border-[#D0D3D9] text-left font-[400]" key={i}>
                     <td className="py-[12px] pl-8">{item.custItemId}</td>
                     <td className="py-[12px] px-4">{item.partCode}</td>
                     <td className="py-[12px] px-4">{item.partName}</td>
                     <td className="py-[12px] px-4">{item.oldPartNumber}</td>
                     <td className="py-[12px] pr-8 flex gap-3 items-center">
-                      <button
-                        className="h-[46px] px-4 bg-[#1BBDD4] items-center rounded-[4px] text-white flex gap-2 text-sm"
+                      <button className="h-[46px] px-4 bg-[#1BBDD4] items-center rounded-[4px] text-white flex gap-2 text-sm"
                         onClick={(e) => part.onDetail(item)}
-                      >
+                        >
                         <EyeIcon />
                         <span className="text-sm">Detail</span>
                       </button>
-                      <button
-                        onClick={(e) => part.onEdit(item)}
+                      <button onClick={(e) => part.onEdit(item)}
                         className="h-[46px] px-4 bg-[#F79009] items-center rounded-[4px] text-white flex gap-2 text-sm"
                       >
                         <PenAltIcon />
                         <span className="text-sm">Edit</span>
                       </button>
-                      <button
-                        onClick={(e) => part.onDelete(item)}
+                      <button onClick={(e) => part.onDelete(item)}
                         className="h-[46px] px-4 bg-[#F04438] items-center rounded-[4px] text-white flex gap-2 text-sm"
                       >
                         <TrashIcon />
