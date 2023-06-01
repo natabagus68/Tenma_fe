@@ -1,4 +1,4 @@
-export const JudgemnetIcon2 = ({ value = "" }) => {
+export const JudgemnetIcon = ({ value = "" }) => {
   const input = value.toLowerCase();
   if (input === "waiting") {
     return (
@@ -22,4 +22,3 @@ export const JudgemnetIcon2 = ({ value = "" }) => {
     return <div>{value}</div>;
   }
 };
-
