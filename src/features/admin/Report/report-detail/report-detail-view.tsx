@@ -96,7 +96,7 @@ const ReportDetailView = () => {
                   <td className="px-8 py-[22px] items-center">{moment(item.lastReport).format("l")}</td>
                   <td className="px-8 py-[22px] items-center">{item.machine?.noMachine || ""}</td>
                   <td className="px-8 py-[22px] items-center">{item.pic}</td>
-                  <td className="px-8 py-[22px] items-center"> <JudgemnetIcon2 value={item.judgement} /> </td>
+                  {/* <td className="px-8 py-[22px] items-center"> <JudgemnetIcon2 value={item.judgement} /> </td> */}
                   <td className="px-8 py-[22px] flex justify-center items-center">
                     <button
                       onClick={() => model.toDetailPart(item.id)}
