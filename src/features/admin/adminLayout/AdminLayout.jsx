@@ -1,23 +1,14 @@
-import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import {
-    BurgerIcon,
-    SearchIcon,
-    AppLogoText,
-} from "../../../common/components/icons";
+import { BurgerIcon } from "@common/components/icons";
 import { Loader } from "../../../common/components";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "./adminLayoutSlice";
-import { Select } from "../../../common/components/input";
-import { Menu } from "@headlessui/react";
+import { Select } from "@common/components/input";
 import { SideBar } from "./SideBar";
-import {
-    useGetAuthenticatedUserQuery,
-    useLogoutMutation,
-} from "../../../app/services/authService";
-import { LogoutDialog } from "./LogoutDialog";
+import { useGetAuthenticatedUserQuery, useLogoutMutation, } from "../../../app/services/authService";
 import { AvatarDropdown } from "./AvatarDropdown";
 import tenma_logo from "../../../assets/tenma.png";
+
 export const AdminLayout = () => {
     const { data: auth, isLoading, isError } = useGetAuthenticatedUserQuery();
     const { navOpen, needCompany, needCompanyArea, needShift } = useSelector(

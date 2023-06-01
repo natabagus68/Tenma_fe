@@ -8,12 +8,12 @@ const PartDetail = () => {
   const partDetail = usePartDetail(new PartApiRepository());
 
   return (
-    <>
-      <Breadcrumbs items={["Part", "Detail"]} />
+    <div className="text-[#514E4E] font-open-sans">
+      <Breadcrumbs items={["Part", "Details"]} />
       <div>
         <div className="m-auto w-full border border-[#D0D3D9] rounded-md pb-52">
           <div className="w-full py-6 border-b border-[#D0D3D9] px-8 flex justify-between items-center">
-            <h1 className="font-[700] text-2xl text-[#514E4E]">Details</h1>
+            <h1 className="font-[700] text-2xl">Details</h1>
             <div className="flex items-center gap-3">
               <button className="py-[12px] px-[20px] border border-[#D0D3D9] text-center items-center rounded-md flex gap-2"
                 onClick={(e) => partDetail.onBack()}
@@ -34,78 +34,74 @@ const PartDetail = () => {
           <div className="flex gap-8">
             {/* table 1 */}
             <table className="w-1/2 ml-8 my-6">
-              <tbody className="text-[#514E4E]">
-                <tr>
-                  <td className="bg-gray-50 border-none p-4">Cust, Item CD</td>
-                  <td className="bg-gray-50 border-none font-bold">
-                    {partDetail.part.customer}, {partDetail.part.custItemId}
-                  </td>
+              <tbody>
+                <tr className="bg-[#F0F1F3]">
+                  <td className="border-none p-4">Cust, Item CD</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.customer}, {partDetail.part.custItemId}</td>
                 </tr>
                 <tr>
                   <td className=" border-none p-4">Part Code</td>
-                  <td className="border-none font-bold">
-                    {partDetail.part.partCode}
-                  </td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.partCode}</td>
                 </tr>
-                <tr>
-                  <td className="bg-gray-50 border-none p-4">Part Name</td>
-                  <td className="bg-gray-50 border-none font-bold">{partDetail.part.partName}</td>
+                <tr className="bg-[#F0F1F3]">
+                  <td className="border-none p-4">Part Name</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.partName}</td>
                 </tr>
                 <tr>
                   <td className="border-none p-4">Item Group CD</td>
-                  <td className="border-none font-bold">{partDetail.part.itemGroupCode}</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.itemGroupCode}</td>
+                </tr>
+                <tr className="bg-[#F0F1F3]">
+                  <td className="border-none p-4">Item Group Name</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.itemGroupName}</td>
                 </tr>
                 <tr>
-                  <td className="bg-gray-50 border-none p-4">Item Group Name</td>
-                  <td className="bg-gray-50 border-none font-bold">{partDetail.part.itemGroupName}</td>
+                  <td className="border-none p-4">Old Part Number</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.oldPartNumber}</td>
                 </tr>
-                <tr>
-                  <td className=" border-none p-4">Old Part Number</td>
-                  <td className="border-none font-bold">{partDetail.part.oldPartNumber}</td>
-                </tr>
-                <tr>
-                  <td className="bg-gray-50 border-none p-4">Customer Model</td>
-                  <td className="bg-gray-50 border-none font-bold">{partDetail.part.customerModel}</td>
+                <tr className="bg-[#F0F1F3]">
+                  <td className="border-none p-4">Customer Model</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.customerModel}</td>
                 </tr>
               </tbody>
             </table>
             {/* table 2 */}
             <table className="w-1/2 mr-8 my-6">
-              <tbody className="text-[#514E4E]">
-                <tr>
-                  <td className="bg-gray-50 border-none p-4">Customer</td>
-                  <td className="bg-gray-50 border-none font-bold">{partDetail.part.customer}</td>
+              <tbody>
+                <tr className="bg-[#F0F1F3]">
+                  <td className="border-none p-4">Customer</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.customer}</td>
                 </tr>
                 <tr>
-                  <td className=" border-none p-4">Material</td>
-                  <td className="border-none font-bold">{partDetail.part.material}</td>
+                  <td className="border-none p-4">Material</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.material}</td>
                 </tr>
-                <tr>
-                  <td className="bg-gray-50 border-none p-4">Material Color</td>
-                  <td className="bg-gray-50 border-none font-bold">{partDetail.part.materialColor}</td>
+                <tr className="bg-[#F0F1F3]">
+                  <td className="border-none p-4">Material Color</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.materialColor}</td>
                 </tr>
                 <tr>
                   <td className="border-none p-4">Customer Model Group</td>
-                  <td className="border-none font-bold">{partDetail.part.customerModelGroup}</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.customerModelGroup}</td>
+                </tr>
+                <tr className="bg-[#F0F1F3]">
+                  <td className="border-none p-4">Unit CD</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.unitCd}</td>
                 </tr>
                 <tr>
-                  <td className="bg-gray-50 border-none p-4">Unit CD</td>
-                  <td className="bg-gray-50 border-none font-bold">{partDetail.part.unitCd}</td>
+                  <td className="border-none p-4">Material Details</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.materialDetails}</td>
                 </tr>
-                <tr>
-                  <td className=" border-none p-4">Material Details</td>
-                  <td className="border-none font-bold">{partDetail.part.materialDetails}</td>
-                </tr>
-                <tr>
-                  <td className="bg-gray-50 border-none p-4">Product Weight</td>
-                  <td className="bg-gray-50 border-none font-bold">{partDetail.part.productWeight} gram</td>
+                <tr className="bg-[#F0F1F3]">
+                  <td className="border-none p-4">Product Weight</td>
+                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.productWeight} gram</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

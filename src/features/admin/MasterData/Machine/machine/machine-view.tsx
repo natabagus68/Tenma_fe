@@ -7,12 +7,12 @@ import { useMachine } from "./machine-view-model";
 const Machine = () => {
   const machine = useMachine();
   return (
-    <>
+    <div className="font-open-sans text-[#514E4E]">
       <Breadcrumbs items={["Machine"]} />
-      <div className="m-auto w-full border border-[#D0D3D9] rounded-md text-[#514E4E]">
+      <div className="m-auto w-full border border-[#D0D3D9] rounded-md">
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl ">Machine</h1>
-          <button className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px]"
+          <button className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
             onClick={machine.onAdd}
           >+ Add Data</button>
         </div>
@@ -20,9 +20,9 @@ const Machine = () => {
           <table className="w-full">
             <thead className="bg-[#FAFAFB] border-y border-[#D0D3D9]">
               <tr>
-                <th className="py-6 px-8 text-start font-[600]">ID Machine</th>
-                <th className="py-6 px-8 text-start font-[600]">No. Machine</th>
-                <th className="py-6 px-8 text-start font-[600]">Action</th>
+                <th className="py-6 px-8 text-start font-[600] text-sm">ID Machine</th>
+                <th className="py-6 px-8 text-start font-[600] text-sm">No. Machine</th>
+                <th className="py-6 px-8 text-start font-[600] text-sm">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@ const Machine = () => {
                 <tr key={item.id} className="border-b border-[#D0D3D9]">
                   <td className="py-6 px-8 text-start">{item.idMachine}</td>
                   <td className="py-6 px-8 text-start">{item.noMachine}</td>
-                  <td className="py-6 px-8 flex gap-3 justify-start">
+                  <td className="py-2 px-8 flex gap-3 justify-start">
                     <button onClick={(e) => machine.onEdit(item.id)}
                       className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-[4px] text-white flex gap-2"
                     >
@@ -74,7 +74,7 @@ const Machine = () => {
         setShowModal={machine.setDeleteConfirmShow}
         onConfirm={machine.onConfirmDelete}
       />
-    </>
+    </div>
   );
 };
 

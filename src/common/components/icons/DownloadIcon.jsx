@@ -1,10 +1,20 @@
-import React from 'react';
-
-export const DownloadIcon = ({ width = 14, height = 17, ...props }) => {
-    return (
-        <svg width={ width } height={ height } { ...props } viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 17H14V15H0V17ZM14 6H10V0H4V6H0L7 13L14 6Z" fill="black" />
-        </svg>
-
-    );
-};
+export const DownloadIcon = ({ ...props }) => {
+  return (
+    <svg
+      width={16}
+      height={16}
+      strokeWidth={1.5}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+      />
+    </svg>
+  )
+}

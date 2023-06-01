@@ -9,23 +9,18 @@ import { TreacebilityIcon } from "@common/components/icons/TreacebilityIcon";
 export const Dashboard = () => {
   const model = dashboardModel();
   return (
-    <div>
+    <div className="text-[#514E4E] font-open-sans">
       <Breadcrumbs items={["Dashboard"]} />
-      <div className="w-full px-4 rounded-md mb-6 pb-3 border border-[#D0D3D9] bg-[#FFFFFF] shadow-sm font-open-sans">
+      <div className="w-full px-4 rounded-md mb-6 pb-3 border border-[#D0D3D9] bg-[#FFFFFF] shadow-sm">
         <div className="w-full flex justify-between items-center py-3">
-          <h1 className="text-[#514E4E] font-semibold">
-            Traceability
-            <span
-              onClick={model.toTraceability}
-              className="text-xs text-blue-500 ml-3 hover:text-blue-600 cursor-pointer"
-            >
-              See more
-            </span>
-          </h1>
+          <div className="flex items-center">
+            <h1 className="font-[600]">Traceability</h1>
+            <span onClick={model.toTraceability} className="text-[10px] text-blue-500 ml-3 hover:text-blue-600 cursor-pointer">See More</span>
+          </div>
           <select
             name="traceability"
             onChange={model.handleTreacibilityTime}
-            className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+            className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-md text-xs"
           >
             <option value="">Today</option>
             <option value="monthly">this month</option>
@@ -55,7 +50,7 @@ export const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col rounded-lg shadow-sm px-6 py-4 bg-white relative border border-[#D0D3D9]">
+      <div className="flex flex-col rounded-md shadow-sm px-6 py-4 bg-white relative border border-[#D0D3D9]">
         <div className="flex justify-between">
           <div className="mb-2 text-[#514E4E] font-[600]">Quality Trends</div>
           <div className="flex gap-4">
@@ -63,22 +58,18 @@ export const Dashboard = () => {
               name="part"
               value={model.revenueQuery.part}
               onChange={model.handleChangeRevenue}
-              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-md text-xs"
             >
-              <option value="" disabled selected>
-                Part Code
-              </option>
+              <option value="" disabled selected>Part Code</option>
               {model.part.data.map((item) => { return <option value={item.id}>{item.partCode}</option>; })}
             </select>
             <select
               name="character"
               value={model.revenueQuery.character}
               onChange={model.handleChangeRevenue}
-              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-md text-xs"
             >
-              <option value="" disabled selected>
-                Characters
-              </option>
+              <option value="" disabled selected>Characters</option>
               {model.character.map((item) => {
                 return <option value={item.character}>{item.character}</option>;
               })}
@@ -90,10 +81,10 @@ export const Dashboard = () => {
       <div className="w-full flex justify-between gap-6 mt-6">
         <div className="w-1/2 rounded-md shadow-sm bg-white justify-center items-center border border-[#D0D3D9]">
           <div className="flex justify-between px-6 py-3">
-            <p className="text-xl text-[#514E4E]">Summary Judgement</p>
+            <p className="font-[600]">Summary Judgement</p>
             <select
               onChange={model.handleSumaryQuery}
-              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-md text-xs"
             >
               <option value="">Today</option>
               <option value="month">Month</option>
@@ -112,7 +103,7 @@ export const Dashboard = () => {
               />
             ) : null}
           </div>
-          <div className="w-full flex gap-8 justify-center mb-[42px] font-open-sans">
+          <div className="w-full flex gap-8 justify-center mb-[42px]">
             <div className="flex gap-2 items-center">
               <div className="w-[16px] h-[16px] bg-[#12B569] rounded-full"></div>
               <p className="font-[400] text-xs">OK</p>
@@ -129,13 +120,11 @@ export const Dashboard = () => {
         </div>
         <div className="w-1/2 rounded-md shadow-sm bg-white px-6 py-3 flex flex-col justify-between border border-[#D0D3D9]">
           <div className="flex justify-between relative w-[100%]">
-            <p className="text-xl text-[#514E4E] mb-[14px]">Part Checking</p>
-            <p className="absolute -rotate-90 top-[10rem] -left-[40px] text-[10px]">
-              part Quantity
-            </p>
+            <p className="mb-[14px] font-[600]">Part Checking</p>
+            <p className="absolute -rotate-90 top-[10rem] -left-[40px] text-[10px]">part Quantity</p>
             <select
               onChange={model.handleSumaryQuery}
-              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-sm"
+              className="p-2 bg-[#FFFFFF] border border-[#D0D3D9] rounded-md text-xs"
             >
               <option value="Daily">Daily</option>
               <option value="Monthly">Monthly</option>

@@ -6,24 +6,24 @@ import useCustomerModel from "./customer-model-view-model";
 const CustomerModel = () => {
   const customerModel = useCustomerModel();
   return (
-    <>
+    <div className="text-[#514E4E] font-open-sans">
       <ModalDelete
         showModal={customerModel.showModal}
         setShowModal={customerModel.setShowModal}
         onConfirm={customerModel.onConfirmDelete}
       />
       <table className="w-full">
-        <thead className="bg-[#FAFAFB] border-y border-[#D0D3D9] text-[#514E4E]">
+        <thead className="bg-[#FAFAFB] border-y border-[#D0D3D9]">
           <tr>
-            <th className="py-6 text-start pl-10 font-[600]">Customer Model Name</th>
-            <th className="py-6 text-start pl-10 font-[600]">Action</th>
+            <th className="py-4 text-start pl-10 font-[600] text-sm">Customer Model Name</th>
+            <th className="py-4 text-start pl-10 font-[600] text-sm">Action</th>
           </tr>
         </thead>
         <tbody>
           {customerModel.customerModel?.data?.map((item, ind) => (
-            <tr className="border-b border-[#D0D3D9] text-[#514E4E]" key={ind}>
-              <td className="py-6 text-start pl-10">{item.name}</td>
-              <td className="py-6 pl-10 flex gap-3 justify-start">
+            <tr className="border-b border-[#D0D3D9]" key={ind}>
+              <td className="py-2 text-start pl-10 font-[400]">{item.name}</td>
+              <td className="py-2 pl-10 flex gap-3 justify-start">
                 <button onClick={() => customerModel.toEdit(item.id)}
                   className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-[4px] text-white flex gap-2"
                 >
@@ -49,7 +49,7 @@ const CustomerModel = () => {
           onClick={customerModel.onPageChange}
         />
       </div>
-    </>
+    </div>
   );
 };
 

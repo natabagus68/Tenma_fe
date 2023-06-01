@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const EyeIcon = ({ width = 18, height = 18, ...props }) => {
     return (
         <>

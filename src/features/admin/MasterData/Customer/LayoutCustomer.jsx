@@ -10,7 +10,7 @@ const LayoutCustomer = () => {
   }
   return (
     <>
-      <Breadcrumbs items={["customer"]} />
+      <Breadcrumbs items={["Customer"]} />
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md pb-6">
         <div className="w-full py-4 px-8 flex justify-between items-center">
           <h1 className="font-[700] text-2xl font-sans text-[#514E4E]">Customer</h1>
@@ -33,7 +33,7 @@ const LayoutCustomer = () => {
             >Customer Model Group</Link>
           </div>
           <button
-            className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-md"
+            className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
             onClick={(e) => {
               e.preventDefault();
               getLastSegmentOfUrl(url) === "customer"
