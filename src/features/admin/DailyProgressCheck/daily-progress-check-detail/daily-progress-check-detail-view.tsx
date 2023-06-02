@@ -12,12 +12,18 @@ const DailyProgressCheckDetailView = () => {
   const dailyProgressCheckDetail = useDailyProgressCheckDetail();
   return (
     <div className="text-[#514E4E] font-open-sans">
-      <Breadcrumbs items={[ "Daily Progress Check", `Detail ${dailyProgressCheckDetail.toogle == "2d" ? "2D" : "3D"}`, ]} />
+      <Breadcrumbs
+        items={[
+          "Daily Progress Check",
+          `Detail ${dailyProgressCheckDetail.toogle == "2d" ? "2D" : "3D"}`,
+        ]}
+      />
       <div className="m-auto w-full border rounded-lg">
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl">Details</h1>
           <div className="flex justify-end items-center gap-3">
-            <div className="flex gap-2">2D
+            <div className="flex gap-2">
+              2D
               <div
                 className="md:w-14 md:h-7 w-12 h-6 flex items-center bg-[#667085] rounded-full py-1 cursor-pointer"
                 onClick={dailyProgressCheckDetail.onToogle}
@@ -38,19 +44,27 @@ const DailyProgressCheckDetailView = () => {
                 <button
                   className="py-[12px] px-[20px] bg-[#F79009] text-white align-middle rounded-md"
                   onClick={dailyProgressCheckDetail.toEditSegment2d}
-                > + Edit Segment Data </button>
+                >
+                  {" "}
+                  + Edit Segment Data{" "}
+                </button>
               ) : !dailyProgressCheckDetail.location ? (
                 <button
                   className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
                   onClick={dailyProgressCheckDetail.onAddSegment}
-                > + Add Segment Data </button>
+                >
+                  {" "}
+                  + Add Segment Data{" "}
+                </button>
               ) : null}
 
               {!dailyProgressCheckDetail.location ? (
                 <button
                   className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md"
                   onClick={dailyProgressCheckDetail.onAddHistory}
-                >+ Add History Data</button>
+                >
+                  + Add History Data
+                </button>
               ) : null}
 
               <button
@@ -102,21 +116,38 @@ const DailyProgressCheckDetailView = () => {
               <tbody>
                 <Tr>
                   <Td className="bg-gray-50 border-none">Part Name</Td>
-                  <Td className="bg-gray-50 border-none">{dailyProgressCheckDetail.dailyProgressCheck.part?.partName}</Td>
+                  <Td className="bg-gray-50 border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.part?.partName}
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className="border-none">Part Code (Item CD) </Td>
-                  <Td className="border-none">{dailyProgressCheckDetail.dailyProgressCheck.part?.partCode}</Td>
+                  <Td className="border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.part?.partCode}
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className="bg-gray-50 border-none">Model</Td>
-                  <Td className="bg-gray-50 border-none">{ dailyProgressCheckDetail.dailyProgressCheck.part ?.customerModel }</Td>
+                  <Td className="bg-gray-50 border-none">
+                    {
+                      dailyProgressCheckDetail.dailyProgressCheck.part
+                        ?.customerModel
+                    }
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className="border-none">Machine No.</Td>
-                  <Td className="border-none"> { dailyProgressCheckDetail.dailyProgressCheck.machine ?.noMachine }</Td>
+                  <Td className="border-none">
+                    {" "}
+                    {
+                      dailyProgressCheckDetail.dailyProgressCheck.machine
+                        ?.noMachine
+                    }
+                  </Td>
                 </Tr>
-                <Tr> <Td className="bg-gray-50 border-none">Inspection Date</Td>
+                <Tr>
+                  {" "}
+                  <Td className="bg-gray-50 border-none">Inspection Date</Td>
                   <Td className="bg-gray-50 border-none">
                     {dailyProgressCheckDetail.dailyProgressCheck
                       .inspectionDate &&
@@ -128,15 +159,22 @@ const DailyProgressCheckDetailView = () => {
                 </Tr>
                 <Tr>
                   <Td className=" border-none">Part Weight QIS</Td>
-                  <Td className="border-none">{dailyProgressCheckDetail.dailyProgressCheck.weightPart} gram</Td>
+                  <Td className="border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.weightPart}{" "}
+                    gram
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className="bg-gray-50 border-none">Lot Production</Td>
-                  <Td className="bg-gray-50 border-none">{dailyProgressCheckDetail.dailyProgressCheck.lotProduction}</Td>
+                  <Td className="bg-gray-50 border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.lotProduction}
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className="bg-gray-50 border-none">Checked By</Td>
-                  <Td className="bg-gray-50 border-none">{dailyProgressCheckDetail.dailyProgressCheck.checkedBy}</Td>
+                  <Td className="bg-gray-50 border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.checkedBy}
+                  </Td>
                 </Tr>
               </tbody>
             </table>
@@ -146,27 +184,49 @@ const DailyProgressCheckDetailView = () => {
               <tbody>
                 <Tr>
                   <Td className="bg-gray-50 border-none">Shift</Td>
-                  <Td className="bg-gray-50 border-none">{dailyProgressCheckDetail.dailyProgressCheck.shift}</Td>
+                  <Td className="bg-gray-50 border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.shift}
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className=" border-none">PIC</Td>
-                  <Td className="border-none">{dailyProgressCheckDetail.dailyProgressCheck.pic?.name}</Td>
+                  <Td className="border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.pic?.name}
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className="bg-gray-50 border-none">Label No.</Td>
-                  <Td className="bg-gray-50 border-none">{dailyProgressCheckDetail.dailyProgressCheck.labelNo}</Td>
+                  <Td className="bg-gray-50 border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.labelNo}
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className=" border-none">Accept sample (time)</Td>
-                  <Td className="border-none">{ dailyProgressCheckDetail.dailyProgressCheck .acceptSampleTime }</Td>
+                  <Td className="border-none">
+                    {
+                      dailyProgressCheckDetail.dailyProgressCheck
+                        .acceptSampleTime
+                    }
+                  </Td>
                 </Tr>
                 <Tr>
-                  <Td className="bg-gray-50 border-none">Measure sample (time)</Td>
-                  <Td className="bg-gray-50 border-none"> { dailyProgressCheckDetail.dailyProgressCheck .measureSampleTime } </Td>
+                  <Td className="bg-gray-50 border-none">
+                    Measure sample (time)
+                  </Td>
+                  <Td className="bg-gray-50 border-none">
+                    {" "}
+                    {
+                      dailyProgressCheckDetail.dailyProgressCheck
+                        .measureSampleTime
+                    }{" "}
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className=" border-none">Weight Part</Td>
-                  <Td className="border-none">{dailyProgressCheckDetail.dailyProgressCheck.actWeightPart} &nbsp;gram</Td>
+                  <Td className="border-none">
+                    {dailyProgressCheckDetail.dailyProgressCheck.actWeightPart}{" "}
+                    &nbsp;gram
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td className="bg-gray-50 border-none">Judgement</Td>
@@ -208,6 +268,7 @@ const DailyProgressCheckDetailView = () => {
               segment={item}
               model={dailyProgressCheckDetail}
               index={item.id}
+              ind={i}
             />
           ))}
         </>
@@ -220,6 +281,7 @@ const DailyProgressCheckDetailView = () => {
               segment={item}
               model={dailyProgressCheckDetail}
               index={item.id}
+              ind={i}
             />
           ))}
         </>
@@ -229,10 +291,11 @@ const DailyProgressCheckDetailView = () => {
         showModal={dailyProgressCheckDetail.deleteSegmentConfirmShow}
         setShowModal={dailyProgressCheckDetail.setDeleteSegmentConfirmShow}
         onConfirm={dailyProgressCheckDetail.confirmDeleteSegment}
-        onCancel={null}
+        onCancel={dailyProgressCheckDetail.cancelConfirmModal}
       />
     </div>
   );
 };
 
 export default DailyProgressCheckDetailView;
+
