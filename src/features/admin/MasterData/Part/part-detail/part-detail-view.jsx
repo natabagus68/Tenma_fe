@@ -6,7 +6,6 @@ import { PartApiRepository } from "@data/api/part-api-repository";
 
 const PartDetail = () => {
   const partDetail = usePartDetail(new PartApiRepository());
-
   return (
     <div className="text-[#514E4E] font-open-sans">
       <Breadcrumbs items={["Part", "Details"]} />

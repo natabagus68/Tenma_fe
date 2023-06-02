@@ -10,6 +10,7 @@ import { MaterialRepository } from "@domain/repositories/material-repository";
 import { PartRepository } from "@domain/repositories/part-repository";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export function usePartForm(
     partRepository: PartRepository,
@@ -32,10 +33,17 @@ export function usePartForm(
     };
     const onSubmit = async () => {
         try {
-            partId
-                ? await partRepository.update(Part.create(part))
-                : await partRepository.store(Part.create(part));
-            navigate("../", { replace: true });
+          if (partId) {
+            await partRepository.update(Part.create(part))
+            Swal.fire({
+              icon: "success",
+              title: "Update Part Successed",
+              timer: 1500,
+              showConfirmButton: false,
+            })
+          } else {
+            // console.log(part)
+          }
         } catch (e) {
             console.error(e)
         }

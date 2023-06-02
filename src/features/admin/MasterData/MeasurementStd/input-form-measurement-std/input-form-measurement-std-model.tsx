@@ -9,13 +9,13 @@ import { PartRepository } from "@domain/repositories/part-repository";
 import { ToolRepository } from "@domain/repositories/tool-repository";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export function useInputMeasurementStd() {
     const partRepo: PartRepository = new PartApiRepository();
     const toolRepo: ToolRepository = new ToolApiRepository();
     const measurementRepository = new MeasurementStdApiRepository();
     const { id } = useParams();
-    console.log(id, "id");
     const navigate = useNavigate();
     const [parts, setParts] = useState<Part[]>([]);
     const [tools, setTools] = useState<Tool[]>([]);
@@ -119,11 +119,32 @@ export function useInputMeasurementStd() {
     };
     const onSave = async (e: React.MouseEvent) => {
         e.preventDefault();
-        id
-            ? measurementRepository.update(id, measurementStd)
-            : measurementRepository.store(measurementStd);
-
-        navigate("../");
+        console.log(measurementStd.part)
+        if (id) {
+          measurementRepository.update(id, measurementStd)
+            Swal.fire({
+              icon: "success",
+              text: "Berhasil Update Measurement Std",
+              timer: 1500,
+              showConfirmButton: false,
+            })
+            navigate(-1)
+        } else {
+          if (measurementStd.part === undefined) {
+            Swal.fire({
+              icon: "error",
+              text: "Part Code - Part Name Harus Diisi",
+              timer: 1500,
+              showConfirmButton: false,
+            })
+          } else {
+            measurementRepository.store(measurementStd)
+          }
+        }
+        // id
+        //     ? measurementRepository.update(id, measurementStd)
+        //     : measurementRepository.store(measurementStd);
+        // navigate("../");
     };
     const onCancel = () => {
         navigate("../");

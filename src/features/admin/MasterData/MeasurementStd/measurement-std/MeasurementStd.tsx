@@ -13,7 +13,7 @@ export default function MeasurementStd() {
         <div className="w-full flex justify-between items-center px-8 py-[18px]">
           <h1 className="font-[700] text-2xl font-sans">Measurement Std</h1>
           <button
-            className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px]"
+            className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
             onClick={measurementStd.toAddData}
           >
             + Add Data
@@ -34,13 +34,13 @@ export default function MeasurementStd() {
             <tbody>
               {measurementStd.measurementStd.data.map((item, ind) => (
                 <tr className="border-b border-gray-100" key={ind}>
-                  <td className="py-6 text-start pl-10 font-[400]">
+                  <td className="py-2 text-start pl-10 font-[400]">
                     {item.part.partCode}
                   </td>
-                  <td className="py-6 text-start pl-10 font-[400]">
+                  <td className="py-2 text-start pl-10 font-[400]">
                     {item.part.partName}
                   </td>
-                  <td className="py-6 text-start pl-10 font-[400]">
+                  <td className="py-2 text-start pl-10 font-[400]">
                     {item.part.customerModel}
                   </td>
                   <td className="py-2 pl-10 flex gap-3 justify-start">

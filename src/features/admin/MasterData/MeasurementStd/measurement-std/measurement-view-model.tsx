@@ -1,7 +1,4 @@
-import {
-  IMeasurementStd,
-  MeasurementStd,
-} from "@domain/models/measurement-std";
+import { IMeasurementStd, MeasurementStd, } from "@domain/models/measurement-std";
 import { MeasurementStdApiRepository } from "@data/api/measurement-std-api-repository";
 import { PaginatedData } from "@domain/models/paginated-data";
 import { config } from "@common/utils";
