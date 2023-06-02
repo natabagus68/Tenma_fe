@@ -1,6 +1,7 @@
 import { Breadcrumbs } from "../../../../../common/components";
 import {
   EyeIcon,
+  MenuIcon,
   PenAltIcon,
   TrashIcon,
 } from "../../../../../common/components/icons";

@@ -67,9 +67,9 @@ export class Measurement extends Entity<IMeasurement> {
     return this._props.character;
   }
   get nominal(): string {
-    if(this._props.nominal === 'Decimal') return `Decimal (${this._props.nominalValue})`
+    if (this._props.nominal === "Decimal")
+      return `Decimal (${this._props.nominalValue})`;
     return this._props.nominal;
-
   }
   get nominalValue(): string {
     return this._props.nominalValue;
@@ -119,23 +119,6 @@ export class Measurement extends Entity<IMeasurement> {
         parseFloat(this._props.nominalValue) + +this._props.lower <=
         parseFloat(this._props.result)
       ) {
-        return "ok";
-      } else {
-        const count =
-          parseFloat(this._props.result) -
-          parseFloat(this._props.nominalValue) -
-          +this._props.lower;
-        if (isNaN(count)) {
-          return "";
-        } else {
-          return count.toFixed(5).toString();
-        }
-      }
-    } else {
-      if (
-        parseFloat(this._props.nominalValue) + +this._props.lower <=
-        parseFloat(this._props.result)
-      ) {
         return "ok".toUpperCase();
       } else {
         const count =
@@ -164,33 +147,6 @@ export class Measurement extends Entity<IMeasurement> {
           parseInt(this._props.nominalValue) + +this._props.upper >=
           parseInt(this._props.saResult)
         ) {
-          return "ok";
-        } else {
-          const count =
-            parseInt(this._props.saResult) -
-            parseInt(this._props.nominalValue) +
-            +this._props.saUpper;
-        if (isNaN(count)) {
-          return "";
-        } else {
-          return count.toFixed(5).toString();
-        }
-      }
-    }
-  }
-  get saResult(): string {
-    return this._props.saResult;
-  }
-  set saResult(value) {
-    this._props.saResult = value;
-  }
-  get saJudgement(): string {
-    if (this._props.saJudgement !== "ok") {
-      if (parseInt(this._props.saResult) > parseInt(this._props.nominalValue)) {
-        if (
-          parseInt(this._props.nominalValue) + +this._props.upper >=
-          parseInt(this._props.saResult)
-        ) {
           return "ok".toLowerCase();
         } else {
           const count =
@@ -198,23 +154,6 @@ export class Measurement extends Entity<IMeasurement> {
             parseInt(this._props.nominalValue) +
             +this._props.saUpper;
 
-          if (isNaN(count)) {
-            return "";
-          } else {
-            return count.toFixed(5).toString();
-          }
-        }
-      } else {
-        if (
-          parseInt(this._props.nominalValue) + +this._props.saLower <=
-          parseInt(this._props.saResult)
-        ) {
-          return "ok";
-        } else {
-          const count =
-            parseInt(this._props.saResult) -
-            parseInt(this._props.nominalValue) -
-            +this._props.saLower;
           if (isNaN(count)) {
             return "";
           } else {
