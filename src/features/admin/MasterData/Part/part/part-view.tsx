@@ -22,7 +22,7 @@ const Part = () => {
           <button
             type="button"
             role="button"
-            className="py-[12px] px-[20px] text-white align-middle rounded-md bg-[#667085]"
+            className="py-[12px] px-[20px] text-white align-middle rounded-md bg-[#667085] text-sm"
             onClick={(e) => part.onAddData()}
           >
             + Add Data

@@ -45,8 +45,10 @@ const InputFormMeasurementView = () => {
       <SpecialAcept model={model} />
 
       <div className="w-full py-5 px-5 flex gap-3 border border-[#D0D3D9] rounded-md mt-4">
-        <button onClick={(e) => model.onSave(e)}
-          className="text-sm rounded-md text-center border h-[40px] w-[180px] font-[600] text-[#B8B6B6] bg-[#D0D3D9] border-[#D0D3D9]"
+        <button
+        // disabled={model.measurementStd.part? false : true}
+        onClick={(e) => model.onSave(e)}
+          className="text-sm rounded-md text-center border h-[] w-[180px] font-[600] text-[#FFFFFF] bg-[#1BBDD4] border-[#1BBDD4]"
           >Save</button>
         <button onClick={model.onCancel}
           className="text-sm rounded-md text-center border h-[40px] w-[180px] font-[600] bg-[#FFFFFF] text-[#667085] border-[#667085]"

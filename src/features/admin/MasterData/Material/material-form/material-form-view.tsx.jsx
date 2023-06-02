@@ -58,7 +58,7 @@ const MaterialFormView = () => {
           <div className="flex gap-4 mt-7">
             <button
               onClick={materialForm.onSave}
-              className="w-[180px] h-[46px] rounded-[4px] bg-[#D0D3D9] text-[#B8B6B6] items-center flex justify-center font-[600] text-sm"
+              className="w-[180px] h-[46px] rounded-[4px] bg-[#1BBDD4] text-[#FFFFFF] items-center flex justify-center font-[600] text-sm"
             >Save</button>
             <button
               className="w-[180px] h-[46px] rounded-[4px] border text-[#667085] items-center flex justify-center font-[600] text-sm"

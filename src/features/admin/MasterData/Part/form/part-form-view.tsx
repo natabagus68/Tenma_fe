@@ -180,11 +180,11 @@ const PartFormView = () => {
             </div>
             <div className="flex gap-2 text-left">
               <button type="button" role="button"
-                className="w-[180px] h-[46px] border bg-[#D0D3D9] border-[#D0D3D9] text-center rounded-md text-[#B8B6B6] font-[600] text-sm"
+                className="w-[180px] h-[46px] border bg-[#1BBDD4] border-[#1BBDD4] text-center rounded-[4px] text-[#FFFFFF] font-[600] text-sm"
                 onClick={(e) => partForm.onSubmit()}
               >Save</button>
               <button type="button" role="button"
-                className="w-[180px] h-[46px] border border-[#D0D3D9] text-center rounded-md font-[600] text-[#514E4E] text-sm"
+                className="w-[180px] h-[46px] border border-[#D0D3D9] text-center rounded-[4px] font-[600] text-[#514E4E] text-sm"
                 onClick={(e) => partForm.onCancel()}
               >Cancel</button>
             </div>

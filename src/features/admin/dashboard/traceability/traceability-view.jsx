@@ -85,7 +85,7 @@ export default function Traceability() {
           className="flex items-center justify-center gap-2 px-4 py-3 bg-[#1BBDD4] text-[#FFFFFF] rounded-md w-[10%]"
         >
           <SearchIcon />
-          <span>Search</span>
+          <span className="text-sm">Search</span>
         </button>
       </div>
       <div className="bg-[#FFFFFF] border border-[#D0D3D9] rounded-md">

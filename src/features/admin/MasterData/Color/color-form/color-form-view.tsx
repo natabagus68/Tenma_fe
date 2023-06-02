@@ -33,7 +33,7 @@ const ColorFormView = () => {
             <div className="flex gap-4 mt-6">
               <button
                 type="submit"
-                className="w-[180px] h-[46px] rounded-[4px] bg-[#D0D3D9] text-[#B8B6B6] items-center flex justify-center font-[600]"
+                className="w-[180px] h-[46px] rounded-[4px] bg-[#1BBDD4] text-[#FFFFFF] items-center flex justify-center font-[600]"
               >Save</button>
               <button
                 type="button"

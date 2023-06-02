@@ -46,7 +46,7 @@ const Weighting = () => {
           <div className="mt-5">
             <button
               onClick={model.storeAddData}
-              className="text-center bg-[#D0D3D9] text-[#B8B6B6] rounded-[4px] w-[180px] h-[46px]"
+              className="text-center bg-[#1BBDD4] text-[#FFFFFF] rounded-[4px] w-[180px] h-[46px] font-[600] text-sm"
             >Save</button>
           </div>
         </form>
