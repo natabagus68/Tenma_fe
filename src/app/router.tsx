@@ -58,335 +58,335 @@ import Weighting from "@features/admin/weighting/weighting-view";
 import Traceability from "@features/admin/dashboard/traceability/traceability-view";
 
 const Root = () => {
-    return <Outlet />;
+  return <Outlet />;
 };
 
 export default createBrowserRouter([
-    {
-        path: config.pathPrefix,
-        element: <Navigate to={`${config.pathPrefix}login`} />,
-    },
-    {
-        path: "table",
-        element: <TableExcel />,
-    },
-    {
-        path: config.pathPrefix,
-        element: <GuestLayouts />,
-        errorElement: <Error404 />,
+  {
+    path: config.pathPrefix,
+    element: <Navigate to={`${config.pathPrefix}login`} />,
+  },
+  {
+    path: "table",
+    element: <TableExcel />,
+  },
+  {
+    path: config.pathPrefix,
+    element: <GuestLayouts />,
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+    ],
+  },
+  {
+    path: config.pathPrefix,
+    element: <AdminLayout />,
+    // errorElemepnt: <Error404 />,
+    children: [
+      {
+        path: "dashboard",
+        element: <Root />,
         children: [
-            {
-                path: "login",
-                element: <Login />,
-            },
+          {
+            path: "",
+            element: <Dashboard />,
+          },
+          {
+            path: "traceability",
+            element: <Traceability />,
+          },
         ],
-    },
-    {
-        path: config.pathPrefix,
-        element: <AdminLayout />,
-        // errorElemepnt: <Error404 />,
+      },
+      {
+        path: "weighting",
+        element: <Root />,
         children: [
-            {
-                path: "dashboard",
-                element: <Root />,
-                children: [
-                    {
-                        path: "",
-                        element: <Dashboard />,
-                    },
-                    {
-                        path: "traceability",
-                        element: <Traceability />,
-                    },
-                ],
-            },
-            {
-                path: "weighting",
-                element: <Root />,
-                children: [
-                    {
-                        path: "",
-                        element: <Weighting />,
-                    },
-                ],
-            },
-            {
-                path: "master-data",
-                element: <Root />,
-                children: [
-                    {
-                        path: "measurement-std",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <MeasurementStd />,
-                            },
-                            {
-                                path: ":id/detail",
-                                element: <MeasurementDetail />,
-                            },
-                            {
-                                path: "add-data",
-                                element: <InputFormMeasurementView />,
-                            },
-                            {
-                                path: ":id/edit-data",
-                                element: <InputFormMeasurementView />,
-                            },
-                        ],
-                    },
-                    {
-                        path: "part",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <Part />,
-                            },
-                            {
-                                path: ":partId/detail",
-                                element: <PartDetail />,
-                            },
-                            {
-                                path: ":partId/edit",
-                                element: <PartFormView />,
-                            },
-                            {
-                                path: "create",
-                                element: <PartFormView />,
-                            },
-                        ],
-                    },
-                    {
-                        path: "customer",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "add-data-c1",
-                                element: <CustomerFormView />,
-                            },
-                            {
-                                path: ":id/edit-customer",
-                                element: <CustomerFormView />,
-                            },
-                            {
-                                path: "add-data-c2",
-                                element: <InputFormCustomerModel />,
-                            },
-                            {
-                                path: ":id/edit-data-customer-model",
-                                element: <InputFormCustomerModel />,
-                            },
-
-                            {
-                                path: "add-data-c3",
-                                element: <InputFormCustomerModelGroup />,
-                            },
-                            {
-                                path: ":id/edit-customer-model-group",
-                                element: <InputFormCustomerModelGroup />,
-                            },
-                            {
-                                path: "",
-                                element: <LayoutCustomer />,
-                                children: [
-                                    {
-                                        path: "",
-                                        element: <Customer />,
-                                    },
-                                    {
-                                        path: "customer-model",
-                                        element: <CustomerModel />,
-                                    },
-                                    {
-                                        path: "customer-model-group",
-                                        element: <CustomerModelGroup />,
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        path: "machine",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <Machine />,
-                            },
-                            {
-                                path: "create",
-                                element: <MachineFormView />,
-                            },
-                            {
-                                path: ":id/edit",
-                                element: <MachineFormView />,
-                            },
-                        ],
-                    },
-                    {
-                        path: "tool",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <ToolView />,
-                            },
-                            {
-                                path: "create",
-                                element: <ToolFormView />,
-                            },
-                            {
-                                path: ":id/edit",
-                                element: <ToolFormView />,
-                            },
-                        ],
-                    },
-                    {
-                        path: "material",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <MaterialView />,
-                            },
-                            {
-                                path: "create",
-                                element: <MaterialFormView />,
-                            },
-                            {
-                                path: ":id/edit",
-                                element: <MaterialFormView />,
-                            },
-                        ],
-                    },
-                    {
-                        path: "color",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <Color />,
-                            },
-                            {
-                                path: "create",
-                                element: <ColorFormView />,
-                            },
-                            {
-                                path: ":id/edit",
-                                element: <ColorFormView />,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                path: "daily-progress-check",
-                element: <Root />,
-                children: [
-                    {
-                        path: "",
-                        element: <DailyProgessCheckView />,
-                    },
-                    {
-                        path: "create",
-                        element: <DailyProgressCheckCreateView />,
-                    },
-                    {
-                        path: ":id/edit",
-                        element: <DailyProgressCheckEditView />,
-                    },
-                    {
-                        path: ":id/create-segment",
-                        element: <CreateSegmentView />,
-                    },
-                    {
-                        path: ":id/detail",
-                        element: <DailyProgressCheckDetailView />,
-                    },
-                    {
-                        path: ":id/history/create",
-                        element: <HistoryFormView />,
-                    },
-                    {
-                        path: ":id/history/:historyId/edit",
-                        element: <HistoryFormView />,
-                    },
-                    {
-                        path: ":id/add-segment-data-2d",
-                        element: <AddSegmentTwoD />,
-                    },
-                    {
-                        path: ":id/edit-segment-data-2d",
-                        element: <AddSegmentTwoD />,
-                    },
-                ],
-            },
-            {
-                path: "report",
-                element: <Root />,
-                children: [
-                    {
-                        path: "",
-                        element: <ReportView />,
-                    },
-                    {
-                        path: ":id/detail",
-                        element: <ReportDetailView />,
-                    },
-                ],
-            },
-            {
-                path: "user",
-                element: <Root />,
-                children: [
-                    {
-                        path: "",
-                        element: <Account />,
-                    },
-                    {
-                        path: "create",
-                        element: <AddAccount />,
-                    },
-                    {
-                        path: ":id/edit-account-user",
-                        element: <AddAccount />,
-                    },
-                    {
-                        path: ":id/detail",
-                        element: <DetailAccount />,
-                    },
-
-                    {
-                        path: "access",
-                        element: <Root />,
-                        children: [
-                            {
-                                path: "",
-                                element: <Access />,
-                            },
-                            {
-                                path: ":id/menu",
-                                element: <Menu />,
-                            },
-                            {
-                                path: "add-new-role",
-                                element: <InputFormUserAccess />,
-                            },
-                            {
-                                path: "edit-new-role/:id",
-                                element: <InputFormUserAccess />,
-                            },
-                        ],
-                    },
-                ],
-            },
+          {
+            path: "",
+            element: <Weighting />,
+          },
         ],
-    },
+      },
+      {
+        path: "master-data",
+        element: <Root />,
+        children: [
+          {
+            path: "measurement-std",
+            element: <Root />,
+            children: [
+              {
+                path: "",
+                element: <MeasurementStd />,
+              },
+              {
+                path: ":id/detail",
+                element: <MeasurementDetail />,
+              },
+              {
+                path: "add-data",
+                element: <InputFormMeasurementView />,
+              },
+              {
+                path: ":id/edit-data",
+                element: <InputFormMeasurementView />,
+              },
+            ],
+          },
+          {
+            path: "part",
+            element: <Root />,
+            children: [
+              {
+                path: "",
+                element: <Part />,
+              },
+              {
+                path: ":partId/detail",
+                element: <PartDetail />,
+              },
+              {
+                path: ":partId/edit",
+                element: <PartFormView />,
+              },
+              {
+                path: "create",
+                element: <PartFormView />,
+              },
+            ],
+          },
+          {
+            path: "customer",
+            element: <Root />,
+            children: [
+              {
+                path: "add-data-c1",
+                element: <CustomerFormView />,
+              },
+              {
+                path: ":id/edit-customer",
+                element: <CustomerFormView />,
+              },
+              {
+                path: "add-data-c2",
+                element: <InputFormCustomerModel />,
+              },
+              {
+                path: ":id/edit-data-customer-model",
+                element: <InputFormCustomerModel />,
+              },
 
-    {
-        path: "*",
-        element: <Error404 />,
-    },
+              {
+                path: "add-data-c3",
+                element: <InputFormCustomerModelGroup />,
+              },
+              {
+                path: ":id/edit-customer-model-group",
+                element: <InputFormCustomerModelGroup />,
+              },
+              {
+                path: "",
+                element: <LayoutCustomer />,
+                children: [
+                  {
+                    path: "",
+                    element: <Customer />,
+                  },
+                  {
+                    path: "customer-model",
+                    element: <CustomerModel />,
+                  },
+                  {
+                    path: "customer-model-group",
+                    element: <CustomerModelGroup />,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: "machine",
+            element: <Root />,
+            children: [
+              {
+                path: "",
+                element: <Machine />,
+              },
+              {
+                path: "create",
+                element: <MachineFormView />,
+              },
+              {
+                path: ":id/edit",
+                element: <MachineFormView />,
+              },
+            ],
+          },
+          {
+            path: "tool",
+            element: <Root />,
+            children: [
+              {
+                path: "",
+                element: <ToolView />,
+              },
+              {
+                path: "create",
+                element: <ToolFormView />,
+              },
+              {
+                path: ":id/edit",
+                element: <ToolFormView />,
+              },
+            ],
+          },
+          {
+            path: "material",
+            element: <Root />,
+            children: [
+              {
+                path: "",
+                element: <MaterialView />,
+              },
+              {
+                path: "create",
+                element: <MaterialFormView />,
+              },
+              {
+                path: ":id/edit",
+                element: <MaterialFormView />,
+              },
+            ],
+          },
+          {
+            path: "color",
+            element: <Root />,
+            children: [
+              {
+                path: "",
+                element: <Color />,
+              },
+              {
+                path: "create",
+                element: <ColorFormView />,
+              },
+              {
+                path: ":id/edit",
+                element: <ColorFormView />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: "daily-progress-check",
+        element: <Root />,
+        children: [
+          {
+            path: "",
+            element: <DailyProgessCheckView />,
+          },
+          {
+            path: "create",
+            element: <DailyProgressCheckCreateView />,
+          },
+          {
+            path: ":id/edit",
+            element: <DailyProgressCheckEditView />,
+          },
+          {
+            path: ":id/create-segment",
+            element: <CreateSegmentView />,
+          },
+          {
+            path: ":id/detail",
+            element: <DailyProgressCheckDetailView />,
+          },
+          {
+            path: ":id/history/create",
+            element: <HistoryFormView />,
+          },
+          {
+            path: ":id/history/:historyId/edit",
+            element: <HistoryFormView />,
+          },
+          {
+            path: ":id/add-segment-data-2d",
+            element: <AddSegmentTwoD />,
+          },
+          {
+            path: ":id/edit-segment-data-2d",
+            element: <AddSegmentTwoD />,
+          },
+        ],
+      },
+      {
+        path: "report",
+        element: <Root />,
+        children: [
+          {
+            path: "",
+            element: <ReportView />,
+          },
+          {
+            path: ":id/detail",
+            element: <ReportDetailView />,
+          },
+        ],
+      },
+      {
+        path: "user",
+        element: <Root />,
+        children: [
+          {
+            path: "",
+            element: <Account />,
+          },
+          {
+            path: "create",
+            element: <AddAccount />,
+          },
+          {
+            path: ":id/edit-account-user",
+            element: <AddAccount />,
+          },
+          {
+            path: ":id/detail",
+            element: <DetailAccount />,
+          },
+        ],
+      },
+
+      {
+        path: "access",
+        element: <Root />,
+        children: [
+          {
+            path: "",
+            element: <Access />,
+          },
+          {
+            path: ":id/menu",
+            element: <Menu />,
+          },
+          {
+            path: "add-new-role",
+            element: <InputFormUserAccess />,
+          },
+          {
+            path: "edit-new-role/:id",
+            element: <InputFormUserAccess />,
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    path: "*",
+    element: <Error404 />,
+  },
 ]);

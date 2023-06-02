@@ -16,6 +16,7 @@ const Menu = () => {
           onChange={model.handleChangeCheckedPermission}
           onCancel={model.onCancelModalPermission}
           onSave={model.savePermissions}
+          model={model}
         />
       )}
       <Breadcrumbs items={["Access", "Menu"]} />
@@ -46,9 +47,15 @@ const Menu = () => {
                     className="w-6 h-6 accent-gray-700"
                   />
                 </th>
-                <th className="py-6 text-start pl-10 font-[500] text-sm">Menu Name</th>
-                <th className="py-6 text-start pl-10 font-[500] text-sm">Permissions</th>
-                <th className="py-6 text-start pl-10 font-[500] text-sm">Action</th>
+                <th className="py-6 text-start pl-10 font-[500] text-sm">
+                  Menu Name
+                </th>
+                <th className="py-6 text-start pl-10 font-[500] text-sm">
+                  Permissions
+                </th>
+                <th className="py-6 text-start pl-10 font-[500] text-sm">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -67,20 +74,18 @@ const Menu = () => {
                       />
                     </td>
                     <td className="py-6 text-start pl-10">{item.name}</td>
-                    <td className="py-6 text-start pl-10">
-                      {item.permission.map((e, i) => {
-                        if (e.active) {
-                          return (
-                            <p>
-                              {e.name} {i !== e.length ? " " : " | "}
-                            </p>
-                          );
-                        }
-                      })}
+                    <td className="py-6 text-start pl-10 ">
+                      <div className="flex gap-2 items-center">
+                        {item.permission.map((e, i) => {
+                          if (e.active) {
+                            return <p>{e.name} </p>;
+                          }
+                        })}
+                      </div>
                     </td>
                     <td className="py-6  pl-10 flex gap-3 justify-start">
                       <button
-                        onClick={() => model.buttonModal(item.id)}
+                        onClick={(e) => model.buttonModal(e, item.id)}
                         className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-[4px] text-white flex gap-2"
                       >
                         <PenAltIcon />
@@ -107,3 +112,4 @@ const Menu = () => {
 };
 
 export default Menu;
+

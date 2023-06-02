@@ -146,7 +146,7 @@ export class UserApiRepository implements UserRepository {
     return User.create({
       name: data.data.name,
       email: data.data.email,
-      password: data.data.password,
+      password: "",
       role_id: data.data.role_id,
       is_verified: data.data.is_verified,
       photo: data.data.photo,

@@ -67,7 +67,7 @@ const Access = () => {
                         <span className="text-sm">Edit</span>
                       </button>
                       <button
-                        onClick={() => model.toDelete(item.id)}
+                        onClick={(e) => model.buttonDelete(e, item.id)}
                         className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-[4px] text-white flex gap-2"
                       >
                         <TrashIcon />

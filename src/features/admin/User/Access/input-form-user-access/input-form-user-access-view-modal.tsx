@@ -32,11 +32,11 @@ export default function useInputFormAccess() {
     if (id) {
       accessRepo
         .update(id, access)
-        .then(() => navigate(`${config.pathPrefix}user/access/`));
+        .then(() => navigate(`${config.pathPrefix}access/`));
       navigate("../");
     } else {
       accessRepo.store(access.name).then(() => {
-        navigate(`${config.pathPrefix}user/access/`);
+        navigate(`${config.pathPrefix}access/`);
       });
     }
   };
