@@ -156,15 +156,15 @@ const TableExcel = ({ datas }) => {
                               <tr>
                                 <td
                                   rowSpan={
-                                    el.std_measurement.special_accept_segments
-                                      .length + 1
+                                    el?.std_measurement.special_accept_segments
+                                      ?.length + 1
                                   }
                                   className="border border-gray-100 px-2 bg-[#E7F8F0] text-center"
                                 >
                                   3D
                                 </td>
                               </tr>
-                              {el.std_measurement.special_accept_segments.map(
+                              {el?.std_measurement?.special_accept_segments?.map(
                                 (data) => {
                                   return (
                                     <tr>
@@ -197,21 +197,21 @@ const TableExcel = ({ datas }) => {
                           );
                       })}
                       {item?.measure_info.map((el) => {
-                        if (el.cavity_type === "2D")
+                        if (el?.cavity_type === "2D")
                           return (
                             <>
                               <tr>
                                 <td
                                   rowSpan={
-                                    el.std_measurement.special_accept_segments
-                                      .length + 1
+                                    el?.std_measurement.special_accept_segments
+                                      ?.length + 1
                                   }
                                   className="border border-gray-100 px-2 bg-[#E9EEF5] text-center"
                                 >
                                   2D
                                 </td>
                               </tr>
-                              {el.std_measurement.special_accept_segments.map(
+                              {el?.std_measurement?.special_accept_segments?.map(
                                 (data) => {
                                   return (
                                     <tr>
@@ -392,25 +392,25 @@ const TableExcel = ({ datas }) => {
                           </th>
                         </tr>
                         {item?.measure_info?.map((el) => {
-                          return el.std_measurement.special_accept_segments.map(
+                          return el?.std_measurement?.special_accept_segments?.map(
                             (ex) => {
                               return (
                                 <>
                                   <tr>
                                     <td className="py-3 px-3 text-center border border-gray-100S">
-                                      {ex.cavity_results.actual_result}
+                                      {ex?.cavity_results?.actual_result}
                                     </td>
                                     <td className="py-3 px-3 text-center border border-gray-100S">
                                       {
-                                        ex.cavity_results
-                                          .actual_result_judgement
+                                        ex?.cavity_results
+                                          ?.actual_result_judgement
                                       }
                                     </td>
                                     <td className="py-3 px-3 text-center border border-gray-100S">
-                                      {ex.cavity_results.sa_result}
+                                      {ex?.cavity_results?.sa_result}
                                     </td>
                                     <td className="py-3 px-3 text-center border border-gray-100S">
-                                      {ex.cavity_results.sa_result_judgement}
+                                      {ex?.cavity_results?.sa_result_judgement}
                                     </td>
                                   </tr>
                                 </>
@@ -447,20 +447,20 @@ const TableExcel = ({ datas }) => {
             </thead>
 
             <tbody>
-              {datas?.progress_check_histories.map((item) => {
+              {datas?.progress_check_histories?.map((item) => {
                 return (
                   <tr>
                     <td className="py-2 px-3 text-center border border-gray-200">
-                      {item.date}
+                      {item?.date}
                     </td>
                     <td className="py-2 px-3 text-center border border-gray-200">
-                      {item.problem}
+                      {item?.problem}
                     </td>
                     <td className="py-2 px-3 text-center border border-gray-200">
-                      {item.char}
+                      {item?.char}
                     </td>
                     <td className="py-2 px-3 text-center border border-gray-200">
-                      {item.remark}
+                      {item?.remark}
                     </td>
                   </tr>
                 );

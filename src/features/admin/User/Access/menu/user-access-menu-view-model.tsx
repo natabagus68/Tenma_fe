@@ -40,15 +40,21 @@ export const useAccessMenu = () => {
     });
   };
 
-  const buttonModal = (ids: string, moduleIds: string) => {
-    console.log(ids, moduleIds);
-
+  const buttonModal = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    moduleIds: string
+  ) => {
+    e.preventDefault();
     setModelId(moduleIds);
-    setRoleId(ids);
-    menuRepo.getPermision(ids, moduleIds).then((result) => {
-      setPermisions(result);
-      setShowModal(!showModal);
-    });
+    setPermisions(
+      menu.data
+        .find((item) => item.id == moduleIds)
+        .permission.map((perm) => Permission.create(perm))
+    );
+    setShowModal(!showModal);
+    // menuRepo.getPermision(id, moduleIds).then((result) => {
+    //   setPermisions(result);
+    // });
   };
 
   const onBack = () => {
@@ -58,14 +64,13 @@ export const useAccessMenu = () => {
     e: React.ChangeEvent<HTMLButtonElement>,
     id: string
   ) => {
-    const val = e.target.value == "false" ? false : true;
-    console.log(val);
     setPermisions((prev) => {
       const result = prev.map((item) => {
-        if (id === item.unmarshall().id)
+        console.log(id, item.id);
+        if (id === item.id)
           return Permission.create({
             ...item.unmarshall(),
-            active: !val,
+            active: !item.active,
           });
         else return Permission.create({ ...item.unmarshall() });
       });
@@ -83,7 +88,7 @@ export const useAccessMenu = () => {
       };
       return data;
     });
-    await menuRepo.updatePermission(roleId, modelId, data);
+    await menuRepo.updatePermission(id, modelId, data);
     setModelId("");
     setPermisions([]);
     setShowModal(!showModal);

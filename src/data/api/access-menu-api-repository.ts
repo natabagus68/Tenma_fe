@@ -15,7 +15,7 @@ export class MenuApirepository implements MenuRepository {
       totalRow: data.totalRows,
       data: data.data.map((item) => {
         return Menu.create({
-          id: item.role_id,
+          id: item.module_id,
           name: item.module_name,
           active: item.is_module_active,
           moduleId: item.module_id,
@@ -37,7 +37,6 @@ export class MenuApirepository implements MenuRepository {
     modulId: string,
     data: any
   ): Promise<boolean> {
-    console.log(`access/${id}/menu/${modulId}/update`, data);
     await api.put(`access/${id}/menu/${modulId}/update`, {
       permissions: data,
     });

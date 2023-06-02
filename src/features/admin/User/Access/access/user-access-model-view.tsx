@@ -26,13 +26,13 @@ export default function useUserAccess() {
   };
 
   const toMenu = (id: string) => {
-    navigate(`${config.pathPrefix}user/access/${id}/menu`);
+    navigate(`${config.pathPrefix}access/${id}/menu`);
   };
   const toEdit = (id: string) => {
-    navigate(`${config.pathPrefix}user/access/edit-new-role/${id}`);
+    navigate(`${config.pathPrefix}access/edit-new-role/${id}`);
   };
   const toAddData = () => {
-    navigate(`${config.pathPrefix}user/access/add-new-role`);
+    navigate(`${config.pathPrefix}access/add-new-role`);
   };
 
   const buttonDelete = (
