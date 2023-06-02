@@ -273,6 +273,9 @@ export function useDailyProgressCheckDetail() {
       });
   };
 
+  const cancelConfirmModal = () => {
+    setDeleteSegmentConfirmShow(!deleteSegmentConfirmShow);
+  };
   useEffect(() => {
     if (state) {
       setLocation(true);
@@ -322,6 +325,7 @@ export function useDailyProgressCheckDetail() {
     handleEditSegment,
     uploadComparisson,
     cancelModelDelete,
+    cancelConfirmModal,
   };
 }
 
