@@ -8,7 +8,7 @@ const HistoryFormView = ({ model = useDailyProgressCheckDetail() }) => {
   return (
     <div className="text-[#514E4E] font-open-sans mt-8">
       <div className="m-auto w-full border rounded-lg">
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center px-6 py-6">
           <h1 className="font-[700] text-2xl">History Problem</h1>
         </div>
         <div>
