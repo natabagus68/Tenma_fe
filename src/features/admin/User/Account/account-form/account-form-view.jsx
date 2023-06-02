@@ -3,52 +3,57 @@ import useFormAccount from "./account-form-view-model";
 
 const AddAccount = () => {
   const model = useFormAccount();
+  console.log(model.access);
   return (
-    <div className="text-[#514E4E] font-open-sans">
-      <Breadcrumbs items={["User", "Account", model.id ? "Edit data" : "Add Data"]} />
-      <div className="m-auto w-full border border-[#D0D3D9] rounded-[4px]">
-        <div className="w-full py-6 px-8 flex justify-between items-center">
-          <h1 className="font-[700] text-2xl">{model.id ? "Edit Data" : "Add Data"}</h1>
+    <>
+      <Breadcrumbs
+        items={["User", "Account", model.id ? "Edit data" : "Add Data"]}
+      />
+      <div className="m-auto w-full border border-gray-100  rounded-lg pb-6">
+        <div className="w-full py-7 px-8 flex justify-between items-center">
+          <h1 className="font-[700] text-2xl text-gray-700 font-sans">
+            {model.id ? "Edit Data" : "Add Data"}
+          </h1>
         </div>
-        <div className="border-t border-[#D0D3D9] pt-5 px-8 pb-80">
+        <div className="border-t border-gray-100 pt-5 px-8 pb-80">
           <form>
             <div className="flex flex-col gap-3">
-              <label className="font-[400]">Nama</label>
+              <label className="text-gray-600">Nama</label>
               <input
                 type="text"
                 value={model.account.name}
                 onChange={(e) => model.onChangeInput(e)}
                 name="name"
                 placeholder="Input name"
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-4 py-2 font-400 placeholder:text-[#B8B6B6]"
+                className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-open-sans font-600"
               />
             </div>
             <div className="flex flex-col gap-3 mt-3">
-              <label className="font-[400]">Email</label>
+              <label className="text-gray-600">Email</label>
               <input
                 type="Email"
                 value={model.account.email}
                 name="email"
                 onChange={(e) => model.onChangeInput(e)}
                 placeholder="Input email"
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-4 py-2 font-400 placeholder:text-[#B8B6B6]"
+                className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-open-sans font-600"
               />
             </div>
             <div className="flex flex-col gap-3 mt-3 relative">
-              <label className="font-[400]">Password</label>
+              <label className="text-gray-600">Password</label>
               <input
                 value={model.account.password}
                 onChange={(e) => model.onChangeInput(e)}
                 name="password"
                 type={model.passwordShow ? "text" : "password"}
                 placeholder="Input Password"
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-4 py-2 font-400 placeholder:text-[#B8B6B6]"
+                className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md font-open-sans font-600"
               />
               <div
                 onClick={(e) => {
                   model.onPasswordShow(e);
                 }}
-                className="inline  absolute top-11 left-[76.5%]"
+                className="inline  absolute top-11 left-[76.5%] text-gray-600"
               >
                 {model.passwordShow ? (
                   <svg
@@ -89,12 +94,12 @@ const AddAccount = () => {
               </div>
             </div>
             <div className="flex flex-col gap-3 mt-3">
-              <label className="">Role</label>
+              <label className="text-gray-600">Role</label>
               <select
                 name="role_id"
                 value={model.account.role_id}
                 onChange={(e) => model.onChangeInput(e)}
-                className="w-[80%] border border-[#D0D3D9] rounded-lg outline-none px-4 py-2 font-400"
+                className="w-[80%] border border-gray-100 rounded-lg outline-none px-5 py-2 text-md text-gray-700 font-open-sans font-600"
               >
                 {model.access.data.map((item, index) =>
                   item.id == model.account.role_id ? (
@@ -112,18 +117,23 @@ const AddAccount = () => {
             <div className="flex gap-4 mt-6">
               <button
                 onClick={(e) => model.onSave(e)}
-                className="bg-[#1BBDD4] text-white items-center flex justify-center w-[200px] h-[46px] rounded-[4px] text-sm font-[600]"
-              >Save</button>
+                className="px-12 py-3 rounded-lg bg-[#1BBDD4] text-white items-center flex justify-center "
+              >
+                Save
+              </button>
               <button
-                className="border text-[#667085] items-center flex justify-center w-[200px] h-[46px] rounded-[4px] text-sm font-[600]"
+                className="px-12 py-3 rounded-lg border  text-[#667085] items-center flex justify-center"
                 onClick={model.onCancel}
-              >Cancel</button>
+              >
+                Cancel
+              </button>
             </div>
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default AddAccount;
+

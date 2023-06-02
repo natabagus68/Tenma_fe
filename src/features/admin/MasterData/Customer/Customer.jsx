@@ -10,29 +10,33 @@ const Customer = () => {
       <ModalDelete
         showModal={customer.showModal}
         setShowModal={customer.setShowModal}
-        onCancel={customer.onCancelModal}
+        onCancel={customer.cancelDelete}
         onConfirm={customer.onConfirm}
         id={customer.id}
       />
       <table className="w-full">
         <thead className="bg-[#FAFAFB] border-y border-[#D0D3D9]">
           <tr>
-            <th className="py-4 text-start pl-10 font-[600] text-sm">Customer Name</th>
+            <th className="py-4 text-start pl-10 font-[600] text-sm">
+              Customer Name
+            </th>
             <th className="py-4 text-start pl-10 font-[600] text-sm">Action</th>
           </tr>
         </thead>
         <tbody>
           {customer.customer?.data?.map((item, ind) => (
             <tr className="border-b border-[#D0D3D9]" key={ind}>
-              <td className="py-2 text-start pl-10 font-[400]">{item.name}</td>
-              <td className="py-2  pl-10 flex gap-3 justify-start">
-                <button onClick={() => customer.onEdit(item.id)}
+              <td className="py-6 text-start pl-10 ">{item.name}</td>
+              <td className="py-6  pl-10 flex gap-3 justify-start">
+                <button
+                  onClick={() => customer.onEdit(item.id)}
                   className="w-[100px] h-[46px] bg-[#F79009] rounded-[4px] text-white flex items-center justify-center gap-2"
                 >
                   <PenAltIcon />
                   <span className="text-sm">Edit</span>
                 </button>
-                <button onClick={() => customer.openModal(item.id)}
+                <button
+                  onClick={() => customer.openModal(item.id)}
                   className="w-[100px] h-[46px] bg-[#F04438] rounded-[4px] text-white flex items-center justify-center gap-2"
                 >
                   <TrashIcon />
@@ -56,3 +60,4 @@ const Customer = () => {
 };
 
 export default Customer;
+

@@ -254,6 +254,7 @@ export function useDailyProgressCheckDetail() {
       .uploadComparisson(id, cavityID, form)
       .then(() => {
         fetchSegment();
+        window.location.reload();
       })
       .catch((error) => console.log(error));
   };
