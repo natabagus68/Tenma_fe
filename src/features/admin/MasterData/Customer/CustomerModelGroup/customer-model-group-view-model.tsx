@@ -67,6 +67,9 @@ export default function useCustomerMOdelGroup() {
             return data;
         });
     };
+    const cancelDelete = () => {
+        setShowModal(!showModal);
+      };
     useEffect(() => {
         customerModelGroupRepository
             .get({
@@ -85,5 +88,6 @@ export default function useCustomerMOdelGroup() {
         setShowModal,
         onConfirm,
         onPageChange,
+        cancelDelete
     };
 }

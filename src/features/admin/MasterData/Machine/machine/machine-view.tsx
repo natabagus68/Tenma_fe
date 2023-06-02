@@ -12,9 +12,12 @@ const Machine = () => {
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md text-[#514E4E]">
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl ">Machine</h1>
-          <button className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px]"
+          <button
+            className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px]"
             onClick={machine.onAdd}
-          >+ Add Data</button>
+          >
+            + Add Data
+          </button>
         </div>
         <div>
           <table className="w-full">
@@ -31,7 +34,8 @@ const Machine = () => {
                   <td className="py-6 px-8 text-start">{item.idMachine}</td>
                   <td className="py-6 px-8 text-start">{item.noMachine}</td>
                   <td className="py-6 px-8 flex gap-3 justify-start">
-                    <button onClick={(e) => machine.onEdit(item.id)}
+                    <button
+                      onClick={(e) => machine.onEdit(item.id)}
                       className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-[4px] text-white flex gap-2"
                     >
                       <PenAltIcon />
@@ -53,7 +57,9 @@ const Machine = () => {
                     <td
                       colSpan={999}
                       className="text-center py-4 border-b border-[#D0D3D9] bg-gray-50"
-                    >Empty</td>
+                    >
+                      Empty
+                    </td>
                   </tr>
                 </>
               )}
@@ -73,9 +79,11 @@ const Machine = () => {
         showModal={machine.deleteConfirmShow}
         setShowModal={machine.setDeleteConfirmShow}
         onConfirm={machine.onConfirmDelete}
+        onCancel={machine.cancelDelete}
       />
     </>
   );
 };
 
 export default Machine;
+

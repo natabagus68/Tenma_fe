@@ -61,6 +61,9 @@ export default function useCustomerModel() {
             return data;
         });
     };
+    const cancelDelete = () => {
+        setShowModal(!showModal);
+      };
     useEffect(() => {
         customerModelRepository
             .get({ limit: customerModel.limit, page: customerModel.page })
@@ -76,5 +79,6 @@ export default function useCustomerModel() {
         showModal,
         setShowModal,
         onPageChange,
+        cancelDelete
     };
 }

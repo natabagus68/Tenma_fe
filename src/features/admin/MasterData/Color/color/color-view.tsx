@@ -91,6 +91,7 @@ const Color = () => {
                 showModal={color.deleteConfirmShow}
                 setShowModal={color.setDeleteConfirmShow}
                 onConfirm={color.onConfirmDelete}
+                onCancel={color.cancelDelete}
             />
         </>
     );

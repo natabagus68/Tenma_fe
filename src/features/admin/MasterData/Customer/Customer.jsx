@@ -10,7 +10,7 @@ const Customer = () => {
       <ModalDelete
         showModal={customer.showModal}
         setShowModal={customer.setShowModal}
-        onCancel={customer.onCancelModal}
+        onCancel={customer.cancelDelete}
         onConfirm={customer.onConfirm}
         id={customer.id}
       />
@@ -26,13 +26,15 @@ const Customer = () => {
             <tr className="border-b border-[#D0D3D9]" key={ind}>
               <td className="py-6 text-start pl-10 ">{item.name}</td>
               <td className="py-6  pl-10 flex gap-3 justify-start">
-                <button onClick={() => customer.onEdit(item.id)}
+                <button
+                  onClick={() => customer.onEdit(item.id)}
                   className="w-[100px] h-[46px] bg-[#F79009] rounded-[4px] text-white flex items-center justify-center gap-2"
                 >
                   <PenAltIcon />
                   <span className="text-sm">Edit</span>
                 </button>
-                <button onClick={() => customer.openModal(item.id)}
+                <button
+                  onClick={() => customer.openModal(item.id)}
                   className="w-[100px] h-[46px] bg-[#F04438] rounded-[4px] text-white flex items-center justify-center gap-2"
                 >
                   <TrashIcon />
@@ -56,3 +58,4 @@ const Customer = () => {
 };
 
 export default Customer;
+
