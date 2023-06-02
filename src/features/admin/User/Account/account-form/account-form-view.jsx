@@ -5,10 +5,14 @@ const AddAccount = () => {
   const model = useFormAccount();
   return (
     <div className="text-[#514E4E] font-open-sans">
-      <Breadcrumbs items={["User", "Account", model.id ? "Edit data" : "Add Data"]} />
+      <Breadcrumbs
+        items={["User", "Account", model.id ? "Edit data" : "Add Data"]}
+      />
       <div className="m-auto w-full border border-[#D0D3D9] rounded-[4px]">
         <div className="w-full py-6 px-8 flex justify-between items-center">
-          <h1 className="font-[700] text-2xl">{model.id ? "Edit Data" : "Add Data"}</h1>
+          <h1 className="font-[700] text-2xl">
+            {model.id ? "Edit Data" : "Add Data"}
+          </h1>
         </div>
         <div className="border-t border-[#D0D3D9] pt-5 px-8 pb-80">
           <form>
@@ -113,11 +117,15 @@ const AddAccount = () => {
               <button
                 onClick={(e) => model.onSave(e)}
                 className="bg-[#1BBDD4] text-white items-center flex justify-center w-[200px] h-[46px] rounded-[4px] text-sm font-[600]"
-              >Save</button>
+              >
+                Save
+              </button>
               <button
                 className="border text-[#667085] items-center flex justify-center w-[200px] h-[46px] rounded-[4px] text-sm font-[600]"
                 onClick={model.onCancel}
-              >Cancel</button>
+              >
+                Cancel
+              </button>
             </div>
           </form>
         </div>
@@ -127,3 +135,4 @@ const AddAccount = () => {
 };
 
 export default AddAccount;
+

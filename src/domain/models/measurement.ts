@@ -67,9 +67,9 @@ export class Measurement extends Entity<IMeasurement> {
     return this._props.character;
   }
   get nominal(): string {
-    if (this._props.nominal == "Decimal")
-      return "Decimal (" + this._props.nominalValue + ")";
-    else return this._props.nominal;
+    if (this._props.nominal === "Decimal")
+      return `Decimal (${this._props.nominalValue})`;
+    return this._props.nominal;
   }
   get nominalValue(): string {
     return this._props.nominalValue;
@@ -101,7 +101,7 @@ export class Measurement extends Entity<IMeasurement> {
         parseFloat(this._props.nominalValue) + +this._props.upper >=
         parseFloat(this._props.result)
       ) {
-        return "ok";
+        return "ok".toUpperCase();
       } else {
         const count =
           parseFloat(this._props.result) -
@@ -119,7 +119,7 @@ export class Measurement extends Entity<IMeasurement> {
         parseFloat(this._props.nominalValue) + +this._props.lower <=
         parseFloat(this._props.result)
       ) {
-        return "ok";
+        return "ok".toUpperCase();
       } else {
         const count =
           parseFloat(this._props.result) -
@@ -147,7 +147,7 @@ export class Measurement extends Entity<IMeasurement> {
           parseInt(this._props.nominalValue) + +this._props.upper >=
           parseInt(this._props.saResult)
         ) {
-          return "ok";
+          return "ok".toLowerCase();
         } else {
           const count =
             parseInt(this._props.saResult) -
@@ -165,7 +165,7 @@ export class Measurement extends Entity<IMeasurement> {
           parseInt(this._props.nominalValue) + +this._props.saLower <=
           parseInt(this._props.saResult)
         ) {
-          return "ok";
+          return "ok".toUpperCase();
         } else {
           const count =
             parseInt(this._props.saResult) -
