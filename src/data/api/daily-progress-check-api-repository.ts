@@ -365,10 +365,18 @@ export class DailyProgressCheckApiRepository
     await api.put(`progress-check/${id}/3d/${cavityID}`, {
       measurements: data.map((item) => {
         return {
-          actual_result: item.result,
-          actual_result_judgment: item.judgement,
-          sa_result: item.saResult,
-          sa_result_judgement: item.saJudgement,
+          character: item?.character,
+          nominal_type: item?.nominal,
+          nominal_value: item?.nominalValue,
+          standard_upper: item?.upper,
+          standard_lower: item?.lower,
+          special_accept_upper: item?.saUpper,
+          special_accept_lower: item?.saLower,
+          tool_id: item?.tool?.id,
+          actual_result: item?.result,
+          actual_result_judgment: item?.judgement,
+          sa_result: item?.saResult,
+          sa_result_judgement: item?.saJudgement,
         };
       }),
     });

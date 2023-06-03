@@ -4,6 +4,7 @@ import { useDailyProgressCheckDetail } from "../daily-progress-check-detail/dail
 import { EditIcon } from "@common/components/icons/EditIcon";
 import { PenAltIcon, PenIcon } from "@common/components/icons";
 import { Comparisson } from "@domain/models/comparisson";
+import ModalNominal from "./ModalNominal";
 const SegmentTable = ({
   segment = Segment.create({
     id: "",
@@ -20,6 +21,7 @@ const SegmentTable = ({
 }) => {
   return (
     <>
+      <ModalNominal model={model} />
       <div
         key={key}
         className="first-line:m-auto border-2 border-gray-100 rounded-lg pb-6 mt-10 
@@ -185,25 +187,104 @@ const SegmentTable = ({
                 {segment?.pacSegments?.map((segment, i) => (
                   <tr key={segment.id}>
                     <td className="border bg-white text-center py-5">
-                      {segment.character}
+                      {model.onEditSegment ? (
+                        <input
+                          type="text"
+                          name="character"
+                          value={model.segments[ind].pacSegments[i].character}
+                          onChange={(e) => model.handleEditSegment(e, ind, i)}
+                          className="border border-gray-300 rounded-lg outline-none w-12 text-sm py-3 px-1.5"
+                        />
+                      ) : (
+                        segment.character
+                      )}
                     </td>
                     <td className="border bg-white text-center py-5">
-                      {segment.nominal}
+                      {model.onEditSegment ? (
+                        <button
+                          onClick={() => model.openModalNominal(ind, i)}
+                          className="w-1/2 px-3 py-2 text-white bg-cyan-400 rounded-md text-sm "
+                        >
+                          {" "}
+                          {segment.nominal == "Decimal"
+                            ? `${segment.nominal} (${segment.nominalValue})`
+                            : segment.nominal}
+                        </button>
+                      ) : segment.nominal == "Decimal" ? (
+                        `${segment.nominal} (${segment.nominalValue})`
+                      ) : (
+                        segment.nominal
+                      )}
                     </td>
                     <td className="border bg-white text-center py-5">
-                      {segment.upper}
+                      {model.onEditSegment ? (
+                        <input
+                          type="text"
+                          name="upper"
+                          value={model.segments[ind].pacSegments[i].upper}
+                          onChange={(e) => model.handleEditSegment(e, ind, i)}
+                          className="border border-gray-300 rounded-lg outline-none w-12 text-sm py-3 px-1.5"
+                        />
+                      ) : (
+                        segment.upper
+                      )}
                     </td>
                     <td className="border bg-white text-center py-5">
-                      {segment.lower}
+                      {model.onEditSegment ? (
+                        <input
+                          type="text"
+                          name="lower"
+                          value={model.segments[ind].pacSegments[i].lower}
+                          onChange={(e) => model.handleEditSegment(e, ind, i)}
+                          className="border border-gray-300 rounded-lg outline-none w-12 text-sm py-3 px-1.5"
+                        />
+                      ) : (
+                        segment.lower
+                      )}
                     </td>
                     <td className="border bg-white text-center py-5">
-                      {segment.saUpper}
+                      {model.onEditSegment ? (
+                        <input
+                          type="text"
+                          name="saUpper"
+                          value={model.segments[ind].pacSegments[i].saUpper}
+                          onChange={(e) => model.handleEditSegment(e, ind, i)}
+                          className="border border-gray-300 rounded-lg outline-none w-12 text-sm py-3 px-1.5"
+                        />
+                      ) : (
+                        segment.saUpper
+                      )}
                     </td>
                     <td className="border bg-white text-center py-5">
-                      {segment.saLower}
+                      {model.onEditSegment ? (
+                        <input
+                          type="text"
+                          name="saLower"
+                          value={model.segments[ind].pacSegments[i].saLower}
+                          onChange={(e) => model.handleEditSegment(e, ind, i)}
+                          className="border border-gray-300 rounded-lg outline-none w-12 text-sm py-3 px-1.5"
+                        />
+                      ) : (
+                        segment.saLower
+                      )}
                     </td>
                     <td className="border bg-white text-center py-5">
-                      {segment.tool?.name}
+                      {model?.onEditSegment ? (
+                        <select
+                          name="tool"
+                          value={model?.segments[ind]?.pacSegments[i]?.tool?.id}
+                          onChange={(e) => model.handleEditSegment(e, ind, i)}
+                          className="py-2 px-3 w-1/2 rounded-md outline-none bg-neutral-200 text-center"
+                        >
+                          {model.tool.map((item) => {
+                            return (
+                              <option value={item?.id}>{item?.name}</option>
+                            );
+                          })}
+                        </select>
+                      ) : (
+                        segment.tool?.name
+                      )}
                     </td>
                     <td className="border bg-white text-center py-5">
                       {model.onEditSegment ? (
@@ -241,6 +322,16 @@ const SegmentTable = ({
                 ))}
               </tbody>
             </table>
+            {model.onEditSegment && (
+              <div className="mt-4 flex justify-center">
+                <button
+                  onClick={(e) => model.addColumn(e, model.segments[ind].id)}
+                  className="py-2 px-4 border-2 border-blue-400 rounded-full text-2xl text-blue-400 hover:scale-75 duration-700"
+                >
+                  +
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

@@ -3,10 +3,12 @@ import { DailyProgressCheckApiRepository } from "@data/api/daily-progress-check-
 import { HistoryApiRepository } from "@data/api/history-api-repository";
 import { ReportApiRepository } from "@data/api/report-api-repository";
 import { Segment3dApiRepository } from "@data/api/segment-3d-api-repository";
+import { ToolApiRepository } from "@data/api/tool-api-repository";
 import { DailyProgressCheck } from "@domain/models/daily-progress-check";
 import { History } from "@domain/models/history";
 import { IMeasurement, Measurement } from "@domain/models/measurement";
 import { Segment } from "@domain/models/segment";
+import { Tool } from "@domain/models/tool";
 import { DailyProgressCheckRepository } from "@domain/repositories/daily-progress-check-repository";
 import { HistoryRepository } from "@domain/repositories/history-repository";
 import { Segment3dRepository } from "@domain/repositories/segment-3d-repository";
@@ -17,12 +19,23 @@ export function useDailyProgressCheckDetail() {
   const { id = "" } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
+  const toolRepo = new ToolApiRepository();
+  const [paramsModal, setParamsModal] = useState({
+    segmentIdx: 0,
+    measurementIdx: 0,
+  });
+  const [modalValue, setModalValue] = useState({
+    nominal: "",
+    nominalValue: "",
+  });
+  const [openModal, setOpenModal] = useState(false);
   const [location, setLocation] = useState(false);
   const [onEditSegment, setOnEditSegment] = useState<boolean>(false);
   const reportRepo = new ReportApiRepository();
   const historyRepo: HistoryRepository = new HistoryApiRepository();
   const dailyProgressCheckRepo = new DailyProgressCheckApiRepository();
   const segmentRepo: Segment3dRepository = new Segment3dApiRepository();
+  const [tool, setTool] = useState<Tool[]>([]);
   const [dailyProgressCheck, setDailyProgressCheck] =
     useState<DailyProgressCheck>(
       DailyProgressCheck.create({
@@ -209,13 +222,17 @@ export function useDailyProgressCheckDetail() {
   };
   const saveSegment = async (
     e: React.MouseEvent<HTMLButtonElement>,
-    cavityID
+    cavityID: string
   ) => {
     e.preventDefault();
-    const data: IMeasurement[] = segments
+    console.log(segments);
+    const data = segments
       .find((item) => item.id === cavityID)
-      .pacSegments.map((item) => item);
-    console.log(data);
+      .pacSegments.map((item: Measurement) => {
+        console.log(item);
+        return Measurement.create({ ...item.unmarshall() });
+      });
+
     await dailyProgressCheckRepo.updateCavity3D(id, cavityID, data);
     setOnEditSegment(false);
   };
@@ -230,7 +247,10 @@ export function useDailyProgressCheckDetail() {
         if (iSegment == i) {
           el.pacSegments.map((item, ex) => {
             if (iMeas === ex) {
-              item[e.target.name] = e.target.value;
+              if (e.target.name == "tool") {
+                const data = tool.find((item) => item.id === e.target.value);
+                item["tool"] = data;
+              } else item[e.target.name] = e.target.value;
             }
             return item;
           });
@@ -276,6 +296,107 @@ export function useDailyProgressCheckDetail() {
   const cancelConfirmModal = () => {
     setDeleteSegmentConfirmShow(!deleteSegmentConfirmShow);
   };
+
+  const addColumn = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    cavityId: string
+  ) => {
+    e.preventDefault();
+    setSegments((prev) => {
+      return prev.map((item: Segment) => {
+        const data = Segment.create({
+          ...item.unmarshall(),
+        });
+
+        data.pushNewPacSegment(
+          Measurement.create({
+            character: "",
+            nominal: "",
+            nominalValue: "",
+            upper: 0,
+            lower: 0,
+            saUpper: 0,
+            saLower: 0,
+            tool: null,
+            result: "",
+            judgement: "",
+            saResult: "",
+            saJudgement: "",
+            checked: false,
+          })
+        );
+
+        return data;
+      });
+    });
+  };
+
+  const openModalNominal = (segmentIdx: number, measurementIdx: number) => {
+    setParamsModal({
+      segmentIdx,
+      measurementIdx,
+    });
+    setOpenModal(true);
+  };
+
+  const cancelModalNominal = () => {
+    setParamsModal({
+      segmentIdx: 0,
+      measurementIdx: 0,
+    });
+    setModalValue({
+      nominal: "",
+      nominalValue: "",
+    });
+    setOpenModal(false);
+  };
+
+  const changeModalValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setModalValue((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
+  const saveModalNominal = () => {
+    setSegments((prev) => {
+      const data = prev.map((el, i) => {
+        if (paramsModal.segmentIdx == i) {
+          el.pacSegments.map((item, ex) => {
+            if (paramsModal.measurementIdx === ex) {
+              item["nominal"] = modalValue.nominal;
+              item["nominalValue"] = modalValue.nominalValue;
+            }
+            return item;
+          });
+        }
+        return el;
+      });
+
+      return data;
+    });
+
+    setModalValue({
+      nominal: "",
+      nominalValue: "",
+    });
+    setParamsModal({
+      segmentIdx: 0,
+      measurementIdx: 0,
+    });
+    setOpenModal(false);
+  };
+
+  useEffect(() => {
+    if (onEditSegment) {
+      toolRepo.getTools().then((result) => {
+        setTool(result);
+      });
+    }
+  }, [onEditSegment]);
+
   useEffect(() => {
     if (state) {
       setLocation(true);
@@ -296,12 +417,19 @@ export function useDailyProgressCheckDetail() {
     }
   }, [id, toogle]);
   return {
+    tool,
+    saveModalNominal,
+    changeModalValue,
+    paramsModal,
+    openModalNominal,
+    cancelModalNominal,
     state,
     dailyProgressCheck,
     segments,
     histories,
     toogle,
     confirmDeleteHistoryShow,
+    openModal,
     deleteComparisson,
     setConfirmDeleteHistoryShow,
     onDeleteHistory,
@@ -326,6 +454,8 @@ export function useDailyProgressCheckDetail() {
     uploadComparisson,
     cancelModelDelete,
     cancelConfirmModal,
+    addColumn,
+    modalValue,
   };
 }
 

@@ -1,8 +1,7 @@
-import { useInputMeasurementStd } from "../../input-form-measurement-std/input-form-measurement-std-model";
+import { useDailyProgressCheckDetail } from "../daily-progress-check-detail/daily-progress-check-detail-model";
 
-const ModalNominal = ({ model = useInputMeasurementStd() }) => {
-  console.log(model.tempSegment.nominal);
-  if (model.nominalModalShow) {
+const ModalNominal = ({ model = useDailyProgressCheckDetail() }) => {
+  if (model.openModal) {
     return (
       <>
         <div className="w-[40%] h-[50%] mx-auto flex flex-col overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[#FFFFFF] top-[32.5%] p-6 rounded-xl">
@@ -21,8 +20,8 @@ const ModalNominal = ({ model = useInputMeasurementStd() }) => {
               </label>
               <select
                 name="nominal"
-                value={model.tempSegment.nominal}
-                onChange={model.onNominalChange}
+                value={model.modalValue.nominal}
+                onChange={(e) => model.changeModalValue(e)}
                 className="w-[50%] py-3 px-5 border outline-none rounded-md bg-[#667085] border-[#667085] text-[#FFFFFF] font-[400]"
               >
                 <option value={""} disabled>
@@ -54,8 +53,8 @@ const ModalNominal = ({ model = useInputMeasurementStd() }) => {
               <input
                 type="text"
                 name="nominalValue"
-                value={model.tempSegment.nominalValue}
-                onChange={model.onNominalChange}
+                value={model.modalValue.nominalValue}
+                onChange={(e) => model.changeModalValue(e)}
                 placeholder={"Input nominal value"}
                 className="w-[50%] py-3 px-5 border border-gray-100 outline-none rounded-md font-[400] placeholder:text-[#B8B6B6]"
               />
@@ -65,14 +64,14 @@ const ModalNominal = ({ model = useInputMeasurementStd() }) => {
             <button
               className="bg-sky-standart border border-sky-standart w-full text-white active:bg-red-600 text-sm px-12 py-3 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
-              onClick={model.onSaveNominalChange}
+              onClick={model.saveModalNominal}
             >
               Save Data
             </button>
             <button
               className="w-full background-transparent text-[#514E4E] border border-[#B8B6B6] px-12 py-3 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 rounded-md"
               type="button"
-              onClick={model.onCancelNominalChange}
+              onClick={model.cancelModalNominal}
             >
               Cancel
             </button>

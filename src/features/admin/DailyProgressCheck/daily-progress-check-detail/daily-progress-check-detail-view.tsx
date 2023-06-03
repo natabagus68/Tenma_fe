@@ -7,6 +7,7 @@ import JudgementIcon from "../icon/JudgemnetIcon";
 import HistoryFormView from "../components/DateTable";
 import ModalDelete from "@common/components/Modal/ModalDelete";
 import { useDailyProgressCheckDetail } from "./daily-progress-check-detail-model";
+import { Segment } from "@domain/models/segment";
 
 const DailyProgressCheckDetailView = () => {
   const dailyProgressCheckDetail = useDailyProgressCheckDetail();
@@ -262,7 +263,7 @@ const DailyProgressCheckDetailView = () => {
       </div>
       {dailyProgressCheckDetail.toogle === "3d" && (
         <>
-          {dailyProgressCheckDetail.segments.map((item, i) => (
+          {dailyProgressCheckDetail.segments.map((item: Segment, i) => (
             <SegmentTable
               key={item.id}
               segment={item}
@@ -275,7 +276,7 @@ const DailyProgressCheckDetailView = () => {
       )}
       {dailyProgressCheckDetail.toogle === "2d" && (
         <>
-          {dailyProgressCheckDetail?.segments?.map((item, i) => (
+          {dailyProgressCheckDetail?.segments?.map((item: Segment, i) => (
             <SegmentTable
               key={item.id}
               segment={item}

@@ -66,29 +66,53 @@ export class Measurement extends Entity<IMeasurement> {
   get character(): string {
     return this._props.character;
   }
+  set character(value) {
+    this._props.character = value;
+  }
   get nominal(): string {
-    if (this._props.nominal === "Decimal")
-      return `Decimal (${this._props.nominalValue})`;
     return this._props.nominal;
+  }
+  set nominal(value) {
+    this._props.nominal = value;
   }
   get nominalValue(): string {
     return this._props.nominalValue;
   }
+  set nominalValue(value) {
+    this._props.nominalValue = value;
+  }
   get upper(): number {
     return this._props.upper;
+  }
+  set upper(value) {
+    this._props.upper = value;
   }
   get lower(): number {
     return this._props.lower;
   }
+  set lower(value) {
+    this._props.lower = value;
+  }
   get saUpper(): number {
     return this._props.saUpper;
+  }
+  set saUpper(value) {
+    this._props.saUpper = value;
   }
   get saLower(): number {
     return this._props.saLower;
   }
+  set saLower(value) {
+    this._props.saLower = value;
+  }
   get tool(): Tool | undefined {
     return this._props.tool ? Tool.create(this._props.tool) : undefined;
   }
+
+  set tool(value) {
+    this._props.tool = value
+  }
+
   get result(): string {
     return this._props.result;
   }

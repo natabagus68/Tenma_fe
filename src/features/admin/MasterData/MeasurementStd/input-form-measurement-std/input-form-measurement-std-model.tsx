@@ -162,6 +162,7 @@ export function useInputMeasurementStd() {
   const onNominalChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
+    console.log({ [e.target.name]: e.target.value });
     setTempSegment((prevState) => {
       const newState = prevState.duplicate();
       newState.update({
