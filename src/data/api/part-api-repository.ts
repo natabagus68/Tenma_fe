@@ -55,7 +55,7 @@ export class PartApiRepository implements PartRepository {
       itemGroupName: data?.item_group_name,
       customerModel: data?.customer_model?.name,
       customer: data?.customer?.name,
-      material: data?.material?.id,
+      material: data?.material?.detail,
       materialColor: data?.material?.color?.name,
       customerModelGroup: data?.customer_model_group?.name,
       unitCd: data?.unit_cd,
