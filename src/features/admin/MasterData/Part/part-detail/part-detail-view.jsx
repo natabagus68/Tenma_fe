@@ -36,9 +36,9 @@ const PartDetail = () => {
             <table className="w-1/2 ml-8 my-6">
               <tbody>
                 <tr className="bg-[#F0F1F3]">
-                  <td className="border-none p-4">Cust, Item CD</td>
+                  <td className="border-none p-4">Cust. Item CD</td>
                   <td className="border-none text-[#393737] font-[600]">
-                    {partDetail.part.customer}, {partDetail.part.custItemId}
+                    {partDetail.part.custItemId}
                   </td>
                 </tr>
                 <tr>
@@ -134,3 +134,4 @@ const PartDetail = () => {
 };
 
 export default PartDetail;
+
