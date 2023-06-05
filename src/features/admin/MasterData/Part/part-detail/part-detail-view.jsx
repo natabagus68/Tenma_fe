@@ -5,7 +5,7 @@ import { ArrowIcon } from "@common/components/icons/ArrowIcon";
 import { PartApiRepository } from "@data/api/part-api-repository";
 
 const PartDetail = () => {
-  const partDetail = usePartDetail(new PartApiRepository());
+  const partDetail = usePartDetail();
   return (
     <div className="text-[#514E4E] font-open-sans">
       <Breadcrumbs items={["Part", "Details"]} />

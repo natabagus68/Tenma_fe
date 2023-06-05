@@ -55,6 +55,32 @@ export class PartApiRepository implements PartRepository {
       itemGroupName: data?.item_group_name,
       customerModel: data?.customer_model?.name,
       customer: data?.customer?.name,
+      material: data?.material?.id,
+      materialColor: data?.material?.color?.name,
+      customerModelGroup: data?.customer_model_group?.name,
+      unitCd: data?.unit_cd,
+      materialDetails: data?.material?.detail,
+      productWeight: data?.product_weight || 0,
+      customerModelId: data?.customer_model_id,
+      customerId: data?.customer_id,
+      customerModelGroupId: data?.customer_model_group_id,
+    });
+  }
+
+  async showForDetail(id: string): Promise<Part> {
+    const {
+      data: { data = {} },
+    } = await api.get(`part/${id}`);
+    return Part.create({
+      id: data.id,
+      custItemId: data?.cust_item_cd,
+      partCode: data?.part_cd,
+      partName: data?.part_name,
+      oldPartNumber: data?.old_part_number,
+      itemGroupCode: data?.item_group_cd,
+      itemGroupName: data?.item_group_name,
+      customerModel: data?.customer_model?.name,
+      customer: data?.customer?.name,
       material: data?.material?.detail,
       materialColor: data?.material?.color?.name,
       customerModelGroup: data?.customer_model_group?.name,
@@ -66,6 +92,7 @@ export class PartApiRepository implements PartRepository {
       customerModelGroupId: data?.customer_model_group_id,
     });
   }
+
   async store(part: Part): Promise<Part> {
     const { data: { data } = {} } = await api.post(`part`, {
       cust_item_cd: part.custItemId,
