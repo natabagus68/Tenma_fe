@@ -17,13 +17,20 @@ const DailyProgessCheckView = () => {
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl">Daily Progress Check</h1>
           <div className="flex gap-4 w-1/2 items-center justify-end">
-            <button className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
+            <button
+              className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
               onClick={dailyProgressCheck.onAdd}
-            >+ Add Data</button>
+            >
+              + Add Data
+            </button>
             <div className="relative">
-              <input type="date" name="date"
+              <input
+                type="date"
+                name="date"
                 value={`${dailyProgressCheck.dailyProgressCheckGetPayload.date}`}
-                onChange={ dailyProgressCheck.onDailyProgressCheckGetPayloadChange }
+                onChange={
+                  dailyProgressCheck.onDailyProgressCheckGetPayloadChange
+                }
                 className="py-[12px] border rounded-[4px] px-10 outline-none border-[#D0D3D9]"
               />
             </div>
@@ -33,31 +40,50 @@ const DailyProgessCheckView = () => {
           <div className="flex gap-5">
             <div className="flex gap-3 items-center">
               <label className="text-sm">PIC</label>
-              <select name="pic"
+              <select
+                name="pic"
                 value={dailyProgressCheck.dailyProgressCheckGetPayload.pic}
-                onChange={ dailyProgressCheck.onDailyProgressCheckGetPayloadChange }
+                onChange={
+                  dailyProgressCheck.onDailyProgressCheckGetPayloadChange
+                }
                 className="w-[100px] py-2 px-3 bg-white outline-none border rounded-md border-[#D0D3D9] text-sm"
               >
                 <option value="">Semua</option>
                 {dailyProgressCheck.pic.map((item) => (
-                  <option value={item.name} key={item.id}>{item.name}</option>
+                  <option value={item.name} key={item.id}>
+                    {item.name}
+                  </option>
                 ))}
               </select>
             </div>
             <div className="flex gap-3 items-center">
               <label className="text-sm">Judgement</label>
-              <select name="judgement"
-                value={ dailyProgressCheck.dailyProgressCheckGetPayload.judgement }
-                onChange={ dailyProgressCheck.onDailyProgressCheckGetPayloadChange }
+              <select
+                name="judgement"
+                value={
+                  dailyProgressCheck.dailyProgressCheckGetPayload.judgement
+                }
+                onChange={
+                  dailyProgressCheck.onDailyProgressCheckGetPayloadChange
+                }
                 className="w-[150px] py-2 px-3 bg-white outline-none border rounded-md border-[#D0D3D9] text-sm"
               >
-                <option>Semua</option>
+                <option value={""}>Semua</option>
+                <option value={"Waiting"}>Waiting</option>
+                <option value={"OK"}>OK</option>
+                <option value={"NG"}>NG</option>
               </select>
             </div>
           </div>
           <div className="relative">
-            <SearchIcon color={"#D0D3D9"} className="absolute top-[32.5%] left-[5%]" />
-            <input type="text" name="search" placeholder="Search Part Code"
+            <SearchIcon
+              color={"#D0D3D9"}
+              className="absolute top-[32.5%] left-[5%]"
+            />
+            <input
+              type="text"
+              name="search"
+              placeholder="Search Part Code"
               value={dailyProgressCheck.dailyProgressCheckGetPayload.search}
               onChange={dailyProgressCheck.onDailyProgressCheckGetPayloadChange}
               className="outline-none text-sm border w-[210px] h-[46px] pl-8 rounded-[4px] border-[#D0D3D9] placeholder:text-sm"
@@ -81,25 +107,42 @@ const DailyProgessCheckView = () => {
             </thead>
             <tbody>
               {dailyProgressCheck.dailyProgressCheck.data.map((item, i) => (
-                <tr key={item.id} className="border-b border-[#D0D3D9] font-[400]">
-                  <td className="py-6 text-start pl-10 items-center">{moment(item.updatedAt).format("HH:mm")}</td>
-                  <td className="py-6 text-start pl-10 items-center">{item.partCode}</td>
-                  <td className="py-6 text-start pl-10 items-center">{item.model}</td>
-                  <td className="py-6 text-start pl-10 items-center">{item.shift}</td>
+                <tr
+                  key={item.id}
+                  className="border-b border-[#D0D3D9] font-[400]"
+                >
+                  <td className="py-6 text-start pl-10 items-center">
+                    {moment(item.updatedAt).format("HH:mm")}
+                  </td>
+                  <td className="py-6 text-start pl-10 items-center">
+                    {item.partCode}
+                  </td>
+                  <td className="py-6 text-start pl-10 items-center">
+                    {item.model}
+                  </td>
+                  <td className="py-6 text-start pl-10 items-center">
+                    {item.shift}
+                  </td>
                   <td className="py-6 text-start pl-10 items-center">
                     <DimantionIcon value={item.judgement3d} />
                   </td>
                   <td className="py-6 text-start pl-10 items-center ">
                     <DimantionIcon value={item.judgement2d} />
                   </td>
-                  <td className="py-6 text-start pl-10 items-center ">{item.pic.name}</td>
                   <td className="py-6 text-start pl-10 items-center ">
-                    <JudgemnetIcon value={item.judgement}
-                      changer={(e) => dailyProgressCheck.handleChangeJudgment(e, item.id, i) }
+                    {item.pic.name}
+                  </td>
+                  <td className="py-6 text-start pl-10 items-center ">
+                    <JudgemnetIcon
+                      value={item.judgement}
+                      changer={(e) =>
+                        dailyProgressCheck.handleChangeJudgment(e, item.id, i)
+                      }
                     />
                   </td>
                   <td className="py-6  pl-10 items-center flex gap-3 justify-start">
-                    <button onClick={(e) => dailyProgressCheck.onDetail(item)}
+                    <button
+                      onClick={(e) => dailyProgressCheck.onDetail(item)}
                       className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
                     >
                       <EyeIcon />

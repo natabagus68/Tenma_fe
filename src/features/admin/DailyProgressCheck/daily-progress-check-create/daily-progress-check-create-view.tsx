@@ -76,7 +76,7 @@ const DailyProgressCheckCreateView = () => {
             <div className="flex gap-4 mt-6">
               <button
                 type="submit"
-                className="rounded-[4px] bg-[#D0D3D9] text-[#B8B6B6] w-[180px] h-[46px] text-sm font-[600] "
+                className="rounded-[4px] bg-[#1BBDD4] text-white w-[180px] h-[46px] text-sm font-[600] "
               >
                 Save
               </button>

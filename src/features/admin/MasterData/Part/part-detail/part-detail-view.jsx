@@ -14,7 +14,8 @@ const PartDetail = () => {
           <div className="w-full py-6 border-b border-[#D0D3D9] px-8 flex justify-between items-center">
             <h1 className="font-[700] text-2xl">Details</h1>
             <div className="flex items-center gap-3">
-              <button className="py-[12px] px-[20px] border border-[#D0D3D9] text-center items-center rounded-md flex gap-2"
+              <button
+                className="py-[12px] px-[20px] border border-[#D0D3D9] text-center items-center rounded-md flex gap-2"
                 onClick={(e) => partDetail.onBack()}
               >
                 <ArrowIcon className="-rotate-90" color={"#667085"} />
@@ -36,31 +37,45 @@ const PartDetail = () => {
               <tbody>
                 <tr className="bg-[#F0F1F3]">
                   <td className="border-none p-4">Cust, Item CD</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.customer}, {partDetail.part.custItemId}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.customer}, {partDetail.part.custItemId}
+                  </td>
                 </tr>
                 <tr>
                   <td className=" border-none p-4">Part Code</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.partCode}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.partCode}
+                  </td>
                 </tr>
                 <tr className="bg-[#F0F1F3]">
                   <td className="border-none p-4">Part Name</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.partName}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.partName}
+                  </td>
                 </tr>
                 <tr>
                   <td className="border-none p-4">Item Group CD</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.itemGroupCode}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.itemGroupCode}
+                  </td>
                 </tr>
                 <tr className="bg-[#F0F1F3]">
                   <td className="border-none p-4">Item Group Name</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.itemGroupName}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.itemGroupName}
+                  </td>
                 </tr>
                 <tr>
                   <td className="border-none p-4">Old Part Number</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.oldPartNumber}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.oldPartNumber}
+                  </td>
                 </tr>
                 <tr className="bg-[#F0F1F3]">
                   <td className="border-none p-4">Customer Model</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.customerModel}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.customerModel}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -69,31 +84,45 @@ const PartDetail = () => {
               <tbody>
                 <tr className="bg-[#F0F1F3]">
                   <td className="border-none p-4">Customer</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.customer}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.customer}
+                  </td>
                 </tr>
                 <tr>
                   <td className="border-none p-4">Material</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.material}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.material}
+                  </td>
                 </tr>
                 <tr className="bg-[#F0F1F3]">
                   <td className="border-none p-4">Material Color</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.materialColor}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.materialColor}
+                  </td>
                 </tr>
                 <tr>
                   <td className="border-none p-4">Customer Model Group</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.customerModelGroup}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.customerModelGroup}
+                  </td>
                 </tr>
                 <tr className="bg-[#F0F1F3]">
                   <td className="border-none p-4">Unit CD</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.unitCd}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.unitCd}
+                  </td>
                 </tr>
                 <tr>
                   <td className="border-none p-4">Material Details</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.materialDetails}</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.materialDetails}
+                  </td>
                 </tr>
                 <tr className="bg-[#F0F1F3]">
                   <td className="border-none p-4">Product Weight</td>
-                  <td className="border-none text-[#393737] font-[600]">{partDetail.part.productWeight} gram</td>
+                  <td className="border-none text-[#393737] font-[600]">
+                    {partDetail.part.productWeight} gram
+                  </td>
                 </tr>
               </tbody>
             </table>

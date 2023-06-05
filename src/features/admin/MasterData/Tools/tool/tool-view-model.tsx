@@ -28,7 +28,7 @@ export default function useTool() {
     setDeleteConfirmShow(true);
     setTool((prevTool) => {
       const tool = PaginatedData.create<Tool>(prevTool.unmarshall());
-      tool.data.find((item) => item.id == id).check();
+      tool.data.find((item) => item.id === id).check();
       return tool;
     });
   };
@@ -44,6 +44,11 @@ export default function useTool() {
   };
 
   const cancelDelete = () => {
+    setTool((prevTool) => {
+      const tool = PaginatedData.create<Tool>(prevTool.unmarshall());
+      tool.data.find((item) => item.checked).uncheck();
+      return tool;
+    });
     setDeleteConfirmShow(!deleteConfirmShow);
   };
 
@@ -64,7 +69,7 @@ export default function useTool() {
     onPageChange,
     deleteConfirmShow,
     setDeleteConfirmShow,
-    cancelDelete
+    cancelDelete,
   };
 }
 

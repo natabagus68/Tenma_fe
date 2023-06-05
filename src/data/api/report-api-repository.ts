@@ -41,7 +41,7 @@ export class ReportApiRepository implements ReportRepository {
       data: (data.data || []).map((item) =>
         Report.create({
           id: item.id,
-          idCode: item.part?.report_transaction_id,
+          idCode: item.report_transaction_id,
           partName: item.part?.part_name,
           lastReport: item.created_at,
           pic: item.pic,
@@ -69,17 +69,17 @@ export class ReportApiRepository implements ReportRepository {
       lastPage: data.totalPage,
       data: (data.data || []).map((item) =>
         Report.create({
-          id: item.id,
+          id: item?.id,
           idCode: item?.report_transaction_id,
-          partName: item.part?.part_name,
-          lastReport: item.created_at,
-          pic: item.pic,
-          part: item.part,
+          partName: item?.part?.part_name,
+          lastReport: item?.created_at,
+          pic: item?.pic,
+          part: item?.part,
           checked: false,
-          judgement: item.judgement,
+          judgement: item?.judgement,
           machine: Machine.create({
-            noMachine: item.machine.no,
-            idMachine: item.machine.id,
+            noMachine: item?.machine?.no,
+            idMachine: item?.machine?.id,
             checked: false,
           }),
         })
