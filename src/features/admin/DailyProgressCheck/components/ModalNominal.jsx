@@ -29,14 +29,14 @@ const ModalNominal = ({ model = useDailyProgressCheckDetail() }) => {
                 </option>
                 {[
                   "Absolute (Good)",
-                  "ORR LESS",
-                  "ORR OVER",
+                  "OR LESS",
+                  "OR OVER",
                   "Decimal",
                   "Decimal with limit",
                   "Free text",
-                  "Free tex with limit",
-                  "Free text with ORR LESS",
-                  "Free text with ORR OVER",
+                  "Free text with limit",
+                  "Free text with OR LESS",
+                  "Free text with OR OVER",
                 ].map((item, i) => {
                   return (
                     <option value={item} key={i}>
