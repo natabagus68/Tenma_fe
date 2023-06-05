@@ -208,10 +208,12 @@ const PartFormView = () => {
                   Select material{" "}
                 </option>
                 {partForm.materials.map((item) => (
-                  <option value={item.id} key={item.id}>
-                    {" "}
-                    {item.name}{" "}
-                  </option>
+                  <>
+                    <option value={item.id} key={item.id}>
+                      {" "}
+                      {item.name}{" "}
+                    </option>
+                  </>
                 ))}
               </select>
             </div>
