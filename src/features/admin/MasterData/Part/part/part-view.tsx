@@ -32,10 +32,10 @@ const Part = () => {
           <table className="w-full">
             <thead className="bg-[#FAFAFB] border-y border-[#D0D3D9]">
               <tr className="text-left font-[600] text-sm">
-                <th className="py-[22px] pl-8">Cust. Item CD</th>
+                <th className="py-[22px] pl-8">Customer Model</th>
                 <th className="py-[22px] px-4">Part Code</th>
                 <th className="py-[22px] px-4">Part Name</th>
-                <th className="py-[22px] px-4 w-[20%]">OLD Part Number</th>
+                <th className="py-[22px] px-4 w-[20%]">Color</th>
                 <th className="py-[22px]">Action</th>
               </tr>
             </thead>
@@ -46,10 +46,10 @@ const Part = () => {
                     className="border-b border-[#D0D3D9] text-left font-[400]"
                     key={i}
                   >
-                    <td className="py-[12px] pl-8">{item.custItemId}</td>
+                    <td className="py-[12px] pl-8">{item.customerModel}</td>
                     <td className="py-[12px] px-4">{item.partCode}</td>
                     <td className="py-[12px] px-4">{item.partName}</td>
-                    <td className="py-[12px] px-4">{item.oldPartNumber}</td>
+                    <td className="py-[12px] px-4">{item.materialColor}</td>
                     <td className="py-[12px] pr-8 flex gap-3 items-center">
                       <button
                         className="h-[46px] px-4 bg-[#1BBDD4] items-center rounded-[4px] text-white flex gap-2 text-sm"
@@ -79,15 +79,13 @@ const Part = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end mt-6 px-8">
-            {part.part.data.length > 0 ? (
+            {part.part.data.length > 0 && (
               <Pagination
-                row={part.part.lastPage * part.part.limit}
-                limit={part.part.limit}
-                page={part.part.page}
-                onClick={(page = 1) => part.onPageChange(page)}
+                row={part.part.totalRow}
+                limit={part.params.limit}
+                page={part.params.page}
+                onClick={part.onPageChange}
               />
-            ) : (
-              ""
             )}
           </div>
         </div>

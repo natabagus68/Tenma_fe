@@ -72,12 +72,14 @@ export default function MeasurementStd() {
           </table>
         </div>
         <div className="w-full flex justify-end py-4 pr-8">
-          <Pagination
-            row={measurementStd.measurementStd.totalRow}
-            limit={measurementStd.measurementStd.limit}
-            page={measurementStd.measurementStd.page}
-            onClick={measurementStd.onPageChange}
-          />
+          {measurementStd.measurementStd.totalRow && (
+            <Pagination
+              row={measurementStd.measurementStd.totalRow}
+              limit={measurementStd.measurementStd.limit}
+              page={measurementStd.measurementStd.page}
+              onClick={measurementStd.onPageChange}
+            />
+          )}
         </div>
       </div>
       <ModalDelete

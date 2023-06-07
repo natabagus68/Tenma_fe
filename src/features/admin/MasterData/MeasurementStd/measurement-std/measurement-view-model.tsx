@@ -1,14 +1,23 @@
-import { IMeasurementStd, MeasurementStd, } from "@domain/models/measurement-std";
+import {
+  IMeasurementStd,
+  MeasurementStd,
+} from "@domain/models/measurement-std";
 import { MeasurementStdApiRepository } from "@data/api/measurement-std-api-repository";
 import { PaginatedData } from "@domain/models/paginated-data";
 import { config } from "@common/utils";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { TableParam } from "types";
 
 export default function useMeasurement() {
   const measurementStdRepository = new MeasurementStdApiRepository();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [params, setParams] = useState<TableParam>({
+    page: 0,
+    limit: 1,
+    q: "",
+  });
   const [measurementStd, setMeasurementStd] = useState<
     PaginatedData<MeasurementStd>
   >(
@@ -58,12 +67,12 @@ export default function useMeasurement() {
   const onCancel = () => {
     navigate(-1);
   };
-  const onPageChange = (page: number) => {
-    setMeasurementStd((prev) => {
-      const data = PaginatedData.create({ ...prev.unmarshall(), page });
-      return data;
-    });
-  };
+  // const onPageChange = (page: number) => {
+  //   setMeasurementStd((prev) => {
+  //     const data = PaginatedData.create({ ...prev.unmarshall(), page });
+  //     return data;
+  //   });
+  // };
   const onConfirmDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const data = measurementStd.data.find((item) => item.checked);
@@ -84,14 +93,27 @@ export default function useMeasurement() {
     setDeleteConfirmShow(!deleteConfirmShow);
   };
 
+  const onPageChange = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setParams((prev) => {
+      return {
+        ...prev,
+        page,
+      };
+    });
+  };
+
   useEffect(() => {
     measurementStdRepository
       .get({
-        limit: measurementStd.limit,
-        page: measurementStd.page,
+        limit: params.limit,
+        page: params.page,
       })
       .then((result) => setMeasurementStd(result));
-  }, []);
+  }, [params.page]);
 
   return {
     measurementStd,

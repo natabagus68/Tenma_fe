@@ -101,70 +101,77 @@ const DailyProgessCheckView = () => {
                 <th className="py-6 text-start pl-10">3D</th>
                 <th className="py-6 text-start pl-10">2D</th>
                 <th className="py-6 text-start pl-10">PIC</th>
+                <th className="py-6 text-start pl-10">Transaction ID</th>
                 <th className="py-6 text-start pl-10">Judgement</th>
                 <th className="py-6 text-start pl-10">Action</th>
               </tr>
             </thead>
             <tbody>
-              {dailyProgressCheck.dailyProgressCheck.data.map((item, i) => (
-                <tr
-                  key={item.id}
-                  className="border-b border-[#D0D3D9] font-[400]"
-                >
-                  <td className="py-6 text-start pl-10 items-center">
-                    {moment(item.updatedAt).format("HH:mm")}
-                  </td>
-                  <td className="py-6 text-start pl-10 items-center">
-                    {item.partCode}
-                  </td>
-                  <td className="py-6 text-start pl-10 items-center">
-                    {item.model}
-                  </td>
-                  <td className="py-6 text-start pl-10 items-center">
-                    {item.shift}
-                  </td>
-                  <td className="py-6 text-start pl-10 items-center">
-                    <DimantionIcon value={item.judgement3d} />
-                  </td>
-                  <td className="py-6 text-start pl-10 items-center ">
-                    <DimantionIcon value={item.judgement2d} />
-                  </td>
-                  <td className="py-6 text-start pl-10 items-center ">
-                    {item.pic.name}
-                  </td>
-                  <td className="py-6 text-start pl-10 items-center ">
-                    <JudgemnetIcon
-                      value={item.judgement}
-                      changer={(e) =>
-                        dailyProgressCheck.handleChangeJudgment(e, item.id, i)
-                      }
-                    />
-                  </td>
-                  <td className="py-6  pl-10 items-center flex gap-3 justify-start">
-                    <button
-                      onClick={(e) => dailyProgressCheck.onDetail(item)}
-                      className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
-                    >
-                      <EyeIcon />
-                      <span className="text-sm">Detail</span>
-                    </button>
-                    <button
-                      className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-md text-white flex gap-2"
-                      onClick={(e) => dailyProgressCheck.onEdit(item)}
-                    >
-                      <PenAltIcon />
-                      <span className="text-sm">Edit</span>
-                    </button>
-                    <button
-                      onClick={(e) => dailyProgressCheck.onDelete(item)}
-                      className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-md text-white flex gap-2"
-                    >
-                      <TrashIcon />
-                      <span className="text-sm">Delete</span>
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {dailyProgressCheck.dailyProgressCheck.data.map((item, i) => {
+                console.log(item.updatedAt);
+                return (
+                  <tr
+                    key={item.id}
+                    className="border-b border-[#D0D3D9] font-[400]"
+                  >
+                    <td className="py-6 text-start pl-10 items-center">
+                      {moment(item.updatedAt).format("HH:mm")}
+                    </td>
+                    <td className="py-6 text-start pl-10 items-center">
+                      {item.partCode}
+                    </td>
+                    <td className="py-6 text-start pl-10 items-center">
+                      {item.model}
+                    </td>
+                    <td className="py-6 text-start pl-10 items-center">
+                      {item.shift}
+                    </td>
+                    <td className="py-6 text-start pl-10 items-center">
+                      <DimantionIcon value={item.judgement3d} />
+                    </td>
+                    <td className="py-6 text-start pl-10 items-center ">
+                      <DimantionIcon value={item.judgement2d} />
+                    </td>
+                    <td className="py-6 text-start pl-10 items-center ">
+                      {item.pic.name}
+                    </td>
+                    <td className="py-6 text-start pl-10 items-center ">
+                      {item.transactionID}
+                    </td>
+                    <td className="py-6 text-start pl-10 items-center ">
+                      <JudgemnetIcon
+                        value={item.judgement}
+                        changer={(e) =>
+                          dailyProgressCheck.handleChangeJudgment(e, item.id, i)
+                        }
+                      />
+                    </td>
+                    <td className="py-6  pl-10 items-center flex gap-3 justify-start">
+                      <button
+                        onClick={(e) => dailyProgressCheck.onDetail(item)}
+                        className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-md text-white flex gap-2"
+                      >
+                        <EyeIcon />
+                        <span className="text-sm">Detail</span>
+                      </button>
+                      <button
+                        className="py-[12px] px-[20px] bg-[#F79009] items-center rounded-md text-white flex gap-2"
+                        onClick={(e) => dailyProgressCheck.onEdit(item)}
+                      >
+                        <PenAltIcon />
+                        <span className="text-sm">Edit</span>
+                      </button>
+                      <button
+                        onClick={(e) => dailyProgressCheck.onDelete(item)}
+                        className="py-[12px] px-[20px] bg-[#F04438] items-center rounded-md text-white flex gap-2"
+                      >
+                        <TrashIcon />
+                        <span className="text-sm">Delete</span>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <div className="flex items-center justify-end px-8 py-6">
@@ -189,3 +196,4 @@ const DailyProgessCheckView = () => {
 };
 
 export default DailyProgessCheckView;
+

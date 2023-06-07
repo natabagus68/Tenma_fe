@@ -34,6 +34,7 @@ export class PartApiRepository implements PartRepository {
           customerModelGroupId: item.customer_model_group?.id || "",
         })
       ),
+
       lastPage: data.totalPage,
       limit: tableParam.limit,
       page: tableParam.page,

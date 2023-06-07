@@ -113,6 +113,7 @@ export function useAddSegment2dModel() {
     }
   };
 
+
   const deleteTableUpdate = (
     e: React.MouseEvent<HTMLButtonElement>,
     index: number
@@ -140,6 +141,7 @@ export function useAddSegment2dModel() {
     onInputNameChange,
     onSave,
     deleteTableUpdate,
+
   };
 }
 

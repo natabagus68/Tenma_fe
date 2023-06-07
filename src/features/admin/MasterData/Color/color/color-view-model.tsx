@@ -5,11 +5,17 @@ import { PaginatedData } from "@domain/models/paginated-data";
 import { ColorRepository } from "@domain/repositories/color-repository";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { TableParam } from "types";
 
 export default function useColor() {
   const colorRepository: ColorRepository = new ColorApiRepository();
   const navigate = useNavigate();
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
+  const [params, setParams] = useState<TableParam>({
+    page: 0,
+    limit: 1,
+    q: "",
+  });
   const [color, setColor] = useState<PaginatedData<Color>>(
     PaginatedData.create<Color>({
       page: 0,
@@ -43,13 +49,16 @@ export default function useColor() {
       return color;
     });
   };
-  const onPageChange = (page: number) => {
-    setColor((prev) => {
-      const data = PaginatedData.create({
-        ...prev.unmarshall(),
-        page: page,
-      });
-      return data;
+  const onPageChange = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setParams((prev) => {
+      return {
+        ...prev,
+        page,
+      };
     });
   };
 
@@ -58,11 +67,11 @@ export default function useColor() {
   };
   useEffect(() => {
     colorRepository
-      .get({ limit: color.limit, page: color.page })
+      .get({ limit: params.limit, page: params.page })
       .then((result) => {
         return setColor(result);
       });
-  }, []);
+  }, [params.page]);
   return {
     color,
     onAdd,
@@ -72,7 +81,7 @@ export default function useColor() {
     onPageChange,
     deleteConfirmShow,
     setDeleteConfirmShow,
-    cancelDelete
+    cancelDelete,
   };
 }
 

@@ -29,6 +29,7 @@ export interface IDailyProgressCheck {
   checked: boolean;
   part?: IPart;
   checkedBy?: string;
+  transactionID?: string;
 }
 
 export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
@@ -62,6 +63,7 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
       part: this.part ? this.part.unmarshall() : undefined,
       checkedBy: this.checkedBy,
       actWeightPart: this.actWeightPart,
+      transactionID: this.transactionID,
     };
   }
   check(): DailyProgressCheck {
@@ -159,6 +161,9 @@ export class DailyProgressCheck extends Entity<IDailyProgressCheck> {
   }
   get actWeightPart(): number {
     return this._props.actWeightPart;
+  }
+  get transactionID(): string {
+    return this._props.transactionID;
   }
 }
 
