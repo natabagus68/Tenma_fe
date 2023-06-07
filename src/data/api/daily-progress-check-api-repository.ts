@@ -40,7 +40,7 @@ export class DailyProgressCheckApiRepository
           judgement: item?.judgement,
           judgement2d: item?.judgement_2d,
           judgement3d: item?.judgement_3d,
-          updatedAt: item?.updated_at,
+          updatedAt: item?.created_at,
           partCode: item?.part.part_cd,
           model: item?.part?.customer_model?.name || "-",
           shift: item?.shift,
@@ -57,6 +57,7 @@ export class DailyProgressCheckApiRepository
           actWeightPart: Number(item?.actual_part_weight),
           checked: false,
           checkedBy: item?.checked_by,
+          transactionID: item?.progress_transaction_id,
           pic: {
             checked: false,
             name: item?.pic || "-",

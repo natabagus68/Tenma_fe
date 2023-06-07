@@ -5,16 +5,23 @@ import { PaginatedData } from "@domain/models/paginated-data";
 import { ToolRepository } from "@domain/repositories/tool-repository";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { TableParam } from "types";
 
 export default function useTool() {
   const toolRepository: ToolRepository = new ToolApiRepository();
   const navigate = useNavigate();
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
+  const [params, setParams] = useState<TableParam>({
+    page: 0,
+    limit: 1,
+    q: "",
+  });
   const [tool, setTool] = useState<PaginatedData<Tool>>(
     PaginatedData.create<Tool>({
       page: 1,
-      limit: 9999,
+      limit: 1,
       lastPage: 0,
+      totalRow: 0,
       data: [],
     })
   );
@@ -52,14 +59,25 @@ export default function useTool() {
     setDeleteConfirmShow(!deleteConfirmShow);
   };
 
-  const onPageChange = (page: number) => {};
+  const onPageChange = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setParams((prev) => {
+      return {
+        ...prev,
+        page,
+      };
+    });
+  };
   useEffect(() => {
     toolRepository
-      .get({ limit: tool.limit, page: tool.page })
+      .get({ limit: params.limit, page: params.page })
       .then((result) => {
         return setTool(result);
       });
-  }, []);
+  }, [params.page]);
   return {
     tool,
     onAdd,

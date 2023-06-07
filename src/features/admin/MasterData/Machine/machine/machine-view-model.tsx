@@ -4,9 +4,15 @@ import { PaginatedData } from "@domain/models/paginated-data";
 import { MachineRepository } from "@domain/repositories/machine-repository";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { TableParam } from "types";
 export function useMachine() {
   const machineRepository: MachineRepository = new MachineApiRepository();
   const navigate = useNavigate();
+  const [params, setParams] = useState<TableParam>({
+    page: 0,
+    limit: 1,
+    q: "",
+  });
   const [machine, setMachine] = useState<PaginatedData<Machine>>(
     PaginatedData.create<Machine>({
       page: 1,
@@ -46,11 +52,16 @@ export function useMachine() {
       return machine;
     });
   };
-  const onPageChange = (page: number) => {
-    setMachine((prevMachine) => {
-      const machine = prevMachine.duplicate();
-      machine.page = page;
-      return machine;
+  const onPageChange = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setParams((prev) => {
+      return {
+        ...prev,
+        page,
+      };
     });
   };
   const cancelDelete = () => {
@@ -58,9 +69,9 @@ export function useMachine() {
   };
   useEffect(() => {
     machineRepository
-      .get({ limit: 10, page: machine.page })
+      .get({ limit: params.limit, page: params.page })
       .then((result) => setMachine(result));
-  }, [machine.page]);
+  }, [params.page]);
   return {
     machine,
     onAdd,
@@ -70,7 +81,7 @@ export function useMachine() {
     setDeleteConfirmShow,
     onPageChange,
     onConfirmDelete,
-    cancelDelete
+    cancelDelete,
   };
 }
 

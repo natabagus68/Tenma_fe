@@ -47,12 +47,14 @@ const CustomerModelGroup = () => {
         </tbody>
       </table>
       <div className="flex items-center justify-end mt-4 px-5">
-        <Pagination
-          row={cmg.customerModelGroup.totalRow}
-          limit={cmg.customerModelGroup.limi}
-          page={cmg.customerModelGroup.page}
-          onClick={cmg.onPageChange}
-        />
+        {cmg.customerModelGroup.totalRow && (
+          <Pagination
+            row={cmg.customerModelGroup.totalRow}
+            limit={cmg.customerModelGroup.limit}
+            page={cmg.customerModelGroup.page}
+            onClick={cmg.onPageChange}
+          />
+        )}
       </div>
     </div>
   );

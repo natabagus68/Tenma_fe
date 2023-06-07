@@ -238,7 +238,7 @@ export function useDailyProgressCheckDetail() {
   };
 
   const handleEditSegment = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     iSegment: number,
     iMeas: number
   ) => {

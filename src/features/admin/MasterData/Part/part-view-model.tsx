@@ -4,15 +4,22 @@ import { IPart, Part } from "@domain/models/part";
 import { PartRepository } from "@domain/repositories/part-repository";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { TableParam } from "types";
 
 export function usePart(partRepository: PartRepository) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
+  const [params, setParams] = useState<TableParam>({
+    page: 0,
+    limit: 1,
+    q: "",
+  });
   const navigate = useNavigate();
   const partRef = useRef<PaginatedData<Part>>(
     PaginatedData.create<Part>({
       data: [],
       lastPage: 1,
+      totalRow: 0,
       limit: Number(searchParams.get("limit")) || 10,
       page: Number(searchParams.get("page")) || 1,
       q: searchParams.get("q") || "",
@@ -37,9 +44,7 @@ export function usePart(partRepository: PartRepository) {
     setPart(partRef.current.unmarshall());
     setDeleteConfirmShow(true);
   };
-  const onPageChange = (page: number) => {
-    console.log(page);
-  };
+
   const onConfirmDelete = () => {
     setDeleteConfirmShow(false);
     partRepository
@@ -50,7 +55,7 @@ export function usePart(partRepository: PartRepository) {
   };
   const loadPart = () => {
     partRepository
-      .get({ limit: part.limit, page: part.page, q: part.q })
+      .get({ limit: params.limit, page: params.page, q: params.q })
       .then((result) => {
         partRef.current = result;
         setPart(partRef.current.unmarshall());
@@ -61,17 +66,30 @@ export function usePart(partRepository: PartRepository) {
     setDeleteConfirmShow(!deleteConfirmShow);
   };
 
-  useEffect(() => {
-    setSearchParams({
-      q: part.q,
-      page: `${part.page}`,
-      limit: `${part.limit}`,
+  const onPageChange = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setParams((prev) => {
+      return {
+        ...prev,
+        page,
+      };
     });
-  }, [part]);
+  };
+  // useEffect(() => {
+  //   setSearchParams({
+  //     q: part.q,
+  //     page: `${part.page}`,
+  //     limit: `${part.limit}`,
+  //   });
+  // }, [part.page]);
   useEffect(() => {
     loadPart();
-  }, []);
+  }, [params.page]);
   return {
+    params,
     part,
     onAddData,
     onDetail,

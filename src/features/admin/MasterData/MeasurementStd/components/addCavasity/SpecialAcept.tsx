@@ -7,7 +7,7 @@ const SpecialAcept = ({ model = useInputMeasurementStd() }) => {
   return (
     <>
       <ModalNominal model={model} />
-      <div className="m-auto w-full border border-[#D0D3D9] rounded-md mt-4 font-open-sans">
+      <div className="m-auto w-full border border-[#D0D3D9] rounded-md mt-4 font-open-sans overflow-x-scroll">
         <div className="py-[18px] px-8 flex justify-between items-center border-b border-[#D0D3D9]">
           <h1 className="font-[700] text-2xl">Segment</h1>
         </div>
@@ -58,13 +58,13 @@ const SpecialAcept = ({ model = useInputMeasurementStd() }) => {
             <tbody>
               {model.measurementStd.segments.map((item, ind) => (
                 <tr>
-                  <td className="py-4 border border-[#D0D3D9] text-center text-sm">
+                  <td className="py-4 border border-[#D0D3D9] text-center text-sm px-4">
                     <input
                       type="text"
                       name="character"
                       value={item.character}
                       onChange={(e) => model.onSegmentChange(e, ind)}
-                      className="px-2 py-2 m-0 border border-[#D0D3D9] rounded-md outline-none w-[50%]"
+                      className="px-2 py-2 m-0 border border-[#D0D3D9] rounded-md outline-none"
                     />
                   </td>
                   <td className="py-4 px-4 border border-[#D0D3D9] text-center text-sm">
@@ -74,54 +74,54 @@ const SpecialAcept = ({ model = useInputMeasurementStd() }) => {
                       onClick={(e) => model.onShowNominalModal(e, item)}
                       className="bg-sky-standart text-center w-[200px] py-3 rounded-md text-[#FFFFFF] text-sm"
                     >
-                      {item.nominal === "Decimal"
+                      {Number(item.nominalValue)
                         ? item.nominal + ` (${item.nominalValue})`
-                        : item.nominal || (
+                        : item.nominalValue || (
                             <span className="block">Choose Nominal</span>
                           )}
                     </button>
                   </td>
-                  <td className="py-4 border border-[#D0D3D9] text-center text-sm">
+                  <td className="py-4 border border-[#D0D3D9] text-center text-sm px-4">
                     <input
                       type="number"
                       step="0.0001"
                       name="upper"
                       value={item.upper}
                       onChange={(e) => model.onSegmentChange(e, ind)}
-                      className="px-2 py-2 m-0 border border-[#D0D3D9] rounded-md outline-none w-[50%]"
+                      className="px-2 py-2 m-0 border border-[#D0D3D9] rounded-md outline-none"
                     />
                   </td>
-                  <td className="py-4 border border-[#D0D3D9] text-center text-sm">
+                  <td className="py-4 border border-[#D0D3D9] text-center text-sm px-4">
                     <input
                       type="number"
                       step="0.0001"
                       name="lower"
                       value={item.lower}
                       onChange={(e) => model.onSegmentChange(e, ind)}
-                      className="px-2 py-2 m-0 border border-[#D0D3D9] rounded-md outline-none w-[50%]"
+                      className="px-2 py-2 m-0 border border-[#D0D3D9] rounded-md outline-none"
                     />
                   </td>
-                  <td className="py-4 border border-[#D0D3D9] text-center text-sm">
+                  <td className="py-4 border border-[#D0D3D9] text-center text-sm px-4">
                     <input
                       type="number"
                       step="0.0001"
                       name="saUpper"
                       value={item.saUpper}
                       onChange={(e) => model.onSegmentChange(e, ind)}
-                      className="px-2 py-2 m-0 border border-[#D0D39D] rounded-md outline-none w-[50%]"
+                      className="px-2 py-2 m-0 border border-[#D0D39D] rounded-md outline-none"
                     />
                   </td>
-                  <td className="py-4 border border-[#D0D3D9] text-center text-sm">
+                  <td className="py-4 border border-[#D0D3D9] text-center text-sm px-4">
                     <input
                       type="number"
                       step="0.0001"
                       name="saLower"
                       value={item.saLower}
                       onChange={(e) => model.onSegmentChange(e, ind)}
-                      className="px-2 py-2 m-0 border border-[#D0D3D9] rounded-md outline-none w-[50%]"
+                      className="px-2 py-2 m-0 border border-[#D0D3D9] rounded-md outline-none"
                     />
                   </td>
-                  <td className="px-4 border-b border-[#D0D3D9] text-center text-sm">
+                  <td className="px-4 border-b border-[#D0D3D9] text-center text-sm ">
                     <select
                       name="tool"
                       value={item.tool?.id}
@@ -151,6 +151,7 @@ const SpecialAcept = ({ model = useInputMeasurementStd() }) => {
         </form>
         {/* button plus for add new row */}
         <div
+          typeof="button"
           onClick={model.onAddSegment}
           className="flex items-center justify-center gap-2 py-4"
         >

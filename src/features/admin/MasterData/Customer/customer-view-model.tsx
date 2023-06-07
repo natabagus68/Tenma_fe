@@ -5,12 +5,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomerApiRepository } from "@data/api/customer-api-repository";
 import { CustomerRepository } from "@domain/repositories/customer-repository";
+import { TableParam } from "types";
 
 export default function () {
   const [id, setId] = useState<string>("");
   const customerRepository: CustomerRepository = new CustomerApiRepository();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [params, setParams] = useState<TableParam>({
+    page: 0,
+    limit: 1,
+    q: "",
+  });
   const [customer, setCustomer] = useState<PaginatedData<Customer>>(
     PaginatedData.create<Customer>({
       page: 0,
@@ -64,13 +70,16 @@ export default function () {
     setId("");
     setShowModal(!showModal);
   };
-  const onPageChange = (page: number) => {
-    setCustomer((prev) => {
-      const data = PaginatedData.create({
-        ...prev.unmarshall(),
+  const onPageChange = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setParams((prev) => {
+      return {
+        ...prev,
         page,
-      });
-      return data;
+      };
     });
   };
   const cancelDelete = () => {
@@ -78,11 +87,11 @@ export default function () {
   };
   useEffect(() => {
     customerRepository
-      .get({ limit: customer.limit, page: customer.page })
+      .get({ limit: params.limit, page: params.page })
       .then((result) => {
         return setCustomer(result);
       });
-  }, [customer]);
+  }, [params.page]);
 
   return {
     id,

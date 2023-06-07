@@ -49,16 +49,16 @@ export const SideBar = () => {
           label={`Master Data`}
           icon={<CubeIcon className="mr-3 -mb-1" />}
         >
+          <NavItem to={"master-data/customer"} label={"Customer"} />
+          <NavItem to={"master-data/machine"} label={"Machine"} />
+          <NavItem to={"master-data/tool"} label={"Tools"} />
+          <NavItem to={"master-data/color"} label={"Color"} />
+          <NavItem to={"master-data/material"} label={"Material"} />
+          <NavItem to={"master-data/part"} label={"Part"} />
           <NavItem
             to={"master-data/measurement-std"}
             label={"Measurement Std"}
           />
-          <NavItem to={"master-data/part"} label={"Part"} />
-          <NavItem to={"master-data/customer"} label={"Customer"} />
-          <NavItem to={"master-data/machine"} label={"Machine"} />
-          <NavItem to={"master-data/tool"} label={"Tools"} />
-          <NavItem to={"master-data/material"} label={"Material"} />
-          <NavItem to={"master-data/color"} label={"Color"} />
         </NavItem>
         <NavItem
           label={`User`}

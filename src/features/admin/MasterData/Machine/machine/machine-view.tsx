@@ -72,12 +72,14 @@ const Machine = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end px-8 py-6">
-            <Pagination
-              row={machine.machine.totalRow}
-              limit={machine.machine.limit}
-              page={machine.machine.page}
-              onClick={machine.onPageChange}
-            />
+            {machine.machine.totalRow > 0 && (
+              <Pagination
+                row={machine.machine.totalRow}
+                limit={machine.machine.limit}
+                page={machine.machine.page}
+                onClick={machine.onPageChange}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -4,91 +4,100 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CustomerModelGroup } from "@domain/models/customer-model-group";
 import { CustomerModelGroupApiRepository } from "@data/api/customer-model-group-api-repository";
+import { TableParam } from "types";
 
 export default function useCustomerMOdelGroup() {
-    const navigate = useNavigate();
-    const [showModal, setShowModal] = useState(false);
-    const customerModelGroupRepository = new CustomerModelGroupApiRepository();
-    const [customerModelGroup, setCustomerModelGroup] = useState<
-        PaginatedData<CustomerModelGroup>
-    >(
-        PaginatedData.create<CustomerModelGroup>({
-            page: 0,
-            limit: 0,
-            lastPage: 0,
-            totalRow: 0,
-            data: [],
-        })
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const customerModelGroupRepository = new CustomerModelGroupApiRepository();
+  const [params, setParams] = useState<TableParam>({
+    page: 0,
+    limit: 1,
+    q: "",
+  });
+  const [customerModelGroup, setCustomerModelGroup] = useState<
+    PaginatedData<CustomerModelGroup>
+  >(
+    PaginatedData.create<CustomerModelGroup>({
+      page: 0,
+      limit: 1,
+      lastPage: 0,
+      totalRow: 0,
+      data: [],
+    })
+  );
+
+  const openModal = (id: string) => {
+    setCustomerModelGroup((prev) => {
+      const cmg = PaginatedData.create<CustomerModelGroup>(prev.unmarshall());
+      cmg.data.forEach((item) => {
+        if (item.id === id) {
+          item.check();
+        } else {
+          item.uncheck();
+        }
+        return item;
+      });
+      return cmg;
+    });
+    setShowModal(true);
+  };
+
+  const toAdd = () => {
+    navigate(`${config.pathPrefix}master-data/customer/add-data-c3`);
+  };
+
+  const toEdit = (id: string) => {
+    navigate(
+      `${config.pathPrefix}master-data/customer/${id}/edit-customer-model-group`
     );
-
-    const openModal = (id: string) => {
-        setCustomerModelGroup((prev) => {
-            const cmg = PaginatedData.create<CustomerModelGroup>(
-                prev.unmarshall()
-            );
-            cmg.data.forEach((item) => {
-                if (item.id === id) {
-                    item.check();
-                } else {
-                    item.uncheck();
-                }
-                return item;
-            });
-            return cmg;
-        });
-        setShowModal(true);
-    };
-
-    const toAdd = () => {
-        navigate(`${config.pathPrefix}master-data/customer/add-data-c3`);
-    };
-
-    const toEdit = (id: string) => {
-        navigate(
-            `${config.pathPrefix}master-data/customer/${id}/edit-customer-model-group`
-        );
-    };
-    const onConfirm = async (e: React.MouseEvent) => {
-        e.preventDefault();
-        const id = customerModelGroup.data.find((item) => item.checked).id;
-        console.log(id);
-        await customerModelGroupRepository.destroy(id);
-        setShowModal(false);
-        setCustomerModelGroup((prev) => {
-            const cust = PaginatedData.create<CustomerModelGroup>(
-                prev.unmarshall()
-            );
-            cust.data = cust.data.filter((item) => !item.checked);
-            return cust;
-        });
-    };
-    const onPageChange = (page: number) => {
-        setCustomerModelGroup((prev) => {
-            const data = PaginatedData.create({ ...prev.unmarshall(), page });
-            return data;
-        });
-    };
-    const cancelDelete = () => {
-        setShowModal(!showModal);
+  };
+  const onConfirm = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    const id = customerModelGroup.data.find((item) => item.checked).id;
+    console.log(id);
+    await customerModelGroupRepository.destroy(id);
+    setShowModal(false);
+    setCustomerModelGroup((prev) => {
+      const cust = PaginatedData.create<CustomerModelGroup>(prev.unmarshall());
+      cust.data = cust.data.filter((item) => !item.checked);
+      return cust;
+    });
+  };
+  const onPageChange = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setParams((item) => {
+      return {
+        ...item,
+        page: page,
       };
-    useEffect(() => {
-        customerModelGroupRepository
-            .get({
-                limit: customerModelGroup.limit,
-                page: customerModelGroup.page,
-            })
-            .then((result) => setCustomerModelGroup(result));
-    }, []);
+    });
+  };
+  const cancelDelete = () => {
+    setShowModal(!showModal);
+  };
+  useEffect(() => {
+    customerModelGroupRepository
+      .get({
+        limit: params.limit,
+        page: params.page,
+      })
+      .then((result) => setCustomerModelGroup(result));
+  }, [params.page]);
 
-    return {
-        toAdd,
-        toEdit,
-        customerModelGroup,
-        openModal,
-        showModal,
-        setShowModal,
-        onConfirm,
-        onPageChange,
-        cancelDelete
-    };
+  return {
+    toAdd,
+    toEdit,
+    customerModelGroup,
+    openModal,
+    showModal,
+    setShowModal,
+    onConfirm,
+    onPageChange,
+    cancelDelete,
+  };
 }
+

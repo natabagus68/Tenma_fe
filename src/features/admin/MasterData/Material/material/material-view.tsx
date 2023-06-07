@@ -67,12 +67,14 @@ const MaterialView = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end px-8 py-6">
-            <Pagination
-              row={material.material.totalRow}
-              limit={material.material.limit}
-              page={material.material.page}
-              onClick={material.onPageChange}
-            />
+            {material.material.totalRow && (
+              <Pagination
+                row={material.material.totalRow}
+                limit={material.material.limit}
+                page={material.material.page}
+                onClick={material.onPageChange}
+              />
+            )}
           </div>
         </div>
       </div>

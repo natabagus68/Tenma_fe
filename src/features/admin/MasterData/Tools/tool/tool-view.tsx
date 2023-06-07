@@ -32,7 +32,10 @@ const ToolView = () => {
             </thead>
             <tbody>
               {tool.tool.data.map((item) => (
-              <tr key={item.id} className="border-b border-[#D0D3D9] text-[#514E4E]">
+                <tr
+                  key={item.id}
+                  className="border-b border-[#D0D3D9] text-[#514E4E]"
+                >
                   <td className="px-8">{item.idTool}</td>
                   <td className="px-8">{item.toolCode}</td>
                   <td className="px-8">{item.name}</td>
@@ -58,7 +61,14 @@ const ToolView = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end px-8 py-6">
-            <Pagination row={1} limit={10} page={undefined} />
+            {tool.tool.totalRow && (
+              <Pagination
+                row={tool.tool.totalRow}
+                limit={tool.tool.limit}
+                page={tool.tool.page}
+                onClick={tool.onPageChange}
+              />
+            )}
           </div>
         </div>
       </div>

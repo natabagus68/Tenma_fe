@@ -48,12 +48,14 @@ const Customer = () => {
         </tbody>
       </table>
       <div className="flex items-center justify-end mt-4 px-5">
-        <Pagination
-          row={customer.customer.totalRow}
-          limit={customer.customer.limit}
-          page={customer.customer.page}
-          onClick={customer.onPageChange}
-        />
+        {customer.customer.totalRow && (
+          <Pagination
+            row={customer.customer.totalRow}
+            limit={customer.customer.limit}
+            page={customer.customer.page}
+            onClick={customer.onPageChange}
+          />
+        )}
       </div>
     </div>
   );

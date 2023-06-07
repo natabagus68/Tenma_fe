@@ -206,11 +206,11 @@ const SegmentTable = ({
                           className="w-1/2 px-3 py-2 text-white bg-cyan-400 rounded-md text-sm "
                         >
                           {" "}
-                          {segment.nominal == "Decimal"
+                          {!isNaN(parseInt(segment.nominalValue))
                             ? `${segment.nominal} (${segment.nominalValue})`
                             : segment.nominal}
                         </button>
-                      ) : segment.nominal == "Decimal" ? (
+                      ) : !isNaN(parseInt(segment.nominalValue)) ? (
                         `${segment.nominal} (${segment.nominalValue})`
                       ) : (
                         segment.nominal

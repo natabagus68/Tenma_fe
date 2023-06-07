@@ -33,6 +33,7 @@ const CreateSegmentView = () => {
                 </option>
                 {model.tools.map((item) => (
                   <option value={item.id} key={item.id}>
+                    {item.name + " - "}
                     {item.toolCode}
                   </option>
                 ))}
@@ -101,3 +102,4 @@ const CreateSegmentView = () => {
 };
 
 export default CreateSegmentView;
+

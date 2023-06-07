@@ -11,9 +11,7 @@ const Color = () => {
       <Breadcrumbs items={["Color"]} />
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md pb-6 ">
         <div className="w-full py-5 px-9 flex justify-between items-center">
-          <h1 className="font-[700] text-2xl">
-            Color
-          </h1>
+          <h1 className="font-[700] text-2xl">Color</h1>
           <button
             className="py-[12px] px-[20px] text-[#FFFFFF] bg-[#667085] align-middle rounded-[4px] text-sm"
             onClick={(e) => color.onAdd()}
@@ -67,12 +65,14 @@ const Color = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end mt-4 px-5">
-            <Pagination
-              row={color.color.totalRow}
-              limit={color.color.limit}
-              page={color.color.page}
-              onClick={color.onPageChange}
-            />
+            {color.color.totalRow && (
+              <Pagination
+                row={color.color.totalRow}
+                limit={color.color.limit}
+                page={color.color.page}
+                onClick={color.onPageChange}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -87,3 +87,4 @@ const Color = () => {
 };
 
 export default Color;
+
