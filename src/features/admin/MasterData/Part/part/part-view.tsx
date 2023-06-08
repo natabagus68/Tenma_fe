@@ -19,14 +19,23 @@ const Part = () => {
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md pb-6">
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl text-[#514E4E] font-sans">Part</h1>
-          <button
-            type="button"
-            role="button"
-            className="py-[12px] px-[20px] text-white align-middle rounded-md bg-[#667085] text-sm"
-            onClick={(e) => part.onAddData()}
-          >
-            + Add Data
-          </button>
+          <div className="flex gap-3 items-center">
+            <button
+              type="button"
+              role="button"
+              className="py-[12px] px-[20px] text-white align-middle rounded-md bg-[#667085] text-sm"
+              onClick={(e) => part.onAddData()}
+            >
+              + Add Data
+            </button>
+            {/* <input
+              type="text"
+              value={part.params.q}
+              onChange={part.handelSearch}
+              placeholder="Search"
+              className="border border-gray-300 rounded-md py-2 px-3 outline-none text-gray-700"
+            /> */}
+          </div>
         </div>
         <div>
           <table className="w-full">

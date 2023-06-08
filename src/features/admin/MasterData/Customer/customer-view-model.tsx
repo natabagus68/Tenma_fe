@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { CustomerApiRepository } from "@data/api/customer-api-repository";
 import { CustomerRepository } from "@domain/repositories/customer-repository";
 import { TableParam } from "types";
-
+import { useContext } from "react";
+import CustContex from "./layout-customer-contex";
 export default function () {
+  const { search } = useContext(CustContex);
   const [id, setId] = useState<string>("");
   const customerRepository: CustomerRepository = new CustomerApiRepository();
   const navigate = useNavigate();
@@ -87,11 +89,11 @@ export default function () {
   };
   useEffect(() => {
     customerRepository
-      .get({ limit: params.limit, page: params.page })
+      .get({ limit: params.limit, page: params.page, q: search })
       .then((result) => {
         return setCustomer(result);
       });
-  }, [params.page]);
+  }, [params.page, search]);
 
   return {
     id,

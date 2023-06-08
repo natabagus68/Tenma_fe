@@ -12,6 +12,7 @@ export class CustomerModelGroupApiRepository
       params: {
         page: param.page,
         limit: param.limit,
+        search: param.q,
       },
     });
     return PaginatedData.create<CustomerModelGroup>({

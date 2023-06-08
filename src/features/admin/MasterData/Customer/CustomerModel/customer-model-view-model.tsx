@@ -5,7 +5,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomerModelApiRepository } from "@data/api/customer-model-api-repository";
 import { TableParam } from "types";
+import { useContext } from "react";
+import CustContex from "../layout-customer-contex";
 export default function useCustomerModel() {
+  const { search } = useContext(CustContex);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const customerModelRepository = new CustomerModelApiRepository();
@@ -76,9 +79,9 @@ export default function useCustomerModel() {
   };
   useEffect(() => {
     customerModelRepository
-      .get({ limit: params.limit, page: params.page })
+      .get({ limit: params.limit, page: params.page, q: search })
       .then((result) => setCustomerModel(result));
-  }, [params.page]);
+  }, [params.page, search]);
 
   return {
     customerModel,

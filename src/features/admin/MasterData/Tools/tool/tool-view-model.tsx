@@ -71,14 +71,23 @@ export default function useTool() {
       };
     });
   };
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setParams((prev) => {
+      return {
+        ...prev,
+        q: e.target.value,
+      };
+    });
+  };
   useEffect(() => {
     toolRepository
-      .get({ limit: params.limit, page: params.page })
+      .get({ limit: params.limit, page: params.page, q: params.q })
       .then((result) => {
         return setTool(result);
       });
-  }, [params.page]);
+  }, [params.page, params.q]);
   return {
+    params,
     tool,
     onAdd,
     onEdit,
@@ -88,6 +97,7 @@ export default function useTool() {
     deleteConfirmShow,
     setDeleteConfirmShow,
     cancelDelete,
+    handleSearch,
   };
 }
 

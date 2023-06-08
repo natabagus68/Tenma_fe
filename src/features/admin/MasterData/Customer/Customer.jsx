@@ -45,7 +45,7 @@ const Customer = () => {
               </td>
             </tr>
           ))}
-        </tbody>
+        </tbody>  
       </table>
       <div className="flex items-center justify-end mt-4 px-5">
         {customer.customer.totalRow && (

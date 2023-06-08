@@ -9,7 +9,11 @@ export class PartApiRepository implements PartRepository {
     const {
       data: { data = [] },
     } = await api.get("part", {
-      params: tableParam,
+      params: {
+        page: tableParam.page,
+        limit: tableParam.limit,
+        search: tableParam.q,
+      },
     });
     return PaginatedData.create<Part>({
       data: data.map((item) =>
