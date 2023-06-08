@@ -78,6 +78,14 @@ export function usePart(partRepository: PartRepository) {
       };
     });
   };
+  const handelSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setParams((prev) => {
+      return {
+        ...prev,
+        q: e.target.value,
+      };
+    });
+  };
   // useEffect(() => {
   //   setSearchParams({
   //     q: part.q,
@@ -87,7 +95,7 @@ export function usePart(partRepository: PartRepository) {
   // }, [part.page]);
   useEffect(() => {
     loadPart();
-  }, [params.page]);
+  }, [params.page, params.q]);
   return {
     params,
     part,
@@ -100,6 +108,7 @@ export function usePart(partRepository: PartRepository) {
     setDeleteConfirmShow,
     onConfirmDelete,
     cancelDelete,
+    handelSearch,
   };
 }
 

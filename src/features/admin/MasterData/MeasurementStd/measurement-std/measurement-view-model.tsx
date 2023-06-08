@@ -106,14 +106,24 @@ export default function useMeasurement() {
     });
   };
 
+  const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setParams(prev => {
+      return {
+        ...prev,
+        q:e.target.value
+      }
+    })
+  }
+
   useEffect(() => {
     measurementStdRepository
       .get({
         limit: params.limit,
         page: params.page,
+        q:params.q
       })
       .then((result) => setMeasurementStd(result));
-  }, [params.page]);
+  }, [params.page, params.q]);
 
   return {
     measurementStd,
@@ -127,6 +137,8 @@ export default function useMeasurement() {
     onConfirmDelete,
     onPageChange,
     cancelDelete,
+    handleSearch,
+    params
   };
 }
 

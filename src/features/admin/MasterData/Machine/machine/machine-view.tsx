@@ -12,12 +12,21 @@ const Machine = () => {
       <div className="m-auto w-full border border-[#D0D3D9] rounded-md">
         <div className="w-full flex justify-between items-center px-8 py-6">
           <h1 className="font-[700] text-2xl ">Machine</h1>
-          <button
-            className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
-            onClick={machine.onAdd}
-          >
-            + Add Data
-          </button>
+          <div className="flex gap-3 items-center">
+            <button
+              className="py-[12px] px-[20px] bg-[#667085] text-white align-middle rounded-[4px] text-sm"
+              onClick={machine.onAdd}
+            >
+              + Add Data
+            </button>
+            <input
+              type="text"
+              value={machine.params.q}
+              onChange={machine.handleSearch}
+              placeholder="Search"
+              className="border border-gray-300 rounded-md py-2 px-3 outline-none text-gray-700"
+            />
+          </div>
         </div>
         <div>
           <table className="w-full">

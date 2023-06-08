@@ -67,11 +67,20 @@ export function useMachine() {
   const cancelDelete = () => {
     setDeleteConfirmShow(!deleteConfirmShow);
   };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setParams((prev) => {
+      return {
+        ...prev,
+        q: e.target.value,
+      };
+    });
+  };
   useEffect(() => {
     machineRepository
-      .get({ limit: params.limit, page: params.page })
+      .get({ limit: params.limit, page: params.page, q: params.q })
       .then((result) => setMachine(result));
-  }, [params.page]);
+  }, [params.page, params.q]);
   return {
     machine,
     onAdd,
@@ -82,6 +91,8 @@ export function useMachine() {
     onPageChange,
     onConfirmDelete,
     cancelDelete,
+    handleSearch,
+    params,
   };
 }
 

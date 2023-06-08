@@ -8,13 +8,17 @@ import { Part } from "@domain/models/part";
 import { Measurement } from "@domain/models/measurement";
 import { Segment2D } from "@domain/models/segment-2d";
 export class MeasurementStdApiRepository implements MeasurementStdRepository {
-  async get(params: TableParam): Promise<PaginatedData<MeasurementStd>> {
+  async get(param: TableParam): Promise<PaginatedData<MeasurementStd>> {
     const { data } = await api.get(`std-measurement`, {
-      params: params,
+      params: {
+        page: param.page,
+        limit: param.limit,
+        search: param.q,
+      },
     });
     return PaginatedData.create({
-      page: params.page,
-      limit: params.limit,
+      page: param.page,
+      limit: param.limit,
       lastPage: data.totalPage,
       totalRow: data.totalRows,
       data: data.data.map((item) => {

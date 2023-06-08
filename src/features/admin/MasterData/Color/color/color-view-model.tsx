@@ -65,13 +65,21 @@ export default function useColor() {
   const cancelDelete = () => {
     setDeleteConfirmShow(!deleteConfirmShow);
   };
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setParams((prev) => {
+      return {
+        ...prev,
+        q: e.target.value,
+      };
+    });
+  };
   useEffect(() => {
     colorRepository
-      .get({ limit: params.limit, page: params.page })
+      .get({ limit: params.limit, page: params.page, q: params.q })
       .then((result) => {
         return setColor(result);
       });
-  }, [params.page]);
+  }, [params.page, params.q]);
   return {
     color,
     onAdd,
@@ -82,6 +90,8 @@ export default function useColor() {
     deleteConfirmShow,
     setDeleteConfirmShow,
     cancelDelete,
+    handleSearch,
+    params,
   };
 }
 

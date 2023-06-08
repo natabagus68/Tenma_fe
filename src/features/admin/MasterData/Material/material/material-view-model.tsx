@@ -75,13 +75,21 @@ export default function useMaterial() {
   const onCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate(-1);
   };
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setParams((prev) => {
+      return {
+        ...prev,
+        q: e.target.value,
+      };
+    });
+  };
   useEffect(() => {
     materialRepository
-      .get({ limit: params.limit, page: params.page })
+      .get({ limit: params.limit, page: params.page, q: params.q })
       .then((result) => {
         return setMaterial(result);
       });
-  }, [params.page]);
+  }, [params.page, params.q]);
   return {
     material,
     onAdd,
@@ -93,6 +101,8 @@ export default function useMaterial() {
     setDeleteConfirmShow,
     onCancel,
     onConfirmCancel,
+    handleSearch,
+    params,
   };
 }
 

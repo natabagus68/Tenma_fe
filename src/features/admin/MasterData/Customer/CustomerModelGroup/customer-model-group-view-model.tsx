@@ -5,8 +5,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CustomerModelGroup } from "@domain/models/customer-model-group";
 import { CustomerModelGroupApiRepository } from "@data/api/customer-model-group-api-repository";
 import { TableParam } from "types";
+import { useContext } from "react";
+import CustContex from "../layout-customer-contex";
 
 export default function useCustomerMOdelGroup() {
+  const { search } = useContext(CustContex);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const customerModelGroupRepository = new CustomerModelGroupApiRepository();
@@ -84,9 +87,10 @@ export default function useCustomerMOdelGroup() {
       .get({
         limit: params.limit,
         page: params.page,
+        q: search,
       })
       .then((result) => setCustomerModelGroup(result));
-  }, [params.page]);
+  }, [params.page, search]);
 
   return {
     toAdd,
