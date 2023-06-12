@@ -153,6 +153,10 @@ export default createBrowserRouter([
                 element: <PartFormView />,
               },
               {
+                path: ":partId/duplicate",
+                element: <PartFormView />,
+              },
+              {
                 path: "create",
                 element: <PartFormView />,
               },
@@ -390,3 +394,4 @@ export default createBrowserRouter([
     element: <Error404 />,
   },
 ]);
+

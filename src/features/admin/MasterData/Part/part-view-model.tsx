@@ -66,6 +66,10 @@ export function usePart(partRepository: PartRepository) {
     setDeleteConfirmShow(!deleteConfirmShow);
   };
 
+  const toDuplicate = (part) => {
+    navigate(`${config.pathPrefix}master-data/part/${part.id}/duplicate`);
+  };
+
   const onPageChange = (
     e: React.MouseEvent<HTMLButtonElement>,
     page: number
@@ -109,6 +113,7 @@ export function usePart(partRepository: PartRepository) {
     onConfirmDelete,
     cancelDelete,
     handelSearch,
+    toDuplicate,
   };
 }
 

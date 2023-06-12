@@ -33,29 +33,51 @@ const SegmentTable = ({
               {segment.name}
             </h1>
             <div className="flex gap-4 max-w-1/2 items-center justify-end">
-              {model.toogle === "2d" ? null : model.onEditSegment ? (
-                <button
-                  onClick={(e) =>
-                    model.saveSegment(e, model.segments?.[Number(ind)].id)
-                  }
-                  className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+              {model.toogle === "2d" ? (
+                <>
+                  <h1 className="font-semibold text-xl mr-6">
+                    Part Weight : {segment.partWeight}
+                  </h1>
+                </>
+              ) : model.onEditSegment ? (
+                <>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Input Part Weight"
+                      value={model.segments[ind].partWeight}
+                      onChange={(e) =>
+                        model.handleChangePArtWeight3D(
+                          e,
+                          model.segments?.[Number(ind)].id
+                        )
+                      }
+                      className="px-3 py-2 border border-gray-200 rounded outline-none"
                     />
-                  </svg>
-                  Save Cavity
-                </button>
+                  </div>
+                  <button
+                    onClick={(e) =>
+                      model.saveSegment(e, model.segments?.[Number(ind)].id)
+                    }
+                    className="py-[12px] px-[20px] bg-[#1BBDD4] text-white align-middle rounded-md flex gap-2 items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                      />
+                    </svg>
+                    Save Cavity
+                  </button>
+                </>
               ) : (
                 <div className="flex gap-5">
                   <div>

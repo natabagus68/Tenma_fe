@@ -5,6 +5,7 @@ import { IComparisson } from "./comparisson";
 export interface ISegment {
   id?: string;
   name: string;
+  partWeight?: string;
   type: string;
   pacSegments: IMeasurement[];
   comparisson?: IComparisson[][] | undefined;
@@ -18,6 +19,7 @@ export class Segment extends Entity<ISegment> {
     return {
       id: this.id,
       name: this.name,
+      partWeight: this.partWeight,
       type: this.type,
       pacSegments: this.pacSegments,
       comparisson: this.comparisson,
@@ -56,6 +58,9 @@ export class Segment extends Entity<ISegment> {
   }
   get checked(): boolean {
     return !!this._props.checked;
+  }
+  get partWeight(): string | undefined {
+    return this._props.partWeight;
   }
 }
 

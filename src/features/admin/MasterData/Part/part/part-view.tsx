@@ -75,6 +75,13 @@ const Part = () => {
                         <span className="text-sm">Edit</span>
                       </button>
                       <button
+                        onClick={(e) => part.toDuplicate(item)}
+                        className="h-[46px] px-4 bg-[#F79009] items-center rounded-[4px] text-white flex gap-2 text-sm"
+                      >
+                        <PenAltIcon />
+                        <span className="text-sm">Duplicate</span>
+                      </button>
+                      <button
                         onClick={(e) => part.onDelete(item)}
                         className="h-[46px] px-4 bg-[#F04438] items-center rounded-[4px] text-white flex gap-2 text-sm"
                       >

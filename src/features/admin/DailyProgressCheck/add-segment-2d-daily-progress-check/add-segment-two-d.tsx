@@ -25,7 +25,7 @@ const AddSegmentTwoD = () => {
                 <div>
                   <input
                     type="text"
-                    placeholder="Input name"
+                    placeholder="Input Part Weight"
                     value={model.segments[index].name}
                     name="name"
                     onChange={(e) => model.onInputNameChange(e, index)}

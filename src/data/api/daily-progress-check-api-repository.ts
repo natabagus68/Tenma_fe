@@ -240,6 +240,7 @@ export class DailyProgressCheckApiRepository
       Segment.create({
         id: item.id,
         name: item.name,
+        partWeight: item.part_weight,
         type: item.cavity_type,
         pacSegments: (item.std_measurement?.special_accept_segments || []).map(
           (pacSegment) =>
@@ -305,6 +306,7 @@ export class DailyProgressCheckApiRepository
       Segment.create({
         id: item?.id,
         name: item?.name,
+        partWeight: item.part_weight,
         type: item?.cavity_type,
         pacSegments: item?.std_measurement?.special_accept_segments?.map(
           (pacSegment) =>
@@ -360,10 +362,12 @@ export class DailyProgressCheckApiRepository
   async updateCavity3D(
     id: string,
     cavityID: string,
-    data: IMeasurement[]
+    data: IMeasurement[],
+    partWeight: string
   ): Promise<boolean> {
     console.log(data);
     await api.put(`progress-check/${id}/3d/${cavityID}`, {
+      part_weight: partWeight,
       measurements: data.map((item) => {
         return {
           character: item?.character,

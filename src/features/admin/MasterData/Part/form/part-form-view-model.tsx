@@ -35,14 +35,26 @@ export function usePartForm(
     e.preventDefault();
     try {
       if (partId) {
-        await partRepository.update(Part.create(part));
-        Swal.fire({
-          icon: "success",
-          title: "Update Part Successed",
-          timer: 1500,
-          showConfirmButton: false,
-        });
-        navigate(-1);
+        if (getTextFromLastURLSegment() === "duplicate") {
+          console.log(getTextFromLastURLSegment());
+          await partRepository.duplicate(partId, Part.create(part));
+          Swal.fire({
+            icon: "success",
+            title: "Duplicate Part Successed",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+          navigate(-1);
+        } else {
+          await partRepository.update(Part.create(part));
+          Swal.fire({
+            icon: "success",
+            title: "Update Part Successed",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+          navigate(-1);
+        }
       } else {
         await partRepository.store(Part.create(part)).then(() => {
           navigate(-1);
@@ -55,6 +67,14 @@ export function usePartForm(
   const onCancel = () => {
     navigate(-1);
   };
+
+  function getTextFromLastURLSegment() {
+    let url = window.location.href; // Ganti dengan URL yang sesuai
+    let segments = url.split("/");
+    let lastSegment = segments[segments.length - 1];
+    return lastSegment;
+  }
+
   useEffect(() => {
     customerModelRepository
       .get({ limit: 99999, page: 1 })
