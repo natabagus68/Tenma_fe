@@ -3,9 +3,11 @@ import { IPart, Part } from "@domain/models/part";
 import { TableParam } from "types";
 
 export interface PartRepository {
-    get(param:TableParam): Promise<PaginatedData<Part>>;
-    show(id: string): Promise<Part>;
-    store(part: Part): Promise<Part>;
-    update(part: Part): Promise<Part>;
-    destroy(part: Part): Promise<boolean>;
+  get(param: TableParam): Promise<PaginatedData<Part>>;
+  show(id: string): Promise<Part>;
+  store(part: Part): Promise<Part>;
+  update(part: Part): Promise<Part>;
+  destroy(part: Part): Promise<boolean>;
+  duplicate(partId: Part["id"], part: Part): Promise<boolean>;
 }
+

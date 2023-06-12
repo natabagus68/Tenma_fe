@@ -233,7 +233,8 @@ export function useDailyProgressCheckDetail() {
         return Measurement.create({ ...item.unmarshall() });
       });
 
-    await dailyProgressCheckRepo.updateCavity3D(id, cavityID, data);
+    const partWeight = segments.find((item) => item.id === cavityID).partWeight;
+    await dailyProgressCheckRepo.updateCavity3D(id, cavityID, data, partWeight);
     setOnEditSegment(false);
   };
 
@@ -262,6 +263,25 @@ export function useDailyProgressCheckDetail() {
     });
   };
 
+  const handleChangePArtWeight3D = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    iSegment: string
+  ) => {
+    setSegments((prev) => {
+      const data = prev.map((item: Segment, i: number) => {
+        if (item.id === iSegment) {
+          return Segment.create({
+            ...item.unmarshall(),
+            partWeight: e.target.value,
+          });
+        } else {
+          return item;
+        }
+      });
+
+      return data;
+    });
+  };
   const uploadComparisson = (
     e: React.ChangeEvent<HTMLInputElement>,
     cavityID: string
@@ -456,6 +476,7 @@ export function useDailyProgressCheckDetail() {
     cancelConfirmModal,
     addColumn,
     modalValue,
+    handleChangePArtWeight3D,
   };
 }
 

@@ -174,5 +174,24 @@ export class PartApiRepository implements PartRepository {
     await api.delete(`part/${part.id}`);
     return true;
   }
+
+  async duplicate(partId: Part["id"], part: Part): Promise<boolean> {
+    await api.post(`/part/${partId}/duplicate`, {
+      cust_item_cd: part.custItemId,
+      part_cd: part.partCode,
+      part_name: part.partName,
+      item_group_cd: part.itemGroupCode,
+      item_group_name: part.itemGroupName,
+      old_part_number: part.oldPartNumber,
+      customer_model_name: part.customerModelId,
+      customer_name: part.customerId,
+      customer_model_group_name: part.customerModelGroupId,
+      material_id: part.material,
+      unit_cd: part.unitCd,
+      product_weight: part.productWeight,
+    });
+
+    return true;
+  }
 }
 
