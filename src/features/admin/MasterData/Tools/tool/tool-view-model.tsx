@@ -12,7 +12,7 @@ export default function useTool() {
   const navigate = useNavigate();
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
   const [params, setParams] = useState<TableParam>({
-    page: 0,
+    page: 1,
     limit: 1,
     q: "",
   });
@@ -100,4 +100,3 @@ export default function useTool() {
     handleSearch,
   };
 }
-

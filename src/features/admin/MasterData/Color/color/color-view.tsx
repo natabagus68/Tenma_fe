@@ -77,8 +77,8 @@ const Color = () => {
             {color.color.totalRow && (
               <Pagination
                 row={color.color.totalRow}
-                limit={color.color.limit}
-                page={color.color.page}
+                limit={color.params.limit}
+                page={color.params.page}
                 onClick={color.onPageChange}
               />
             )}
@@ -96,4 +96,3 @@ const Color = () => {
 };
 
 export default Color;
-

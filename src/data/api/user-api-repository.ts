@@ -4,8 +4,9 @@ import { UserRepository } from "@domain/repositories/user-repository";
 import { getParam } from "@domain/repositories/_repository";
 import { api } from "./_api";
 import { Access } from "@domain/models/access";
+import { PaginatedData } from "@domain/models/paginated-data";
 
-export class UserApiRepository implements UserRepository {
+export class UserApiRepository {
   async create(props: User): Promise<User> {
     const { data } = await api.post("user", {
       name: props.name,
@@ -83,28 +84,34 @@ export class UserApiRepository implements UserRepository {
   async logout(): Promise<void> {
     await this._api.delete("hmi/auth/logout");
   }
-  async get(param?: getParam): Promise<User[]> {
+  async get(param?: getParam): Promise<PaginatedData<User>> {
     const { data } = await api.get(`user`, {
       params: { page: param.page, limit: param.limit, q: param.q },
     });
-    return (data?.data || []).map((item) =>
-      User.create({
-        id: item.id,
-        name: item.name,
-        email: item.email,
-        password: item.password,
-        role_id: item.role_id,
-        is_verified: item.is_verified,
-        photo: item.photo,
-        email_verified_at: item.email_verified_at,
-        fcm_token: item.fcm_token,
-        created_at: item.created_at,
-        updated_at: item.updated_at,
-        deleted_at: item.deleted_at,
-        roles: [],
-        checked: false,
-      })
-    );
+    return PaginatedData.create<User>({
+      page: param.page,
+      limit: param.limit,
+      lastPage: data.totalPage,
+      totalRow: data.totalRows,
+      data: data?.data.map((item) => {
+        return User.create({
+          id: item.id,
+          name: item.name,
+          email: item.email,
+          password: item.password,
+          role_id: item.role_id,
+          is_verified: item.is_verified,
+          photo: item.photo,
+          email_verified_at: item.email_verified_at,
+          fcm_token: item.fcm_token,
+          created_at: item.created_at,
+          updated_at: item.updated_at,
+          deleted_at: item.deleted_at,
+          roles: [],
+          checked: false,
+        });
+      }),
+    });
   }
 
   async update(id: string, props: User): Promise<User> {
@@ -161,4 +168,3 @@ export class UserApiRepository implements UserRepository {
     });
   }
 }
-

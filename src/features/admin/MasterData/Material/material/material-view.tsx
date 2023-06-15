@@ -79,8 +79,8 @@ const MaterialView = () => {
             {material.material.totalRow && (
               <Pagination
                 row={material.material.totalRow}
-                limit={material.material.limit}
-                page={material.material.page}
+                limit={material.params.limit}
+                page={material.params.page}
                 onClick={material.onPageChange}
               />
             )}
@@ -98,4 +98,3 @@ const MaterialView = () => {
 };
 
 export default MaterialView;
-

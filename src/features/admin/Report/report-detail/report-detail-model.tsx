@@ -44,6 +44,7 @@ export default function useReportDetail() {
       page: 1,
       limit: 10,
       lastPage: 1,
+      totalRow: 0,
       data: [],
     })
   );
@@ -54,8 +55,8 @@ export default function useReportDetail() {
   });
 
   const [reportParam, setReportParam] = useState({
-    page: reportDetail.page,
-    limit: reportDetail.limit,
+    page: 1,
+    limit: 10,
     q: "",
     pic: "",
     judgement: "",
@@ -118,6 +119,14 @@ export default function useReportDetail() {
   const fetchDetailPart = () => {
     partRepo.show(id).then((result) => setPart(result));
   };
+  const handlePage = (page: number) => {
+    setReportParam((prev) => {
+      return {
+        ...prev,
+        page: page,
+      };
+    });
+  };
   useEffect(() => {
     fetchPic();
   }, []);
@@ -142,6 +151,6 @@ export default function useReportDetail() {
     onChangeInputDownload,
     downoladParam,
     onDowloadReport,
+    handlePage,
   };
 }
-

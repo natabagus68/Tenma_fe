@@ -15,8 +15,8 @@ export default function () {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [params, setParams] = useState<TableParam>({
-    page: 0,
-    limit: 1,
+    page: 1,
+    limit: 10,
     q: "",
   });
   const [customer, setCustomer] = useState<PaginatedData<Customer>>(
@@ -96,6 +96,7 @@ export default function () {
   }, [params.page, search]);
 
   return {
+    params,
     id,
     customer,
     onEdit,
@@ -109,4 +110,3 @@ export default function () {
     cancelDelete,
   };
 }
-

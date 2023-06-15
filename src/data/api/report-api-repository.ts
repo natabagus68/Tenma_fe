@@ -67,6 +67,7 @@ export class ReportApiRepository implements ReportRepository {
       page: param.page,
       limit: param.limit,
       lastPage: data.totalPage,
+      totalRow: data.totalRows,
       data: (data.data || []).map((item) =>
         Report.create({
           id: item?.id,
@@ -236,4 +237,3 @@ export class ReportApiRepository implements ReportRepository {
     return newState;
   }
 }
-

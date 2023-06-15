@@ -45,14 +45,14 @@ const Customer = () => {
               </td>
             </tr>
           ))}
-        </tbody>  
+        </tbody>
       </table>
       <div className="flex items-center justify-end mt-4 px-5">
         {customer.customer.totalRow && (
           <Pagination
             row={customer.customer.totalRow}
-            limit={customer.customer.limit}
-            page={customer.customer.page}
+            limit={customer.params.limit}
+            page={customer.params.page}
             onClick={customer.onPageChange}
           />
         )}
@@ -62,4 +62,3 @@ const Customer = () => {
 };
 
 export default Customer;
-

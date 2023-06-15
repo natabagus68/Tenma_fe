@@ -12,8 +12,8 @@ export default function useMaterial() {
   const navigate = useNavigate();
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
   const [params, setParams] = useState<TableParam>({
-    page: 0,
-    limit: 1,
+    page: 1,
+    limit: 10,
     q: "",
   });
   const [material, setMaterial] = useState<PaginatedData<Material>>(
@@ -105,4 +105,3 @@ export default function useMaterial() {
     params,
   };
 }
-

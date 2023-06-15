@@ -13,8 +13,8 @@ export default function useCustomerModel() {
   const [showModal, setShowModal] = useState(false);
   const customerModelRepository = new CustomerModelApiRepository();
   const [params, setParams] = useState<TableParam>({
-    page: 0,
-    limit: 1,
+    page: 1,
+    limit: 10,
     q: "",
   });
   const [customerModel, setCustomerModel] = useState<
@@ -93,6 +93,6 @@ export default function useCustomerModel() {
     setShowModal,
     onPageChange,
     cancelDelete,
+    params,
   };
 }
-

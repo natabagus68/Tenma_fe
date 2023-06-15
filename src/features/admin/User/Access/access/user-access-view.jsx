@@ -79,12 +79,14 @@ const Access = () => {
               </tbody>
             </table>
             <div className="flex items-center justify-end px-8 py-6">
-              <Pagination
-                row={model.access.totalRows}
-                limit={model.access.limit}
-                page={model.access.page}
-                onClick={model.onPageChange}
-              />
+              {model.access.totalRow && (
+                <Pagination
+                  row={model.access.totalRows}
+                  limit={model.params.limit}
+                  page={model.params.page}
+                  onClick={model.onPageChange}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -94,4 +96,3 @@ const Access = () => {
 };
 
 export default Access;
-

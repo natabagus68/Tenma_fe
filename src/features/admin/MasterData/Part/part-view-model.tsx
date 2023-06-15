@@ -9,17 +9,19 @@ import { TableParam } from "types";
 export function usePart(partRepository: PartRepository) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
+  const [countRow, setCountRow] = useState(0);
   const [params, setParams] = useState<TableParam>({
-    page: 0,
+    page: 1,
     limit: 1,
     q: "",
   });
+  const [pageinationShow, setPaginationShow] = useState(false);
   const navigate = useNavigate();
   const partRef = useRef<PaginatedData<Part>>(
     PaginatedData.create<Part>({
       data: [],
       lastPage: 1,
-      totalRow: 0,
+      totalRow: 1,
       limit: Number(searchParams.get("limit")) || 10,
       page: Number(searchParams.get("page")) || 1,
       q: searchParams.get("q") || "",
@@ -59,6 +61,8 @@ export function usePart(partRepository: PartRepository) {
       .then((result) => {
         partRef.current = result;
         setPart(partRef.current.unmarshall());
+        setCountRow(result.totalRow);
+        setPaginationShow(true);
       });
   };
 
@@ -101,6 +105,7 @@ export function usePart(partRepository: PartRepository) {
     loadPart();
   }, [params.page, params.q]);
   return {
+    countRow,
     params,
     part,
     onAddData,
@@ -114,6 +119,7 @@ export function usePart(partRepository: PartRepository) {
     cancelDelete,
     handelSearch,
     toDuplicate,
+    partRef,
+    pageinationShow,
   };
 }
-

@@ -73,8 +73,8 @@ const ToolView = () => {
             {tool.tool.totalRow && (
               <Pagination
                 row={tool.tool.totalRow}
-                limit={tool.tool.limit}
-                page={tool.tool.page}
+                limit={tool.params.limit}
+                page={tool.params.page}
                 onClick={tool.onPageChange}
               />
             )}
@@ -92,4 +92,3 @@ const ToolView = () => {
 };
 
 export default ToolView;
-

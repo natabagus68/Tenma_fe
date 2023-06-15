@@ -139,7 +139,7 @@ export function useReport() {
   }, []);
   useEffect(() => {
     fetchReport();
-  }, [reportParam]);
+  }, [reportParam, report.page]);
   return {
     count,
     report,
@@ -161,4 +161,3 @@ export function useReport() {
     // downloadToPDF,
   };
 }
-

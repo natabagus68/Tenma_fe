@@ -14,8 +14,8 @@ export default function useCustomerMOdelGroup() {
   const [showModal, setShowModal] = useState(false);
   const customerModelGroupRepository = new CustomerModelGroupApiRepository();
   const [params, setParams] = useState<TableParam>({
-    page: 0,
-    limit: 1,
+    page: 1,
+    limit: 10,
     q: "",
   });
   const [customerModelGroup, setCustomerModelGroup] = useState<
@@ -102,6 +102,6 @@ export default function useCustomerMOdelGroup() {
     onConfirm,
     onPageChange,
     cancelDelete,
+    params,
   };
 }
-

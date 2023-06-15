@@ -14,8 +14,8 @@ export default function useMeasurement() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [params, setParams] = useState<TableParam>({
-    page: 0,
-    limit: 1,
+    page: 1,
+    limit: 2,
     q: "",
   });
   const [measurementStd, setMeasurementStd] = useState<
@@ -106,21 +106,21 @@ export default function useMeasurement() {
     });
   };
 
-  const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setParams(prev => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setParams((prev) => {
       return {
         ...prev,
-        q:e.target.value
-      }
-    })
-  }
+        q: e.target.value,
+      };
+    });
+  };
 
   useEffect(() => {
     measurementStdRepository
       .get({
         limit: params.limit,
         page: params.page,
-        q:params.q
+        q: params.q,
       })
       .then((result) => setMeasurementStd(result));
   }, [params.page, params.q]);
@@ -138,7 +138,6 @@ export default function useMeasurement() {
     onPageChange,
     cancelDelete,
     handleSearch,
-    params
+    params,
   };
 }
-
