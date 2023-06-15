@@ -13,7 +13,7 @@ export default function useColor() {
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
   const [params, setParams] = useState<TableParam>({
     page: 0,
-    limit: 1,
+    limit: 10,
     q: "",
   });
   const [color, setColor] = useState<PaginatedData<Color>>(
@@ -94,4 +94,3 @@ export default function useColor() {
     params,
   };
 }
-

@@ -10,7 +10,7 @@ export function useMachine() {
   const navigate = useNavigate();
   const [params, setParams] = useState<TableParam>({
     page: 1,
-    limit: 1,
+    limit: 10,
     q: "",
   });
   const [machine, setMachine] = useState<PaginatedData<Machine>>(

@@ -15,7 +15,7 @@ export default function useMeasurement() {
   const [showModal, setShowModal] = useState(false);
   const [params, setParams] = useState<TableParam>({
     page: 1,
-    limit: 2,
+    limit: 10,
     q: "",
   });
   const [measurementStd, setMeasurementStd] = useState<
