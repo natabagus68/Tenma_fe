@@ -138,7 +138,14 @@ const ReportDetailView = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end px-8 py-6">
-            <Pagination row={1} limit={10} page={undefined} />
+            {model.reportDetail.totalRow && (
+              <Pagination
+                row={model.reportDetail.totalRow}
+                limit={model.reportParam.limit}
+                page={model.reportParam.page}
+                onClick={model.handleParams}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -147,4 +154,3 @@ const ReportDetailView = () => {
 };
 
 export default ReportDetailView;
-

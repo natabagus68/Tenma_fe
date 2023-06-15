@@ -49,7 +49,10 @@ const ReportView = () => {
             </div>
           </div>
           <div className="relative">
-            <SearchIcon color={"#D0D3D9"} className="absolute top-[32.5%] left-[5%]" />
+            <SearchIcon
+              color={"#D0D3D9"}
+              className="absolute top-[32.5%] left-[5%]"
+            />
             <input
               type="text"
               name="q"
@@ -64,24 +67,41 @@ const ReportView = () => {
           <table className="w-full">
             <thead className="bg-[#FAFAFB] border-y border-[#D0D3D9]">
               <tr>
-                <th className="py-[22px] text-start pl-10 font-[600] text-sm">ID CD</th>
-                <th className="py-[22px] text-start pl-10 font-[600] text-sm">Part Name</th>
-                <th className="py-[22px] text-start pl-10 font-[600] text-sm">Last Report</th>
-                <th className="py-[22px] text-start pl-10 font-[600] text-sm">PIC</th>
-                <th className="py-[22px] text-start pl-10 font-[600] text-sm">Action</th>
+                <th className="py-[22px] text-start pl-10 font-[600] text-sm">
+                  ID CD
+                </th>
+                <th className="py-[22px] text-start pl-10 font-[600] text-sm">
+                  Part Name
+                </th>
+                <th className="py-[22px] text-start pl-10 font-[600] text-sm">
+                  Last Report
+                </th>
+                <th className="py-[22px] text-start pl-10 font-[600] text-sm">
+                  PIC
+                </th>
+                <th className="py-[22px] text-start pl-10 font-[600] text-sm">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
               {model.report.data.map((item) => (
                 <tr key={item.id} className="border-b border-[#D0D3D9]">
-                  <td className="py-[22px] text-start pl-10 items-center">{item.idCode}</td>
-                  <td className="py-[22px] text-start pl-10 items-center">{item.partName}</td>
+                  <td className="py-[22px] text-start pl-10 items-center">
+                    {item.idCode}
+                  </td>
+                  <td className="py-[22px] text-start pl-10 items-center">
+                    {item.partName}
+                  </td>
                   <td className="py-[22px] text-start pl-10 items-center">
                     {moment(item.lastReport).format("DD/MM/YYYY")}
                   </td>
-                  <td className="py-[22px] text-start pl-10 items-center ">{item.pic}</td>
+                  <td className="py-[22px] text-start pl-10 items-center ">
+                    {item.pic}
+                  </td>
                   <td className="py-2 pl-10 items-center flex gap-8 justify-start">
-                    <button onClick={(e) => model.onDetail(e, item.part.id)}
+                    <button
+                      onClick={(e) => model.onDetail(e, item.part.id)}
                       className="py-[12px] px-[20px] bg-[#1BBDD4] items-center rounded-[4px] text-white flex gap-2"
                     >
                       <EyeIcon />
@@ -98,12 +118,14 @@ const ReportView = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end mt-4 px-5">
-            <Pagination
-              row={model.report.totalRow}
-              limit={model.report.limit}
-              page={model.report.page}
-              onClick={model.handlePagination}
-            />
+            {model.report.totalRow && (
+              <Pagination
+                row={model.report.totalRow}
+                limit={model.report.limit}
+                page={model.report.page}
+                onClick={model.handlePagination}
+              />
+            )}
           </div>
         </div>
       </div>

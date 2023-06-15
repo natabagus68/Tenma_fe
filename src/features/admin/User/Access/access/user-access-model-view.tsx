@@ -8,9 +8,13 @@ import { useNavigate, useParams } from "react-router-dom";
 export default function useUserAccess() {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 10,
+  });
   const [access, setAccess] = useState<PaginatedData<Access>>(
     PaginatedData.create<Access>({
-      page: 0,
+      page: 1,
       limit: 10,
       lastPage: 0,
       totalRow: 0,
@@ -21,7 +25,7 @@ export default function useUserAccess() {
 
   const fetchAccessData = () => {
     accessRepo
-      .get({ page: access.page, limit: access.limit })
+      .get({ page: params.page, limit: params.limit })
       .then((result) => setAccess(result));
   };
 
@@ -69,12 +73,13 @@ export default function useUserAccess() {
     });
   };
 
-  const onPageChange = (page: number) => {
-    setAccess((prev) => {
-      return PaginatedData.create({
-        ...prev.unmarshall(),
+  const onPageChange = (e: React.SyntheticEvent, page: number) => {
+    e.preventDefault();
+    setParams((prev) => {
+      return {
+        ...prev,
         page,
-      });
+      };
     });
   };
 
@@ -83,7 +88,7 @@ export default function useUserAccess() {
   };
   useEffect(() => {
     fetchAccessData();
-  }, []);
+  }, [params.page]);
 
   return {
     openModal,
@@ -95,6 +100,6 @@ export default function useUserAccess() {
     onPageChange,
     buttonDelete,
     cancelDelete,
+    params,
   };
 }
-

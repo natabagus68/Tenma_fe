@@ -6,17 +6,16 @@ import { PaginatedData } from "@domain/models/paginated-data";
 
 export class PartApiRepository implements PartRepository {
   async get(tableParam: TableParam): Promise<PaginatedData<Part>> {
-    const {
-      data: { data = [] },
-    } = await api.get("part", {
+    const { data } = await api.get("part", {
       params: {
         page: tableParam.page,
         limit: tableParam.limit,
         search: tableParam.q,
       },
     });
+    console.log(data.totalRows);
     return PaginatedData.create<Part>({
-      data: data.map((item) =>
+      data: data.data.map((item) =>
         Part.create({
           id: item.id,
           custItemId: item.cust_item_cd,
@@ -194,4 +193,3 @@ export class PartApiRepository implements PartRepository {
     return true;
   }
 }
-

@@ -50,8 +50,8 @@ const CustomerModel = () => {
         {customerModel.customerModel.totalRow && (
           <Pagination
             row={customerModel.customerModel.totalRow}
-            limit={customerModel.customerModel.limit}
-            page={customerModel.customerModel.page}
+            limit={customerModel.params.limit}
+            page={customerModel.params.page}
             onClick={customerModel.onPageChange}
           />
         )}
@@ -61,4 +61,3 @@ const CustomerModel = () => {
 };
 
 export default CustomerModel;
-

@@ -50,8 +50,8 @@ const CustomerModelGroup = () => {
         {cmg.customerModelGroup.totalRow && (
           <Pagination
             row={cmg.customerModelGroup.totalRow}
-            limit={cmg.customerModelGroup.limit}
-            page={cmg.customerModelGroup.page}
+            limit={cmg.params.limit}
+            page={cmg.params.page}
             onClick={cmg.onPageChange}
           />
         )}
@@ -61,4 +61,3 @@ const CustomerModelGroup = () => {
 };
 
 export default CustomerModelGroup;
-

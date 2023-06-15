@@ -100,17 +100,8 @@ export function useAccount() {
         limit: userParam.limit,
         page: userParam.page,
       })
-      .then((result) =>
-        setAccount(
-          PaginatedData.create({
-            limit: userParam.limit,
-            page: userParam.page,
-            lastPage: 0,
-            data: result,
-          })
-        )
-      );
-  }, [userParam]);
+      .then((result) => setAccount(result));
+  }, [userParam.page, userParam.q]);
   return {
     account,
     deleteConfirmShow,
@@ -127,4 +118,3 @@ export function useAccount() {
     cancelDelete,
   };
 }
-

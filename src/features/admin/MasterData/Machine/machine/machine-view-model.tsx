@@ -9,7 +9,7 @@ export function useMachine() {
   const machineRepository: MachineRepository = new MachineApiRepository();
   const navigate = useNavigate();
   const [params, setParams] = useState<TableParam>({
-    page: 0,
+    page: 1,
     limit: 1,
     q: "",
   });
@@ -95,4 +95,3 @@ export function useMachine() {
     params,
   };
 }
-

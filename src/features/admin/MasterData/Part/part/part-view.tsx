@@ -7,6 +7,7 @@ import { PartApiRepository } from "@data/api/part-api-repository";
 
 const Part = () => {
   const part = usePart(new PartApiRepository());
+  // console.log(part.partRef.current.totalRow);
   return (
     <div className="text-[#514E43] font-open-sans">
       <ModalDelete
@@ -95,9 +96,9 @@ const Part = () => {
             </tbody>
           </table>
           <div className="flex items-center justify-end mt-6 px-8">
-            {part.part.data.length > 0 && (
+            {part.pageinationShow && (
               <Pagination
-                row={part.part.totalRow}
+                row={part.countRow}
                 limit={part.params.limit}
                 page={part.params.page}
                 onClick={part.onPageChange}
@@ -111,4 +112,3 @@ const Part = () => {
 };
 
 export default Part;
-

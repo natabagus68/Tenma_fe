@@ -20,7 +20,7 @@ const Pagination = ({ row = 0, limit = 0, page = 0, onClick = null }) => {
           disabled={page < 2}
           type="button"
           role="button"
-          className="flex gap-4 text-[#D0D3D9] items-center px-3 py-2 rounded-[4px] border border-[#D0D3D9] hover:bg-[#667085] hover:text-white"
+          className="flex gap-4 cursor-pointer text-[#D0D3D9] items-center px-3 py-2 rounded-[4px] border border-[#D0D3D9] hover:bg-[#667085] hover:text-white"
         >
           <div className="flex items-center gap-2">
             <ArrowIcon color={"#D0D3D9"} className="-rotate-90" />
@@ -30,24 +30,24 @@ const Pagination = ({ row = 0, limit = 0, page = 0, onClick = null }) => {
 
         {/* part pagination */}
 
-        {count.map((item, i) => (
-          <button
-            key={i}
-            type="button"
-            role="button"
-            onClick={(e) => onClick(e, i + 1)}
-            className="text-sm flex gap-1 text-[#514E4E] items-center px-4 py-2 rounded-[4px] border border-[#D0D3D9] hover:bg-[#667085] hover:text-white"
-          >
-            {i + 1}
-          </button>
-        ))}
+        {/* {count.map((item, i) => ( */}
+        <button
+          // key={i}
+          type="button"
+          role="button"
+          // onClick={(e) => onClick(e, i + 1)}
+          className="text-sm flex gap-1 text-[#514E4E] items-center px-4 py-2 rounded-[4px] border border-[#D0D3D9] hover:bg-[#667085] hover:text-white"
+        >
+          {page}
+        </button>
+        {/* ))} */}
 
         <button
-          onClick={(e) => onClick(e, page < count.length ? page + 1 : page)}
+          onClick={(e) => onClick(e, page + 1)}
           disabled={page == count.length}
           type="button"
           role="button"
-          className="text-sm flex gap-1 text-[#D0D3D9] items-center px-3 py-2 rounded-[4px] border border-[##667085] hover:bg-[##667085] hover:text-white"
+          className="text-sm cursor-pointer flex gap-1 text-[#D0D3D9] items-center px-3 py-2 rounded-[4px] border border-[##667085] hover:bg-[##667085] hover:text-white"
         >
           <div className="flex items-center gap-2 text-[#667085]">
             <span className="text-sm">Next</span>
@@ -59,4 +59,3 @@ const Pagination = ({ row = 0, limit = 0, page = 0, onClick = null }) => {
 };
 
 export default Pagination;
-

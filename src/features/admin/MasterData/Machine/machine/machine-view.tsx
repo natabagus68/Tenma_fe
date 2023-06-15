@@ -84,8 +84,8 @@ const Machine = () => {
             {machine.machine.totalRow > 0 && (
               <Pagination
                 row={machine.machine.totalRow}
-                limit={machine.machine.limit}
-                page={machine.machine.page}
+                limit={machine.params.limit}
+                page={machine.params.page}
                 onClick={machine.onPageChange}
               />
             )}
@@ -103,4 +103,3 @@ const Machine = () => {
 };
 
 export default Machine;
-
