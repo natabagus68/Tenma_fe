@@ -13,7 +13,7 @@ export default function useTool() {
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
   const [params, setParams] = useState<TableParam>({
     page: 1,
-    limit: 1,
+    limit: 10,
     q: "",
   });
   const [tool, setTool] = useState<PaginatedData<Tool>>(

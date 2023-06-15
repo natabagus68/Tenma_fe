@@ -12,7 +12,7 @@ export function usePart(partRepository: PartRepository) {
   const [countRow, setCountRow] = useState(0);
   const [params, setParams] = useState<TableParam>({
     page: 1,
-    limit: 1,
+    limit: 10,
     q: "",
   });
   const [pageinationShow, setPaginationShow] = useState(false);
