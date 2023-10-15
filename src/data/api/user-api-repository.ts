@@ -31,54 +31,49 @@ export class UserApiRepository {
       id: data.id,
     });
   }
-  async login(
-    email: string,
-    password: string,
-    lineShiftId: string
-  ): Promise<Auth> {
-    const { data } = await this._api.post("hmi/auth/login", {
+  async login(email: string, password: string): Promise<Auth> {
+    const { data } = await api.post("login", {
       email,
       password,
-      lineShiftId,
     });
     return Auth.create({
       token: data.token,
-      user: {
-        id: data.data?.user?.id,
-        name: data.data?.user?.name,
-        email: data.data?.user?.email,
-        password: data.data?.user?.password,
-        role_id: data.data?.user?.role_id,
-        is_verified: data.data?.user?.is_verified,
-        photo: data.data?.user?.photo,
-        email_verified_at: data.data?.user?.email_verified_at,
-        fcm_token: data.data?.user?.fcm_token,
-        created_at: data.data?.user?.created_at,
-        updated_at: data.data?.user?.updated_at,
-        deleted_at: data.data?.user?.deleted_at,
-        roles: [],
-      },
+      user: User.create({
+        id: data.data.id,
+        name: data.data.name,
+        email: data.data.email,
+        password: data.data.password,
+        role_id: data.data.role_id,
+        is_verified: false,
+        photo: "",
+        email_verified_at: undefined,
+        fcm_token: "",
+        created_at: "",
+        updated_at: "",
+        deleted_at: undefined,
+        checked: false,
+      }),
     });
   }
   async check(): Promise<Auth> {
-    const { data } = await this._api.get("hmi/auth/me");
+    const { data } = await api.get("auth/me");
     return Auth.create({
       token: data.token,
-      user: {
-        id: data.data?.user?.id,
-        name: data.data?.user?.name,
-        email: data.data?.user?.email,
-        password: data.data?.user?.password,
-        role_id: data.data?.user?.role_id,
-        is_verified: data.data?.user?.is_verified,
-        photo: data.data?.user?.photo,
-        email_verified_at: data.data?.user?.email_verified_at,
-        fcm_token: data.data?.user?.fcm_token,
-        created_at: data.data?.user?.created_at,
-        updated_at: data.data?.user?.updated_at,
-        deleted_at: data.data?.user?.deleted_at,
-        roles: [],
-      },
+      user: User.create({
+        id: data.data.id,
+        name: data.data.name,
+        email: data.data.email,
+        password: data.data.password,
+        role_id: data.data.role_id,
+        is_verified: false,
+        photo: "",
+        email_verified_at: undefined,
+        fcm_token: "",
+        created_at: "",
+        updated_at: "",
+        deleted_at: undefined,
+        checked: false,
+      }),
     });
   }
   async logout(): Promise<void> {
